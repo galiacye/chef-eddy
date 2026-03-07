@@ -1,0 +1,46 @@
+Utilisateur soumet le formulaire (POST)
+          │
+          ▼
+   Controller cAddUser
+          │
+          ▼
+Récupération des règles de validation ($rules)
+          │
+          ▼
+ ┌─────────────────────────────┐
+ │ Validation CI4 avec $rules │
+ └─────────────────────────────┘
+          │
+ ┌────────┴─────────┐
+ │                  │
+ ▼                  ▼
+Validation OK      Validation échoue
+ │                  │
+ │                  │
+ Récupération des   Retour vers
+ champs via         view('User/cAddUser')
+ $this->request->getPost() 
+ et $this->request->getFile() (avatar)
+ │                  │
+ │                  │
+ Traitement de      Affichage des erreurs
+ l'avatar si        (ex: $errors = $this->validator->getErrors())
+ uploadé
+ │
+ ▼
+Préparation du tableau $data :
+[
+ "username" => ...,
+ "email" => ...,
+ "password" => ...,
+ "nom" => ...,
+ "prenom" => ...,
+ "avatar_url" => ...,
+ "role" => ...
+]
+ │
+ ▼
+Insertion dans la base via $this->model->addUser($data)
+ │
+ ▼
+Retour view('success')

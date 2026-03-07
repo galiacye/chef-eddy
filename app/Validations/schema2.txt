@@ -1,0 +1,7 @@
+app/
+ ├─ Config/
+ │    └─ Validation.php     ← liste des classes de règles ($ruleSets)
+ ├─ Validation/
+ │    └─ CustomRules.php    ← règles personnalisées
+ └─ Controllers/
+      └─ User.php           ← contrôleur

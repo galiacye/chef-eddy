@@ -1,0 +1,16 @@
+body {
+    margin: 2rem;
+    background-color: rgb(238, 223, 204);
+}
+.eddy {
+    height: 200px;
+    padding: 10px;
+}
+.ban {
+    display: flex;
+  
+    justify-content: space-between;
+}
+.logo {
+    border-radius: 50%;
+}

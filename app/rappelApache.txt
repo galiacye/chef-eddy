@@ -1,0 +1,21 @@
+cat /etc/apache2/sites-enabled/000-default.conf | grep DocumentRoot
+
+-> DocumentRoot /var/www/html
+
+Voilà le problème ! Apache sert /var/www/html au lieu de ton dossier public/ CI4. 
+
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+Remplace la ligne DocumentRoot /var/www/html par le chemin vers ton public/ CI4. Pour trouver ce chemin exact :
+
+bashfind /var/www -name "index.php" 2>/dev/null
+
+Ça devrait te retourner quelque chose comme /var/www/html/mon-projet/public/index.php.
+ Ton DocumentRoot sera donc /var/www/html/mon-projet/public.
+
+ sudo systemctl restart apache2
+
+ 
+
+
+ 
