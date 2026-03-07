@@ -126,3 +126,6 @@ _modules/*
 /phpunit*.xml
 /vendor/
 /system/
+/sauv/SAUVapp/
+/sauv/SAUVpublic/
+
