@@ -111,13 +111,17 @@ CREATE TABLE recette_categories (
     UNIQUE KEY unique_recette_categorie (recette_id, categorie_id)
 );
 
-CREATE TABLE recette_tags (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE recettes_tags (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     recette_id INT NOT NULL,
     tag_id INT NOT NULL,
     FOREIGN KEY (recette_id) REFERENCES recettes(id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE,
     UNIQUE KEY unique_recette_tag (recette_id, tag_id)
+);
+CREATE TABLE tags (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL
 );
 
 CREATE INDEX idx_recettes_user ON recettes(user_id);
@@ -126,19 +130,21 @@ CREATE INDEX idx_comments_recette ON comments(recette_id);
 CREATE INDEX idx_comments_user ON comments(user_id);
 
 INSERT INTO categories (nom) VALUES
+('Apéritifs'),
 ('Entrées'),
 ('Plats principaux'),
 ('Desserts');
 
-
-INSERT INTO tags (nom) VALUES
-('Végétarien'),
-('Vegan'),
-('Sans gluten'),
-('Rapide'),
-('Économique'),
-('Gastronomique'),
-('Healthy');
+INSERT INTO tags (nom) VALUES 
+    ('Végétarien'),
+    ('Vegan'),
+    ('Rapide'),
+    ('Cuisine du monde'),
+    ('Sans gluten'),
+    ('Gastronomique'),
+    ('Économique'),
+    ('Au chocolat');
+    --fait
 
 --pour les tests:
 
@@ -159,6 +165,28 @@ VALUES(
 
 ALTER TABLE recipes 
 MODIFY COLUMN statut ENUM('pending', 'approved', 'rejected') DEFAULT 'pending';
+
+CREATE TABLE ingredients_categories (
+    id  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL
+);
+
+INSERT INTO ingredients_categories (nom) VALUES
+    ('Viandes'),
+    ('Poissons'),
+    ('Oeufs'),
+    ('Légumes'),
+    ('Fruits'),
+    ('Féculents'),
+    ('Farines et céréales'),
+    ('Produits laitiers'),
+    ('Épices & herbes'),
+    ('Sucre et édulcorants'),
+    ('Matières grasses'),
+    ('Liquides'),
+    ('Autres');
+
+ ALTER TABLE ingredients ADD COLUMN categorie VARCHAR(50) DEFAULT NULL;   
 
 
 

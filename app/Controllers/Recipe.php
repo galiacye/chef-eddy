@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\TagModel;
+use App\Models\CategorieModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -37,7 +39,13 @@ class Recipe extends BaseController
     public function createRecipe()
     {
         if ($this->request->is('post') === false) {
-            return view('Recipe/createRecipe');
+            $tagModel       = new TagModel();
+            $categorieModel = new CategorieModel();
+
+            return view('Recipe/createRecipe', [
+                'tags'       => $tagModel->findAll(),
+                'categories' => $categorieModel->findAll()
+            ]);
         } else {
             // L'user_id vient de la session
             $user_id = session()->get('user_id');
@@ -105,10 +113,24 @@ class Recipe extends BaseController
                         "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
                     ]
                 ],
+                "categorie_id" => [
+                    "label" => "Catégorie",
+                    "rules" => "required|integer|greater_than_equal_to[1]",
+                    "errors" => [
+                        "required" => "La catégorie est requise",
+                        "integer"  => "Catégorie invalide",
+                    ]
+                ],
+                "tags" => [
+                    "label" => "Tags",
+                    "rules" => "permit_empty",
+                ],
             ];
             if (!$this->validate($rules)) {
                 return view('Recipe/createRecipe', [
-                    'errors' => $this->validator->getErrors()
+                    'errors' => $this->validator->getErrors(),
+                    'tags'       => (new TagModel())->findAll(),      
+                    'categories' => (new CategorieModel())->findAll() 
                 ]);
             }
             // Gestion de l'image
@@ -126,7 +148,7 @@ class Recipe extends BaseController
             $purifier = new HTMLPurifier($config);
             $contenu = $purifier->purify($this->request->getPost('contenu'));
             $data = [
-                'user_id'           => 3,
+                'user_id'           => 3, //$user_id plus tard, là on teste avec admin
                 'titre'             => $this->request->getPost('titre'),
                 'image_url'         => $image_path,
                 'temps_preparation' => $this->request->getPost('temps_preparation') ?: null,
@@ -137,8 +159,61 @@ class Recipe extends BaseController
                 'statut'            => 'pending',
                 'nb_vues'           => 0,
             ];
-            $this->model->createRecipe($data);
-            return redirect()->to('/recipes')->with('success', 'Recette créée avec succès !');
+            //gestion des tables de liaison:
+            $recette_id = $this->model->createRecipe($data); //ici insertion en base
+            $db = \Config\Database::connect();
+            $categorie_id = $this->request->getPost('categorie_id');
+            if ($categorie_id) {
+                $db->table('recette_categories')->insert([
+                    'recette_id'   => $recette_id,
+                    'categorie_id' => $categorie_id
+                ]);
+            }
+            $tag_ids = $this->request->getPost('tags');
+            if ($tag_ids) {
+                foreach ($tag_ids as $tag_id) {
+                    $db->table('recettes_tags')->insert([
+                        'recette_id' => $recette_id,
+                        'tag_id'     => $tag_id
+                    ]);
+                }
+            }
+            // Sauvegarde des ingrédients
+            $ingredients = $this->request->getPost('ingredients');
+            if ($ingredients) {
+                foreach ($ingredients as $ingredient) {
+                    $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
+                    if (empty($nom)) continue; // on saute les lignes vides
+
+                    // 1. Chercher si l'ingrédient existe déjà
+                    $ing_existant = $db->table('ingredients')
+                        ->where('nom', $nom)
+                        ->get()
+                        ->getRowArray();
+
+                    if ($ing_existant) {
+                        // 2a. Il existe → on récupère son id
+                        $ingredient_id = $ing_existant['id'];
+                    } else {
+                        // 2b. Il n'existe pas → on l'insère
+                        $db->table('ingredients')->insert([
+                            'nom'       => $nom,
+                            'categorie' => $ingredient['categorie']
+                        ]);
+                        $ingredient_id = $db->insertID();
+                    }
+
+                    // 3. Insérer dans recette_ingredients
+                    $db->table('recette_ingredients')->insert([
+                        'recette_id'    => $recette_id,
+                        'ingredient_id' => $ingredient_id,
+                        'quantite'      => $ingredient['quantite'] ?: null,
+                        'unite'         => $ingredient['unite'] ?: null
+                    ]);
+                }
+            }
+
+            return redirect()->to('/all-recipes')->with('success', 'Recette créée avec succès !');
         }
     }
 }

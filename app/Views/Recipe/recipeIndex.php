@@ -5,6 +5,13 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
+
+<?php if (session()->getFlashdata('success')) : ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif ?>
+
 <?php foreach($recipes as $recipe): ?>
     <div class="intro">            
         <h1><?= esc($recipe->titre) ?></h1>
