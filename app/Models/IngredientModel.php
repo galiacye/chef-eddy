@@ -13,7 +13,15 @@ class IngredientModel extends Model
 
     public function getCategory()
     {
-        return $this->db->table('ingredients_categorie')->get()->getResult();
+        return $this->db->table('ingredients_categories')->get()->getResult();
+    }
+
+    public function getRecipeIngredients($recipe_id)
+    {
+        return $this->select('ingredients.nom')
+                    ->join('recette_ingredients','ingredients.id = recette_ingredients.ingredient_id')
+                    ->where('recette_ingredients.recette_id',$recipe_id)
+                    ->get()->getResult();
     }
 
 }

@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\RecipeModel;
 use App\Models\TagModel;
 use App\Models\CategorieModel;
+use App\Models\IngredientModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -18,23 +19,6 @@ class Recipe extends BaseController
         $this->model = Model('RecipeModel');
     }
 
-    public function showRecipe(int $id)
-    {
-        $recipe = $this->model->find($id);
-        $data = [
-            "recipe" => $recipe
-        ];
-        return view('Recipe/showRecipe', $data);
-    }
-
-    public function recipeIndex(): string
-    {
-        $recipes = $this->model->findAll();
-        $data = [
-            "recipes" => $recipes
-        ];
-        return view('Recipe/recipeIndex', $data);
-    }
 
     public function createRecipe()
     {
@@ -129,8 +113,8 @@ class Recipe extends BaseController
             if (!$this->validate($rules)) {
                 return view('Recipe/createRecipe', [
                     'errors' => $this->validator->getErrors(),
-                    'tags'       => (new TagModel())->findAll(),      
-                    'categories' => (new CategorieModel())->findAll() 
+                    'tags'       => (new TagModel())->findAll(),
+                    'categories' => (new CategorieModel())->findAll()
                 ]);
             }
             // Gestion de l'image
@@ -152,6 +136,7 @@ class Recipe extends BaseController
                 'titre'             => $this->request->getPost('titre'),
                 'image_url'         => $image_path,
                 'temps_preparation' => $this->request->getPost('temps_preparation') ?: null,
+                //ternaire syntaxe simplifiée = $this->request->getPost('temps_preparation')? $this->request->getPost('temps_preparation'): null
                 'temps_cuisson'     => $this->request->getPost('temps_cuisson') ?: null,
                 'contenu'           => $contenu,
                 'nb_personnes'      => $this->request->getPost('nb_personnes'),
@@ -160,12 +145,12 @@ class Recipe extends BaseController
                 'nb_vues'           => 0,
             ];
             //gestion des tables de liaison:
-            $recette_id = $this->model->createRecipe($data); //ici insertion en base
+            $recipe_id = $this->model->createRecipe($data); //ici insertion en base
             $db = \Config\Database::connect();
             $categorie_id = $this->request->getPost('categorie_id');
             if ($categorie_id) {
                 $db->table('recette_categories')->insert([
-                    'recette_id'   => $recette_id,
+                    'recette_id'   => $recipe_id,
                     'categorie_id' => $categorie_id
                 ]);
             }
@@ -173,7 +158,7 @@ class Recipe extends BaseController
             if ($tag_ids) {
                 foreach ($tag_ids as $tag_id) {
                     $db->table('recettes_tags')->insert([
-                        'recette_id' => $recette_id,
+                        'recette_id' => $recipe_id,
                         'tag_id'     => $tag_id
                     ]);
                 }
@@ -205,7 +190,7 @@ class Recipe extends BaseController
 
                     // 3. Insérer dans recette_ingredients
                     $db->table('recette_ingredients')->insert([
-                        'recette_id'    => $recette_id,
+                        'recette_id'    => $recipe_id,
                         'ingredient_id' => $ingredient_id,
                         'quantite'      => $ingredient['quantite'] ?: null,
                         'unite'         => $ingredient['unite'] ?: null
@@ -215,5 +200,31 @@ class Recipe extends BaseController
 
             return redirect()->to('/all-recipes')->with('success', 'Recette créée avec succès !');
         }
+    }
+
+    public function showRecipe(int $id)
+    {
+        $recipeModel = new RecipeModel();
+        $tagModel        = new TagModel();
+        $ingredientModel = new IngredientModel();
+
+        $recipe = $recipeModel->getRecipe($id);
+        $tags = $tagModel->getRecipeTags($id);
+        $ingredients = $ingredientModel->getRecipeIngredients($id);
+        $data = [
+            "recipe" => $recipe,
+            "tags" => $tags,
+            "ingredients" => $ingredients
+        ];
+        return view('Recipe/showRecipe',$data);
+    }
+
+    public function recipeIndex(): string
+    {
+        $recipes = $this->model->findAll();
+        $data = [
+            "recipes" => $recipes
+        ];
+        return view('Recipe/recipeIndex', $data);
     }
 }
