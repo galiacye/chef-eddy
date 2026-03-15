@@ -2,12 +2,12 @@
 
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('./css/addRecipe.css') ?>" rel="stylesheet">
+<link href="<?= base_url('./css/createRecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-<h1 class="text-center">Proposez une recette</h1>
+<h2 class="text-center">Proposez une recette</h2>
 
 <?php
 $title = [
@@ -183,7 +183,7 @@ foreach ($categories as $categorie) {
         modules: { //relie la toolbar qui est en dehors du form
             toolbar: '#toolbar'
         },
-        placeholder: 'Écrivez votre commentaire ici...',
+        placeholder: 'Écrivez votre recette ici...',
         theme: 'snow',
     });
     const existingContent = document.getElementById('contenu').value;

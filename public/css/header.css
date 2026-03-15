@@ -1,16 +1,25 @@
-
+@font-face {
+    font-family: "super_popstar";
+    src: url('/fonts/super_popstar/Super-Popstar.ttf') format('truetype');
+}
+.hero-title {
+    font-family: "super_popstar";
+    color: pink;
+    font-size: 6em;
+}
 .eddy {
     height: 200px;
     padding: 10px;
     border-radius: 50%;
+    margin-left: 20px;
 }
 .ban {
     display: flex;
-  
+    align-items: center;
     justify-content: space-between;
 }
 .logo {
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
+    margin-right: 2rem;
+    height: 150px;
+    border-radius: 10%;
 }

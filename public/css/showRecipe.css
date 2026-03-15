@@ -1,3 +1,14 @@
 body {
-    background-color: rgb(115, 229, 149);
+    background-color: rgb(216, 237, 222);
+}
+.banner .recipe-img {
+    height: 15rem ;
+    width: auto;
+    object-fit: cover;
+    display: block;
+}
+.banner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
