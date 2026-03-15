@@ -2,19 +2,12 @@
 
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
+<link href="<?= base_url('./css/addRecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
 <h1 class="text-center">Proposez une recette</h1>
-<div id="toolbar">
-    <button class="ql-bold"></button>
-    <button class="ql-italic"></button>
-    <button class="ql-underline"></button>
-    <button class="ql-list" value="ordered"></button>
-    <button class="ql-list" value="bullet"></button>
-</div>
 
 <?php
 $title = [
@@ -86,6 +79,7 @@ foreach ($categories as $categorie) {
 
 ?>
 <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
+
 
 
 
@@ -164,9 +158,16 @@ foreach ($categories as $categorie) {
         <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
     </div>
 </div>
-<button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button>
+<button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button><br>
 
-<label for="contenu">La Recette</label>
+<label for="contenu"><h2>La Recette</h2></label>
+<div id="toolbar">
+    <button class="ql-bold"></button>
+    <button class="ql-italic"></button>
+    <button class="ql-underline"></button>
+    <button class="ql-list" value="ordered"></button>
+    <button class="ql-list" value="bullet"></button>
+</div>
 <div id="editor" style="height: 300px; border: 1px solid #ccc;"></div>
 <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu') ?>">
 

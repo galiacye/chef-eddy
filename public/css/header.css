@@ -1,10 +1,8 @@
-body {
-    margin: 2rem;
-    background-color: rgb(238, 223, 204);
-}
+
 .eddy {
     height: 200px;
     padding: 10px;
+    border-radius: 50%;
 }
 .ban {
     display: flex;
@@ -13,4 +11,6 @@ body {
 }
 .logo {
     border-radius: 50%;
+    height: 200px;
+    width: 200px;
 }
