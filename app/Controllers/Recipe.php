@@ -202,6 +202,11 @@ class Recipe extends BaseController
         }
     }
 
+    public function createEditor()
+    {
+        return view('Recipe/create-editor');
+    }
+
     public function showRecipe(int $id)
     {
         $recipeModel = new RecipeModel();

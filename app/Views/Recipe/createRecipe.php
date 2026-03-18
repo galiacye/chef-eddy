@@ -2,6 +2,7 @@
 
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="<?= base_url('css/quill.css') ?>" rel="stylesheet">
 <link href="<?= base_url('./css/createRecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
@@ -70,18 +71,16 @@ $options_ingredients = [
     'liquides'  => 'Liquides',
     'autres'    => 'Autres'
 ];
-//form_dropdown génère le html select à partir du tab $options_cat
+//form_dropdown génère le html select à partir du tab $options_categories
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
 foreach ($categories as $categorie) {
-    $options_categories[$categorie['id']] = $categorie['nom']; //valeur envoyée en base(id)  = ce que user voit(nom)
+    $options_categories[$categorie['id']] = $categorie['nom']; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
 }
-//$status et $views gérées ds ctrlr
-
 ?>
+
+<!-- $status et $views gérées ds ctrlr -->
+
 <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
-
-
-
 
 <label for="titre">Titre</label>
 <?= form_input($title) ?>
@@ -160,7 +159,7 @@ foreach ($categories as $categorie) {
 </div>
 <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button><br>
 
-<label for="contenu"><h2>La Recette</h2></label>
+<label for="contenu"><h2>Votre Recette</h2></label>
 <div id="toolbar">
     <button class="ql-bold"></button>
     <button class="ql-italic"></button>
@@ -168,10 +167,8 @@ foreach ($categories as $categorie) {
     <button class="ql-list" value="ordered"></button>
     <button class="ql-list" value="bullet"></button>
 </div>
-<div id="editor" style="height: 300px; border: 1px solid #ccc;"></div>
+<div id="editor"></div>
 <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu') ?>">
-
-
 
 <button type="submit" class="btn btn-primary">Envoyer</button>
 <?= form_close() ?>

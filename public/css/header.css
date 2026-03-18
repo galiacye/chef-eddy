@@ -1,11 +1,15 @@
 @font-face {
-    font-family: "super_popstar";
-    src: url('/fonts/super_popstar/Super-Popstar.ttf') format('truetype');
+    font-family: "dirty_war";
+    src: url('/fonts/dirty_war/Dirty-War.otf') format('truetype');
 }
 .hero-title {
-    font-family: "super_popstar";
-    color: pink;
+    font-family: "dirty_war";
+    color: rgb(154, 185, 132);
     font-size: 6em;
+}
+.txt {
+    color: white;
+    font-size: 1.3em;
 }
 .eddy {
     height: 200px;
