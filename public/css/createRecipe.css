@@ -28,3 +28,12 @@ body {
   flex: 1;        /* prend toute la hauteur restante */
   min-height: 0;
 }
+.ingredient-row {
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ingredient-row input,
+.ingredient-row select {
+    width: 100% !important; /* écrase les w-25 de Bootstrap */
+}

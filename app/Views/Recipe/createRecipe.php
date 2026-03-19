@@ -131,7 +131,7 @@ foreach ($categories as $categorie) {
 
         <label>Ingrédients</label>
         <div id="ingredients-container">
-            <div class="ingredient-row d-flex gap-2 mb-2">
+            <div class="ingredient-row gap-2 mb-2">
                 <?php
                 $ing_nom = [
                     'name'        => 'ingredients[0][nom]',
@@ -207,7 +207,7 @@ foreach ($categories as $categorie) {
     document.getElementById('ajouter-ingredient').addEventListener('click', () => {
         const container = document.getElementById('ingredients-container');
         const row = document.createElement('div');
-        row.classList.add('ingredient-row', 'd-flex', 'gap-2', 'mb-2');
+        row.classList.add('ingredient-row', 'gap-2', 'mb-2');
 
         const options = Object.entries(categoriesIngredient)
             .map(([val, label]) => `<option value="${val}">${label}</option>`)
