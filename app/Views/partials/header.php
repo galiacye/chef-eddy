@@ -14,7 +14,7 @@
         <a class="navbar-brand" href="<?= base_url('users') ?>">Utilisateurs</a>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('recipes') ?>">Toutes les recettes</a>
+                <a class="nav-link" href="<?= base_url('recipeIndex') ?>">Toutes les recettes</a>
             </li>
             <li>
                 <a class="nav-link" href="<?= base_url('categories') ?>"> Les Catégories</a>

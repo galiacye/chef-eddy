@@ -3,7 +3,7 @@
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link href="<?= base_url('css/quill.css') ?>" rel="stylesheet">
-<link href="<?= base_url('./css/createRecipe.css') ?>" rel="stylesheet">
+<link href="<?= base_url('./css/recipes/createRecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>

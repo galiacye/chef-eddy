@@ -1,0 +1,16 @@
+
+  body {
+    background-image: url("/img/desserts/citroncoupe.png");
+    background-size: cover;
+  }
+  h1 {
+    font-size: 4em;
+    color: white;
+    text-shadow: 2px 2px black;
+  }
+  .rech {
+    background-color: white;
+  }
+  .box {
+    height: 1000px;
+  }

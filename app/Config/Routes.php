@@ -18,7 +18,7 @@ $routes->get('user/(:num)', 'User::cIdUser/$1');
 $routes->get('user-chef/(:num)','User::userChef/$1');
 $routes->get('all-users','User::UserIndex');
 //recipe
-$routes->get('all-recipes','Recipe::recipeIndex');
+$routes->get('recipeIndex','Recipe::recipeIndex');
 $routes->get('recipe/(:num)','Recipe::showRecipe/$1');
 $routes->match(['get','post'],'add-recipe','Recipe::createRecipe');
 $routes->match(['get','post'],'create-editor','Recipe::createEditor');

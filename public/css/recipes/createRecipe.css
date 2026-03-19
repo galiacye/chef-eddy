@@ -1,0 +1,39 @@
+body {
+    background-color: rgb(188, 241, 159);
+}
+#toolbar {
+    background-color: white;
+}
+.formulaire {
+  display: flex;
+  gap: 2rem;
+}
+
+.infos {
+    /* flex-grow: 0;     ne grandit PAS au delà de 35% 
+    flex-shrink: 0;  ne rétrécit PAS en dessous de 35% 
+    flex-basis: 25%; taille fixe : exactement 35%   */
+  flex: 0 0 25%;   /* largeur fixe */
+  min-width: 0;    /* évite les débordements dans un contexte flex */
+}
+
+.editeur {
+  flex: 1;         /* prend tout l'espace restant */
+  min-width: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+.editeur .ql-container {
+  flex: 1;        /* prend toute la hauteur restante */
+  min-height: 0;
+}
+.ingredient-row {
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ingredient-row input,
+.ingredient-row select {
+    width: 100% !important; /* écrase les w-25 de Bootstrap */
+}
