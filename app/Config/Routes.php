@@ -11,6 +11,9 @@ $routes->get('test', 'Home::salut');
 $routes->get('afficher','Home::afficher');
 $routes->get('monpdf','Home::creerPdf');
 $routes->get('upload','Article::upload');
+
+//search
+$routes->get('search','Search::search');
 //user
 $routes->get('user/(:num)', 'User::showUser/$1');
 $routes->match(['get', 'post'], 'add-user', 'User::createUser');

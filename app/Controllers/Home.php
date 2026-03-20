@@ -7,7 +7,8 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('Home/accueil');
+        helper('form');
+        return view('Home/index');
     }
     
     public function salut()
