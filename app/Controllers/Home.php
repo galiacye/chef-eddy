@@ -2,13 +2,16 @@
 
 namespace App\Controllers;
 use App\Libraries\Pdf;
+use App\Models\IngredientModel;
+
 
 class Home extends BaseController
 {
     public function index(): string
     {
         helper('form');
-        return view('Home/index');
+        $ingredientModel = model('IngredientModel');
+        return view('Home/index',['ingredients'=>$ingredientModel->findAll()]);
     }
     
     public function salut()

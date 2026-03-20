@@ -20,10 +20,14 @@ class Search extends BaseController
     public function search()
     {
         $search = $this->request->getGet('search');
-        $data = [
-            'recipes'=>$this->model->searchRecipe($search)
-        ];
+        $ingredient = $this->request->getGet('ingredient');
+        
+        if($ingredient){
+            $recipes = $this->model->searchByIngredient($ingredient);
+        }else{
+            $recipes = $this->model->searchRecipe($search);
+        }
+        $data = ['recipes'=>$recipes];
         return view('Search/results',$data);
-
     }
 }

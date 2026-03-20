@@ -202,15 +202,10 @@ class Recipe extends BaseController
         }
     }
 
-    public function createEditor()
-    {
-        return view('Recipe/create-editor');
-    }
-
     public function showRecipe(int $id)
     {
-        $recipeModel = new RecipeModel();
-        $tagModel        = new TagModel();
+        $recipeModel = model('recipeModel');//syntaxe ci4 helper
+        $tagModel        = new TagModel();//syntaxe classique
         $ingredientModel = new IngredientModel();
 
         $recipe = $recipeModel->getRecipe($id);

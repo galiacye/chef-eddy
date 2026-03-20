@@ -16,7 +16,7 @@
                         <p>Temps de préparation : <?= $recipe->temps_preparation ?></p>
                         <p>Temps de cuisson : <?= $recipe->temps_cuisson ?></p>
                         <p>Nombre de personnes : <?= $recipe->nb_personnes ?></p>
-                        <a href="<?= base_url('recipes/'. $recipe->id) ?>" class="btn btn-primary">Voir la recette</a>
+                        <a href="<?= base_url('recipe/'. $recipe->id) ?>" class="btn btn-primary">Voir la recette</a>
                     </div>
                 </div>
             </div>

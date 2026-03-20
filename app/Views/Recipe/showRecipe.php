@@ -39,7 +39,7 @@
 
 <!-- pour quill-js : -->
 <div class="editor">
-        <p><?= $recipe->contenu ?>
+        <p><?= $recipe->contenu ?></p>
 </div>
 
 
