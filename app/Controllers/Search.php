@@ -17,16 +17,19 @@ class Search extends BaseController
         helper('form');
         $this->model = Model('SearchModel');
     }
+ 
+
     public function search()
     {
         $search = $this->request->getGet('search');
-        $ingredient = $this->request->getGet('ingredient');
-        
-        if($ingredient){
-            $recipes = $this->model->searchByIngredient($ingredient);
-        }else{
-            $recipes = $this->model->searchRecipe($search);
-        }
+        $type   = $this->request->getGet('type');
+
+        $recipes = match($type) {
+        'ingredient' => $this->model->searchByIngredient($search),
+        'tag'        => $this->model->searchByTag($search),
+        'categorie'  => $this->model->searchByCategory($search),
+        default      => $this->model->searchRecipe($search)
+        };
         $data = ['recipes'=>$recipes];
         return view('Search/results',$data);
     }

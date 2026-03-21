@@ -16,7 +16,7 @@
 
     <div class="illustration">
         <?php if($recipe->image_url): ?>
-            <img src="<?= base_url($recipe->image_url) ?>" alt="image recette" class="recipe-img">
+            <img src="<?= base_url($recipe->image_url ?? 'img/default.jpg') ?>" alt="image recette" class="recipe-img">
         <?php endif ?>
     </div>
 </div>
