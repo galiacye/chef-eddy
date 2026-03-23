@@ -24,7 +24,6 @@ $routes->get('all-users','User::UserIndex');
 $routes->get('recipeIndex','Recipe::recipeIndex');
 $routes->get('recipe/(:num)','Recipe::showRecipe/$1');
 $routes->match(['get','post'],'add-recipe','Recipe::createRecipe');
-$routes->match(['get','post'],'create-editor','Recipe::createEditor');
 $routes->get('update-recipe/(:num)','Recipe::updateRecipe');
 
 //ingredients

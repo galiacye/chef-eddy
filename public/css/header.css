@@ -2,6 +2,10 @@
     font-family: "dirty_war";
     src: url('/fonts/dirty_war/Dirty-War.otf') format('truetype');
 }
+@font-face {
+    font-family: "gimme_danger";
+    src: url('/fonts/gimme_danger/Gimme-Danger.ttf') format('truetype');
+}
 .hero-title {
     font-family: "dirty_war";
     color: rgb(154, 185, 132);
