@@ -1,6 +1,30 @@
 body {
+    margin: 0;
     background-color: rgb(165, 240, 124);
 }
 #toolbar {
     background-color: white;
+}
+.main {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    /* flex-direction: column; */
+}
+.haut {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 3rem;
+    width: 25%;
+}
+.bas-editeur {
+    flex: 1;
+    min-width: 0;
+    width: 75%;
+    margin-left: 0;
+}
+.bas-editeur h2 {
+    margin-bottom: 30px;;
 }

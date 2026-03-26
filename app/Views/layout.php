@@ -13,7 +13,7 @@
 
     <?= $this->include('partials/header') ?>
 
-    <main class="container mt-4">
+    <main class="container-fluid">
         <?= $this->renderSection('body') ?>
     </main>
 
