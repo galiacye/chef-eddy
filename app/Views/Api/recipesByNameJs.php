@@ -9,25 +9,37 @@
 
 <?= $this->section('custom-js') ?>
 <script>
-  function searchRecipesByName() {
-    console.log('click ok');
+console.log("JS chargé");
+
+function searchRecipesByName() {
+    console.log('click OK');
+
     let recipe = document.getElementById('recipeName').value;
 
     if (!recipe) {
-      alert("Tapez le nom d'une recette !");
-      return;
+        alert("Tapez le nom d'une recette !");
+        return;
     }
 
     fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + recipe)
-      .then(res => res.json())
-      .then(data => console.log(data));
-  }
+        .then(res => res.json())
+        .then(data => {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ""; // vide les résultats précédents
 
-</script>
-<script>
-console.log("JS chargé");
-function searchRecipesByName() {
-  console.log("Fonction OK");
+            if (data.meals) {
+                data.meals.forEach(meal => {
+                    resultsDiv.innerHTML += `
+                    <div>
+                        <h3>${meal.strMeal}</h3>
+                        <img src="${meal.strMealThumb}" width="150">
+                    </div>
+                    `;
+                });
+            } else {
+                resultsDiv.innerHTML = "<p>Aucune recette trouvée</p>";
+            }
+        });
 }
 </script>
 <?= $this->endSection() ?>
