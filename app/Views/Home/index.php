@@ -29,9 +29,11 @@
         </div>
         <div class="col-auto">  OU  </div>
         <div class="col-auto">
-            <label for="ingredients_input">Rechercher une recette par ingrédient</label>
              <!-- input list pointe vers datalist id , name="ingredient" au sing cf Controller -->
-            <input list="ingredients-list" id="ingredients_input" name="ingredient" placeholder="entrez ici le nom d'un ingrédient pour accéder aux recettes qui le contiennent">
+            <input list="ingredients-list" id="ingredients_input" 
+                name="ingredient" 
+                placeholder="Recettes par ingrédients"
+                class="form-control">
                 <datalist id="ingredients-list">
                 <?php foreach($ingredients as $ingr) : ?>
                     <option value="<?= esc($ingr->nom)?>"></option>
@@ -43,5 +45,35 @@
         </div>
       </div>
     <?= form_close() ?>
+    <div class="row d-flex align-items-center divers">
+        <div class="col md-4 lg-2 cat">
+            <img src="<?= base_url('img/desserts/cheesecake-speculoos.jpg') ?>" class="photo1">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
+                deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
+                officia doloribus ipsam repudiandae.
+
+            </p>
+        </div>
+        <div class="col md-4 lg-2 tags">
+              <img src="<?= base_url('img/desserts/cheesecake-speculoos.jpg') ?>" class="photo1">      
+                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
+                deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
+                officia doloribus ipsam repudiandae.
+
+            </p>
+            </div>
+        <div class="col md-4 lg-2 saison">
+            <img src="<?= base_url('img/desserts/cheesecake-speculoos.jpg') ?>" class="photo1">
+
+                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
+                deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
+                officia doloribus ipsam repudiandae.
+
+            </p>
+        </div>
+    </div>
 <?= $this->endSection() ?>
 
