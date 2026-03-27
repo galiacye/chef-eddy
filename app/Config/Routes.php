@@ -31,6 +31,10 @@ $routes->get('all-ing','Ingredients::indexIngredients');
 $routes->get('one-ing/(:num)','Ingredient::showIngredient/$1');
 $routes->get('add-ing', 'Ingredient::createIngredient');
 
+//Api
+$routes->get('recipesByCat', 'Api::recipesByCat');
+$routes->get('recipesByNameJs','Api::recipesByName');
+
 
 //
 

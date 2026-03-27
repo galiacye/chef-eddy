@@ -16,4 +16,9 @@ class TagModel extends Model
                     ->where('recettes_tags.recette_id',$id)
                     ->get()->getResult();
     }
+
+    public function editTag()
+    {
+        
+    }
 }

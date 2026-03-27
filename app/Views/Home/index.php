@@ -25,13 +25,13 @@
             <input type="text" name="search" class="form-control" placeholder="Rechercher une recette">
         </div>
         <div class="col-auto">
-            <button type="submit"class="btn btn-primary">search</button>
+            <button type="submit"class="btn btn-primary">search...</button>
         </div>
         <div class="col-auto">  OU  </div>
         <div class="col-auto">
             <label for="ingredients_input">Rechercher une recette par ingrédient</label>
              <!-- input list pointe vers datalist id , name="ingredient" au sing cf Controller -->
-            <input list="ingredients-list" id="ingredients_input" name="ingredient" placeholder="entrez ici le nom d'un ingrédient pour accéder aux recettes qui le contiennent">
+            <input list="ingredients-list" id="ingredients_input" name="ingredient" placeholder="Entrez ici un ingrédient">
                 <datalist id="ingredients-list">
                 <?php foreach($ingredients as $ingr) : ?>
                     <option value="<?= esc($ingr->nom)?>"></option>
@@ -43,5 +43,6 @@
         </div>
       </div>
     <?= form_close() ?>
+    <div class="box"></div>
 <?= $this->endSection() ?>
 

@@ -314,10 +314,7 @@ class Recipe extends BaseController
                         "integer"  => "Catégorie invalide",
                     ]
                 ],
-                "tags" => [
-                    "label" => "Tags",
-                    "rules" => "permit_empty",
-                ],
+             
             ];
             if (!$this->validate($rules)) {
                 return view('Recipe/updateRecipe', [
@@ -364,15 +361,7 @@ class Recipe extends BaseController
                     'categorie_id' => $categorie_id
                 ]);
             }
-            $tag_ids = $this->request->getPost('tags');
-            if ($tag_ids) {
-                foreach ($tag_ids as $tag_id) {
-                    $db->table('recette_tags')->insert([
-                        'recette_id' => $recipe_id,
-                        'tag_id' => $tag_id
-                    ]);
-                }
-            }
+          
             $ingredients = $this->request->getPost('ingredients');
             if ($ingredients) {
                 foreach ($ingredients as $ingredient) {
