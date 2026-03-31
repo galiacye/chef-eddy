@@ -36,17 +36,42 @@ class Admin extends BaseController
         return view('Admin/dashboard');
     }
 
+    public function userIndex()
+    {
+        $users = $this->userModel->findAll();
+        return view('Admin/userIndex', ["users"=>$users]);//ici pas de $data car le param est passé directement à la vue,mais c'est pareil
+    }//pareil que :
+    //$users = $this->userModel->findAll();
+    //$data = ["users" => $users];
+    //return view('Admin/userIndex', $data);
+
+    public function userDetails($id)
+    {
+        $user = $this->userModel->find($id);
+        $data = [
+            "user"=>$user
+        ];
+        return view('User/showUser', $id);
+    }
+
     public function deleteUser(int $id)
     {
+        $user = $this->userModel->find($id);
         $this->userModel->delete($id);
         return redirect()->to('Admin/userIndex');//créer vue admin avec index users
+    }
+
+    public function changeUserRole(int $id)
+    {
+        $user = $this->userModel->find($id);
+        
     }
 
 
     public function deleteRecipe(int $id)
     {
         $this->recipeModel->delete($id);
-        return redirect()->to('Admin/recipeIndex');//idem pr recipe
+        return redirect()->to('Admin/recipe');//idem pr recipe
     }
 
 
