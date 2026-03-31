@@ -5,7 +5,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<!-- <div class="row">
+<div class="row">
     <div class="col-auto">
         <button class="btn btn-primary">Déjà membre</button>
     </div>
@@ -15,7 +15,7 @@
     <div class="col-auto">
         <button class="btn btn-primary">S'inscrire</button>
     </div>
-</div> -->
+</div>
     
         <br>
   
