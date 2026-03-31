@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use CodeIgniter\Model;
 
 class UserModel extends Model
@@ -10,16 +11,23 @@ class UserModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
-        'username','email','password','nom','prenom','avatar_url','role_id'
+        'username',
+        'email',
+        'password',
+        'nom',
+        'prenom',
+        'avatar_url',
+        'role_id'
     ];
     protected $returnType = 'object';
 
-  
-    public function getRoles()
+    public function getUsersWithRole()
     {
-        return $this->db->table('roles')->get()->getResult();
+        return $this->select('users.*, roles.name as role_name')
+            ->join('roles', 'roles.id = users.role_id')
+            ->findAll();
     }
 
-
-   
+    
+    
 }

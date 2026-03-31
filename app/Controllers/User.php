@@ -20,15 +20,23 @@ class User extends BaseController
         return view('User/showUser', $data);
     }
 
+
+    public function getUsersWithRole()
+    {
+        return $this->db->table('users')
+            ->join('roles', 'roles.id = users.role_id')
+            ->get()->getResult();
+    }
+
     public function cIdUser(int $id)
     {
-        $idUser = $this->model->find($id);
+        $idUser = $this->model->find($id); //find = fonction native de ci4, c'est pourquoi ne figure pas ds le model
         return view('User/cIdUser', ['user' => $idUser]);
     }
 
     public function userIndex(): string
     {
-        $users = $this->model->findAll();
+        $users = $this->model->findAll(); //findAll = idem
         $data = [
             "users" => $users
         ];
@@ -99,7 +107,7 @@ class User extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                 dd($this->validator->getErrors());
+                dd($this->validator->getErrors());
                 // validation échoue → on retourne le formulaire avec les erreurs
                 return view('User/createUser', [
                     'errors' => $this->validator->getErrors(),
@@ -113,7 +121,7 @@ class User extends BaseController
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
             $nom = $this->request->getPost('nom');
             $prenom = $this->request->getPost('prenom');
-$role_id = $this->request->getPost('role_id') ?: 1;
+            $role_id = $this->request->getPost('role_id') ?: 1;
 
             // Gestion du fichier avatar
             $avatar_file = $this->request->getFile('avatar_url');
@@ -135,7 +143,7 @@ $role_id = $this->request->getPost('role_id') ?: 1;
             ];
 
             // Insertion dans la base
-            $this->model->insert($data);
+            $this->model->insert($data); //insert = tjrs fct nat ci4
 
             return view('success');
         }
@@ -199,8 +207,13 @@ $role_id = $this->request->getPost('role_id') ?: 1;
                         "mime_in" => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ],
-                "role_id"
-
+                "role_id" =>  [
+                    "label" => "Rôle",
+                    "rules" => "permit_empty|is_natural|max_length[11]",
+                    "errors" => [
+                        "is_natural" => "Rôle invalide"
+                    ]
+                ]
             ];
             if (!$this->validate($rules)) {
                 // validation échoue → on retourne le formulaire avec les erreurs
@@ -215,7 +228,7 @@ $role_id = $this->request->getPost('role_id') ?: 1;
             $email = $this->request->getPost('email');
             $nom = $this->request->getPost('nom');
             $prenom = $this->request->getPost('prenom');
-$role_id = $this->request->getPost('role_id') ?: 1;
+            $role_id = $this->request->getPost('role_id') ?: 1;
             // Gestion du fichier avatar
 
             $avatar_file = $this->request->getFile('avatar_url');
@@ -231,7 +244,7 @@ $role_id = $this->request->getPost('role_id') ?: 1;
                 "nom" => $nom,
                 "prenom" => $prenom,
                 "avatar_url" => $avatar_url,
-                "role_id" => $user->role_id 
+                "role_id" => $role_id
             ];
             $password = $this->request->getPost('password');
             if (!empty($password)) {
@@ -239,7 +252,7 @@ $role_id = $this->request->getPost('role_id') ?: 1;
             }
 
             // Insertion dans la base
-            $this->model->update($id, $data);
+            $this->model->update($id, $data); //update fct native ci4
 
             // Retour view succès
             return view('success');

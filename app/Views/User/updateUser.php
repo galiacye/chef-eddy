@@ -12,7 +12,7 @@
 
     <h1 class="text-center">Modifier vos données</h1>
 
-    <?= form_open_multipart('/user/add') ?>
+    <?= form_open_multipart('/update-user/'. $user->id) ?>
 
 <?php
 $username = [
