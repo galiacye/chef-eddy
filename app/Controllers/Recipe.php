@@ -46,7 +46,9 @@ class Recipe extends BaseController
         return view('Recipe/recipeIndex', $data);
     }
 
-    public function createRecipe()
+    // createRecipe:
+    // validation ✔️upload image ✔️purification Quill ✔️tables de liaison ✔️gestion ingrédients intelligente ✔️
+    public function createRecipe() 
     {
         if ($this->request->is('post') === false) {
             $tagModel       = new TagModel();
@@ -204,7 +206,7 @@ class Recipe extends BaseController
 
                     if ($ing_existant) {
                         // 2a. Il existe → on récupère son id
-                        $ingredient_id = $ing_existant['id'];
+                        $ingredient_id = $ing_existant['id'];//syntaxe array car getRowArray() ci-dessus
                     } else {
                         // 2b. Il n'existe pas → on l'insère
                         $db->table('ingredients')->insert([
@@ -232,17 +234,18 @@ class Recipe extends BaseController
     {
         if ($this->request->is('get')) //ou is('post')===false
         {
-            $recipe = $this->model->find($id);
+            $recipe = $this->model->getRecipe($id);//car find() na fait pas les jointures !
             $tagModel = model('TagModel');
             $categorieModel = model('CategorieModel');
             return view('Recipe/updateRecipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
-                'categories' => $categorieModel->findAll()
+                'categories' => $categorieModel->findAll(),
+                'ingredients' => $this->model->getIngredients($id)
             ]);
-        } else {
+        } else {//si pas get, post donc traitement
             $user_id = session()->get('user_id');
-
+// dd($id,$this->request->getPost());//pour voir!
             $rules = [
                 "titre" => [
                     "label" => "Titre",
@@ -321,7 +324,8 @@ class Recipe extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'recipe'=> $this->model->find($id),
                     'tags' => model('TagModel')->findAll(),
-                    'categories' => model('CategorieModel')->findAll()
+                    'categories' => model('CategorieModel')->findAll(),
+                    'ingredients' => $this->model->getIngredients($id)
                 ]);
             }
             $image = $this->request->getFile('image_url');
@@ -352,9 +356,13 @@ class Recipe extends BaseController
             ];
             //pour les tables de liaison:
             $this->model->updateRecipe($id, $data);
+
+            // dd($id, $data); // 
+        
             $recipe_id = $id; //pour les tables intermédiaires
             $db = \Config\Database::connect();
             $categorie_id = $this->request->getPost('categorie_id');
+            $db->table('recette_categories')->where('recette_id', $recipe_id)->delete();//supp avant réinsertion
             if ($categorie_id) {
                 $db->table('recette_categories')->insert([
                     'recette_id' => $recipe_id,
@@ -363,6 +371,7 @@ class Recipe extends BaseController
             }
           
             $ingredients = $this->request->getPost('ingredients');
+            $db->table('recette_ingredients')->where('recette_id', $recipe_id)->delete();//on supprime les anciens ingr
             if ($ingredients) {
                 foreach ($ingredients as $ingredient) {
                     $nom = ucfirst(strtolower(trim($ingredient['nom'])));
@@ -393,4 +402,6 @@ class Recipe extends BaseController
             return redirect()->to('/recipeIndex')->with('success', 'Recette modifiée avec succès !');
         }
     }
+
+   
 }

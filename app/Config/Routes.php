@@ -14,9 +14,9 @@ $routes->get('upload','Article::upload');
 
 //Admin
 $routes->get('dashboard','Admin::dashboard');
-$routes->get('delete-user/(:num)','Admin::deleteUser/$1');
-// dans la vue : <a href="<?= base_url('delete-user/' . $user->id) >supp</a>
-
+$routes->get('users-index','Admin::user');
+$routes->get('recipe-index','Admin::recipeIndex');
+$routes->get('delete-user/(:num)','Admin::deleteUser/$1');// dans la vue : <a href="<?= base_url('delete-user/' . $user->id)? >supp</a>
 $routes->get('delete-recipe/(:num)','Admin::deleteRecipe/$1');
 
 //search
@@ -36,7 +36,7 @@ $routes->get('role','Role::getRole');
 $routes->get('recipeIndex','Recipe::recipeIndex');
 $routes->get('recipe/(:num)','Recipe::showRecipe/$1');
 $routes->match(['get','post'],'add-recipe','Recipe::createRecipe');
-$routes->get('update-recipe/(:num)','Recipe::updateRecipe');
+$routes->match(['get','post'],'update-recipe/(:num)','Recipe::updateRecipe/$1');
 
 //ingredients
 $routes->get('all-ing','Ingredients::indexIngredients');

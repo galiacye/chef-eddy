@@ -54,24 +54,33 @@ class Admin extends BaseController
         return view('User/showUser', $id);
     }
 
-    public function deleteUser(int $id)
-    {
-        $user = $this->userModel->find($id);
-        $this->userModel->delete($id);
-        return redirect()->to('Admin/userIndex');//créer vue admin avec index users
-    }
-
-    public function changeUserRole(int $id)
+     public function changeUserRole(int $id)
     {
         $user = $this->userModel->find($id);
         
     }
 
+    public function deleteUser(int $id)
+    {
+        // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé, par ex
+        $this->userModel->delete($id);//pattern natif de ci4 pas besoin de méthode customisée ds modèle
+        return redirect()->to('Admin/userIndex');//créer vue admin avec index users
+    }
+
+    public function recipeIndex()
+    {
+        return view('Admin/recipeIndex');
+    }
+
+    public function recipeDetails()
+    {
+        return view('Recipe/showRecipe');
+    }
 
     public function deleteRecipe(int $id)
     {
         $this->recipeModel->delete($id);
-        return redirect()->to('Admin/recipe');//idem pr recipe
+        return redirect()->to('Admin/recipe')->with('success','Recette supprimée');//idem pr recipe: ds vue admin
     }
 
 
