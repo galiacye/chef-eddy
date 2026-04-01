@@ -33,7 +33,12 @@ class Admin extends BaseController
 
     public function dashboard()
     {
-        return view('Admin/dashboard');
+
+        return view('Admin/dashboard',[
+            'nb_users'=>$this->userModel->countAll(),
+            'nb_recipes'=>$this->recipeModel->countAll(),
+            'nb_recipes_pending'=>$this->recipeModel->countAll()
+        ]);
     }
 
     public function userIndex()

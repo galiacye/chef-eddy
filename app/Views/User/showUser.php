@@ -1,7 +1,7 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('./css/showUser.css')?>" rel="stylesheet">
+<link href="<?= base_url('css/showUser.css')?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>

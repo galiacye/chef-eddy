@@ -56,7 +56,7 @@
             </p>
         </div>
         <div class="col md-4 lg-2 tags">
-              <img src="<?= base_url('img/desserts/cheesecake-speculoos.jpg') ?>" class="photo1">      
+              <img src="<?= base_url('img/desserts/tarte_poires_amandes.JPG') ?>" class="photo1">      
                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                 Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
                 deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
@@ -65,7 +65,7 @@
             </p>
             </div>
         <div class="col md-4 lg-2 saison">
-            <img src="<?= base_url('img/desserts/cheesecake-speculoos.jpg') ?>" class="photo1">
+            <img src="<?= base_url('img/desserts/foretnoire-dessus.png') ?>" class="photo1">
 
                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                 Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
