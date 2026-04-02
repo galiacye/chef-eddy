@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "dirty_war";
+    src: url('/fonts/dirty_war/Dirty-War.otf') format('truetype');
+}
+
+.hero-title {
+    font-family: "dirty_war";
+    color: rgb(154, 185, 132);
+    font-size: xx-large;
+}
+.txt {
+    color: white;
+    font-size: small;
+}
+.eddy {
+    height: 90px;
+    border-radius: 50%;
+    margin-left: 2px;
+}
+.ban {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+.logo {
+    height: 80px;
+    width: 100px;
+    border-radius: 10%;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 576px){
+  
+}
+@media screen and (min-width: 768px){
+
+}
+@media screen and (min-width: 1024px){
+
+}
