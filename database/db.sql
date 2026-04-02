@@ -109,7 +109,7 @@ CREATE TABLE recette_categories (
     FOREIGN KEY (recette_id) REFERENCES recettes(id) ON DELETE CASCADE,
     FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE,
     UNIQUE KEY unique_recette_categorie (recette_id, categorie_id)
-);
+);--fait
 
 CREATE TABLE recettes_tags (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -118,7 +118,7 @@ CREATE TABLE recettes_tags (
     FOREIGN KEY (recette_id) REFERENCES recettes(id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE,
     UNIQUE KEY unique_recette_tag (recette_id, tag_id)
-);
+);--fait
 CREATE TABLE tags (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(50) NOT NULL
