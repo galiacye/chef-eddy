@@ -1,41 +1,121 @@
 @font-face {
-    font-family: "dirty_war";
-    src: url('/fonts/dirty_war/Dirty-War.otf') format('truetype');
+  font-family: "dirty_war";
+  src: url("/fonts/dirty_war/Dirty-War.otf") format("opentype"); /*truetype pour ttf*/
 }
-
-.hero-title {
-    font-family: "dirty_war";
-    color: rgb(154, 185, 132);
-    font-size: xx-large;
-}
-.txt {
-    color: white;
-    font-size: small;
-}
-.eddy {
-    height: 90px;
-    border-radius: 50%;
-    margin-left: 2px;
+@font-face {
+    font-family: "Rifle-bats-tfb";
+    src: url('/fonts/Rifle-bats-tfb.ttf') format('truetype');
 }
 .ban {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
 }
+/*camouflage qui bouge*/
+ .hero-title {
+    font-family: "dirty_war";
+    font-size: 3em;
+ text-shadow: none;
+    background: url('../img/camouflage.jpg') repeat;
+    background-size: 300px;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: camoMove 5s linear infinite;
+}
+
+
+@keyframes camoMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 300px 0;
+    }
+} 
+
+
+/*camouflage simple/*/
+ /* .hero-title {
+    font-family: "dirty_war";
+    font-size: 2em;
+
+    background-image: url('../img/camouflage.jpg');
+    background-size: cover;
+    background-position: center;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;  IMPORTANT
+    color: transparent;
+
+    text-shadow: none;  au cas où 
+    
+}  */
+
+.txt {
+  color:white;
+  font-size: 0.8em;
+    }
+.fusil {
+    font-family: "Rifle-bats-tfb"; 
+    -webkit-text-fill-color: rgb(246, 148, 195);
+    color: rgb(246, 148, 195) !important;
+    font-size: 3rem;
+}
+.eddy {
+  height: 90px;
+  border-radius: 50%;
+  margin-left: 6px;
+}
+
 .logo {
-    height: 80px;
-    width: 100px;
-    border-radius: 10%;
-    margin-right: 10px;
+  height: 70px;
+  width: 70px;
+  border-radius: 10%;
+  margin-right: 10px;
 }
 
-@media screen and (min-width: 576px){
-  
+@media screen and (min-width: 768px) {
+  .ban {
+    height: 130px;
+  }
+  .hero-title {
+    font-size: 3.5em;
+  }
+  .eddy {
+    height: 120px;
+    margin-left: 10px;
+  }
+  .txt {
+    font-size: 1.1em;
+  }
+  .logo {
+    height: 130px;
+    width: 130px;
+    margin-right: 15px;
+  }
 }
-@media screen and (min-width: 768px){
-
-}
-@media screen and (min-width: 1024px){
-
+@media screen and (min-width: 1024px) {
+  .ban {
+    height: 180px;
+  }
+  .hero-title {
+    font-size: 5em;
+  }
+  .eddy {
+    height: 170px;
+    margin-left: 20px;
+  }
+  .txt {
+    font-size: 1.5em;
+  }
+  .logo {
+    height: 150px;
+    width: 150px;
+    margin-right: 20px;
+  }
 }
