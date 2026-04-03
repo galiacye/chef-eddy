@@ -3,8 +3,8 @@
   src: url("/fonts/dirty_war/Dirty-War.otf") format("opentype"); /*truetype pour ttf*/
 }
 @font-face {
-    font-family: "Rifle-bats-tfb";
-    src: url('/fonts/Rifle-bats-tfb.ttf') format('truetype');
+  font-family: "Rifle-bats-tfb";
+  src: url("/fonts/Rifle-bats-tfb.ttf") format("truetype");
 }
 .ban {
   display: flex;
@@ -13,32 +13,30 @@
   height: 100px;
 }
 /*camouflage qui bouge*/
- .hero-title {
-    font-family: "dirty_war";
-    font-size: 3em;
- text-shadow: none;
-    background: url('../img/camouflage.jpg') repeat;
-    background-size: 300px;
+.hero-title {
+  font-family: "dirty_war";
+  font-size: 2.2em;
+  text-shadow: none;
+  background: url("../img/camouflage.jpg") repeat;
+  background-size: 300px;
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-    animation: camoMove 5s linear infinite;
+  animation: camoMove 5s linear infinite;
 }
 
-
 @keyframes camoMove {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 300px 0;
-    }
-} 
-
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 300px 0;
+  }
+}
 
 /*camouflage simple/*/
- /* .hero-title {
+/* .hero-title {
     font-family: "dirty_war";
     font-size: 2em;
 
@@ -55,17 +53,14 @@
     text-shadow: none;  au cas où 
     
 }  */
-
-.txt {
-  color:white;
-  font-size: 0.8em;
-    }
 .fusil {
-    font-family: "Rifle-bats-tfb"; 
-    -webkit-text-fill-color: rgb(246, 148, 195);
-    color: rgb(246, 148, 195) !important;
-    font-size: 3rem;
+  display: none;
 }
+.txt {
+  color: white;
+  font-size: 0.8em;
+}
+
 .eddy {
   height: 90px;
   border-radius: 50%;
@@ -86,6 +81,13 @@
   .hero-title {
     font-size: 3.5em;
   }
+  .fusil {
+    display: inline;
+    font-family: "Rifle-bats-tfb";
+    -webkit-text-fill-color: pink;
+    color: pink !important;
+    font-size: 2rem;
+  }
   .eddy {
     height: 120px;
     margin-left: 10px;
@@ -105,6 +107,12 @@
   }
   .hero-title {
     font-size: 5em;
+  }
+  .fusil {
+    display: inline;
+    font-size: 3rem;
+    -webkit-text-fill-color: pink;
+    color: pink !important;
   }
   .eddy {
     height: 170px;
