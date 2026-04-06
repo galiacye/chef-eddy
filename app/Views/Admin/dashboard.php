@@ -4,14 +4,14 @@
 <link href="dashboard.css" rel="stylesheet">
 <style>
     body {
-        background-image: url('<?= base_url('img/topo.png') ?>');
+        background-image: url('<?= base_url('img/camouforange.jpg') ?>');
         background-size: cover;
     }
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
-<h1 class="mb-4">Tableau de bord</h1>
+<h1 class="mb-4" style="color: white;">Tableau de bord</h1>
 
 <div class="row g-3 mb-5">
     <div class="col-md-4">
