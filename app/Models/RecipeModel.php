@@ -63,4 +63,12 @@ class RecipeModel extends Model
   {
     return $this->update($id, $data);
   }
+
+  public function getRecipeAuthor()
+  {
+    return $this->select('recettes.*, users.username')
+                ->join('users','users.id = recettes.user_id')
+                ->findAll();//ici sql renvoie un résultat ds lequel username devient un attribut de $recipe
+                //d'où le $recipe->username ds views/Admin/recipes-index
+  }
 }

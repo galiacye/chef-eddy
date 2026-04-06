@@ -41,10 +41,10 @@ class Admin extends BaseController
         ]);
     }
 
-    public function userIndex()
+    public function usersIndex()
     {
         $users = $this->userModel->findAll();
-        return view('Admin/userIndex', ["users"=>$users]);//ici pas de $data car le param est passé directement à la vue,mais c'est pareil
+        return view('Admin/users-index', ["users"=>$users]);//ici pas de $data car le param est passé directement à la vue,mais c'est pareil
     }//pareil que :
     //$users = $this->userModel->findAll();
     //$data = ["users" => $users];
@@ -69,13 +69,32 @@ class Admin extends BaseController
     {
         // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé, par ex
         $this->userModel->delete($id);//pattern natif de ci4 pas besoin de méthode customisée ds modèle
-        return redirect()->to('Admin/userIndex');//créer vue admin avec index users
+        return redirect()->to('Admin/users-index');//créer vue admin avec index users
     }
 
-    public function recipeIndex()
+    //public function recipesIndex()
+    //{
+      //  $users = $this->userModel->findAll();
+        //$recipes = $this->recipeModel->findAll();
+        //$data = [
+          //  'recipes'=> $recipes,
+            //'users'=>$users
+        //];
+        //return view('Admin/recipes-index', $data);
+    //} implique une vue avec boucle imbriquée
+
+    //avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
+
+     public function recipesIndex():string
     {
-        return view('Admin/recipeIndex');
+            $recipes = $this->recipeModel->getRecipeAuthor();
+            $data = ['recipes' => $recipes];
+            return view('Admin/recipes-index', $data);
     }
+    //équivaut à :
+      //{$data['recipes'] = $this->model->getRecipeAuthor();
+        //return view('Admin/recipes-index', $data);}
+    
 
     public function recipeDetails()
     {
@@ -85,7 +104,7 @@ class Admin extends BaseController
     public function deleteRecipe(int $id)
     {
         $this->recipeModel->delete($id);
-        return redirect()->to('Admin/recipe')->with('success','Recette supprimée');//idem pr recipe: ds vue admin
+        return redirect()->to('Admin/recipes-index')->with('success','Recette supprimée');//idem pr recipe: ds vue admin
     }
 
 

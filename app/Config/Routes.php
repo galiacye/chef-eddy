@@ -14,8 +14,8 @@ $routes->get('upload','Article::upload');
 
 //Admin
 $routes->get('dashboard','Admin::dashboard');
-$routes->get('users-index','Admin::user');
-$routes->get('recipe-index','Admin::recipeIndex');
+$routes->get('Admin/users-index','Admin::usersIndex');
+$routes->get('Admin/recipes-index','Admin::recipesIndex');
 $routes->get('delete-user/(:num)','Admin::deleteUser/$1');// dans la vue : <a href="<?= base_url('delete-user/' . $user->id)? >supp</a>
 $routes->get('delete-recipe/(:num)','Admin::deleteRecipe/$1');
 

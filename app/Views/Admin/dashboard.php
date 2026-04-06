@@ -1,8 +1,17 @@
 <?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Dashboard<?= $this->endSection() ?>
+<?= $this->section('custom-css') ?>
+<link href="dashboard.css" rel="stylesheet">
+<style>
+    body {
+        background-image: url('<?= base_url('img/topo.png') ?>');
+        background-size: cover;
+    }
+</style>
+<?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
-<h1 class="mb-4">Dashboard</h1>
+<h1 class="mb-4">Tableau de bord</h1>
 
 <div class="row g-3 mb-5">
     <div class="col-md-4">
@@ -27,13 +36,13 @@
 
 <div class="row g-3">
       <div class="col-md-6">
-        <a href="/users-index" class="card p-3 text-decoration-none text-dark d-block">
+        <a href="Admin/users-index" class="card p-3 text-decoration-none text-dark d-block">
             <h5>Utilisateurs</h5>
             <p class="text-muted mb-0">Comptes, rôles, accès</p>
         </a>
     </div>
     <div class="col-md-6">
-        <a href="/recipe-index" class="card p-3 text-decoration-none text-dark d-block">
+        <a href="Admin/recipes-index" class="card p-3 text-decoration-none text-dark d-block">
             <!-- text-decoration-none pour ôter le style bleu du lien  <a> -->
             <h5>Recettes</h5>
             <p class="text-muted mb-0">Gérer, modifier, supprimer</p>

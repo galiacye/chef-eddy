@@ -37,17 +37,18 @@ class Recipe extends BaseController
         return view('Recipe/showRecipe', $data);
     }
 
+    
     public function recipeIndex(): string
-    {
-        $recipes = $this->model->findAll();
-        $data = [
-            "recipes" => $recipes
-        ];
+    {//avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
+    //$recipes = $this->model->getRecipeAuthor();
+    //$data = ['recipes' => $recipes]; équivaut à :
+        $data['recipes'] = $this->model->getRecipeAuthor();
         return view('Recipe/recipeIndex', $data);
     }
+    
 
     // createRecipe:
-    // validation ✔️upload image ✔️purification Quill ✔️tables de liaison ✔️gestion ingrédients intelligente ✔️
+    // validation upload image purification Quill tables de liaison gestion ingrédients intelligente 
     public function createRecipe() 
     {
         if ($this->request->is('post') === false) {
