@@ -15,7 +15,7 @@
     <div class="ban ">
         <img src="<?= base_url('./img/eddy-bd.jpeg') ?>" class="eddy">
         <div class="container text-center">
-            <h1 class="hero-title">Chef Eddy  <span class="fusil">m</span></h1>
+            <h1 class="hero-title">Chef Eddy  <span class="fusil">s</span></h1>
             <h2 class="txt">On ne rigole pas avec les grammages...</h2>
         </div>
         <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
