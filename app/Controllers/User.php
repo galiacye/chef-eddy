@@ -128,6 +128,8 @@ class User extends BaseController
             $avatar_url = null;
             if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
                 $avatar_url = $avatar_file->store();
+            }else{
+                $avatar_url = base_url('uploads/avatars/fantome.png');
             }
 
 
@@ -233,8 +235,9 @@ class User extends BaseController
 
             $avatar_file = $this->request->getFile('avatar_url');
             $avatar_url = $user->avatar_url;
-            if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
-                $avatar_url = $avatar_file->store();
+            if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) 
+            {  //car ne peut être déplacé qu'une fois et l'a déjà été en tant que fichier temporaire au moment du chargement
+                $avatar_url = $avatar_file->store();//native de ci4 stocke direct les uploads ds writable
             }
 
             // Préparation des données pour le modèle
