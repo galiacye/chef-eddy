@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\UserModel;
 use App\Models\RecipeModel;
@@ -28,24 +30,23 @@ class Admin extends BaseController
         $this->ingredientModel = Model('IngredientModel');
         $this->categorieModel = Model('CategorieModel');
         $this->tagModel = Model('TagModel');
-
     }
 
     public function dashboard()
     {
 
-        return view('Admin/dashboard',[
-            'nb_users'=>$this->userModel->countAll(),
-            'nb_recipes'=>$this->recipeModel->countAll(),
-            'nb_recipes_pending'=>$this->recipeModel->countAll()
+        return view('Admin/dashboard', [
+            'nb_users' => $this->userModel->countAll(),
+            'nb_recipes' => $this->recipeModel->countAll(), //devient countAllResults derrière un where:
+            'nb_recipes_pending' => $this->recipeModel->where('statut', 'pending')->countAllResults()
         ]);
     }
 
     public function usersIndex()
     {
         $users = $this->userModel->findAll();
-        return view('Admin/users-index', ["users"=>$users]);//ici pas de $data car le param est passé directement à la vue,mais c'est pareil
-    }//pareil que :
+        return view('Admin/users-index', ["users" => $users]); //ici pas de $data car le param est passé directement à la vue,mais c'est pareil
+    } //pareil que :
     //$users = $this->userModel->findAll();
     //$data = ["users" => $users];
     //return view('Admin/userIndex', $data);
@@ -53,60 +54,71 @@ class Admin extends BaseController
     public function userDetails($id)
     {
         $user = $this->userModel->find($id);
+        $recipes = $this->recipeModel->where('user_id', $id)->findAll();
         $data = [
-            "user"=>$user
+            "user" => $user,
+            "recipes" => $recipes
         ];
-        return view('User/showUser', $id);
+        return view('Admin/user-details', $data);
     }
 
-     public function changeUserRole(int $id)
+    public function changeUserRole(int $id)
     {
-        $user = $this->userModel->find($id);
-        
+        $this->userModel->update($id, [//encore une native ci4
+            'role_id' => $this->request->getPost('role_id')
+        ]);
+        return redirect()->to('Admin/user-details/' . $id);
     }
 
     public function deleteUser(int $id)
     {
         // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé, par ex
-        $this->userModel->delete($id);//pattern natif de ci4 pas besoin de méthode customisée ds modèle
-        return redirect()->to('Admin/users-index');//créer vue admin avec index users
+        $this->userModel->delete($id); //pattern natif de ci4 pas besoin de méthode customisée ds modèle
+        return redirect()->to('Admin/users-index'); //créer vue admin avec index users
     }
+
+
 
     //public function recipesIndex()
     //{
-      //  $users = $this->userModel->findAll();
-        //$recipes = $this->recipeModel->findAll();
-        //$data = [
-          //  'recipes'=> $recipes,
-            //'users'=>$users
-        //];
-        //return view('Admin/recipes-index', $data);
+    //  $users = $this->userModel->findAll();
+    //$recipes = $this->recipeModel->findAll();
+    //$data = [
+    //  'recipes'=> $recipes,
+    //'users'=>$users
+    //];
+    //return view('Admin/recipes-index', $data);
     //} implique une vue avec boucle imbriquée
 
     //avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
 
-     public function recipesIndex():string
+    public function recipesIndex(): string
     {
-            $recipes = $this->recipeModel->getRecipeAuthor();
-            $data = ['recipes' => $recipes];
-            return view('Admin/recipes-index', $data);
+        $recipes = $this->recipeModel->getRecipeAuthor();
+        $data = ['recipes' => $recipes];
+        return view('Admin/recipes-index', $data);
     }
     //équivaut à :
-      //{$data['recipes'] = $this->model->getRecipeAuthor();
-        //return view('Admin/recipes-index', $data);}
-    
+    //{
+    //$data['recipes'] = $this->model->getRecipeAuthor();
+    //return view('Admin/recipes-index', $data);
+    //}
 
-    public function recipeDetails()
+
+    public function recipeDetails($recipe_id)
     {
-        return view('Recipe/showRecipe');
+        $recipe = $this->recipeModel->find($recipe_id);
+        $ingredients = $this->ingredientModel->getRecipeIngredients($recipe_id);
+        $data = [
+            'recipe'=>$recipe,
+            'ingredients'=>$ingredients
+        ];
+        return view('Admin/recipe-details',$data);
     }
 
     public function deleteRecipe(int $id)
     {
         $this->recipeModel->delete($id);
-        return redirect()->to('Admin/recipes-index')->with('success','Recette supprimée');//idem pr recipe: ds vue admin
+        return redirect()->to('Admin/recipes-index')->with('success', 'Recette supprimée'); //idem pr recipe: ds vue admin
     }
-
-
-
 }

@@ -17,8 +17,8 @@
             </a>
             <span class="navbar-brand"> Admin Chef Eddy</span>
             <div>
-                <a href="/Admin/recipeIndex" class="btn btn-outline-light btn-sm me-2">Recettes</a>
-                <a href="/Admin/userIndex" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
+                <a href="/Admin/recipes-index" class="btn btn-outline-light btn-sm me-2">Recettes</a>
+                <a href="/Admin/users-index" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
                 <a href="/" class="btn btn-outline-warning btn-sm">Site</a>
             </div>
         </div>

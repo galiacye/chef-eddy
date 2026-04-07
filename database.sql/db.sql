@@ -188,6 +188,15 @@ INSERT INTO ingredients_categories (nom) VALUES
 
  ALTER TABLE ingredients ADD COLUMN categorie VARCHAR(50) DEFAULT NULL;   
 
+ INSERT INTO roles (nom) VALUES ('banned');
+
+ ALTER TABLE recettes 
+MODIFY statut VARCHAR(50) DEFAULT 'pending';
+
+UPDATE recettes 
+SET statut = 'pending' 
+WHERE statut IS NULL OR statut = '';
+
 
 
 

@@ -21,7 +21,7 @@ class IngredientModel extends Model
         return $this->select('ingredients.nom, recette_ingredients.quantite, recette_ingredients.unite')
                     ->join('recette_ingredients','ingredients.id = recette_ingredients.ingredient_id')
                     ->where('recette_ingredients.recette_id',$recipe_id)
-                    ->get()->getResult();
+                    ->findAll();
     }
 
 }

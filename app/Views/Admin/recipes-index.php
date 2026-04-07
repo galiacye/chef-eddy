@@ -48,7 +48,7 @@
                         <h4 class="text-light"><span class="text-info"><?= $recipe->username ?></span></h4>
                        
                         <i class="fa-solid fa-bomb grenade-icon" onclick="alert('Grenade 1 cliquée !')">voir, modifier, supprimer ici</i>
-                        <!-- <a href="<?= base_url('') ?>" class="btn btn-primary">Gérer</a> -->
+                        <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-primary">Gérer</a>
 
                     </div>
                 </li>
