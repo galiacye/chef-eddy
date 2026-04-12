@@ -5,75 +5,55 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<div class="row">
+<?= form_open('search', ['method' => 'GET']) ?>
+<div class="row d-flex align-items-center">
+
     <div class="col-auto">
-        <button class="btn btn-primary">Déjà membre</button>
-    </div>
-    <div class="col-2">
-        <p> OU </p>
+        <input type="text" name="search" id="search_input"
+            class="form-control" placeholder="Rechercher une recette">
     </div>
     <div class="col-auto">
-        <button class="btn btn-primary">S'inscrire</button>
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </div>
+
+    <div class="col-auto">OU</div>
+
+    <div class="col-auto">
+        <input list="ingredients-list" id="ingredients_input"
+            name="ingredient" class="form-control"
+            placeholder="Recettes par ingrédient">
+        <datalist id="ingredients-list">
+            <?php foreach ($ingredients as $ingr) : ?>
+                <option value="<?= esc($ingr->nom) ?>"></option>
+            <?php endforeach ?>
+        </datalist>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </div>
+
+</div>
+<?= form_close() ?>
+
+<div class="row mt-4">
+    <div class="col-sm-12 md-4 lg-3">
+        <h2>Recettes de Chef Eddy</h2>
+        <div class="row">
+            <?php foreach ($Recipes as $recipe) : ?>
+                <div class="col-10 col-md-6 col-lg-4  mb-4">
+                    <div class="card h-100">
+                       <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>" 
+                                    class="card-img-top" alt="<?= esc($recipe->titre) ?>">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
+                            
+                            <a href="<?= base_url('recipe/' . $recipe->id) ?>" class="btn btn-primary mt-auto">Voir la recette</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
     </div>
 </div>
-    
-        <br>
-  
-    <?= form_open('search',['method'=>'GET'])?>
-      <div class="row d-flex align-items-center">
-        <div class="col-auto">
-            <input type="text" name="search" class="form-control" placeholder="Rechercher une recette">
-        </div>
-        <div class="col-auto">
-            <button type="submit"class="btn btn-primary">search</button>
-        </div>
-        <div class="col-auto">  OU  </div>
-        <div class="col-auto">
-             <!-- input list pointe vers datalist id , name="ingredient" au sing cf Controller -->
-            <input list="ingredients-list" id="ingredients_input" 
-                name="ingredient" 
-                placeholder="Recettes par ingrédients"
-                class="form-control">
-                <datalist id="ingredients-list">
-                <?php foreach($ingredients as $ingr) : ?>
-                    <option value="<?= esc($ingr->nom)?>"></option>
-                <?php endforeach ?>
-                </datalist>
-        </div>
-        <div class="col-auto">
-            <button type="submit"class="btn btn-primary">Search...</button>
-        </div>
-      </div>
-    <?= form_close() ?>
-    <div class="row d-flex align-items-center divers">
-        <div class="col md-4 lg-2 cat">
-            <img src="<?= base_url('img/desserts/cheesecake-speculoos.jpg') ?>" class="photo1">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
-                deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
-                officia doloribus ipsam repudiandae.
-
-            </p>
-        </div>
-        <div class="col md-4 lg-2 tags">
-              <img src="<?= base_url('img/desserts/tarte_poires_amandes.JPG') ?>" class="photo1">      
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
-                deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
-                officia doloribus ipsam repudiandae.
-
-            </p>
-            </div>
-        <div class="col md-4 lg-2 saison">
-            <img src="<?= base_url('img/desserts/foretnoire-dessus.png') ?>" class="photo1">
-
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Sed aut repellendus debitis doloremque omnis esse, voluptate ad nesciunt 
-                deserunt exercitationem. Odio velit veniam facere. Libero perferendis 
-                officia doloribus ipsam repudiandae.
-
-            </p>
-        </div>
-    </div>
+                
 <?= $this->endSection() ?>
-

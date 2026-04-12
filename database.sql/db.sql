@@ -197,6 +197,8 @@ UPDATE recettes
 SET statut = 'pending' 
 WHERE statut IS NULL OR statut = '';
 
+INSERT INTO tags (nom_tag) VALUES ('chef-eddy');
+
 
 
 

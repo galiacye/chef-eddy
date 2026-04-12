@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\RecipeModel;
 use App\Models\TagModel;
@@ -17,20 +18,19 @@ class Search extends BaseController
         helper('form');
         $this->model = Model('SearchModel');
     }
- 
 
     public function search()
     {
-        $search = $this->request->getGet('search');
-        $type   = $this->request->getGet('type');
+        $search     = $this->request->getGet('search');
+        $ingredient = $this->request->getGet('ingredient');
 
-        $recipes = match($type) {
-        'ingredient' => $this->model->searchByIngredient($search),
-        'tag'        => $this->model->searchByTag($search),
-        'categorie'  => $this->model->searchByCategory($search),
-        default      => $this->model->searchRecipe($search)
+        $recipes = match (true) {
+            !empty($ingredient) => $this->model->searchByIngredient($ingredient),
+            !empty($search)     => $this->model->searchRecipe($search),
+            default             => []
         };
-        $data = ['recipes'=>$recipes];
-        return view('Search/results',$data);
+
+        $data = ['recipes' => $recipes];
+        return view('Search/results', $data);
     }
 }

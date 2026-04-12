@@ -17,6 +17,17 @@ class TagModel extends Model
                     ->get()->getResult();
     }
 
+    public function getRecipesByTag(int $tag_id, int $limit = 6)
+    {
+        return $this->select('recettes.id, recettes.titre, recettes.image_url')
+                    ->join('recettes_tags', 'tags.id = recettes_tags.tag_id')
+                    ->join('recettes', 'recettes.id = recettes_tags.recette_id')
+                    ->where('recettes_tags.tag_id', $tag_id)
+                    ->orderBy('recettes.id', 'RANDOM')//pour afficher les recettes de façon aléatoire
+                    ->limit($limit)
+                    ->get()->getResult();
+    }
+
     public function editTag()
     {
         

@@ -54,6 +54,12 @@ $routes->get('add-ing', 'Ingredient::createIngredient');
 $routes->get('recipesByCat', 'Api::recipesByCat');
 $routes->get('recipesByNameJs','Api::recipesByName');
 
+//categories et tags
+// Routes.php
+$routes->get('tag/index', 'Tag::index');
+$routes->get('tag/(:num)', 'Tag::showRecipesByTag/$1');
 
+$routes->get('categorie/index', 'Categorie::index');
+$routes->get('categorie/show/(:num)', 'Categorie::showRecipesByCategorie/$1');
 
 

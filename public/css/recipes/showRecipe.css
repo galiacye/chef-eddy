@@ -6,6 +6,7 @@ body {
     width: auto;
     object-fit: cover;
     display: block;
+    margin-top: 50px;
 }
 .banner {
     display: flex;

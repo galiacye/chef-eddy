@@ -10,8 +10,15 @@ class Home extends BaseController
     public function index(): string
     {
         helper('form');
+        $recipeModel = model('RecipeModel');
+        $Recipes = $recipeModel->findAll();
         $ingredientModel = model('IngredientModel');
-        return view('Home/index',['ingredients'=>$ingredientModel->findAll()]);
+        $ingredients = $ingredientModel->findAll();
+        $data = [
+            'Recipes' => $Recipes,
+            'ingredients' => $ingredients
+        ];
+        return view('Home/index', $data);
     }
     
     public function salut()

@@ -131,3 +131,15 @@ _modules/*
 
 token-git/
 tkn-git/
+
+# Sessions
+writable/session/*
+!writable/session/.gitkeep
+
+# Logs aussi tant qu'on y est
+writable/logs/*
+!writable/logs/.gitkeep
+
+# Cache
+writable/cache/*
+!writable/cache/.gitkeep

@@ -15,7 +15,7 @@
     <div class="ban ">
         <img src="<?= base_url('./img/eddy-bd.jpeg') ?>" class="eddy">
         <div class="container text-center">
-            <h1 class="hero-title">Chef Eddy  <span class="fusil">m</span></h1>
+            <h1 class="hero-title">Chef Eddy  </h1>
             <h2 class="txt">On ne rigole pas avec les grammages...</h2>
         </div>
         <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
@@ -24,25 +24,46 @@
 </header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">  <!-- expand-lg =>se replie en deçà de 1024 -->
    
-    <div class="container">
-        
+    <div class="container d-flex justify-content-between">
+        <div class="left">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('users') ?>">Utilisateurs</a>
+                <a class="nav-link" href="<?= base_url('index') ?>">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('recipeIndex') ?>">Toutes les recettes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('categories') ?>"> Les Catégories</a>
+                <a class="nav-link" href="<?= base_url('categorie/index') ?>"> Les Catégories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('tags') ?>">Tags</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('ingredients') ?>">Recherche par ingrédients</a>
+                <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
             </li>
         </ul>
+        </div>
+        <div class="right">
+        <ul class="navbar-nav">
+            <?php if(session()->has('user_id')): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('profile') ?>">Mon Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('mes-recettes') ?>">Mes Recettes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('logout') ?>">Se Déconnecter</a>
+                </li>
+        </ul>
+            <?php else: ?>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('login') ?>">Déjà membre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('register') ?>">S'inscrire</a>
+                    </li>
+                </ul>
+            <?php endif; ?>
     </div>
 </nav>
 
