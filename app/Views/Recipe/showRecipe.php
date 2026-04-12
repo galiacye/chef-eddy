@@ -10,7 +10,7 @@
     <div class="title-and-tags">
         <h1><?= $recipe->titre ?></h1>
         <?php foreach($tags as $tag): ?>
-            <h2><?= $tag->nom_tag ?></h2>
+            <h2><?= $tag->nom ?></h2>
         <?php endforeach ?>
     </div>
 

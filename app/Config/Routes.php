@@ -60,6 +60,6 @@ $routes->get('tag/index', 'Tag::index');
 $routes->get('tag/(:num)', 'Tag::showRecipesByTag/$1');
 
 $routes->get('categorie/index', 'Categorie::index');
-$routes->get('categorie/show/(:num)', 'Categorie::showRecipesByCategorie/$1');
+$routes->get('categorie/(:num)', 'Categorie::showRecipesByCategorie/$1');
 
 

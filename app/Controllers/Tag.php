@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\TagModel;
@@ -9,24 +10,30 @@ use App\Models\CategorieModel;
 
 class Tag extends BaseController
 {
-    
-public function index()
-{
-    $tagModel = model('TagModel');
-    $tags = $tagModel->findAll();
-
-    return view('Tag/index', ['tags' => $tags]);
-}
-
-
-
-
-
-public function showRecipesByTag(int $tag_id)
+//tous les tags
+    public function index()
     {
         $tagModel = model('TagModel');
+        $tags = $tagModel->getAllTags();
+
+        $data = [
+            'tags' => $tags
+        ];
+
+        return view('Tag/index', $data);
+    }
+//les recettes d'un tag : show
+    public function showRecipesByTag(int $tag_id)
+    {
+        $tagModel = model('TagModel');
+        $tag = $tagModel->find($tag_id);
         $recipes = $tagModel->getRecipesByTag($tag_id);
 
-        return view('recipes_by_tag', ['recipes' => $recipes]);
+        $data = [
+            'tag' => $tag,
+            'recipes' => $recipes
+        ];
+
+        return view('Tag/show', $data);
     }
 }

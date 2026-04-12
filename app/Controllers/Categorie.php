@@ -9,24 +9,27 @@ use App\Models\TagModel;
 
 class Categorie extends BaseController
 {
+    //toutes les catégories : index
     public function index()
     {
         $categorieModel = model('CategorieModel');
         $categories = $categorieModel->findAll();
+        $data = [
+            'categories' => $categories
+        ];
 
-        return view('Categorie/index', ['categories' => $categories]);
+        return view('Categorie/index', $data);
     }
-
+    //les recettes d'une catégorie: show
     public function showRecipesByCategorie(int $categorie_id)
     {
         $categorieModel  = model('CategorieModel');
-        $ingredientModel = model('IngredientModel');
-        $tagModel        = model('TagModel');
+        $categorie = $categorieModel->getCategorie($categorie_id);
+        $recipes   = $categorieModel->getRecipesByCategorie($categorie_id);
 
         $data = [
-            'categorie'   => $categorieModel->getCategorie($categorie_id),
-            'ingredients' => $ingredientModel->getIngredientsByCategorie($categorie_id),
-            'tags'        => $tagModel->getTagsByCategorie($categorie_id),
+            'categorie'   => $categorie,
+            'recipes'     => $recipes
         ];
 
         return view('Categorie/show', $data);
