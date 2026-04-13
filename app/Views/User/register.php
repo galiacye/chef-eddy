@@ -78,24 +78,9 @@ foreach ($roles as $role) {
 <?= form_input($password) ?>
 <?= validation_show_error('password') ?><br>
 
-<label for="nom">Nom</label>
-<?= form_input($nom) ?>
-<?= validation_show_error('nom') ?><br>
-
-<label for="prenom">Prénom</label>
-<?= form_input($prenom) ?>
-<?= validation_show_error('prenom') ?><br>
-
 <label for="avatar_url">Avatar</label>
 <?= form_upload($avatar) ?>
 <?= validation_show_error('avatar_url') ?><br>
-
-
-
-<label for="role_id">Rôle</label>
-<?= form_dropdown('role_id', $rolesOptions, set_value('role_id'), ['class' => 'form-control w-50']) ?>
-<?= validation_show_error('role_id') //$role_id récupéré par la session?>
-
 
 <?= form_fieldset_close() ?>
 

@@ -57,10 +57,10 @@
             <?php else: ?>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('login') ?>">Déjà membre</a>
+                        <a class="nav-link" href="<?= base_url('Admin/login') ?>">Déjà membre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('register') ?>">S'inscrire</a>
+                        <a class="nav-link" href="<?= base_url('User/register') ?>">S'inscrire</a>
                     </li>
                 </ul>
             <?php endif; ?>
