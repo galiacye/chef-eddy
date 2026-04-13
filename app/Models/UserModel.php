@@ -21,13 +21,22 @@ class UserModel extends Model
     ];
     protected $returnType = 'object';
 
+    //register
+    public function register(array $data) 
+    {
+        $user = $this->insert($data);
+    }
+
+    //login
+    public function getUserByEmail(string $email)
+    {
+        return $this->where('email', $email)->first(); // = get()->getRow() pour un objet unique
+    }
+
     public function getUsersWithRole()
     {
-        return $this->select('users.*, roles.name as role_name')
+        return $this->select('users.*, roles.nom as role_name')
             ->join('roles', 'roles.id = users.role_id')
             ->findAll();
     }
-
-    
-    
 }

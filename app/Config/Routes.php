@@ -17,6 +17,7 @@ $routes->get('dashboard','Admin::dashboard');
     //admin::user
 $routes->get('Admin/users-index','Admin::usersIndex');
 $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
+$routes->get('Admin/add-user','Admin::addUser');
 $routes->post('Admin/changeUserRole/(:num)', 'Admin::changeUserRole/$1');
 $routes->get('Admin/deleteUser/(:num)', 'Admin::deleteUser/$1');
     //admin::recipe
@@ -29,6 +30,7 @@ $routes->get('delete-recipe/(:num)','Admin::deleteRecipe/$1');
 //search
 $routes->get('search','Search::search');
 //user
+$routes->match(['get','post'],'User/register', 'User::register' );
 $routes->get('user/(:num)', 'User::showUser/$1');
 $routes->match(['get', 'post'], 'add-user', 'User::createUser');
 $routes->get('user/(:num)', 'User::cIdUser/$1');

@@ -1,18 +1,18 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('title') ?>
-    Add User
+    Register
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css')?>
-    <link href="addUser.css" rel="stylesheet">
+    <link href="User/register.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
     <h1 class="text-center">S'inscrire</h1>
 
-    <?= form_open_multipart('add-user') ?>
+    <?= form_open_multipart('User/register') ?>
 
 <?php
 $username = [
@@ -65,16 +65,10 @@ foreach ($roles as $role) {
 
 <?= form_fieldset("Informations de l'utilisateur", ['class' => 'border p-4']) ?>
 
+<!-- ici pas d'utilisation de helper('form')-->
 <label for="username">Pseudo</label>
 <?= form_input($username) ?>
-<?= validation_show_error('username') ?><br>
-
-
-<label for="role_id">Rôle</label>
-<?= form_dropdown('role_id', $rolesOptions, set_value('role_id'), ['class' => 'form-control w-50']) ?>
-<?= validation_show_error('role_id') //$role_id récupéré par la session?>
-
-
+<?= validation_show_error('username') ?>
 
 <label for="email">Email</label>
 <?= form_input($email) ?>
@@ -95,6 +89,12 @@ foreach ($roles as $role) {
 <label for="avatar_url">Avatar</label>
 <?= form_upload($avatar) ?>
 <?= validation_show_error('avatar_url') ?><br>
+
+
+
+<label for="role_id">Rôle</label>
+<?= form_dropdown('role_id', $rolesOptions, set_value('role_id'), ['class' => 'form-control w-50']) ?>
+<?= validation_show_error('role_id') //$role_id récupéré par la session?>
 
 
 <?= form_fieldset_close() ?>

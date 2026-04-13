@@ -9,5 +9,8 @@ class RoleModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = ['nom'];
+    protected $returnType = 'object';
+
+    
     
 }
