@@ -28,7 +28,7 @@
         <div class="left">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('index') ?>">Accueil</a>
+                <a class="nav-link" href="<?= base_url('index.php') ?>">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('recipeIndex') ?>">Toutes les recettes</a>
