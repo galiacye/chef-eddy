@@ -12,9 +12,25 @@ class CategorieModel extends Model
     protected $allowedFields = ['nom'];
     protected $returnType = 'object'; // 
 
+    public function addCategory(array $data)
+    {
+        return $this->insert($data);
+
+    }
+
+    public function updateCategory(int $id, array $data)
+    {
+        return $this->update($id, $data);
+    }
+
     public function getAllCategories()
     {
         return $this->findAll();
+    }
+
+    public function deleteCategory(int $id)
+    {
+        return $this->delete($id);
     }
 
     public function getCategorie($id)
@@ -40,4 +56,6 @@ class CategorieModel extends Model
             ->get()
             ->getResult();
     }
+
+
 }

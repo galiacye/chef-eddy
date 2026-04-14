@@ -13,8 +13,23 @@ class TagModel extends Model
     protected $returnType = 'object';
 
 
+    public function addTag(array $data)//ou edit ?
+    {
+        return $this->insert($data);
+    }
+
+    public function updateTag(int $id, array $data)
+    {
+        return $this->update($id, $data);
+    }
+
+    public function deleteTag(int $id)
+    {
+        return $this->delete($id);
+    }
+
     public function getAllTags()
-    {   //pour avoir ces tags en premier : Chef Eddy et Au chocolat
+    {  
         return $this->findAll();
     }
 // chercher les tags d'une recette

@@ -34,4 +34,24 @@ class Categorie extends BaseController
 
         return view('Categorie/show', $data);
     }
+
+    public function addCategory()
+    {
+        helper('form');
+        $categorieModel = model('CategorieModel');
+
+        
+    }
+    public function updateCategory(int $categorie_id)
+    {
+        helper('form');
+        $categorieModel = model('CategorieModel');
+        $categorie = $categorieModel->find($categorie_id);
+    }
+
+    public function deleteCategory(int $categorie_id)
+    {
+        $categorieModel = model('CategorieModel');
+        $categorieModel->delete($categorie_id);
+    }
 }

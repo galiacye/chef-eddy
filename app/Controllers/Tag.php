@@ -36,4 +36,29 @@ class Tag extends BaseController
 
         return view('Tag/show', $data);
     }
+
+    public function addTag()
+    {
+        helper('form');
+        $tagModel = model('TagModel');
+
+        
+    }
+
+    public function updateTag(int $tag_id)
+    {
+        helper('form');
+        $tagModel = model('TagModel');
+        $tag = $tagModel->find($tag_id);
+
+        
+    }
+
+    public function deleteTag(int $tag_id)
+    {
+        $tagModel = model('TagModel');
+        $tagModel->delete($tag_id);
+
+        return redirect()->to('tag/index')->with('success', 'Tag supprimé avec succès.');
+    }
 }
