@@ -1,18 +1,22 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('title') ?>
-    Register
+Register
 <?= $this->endSection() ?>
 
-<?= $this->section('custom-css')?>
-    <link href="User/register.css" rel="stylesheet">
+<?= $this->section('custom-css') ?>
+<style>
+    body {
+        background-image: url('img/camouflage.jpg');
+    }
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-    <h1 class="text-center">S'inscrire</h1>
+<h1 class="text-center">S'inscrire</h1>
 
-    <?= form_open_multipart('User/register') ?>
+<?= form_open_multipart('User/register') ?>
 
 <?php
 $username = [
@@ -91,4 +95,3 @@ foreach ($roles as $role) {
 <?= form_close() ?>
 
 <?= $this->endSection() ?>
-

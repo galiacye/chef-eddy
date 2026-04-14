@@ -74,7 +74,7 @@ $options_ingredients = [
 //form_dropdown génère le html select à partir du tab $options_categories
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
 foreach ($categories as $categorie) {
-    $options_categories[$categorie['id']] = $categorie['nom']; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
+    $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
 <div class="formulaire">
@@ -116,13 +116,13 @@ foreach ($categories as $categorie) {
                 <div class="form-check">
                     <input
                         type="checkbox"
-                        name="tags[]"
-                        value="<?= $tag['id'] ?>"
-                        id="tag_<?= $tag['id'] ?>"
+                        name="tags"
+                        value="<?= $tag->id ?>"
+                        id="tag_<?= $tag->id ?>"
                         class="form-check-input"
-                        <?= in_array($tag['id'], (array) set_value('tags', [])) ? 'checked' : '' ?>>
-                    <label class="form-check-label" for="tag_<?= $tag['id'] ?>">
-                        <?= $tag['nom'] ?>
+                        <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="tag_nom"<?= $tag->id ?>">
+                        <?= $tag->nom ?>
                     </label>
                 </div>
             <?php endforeach ?>
