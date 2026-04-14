@@ -18,6 +18,7 @@ $routes->get('dashboard','Admin::dashboard');
 $routes->get('Admin/users-index','Admin::usersIndex');
 $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
 $routes->get('Admin/add-user','Admin::addUser');
+$routes->post('register', 'Auth::saveUser');
 $routes->post('Admin/changeUserRole/(:num)', 'Admin::changeUserRole/$1');
 $routes->get('Admin/deleteUser/(:num)', 'Admin::deleteUser/$1');
     //admin::recipe
@@ -26,6 +27,10 @@ $routes->get('Admin/recipe-details/(:num)', 'Admin::recipeDetails/$1');
 
 $routes->get('delete-user/(:num)','Admin::deleteUser/$1');// dans la vue : <a href="<?= base_url('delete-user/' . $user->id)? >supp</a>
 $routes->get('delete-recipe/(:num)','Admin::deleteRecipe/$1');
+
+//Auth
+$routes->post('login', 'Auth::connect');
+$routes->get('auth/register', 'Auth::connect');
 
 //search
 $routes->get('search','Search::search');

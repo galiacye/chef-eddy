@@ -15,7 +15,7 @@ class User extends BaseController
         $this->roleModel = Model('RoleModel');
     }
 
-    public function register()
+    public function register()//ou dans Auth ???
     {
         if ($this->request->getMethod() !== 'post') {
         $data['roles'] = $this->roleModel->findAll();

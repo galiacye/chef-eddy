@@ -9,6 +9,13 @@ use App\Models\TagModel;
 
 class Categorie extends BaseController
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = model('CategorieModel');
+    }
+
     //toutes les catégories : index
     public function index()
     {
@@ -35,12 +42,22 @@ class Categorie extends BaseController
         return view('Categorie/show', $data);
     }
 
+    public function cAddCategorie(): void
+    {
+        $data = [
+            "nom_categorie" => "météo"
+        ];
+        $this->model->addCategorie($data);
+        echo 'insertion reussi';
+    }
+
+
+
+
     public function addCategory()
     {
         helper('form');
         $categorieModel = model('CategorieModel');
-
-        
     }
     public function updateCategory(int $categorie_id)
     {
@@ -48,10 +65,16 @@ class Categorie extends BaseController
         $categorieModel = model('CategorieModel');
         $categorie = $categorieModel->find($categorie_id);
     }
-
+//renommage se fera dans branche dédiée
     public function deleteCategory(int $categorie_id)
     {
         $categorieModel = model('CategorieModel');
         $categorieModel->delete($categorie_id);
+    }
+//option Alexis dans blog:
+    public function cDeleteCategorie(int $idCategorie):void
+    {
+        $this->model->deleteCategorie($idCategorie);
+        echo 'Suppression';
     }
 }

@@ -24,41 +24,10 @@ class Auth extends BaseController
         return view('Auth/login');
     }
 
-    public function save(array $data)
-    {
-        $rules = [
-            'username' => 'required|min_length[3]|max_length[20]',
-            'email'    => 'required|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length[8]',
-            'avatar_url' => 'uploaded[avatar_url]|max_size[avatar_url,2048]|is_image[avatar_url]'
-        ];
+       // return redirect()->to('login')->with('success', 'Inscription réussie, vous pouvez maintenant vous connecter.');
+    
 
-        if (!$this->validate($rules)) {
-            return redirect()->to('register')->withInput()->with('errors', $this->validator->getErrors());
-        }
-
-        $avatarFile = $this->request->getFile('avatar_url');
-        $avatarPath = null;
-        if ($avatarFile->isValid() && !$avatarFile->hasMoved()) {
-            $avatarPath = $avatarFile->store('avatars');
-        }
-
-        $userData = [
-            'username' => $data['username'],
-            'email'    => $data['email'],
-            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
-            'nom'      => $data['nom'] ?? null,
-            'prenom'   => $data['prenom'] ?? null,
-            'avatar_url' => $avatarPath,
-            'role_id'  => 2
-        ];
-
-        $this->UserModel->save($userData);
-
-        return redirect()->to('login')->with('success', 'Inscription réussie, vous pouvez maintenant vous connecter.');
-    }
-
-    public function authenticate()
+    public function connect()
     {
         $rules = [
             'email'    => 'required|valid_email',
@@ -89,7 +58,7 @@ class Auth extends BaseController
 
         session()->set([
             'user_id'  => $user->id,
-            'user_nom' => $user->nom,
+            'username' => $user->username,
             'role_id'  => $user->role_id
         ]);
 
