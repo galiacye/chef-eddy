@@ -221,29 +221,66 @@ class Admin extends BaseController
 
     //avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
 
-    public function recipesIndex(): string
-    {
-        $recipes = $this->recipeModel->getRecipeAuthor();
-        $data = ['recipes' => $recipes];
-        return view('Admin/recipes-index', $data);
-    }
+    // public function recipesIndex(): string
+    // {
+    //     $user = $this->request->getGet('user'); //pour filtrer par user ds url : ?user=3
+    //     $status = $this->request->getGet('statut');
+    //     $recipes = $this->recipeModel->getRecipesByStatus($status);    
+    //         $data = [
+    //         'recipes' => $recipes,
+    //         'statut' => $status,
+    //         'user' => $user
+    //     ];
+    //     return view('Admin/recipes-index', $data);
+    // }
     //équivaut à :
     //{
     //$data['recipes'] = $this->model->getRecipeAuthor();
     //return view('Admin/recipes-index', $data);
     //}
 
+    public function recipesIndex(): string
+{
+    $user   = $this->request->getGet('user');
+    $status = $this->request->getGet('statut');
 
-    public function recipeDetails($recipe_id)
+    if ($user) {
+        $recipes = $this->recipeModel->getRecipeByUser($user);
+    } else {
+        $recipes = $this->recipeModel->getRecipesByStatus($status);
+    }
+
+    $data = [
+        'recipes' => $recipes,
+        'statut'  => $status,
+        'user'    => $user
+    ];
+
+    return view('Admin/recipes-index', $data);
+}
+
+    public function recipeDetails($id)
     {
-        $recipe = $this->recipeModel->find($recipe_id);
-        $ingredients = $this->ingredientModel->getRecipeIngredients($recipe_id);
+        $recipe = $this->recipeModel->find($id);
+        $ingredients = $this->ingredientModel->getRecipeIngredients($id);
         $data = [
             'recipe' => $recipe,
             'ingredients' => $ingredients
         ];
         return view('Admin/recipe-details', $data);
     }
+
+    public function saveRecipe($id)
+    {
+        $recipe = $this->recipeModel->find($id);
+        $data = [
+            'statut' => 'Approuvée'
+        ];
+        $this->recipeModel->update($id, $data);
+        return redirect()->to('Admin/recipes-index')->with('success', 'Recette validée');
+    }
+
+
 
     public function deleteRecipe(int $id)
     {

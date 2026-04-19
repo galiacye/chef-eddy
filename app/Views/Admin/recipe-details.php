@@ -59,4 +59,23 @@
 
         <div><?= $recipe->contenu ?></div>
     </div>
-    <?= $this->endSection() ?>
+    <?php
+    if ($recipe->statut === 'En attente') { ?>
+        <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+            <button type="submit" class="btn btn-secondary">Rejeter</button>
+        </form>
+
+        <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
+            <button type="submit" class="btn btn-danger">Approuver</button>
+        </form>
+    <?php } elseif($recipe->statut ==='Approuvée') { ?>
+        <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+            <button type="submit" class="btn btn-secondary">Rejeter</button>
+        </form>
+    <?php  } elseif($recipe->statut === 'Rejetée') { ?>
+        <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
+            <button type="submit" class="btn btn-danger">Approuver</button>
+        </form>
+    <?php } ?>
+</div>
+<?= $this->endSection() ?>

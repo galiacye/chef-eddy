@@ -36,6 +36,15 @@
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 <div class="container-fluid m-3">
+    <div class="btn-group">
+        <a href="<?= base_url('Admin/recipes-index/by-user') ?>">Par utilisateur</a>
+        <a href="<?= base_url('Admin/recipes-index?statut=En attente') ?>"
+            class="btn <?= $statut === 'En attente' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
+        <a href="<?= base_url('Admin/recipes-index?statut=Approuvée') ?>"
+            class="btn <?= $statut === 'Approuvée' ? 'btn-success' : 'btn-outline-success' ?>">Approuvées</a>
+        <a href="<?= base_url('Admin/recipes-index?statut=Rejetée') ?>"
+            class="btn <?= $statut === 'Rejetée' ? 'btn-danger' : 'btn-outline-danger' ?>">Rejetées</a>
+    </div>
     <div class="row m-3">
         <ul class="grenade-list">
 
@@ -46,7 +55,7 @@
                         <h4 class="text-light"><span class="text-light"><?= $recipe->titre ?></span></h4>
 
                         <h4 class="text-light"><span class="text-info"><?= $recipe->username ?></span></h4>
-                       
+
                         <i class="fa-solid fa-bomb grenade-icon" onclick="alert('Grenade 1 cliquée !')">voir, modifier, supprimer ici</i>
                         <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-primary">Gérer</a>
 

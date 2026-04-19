@@ -106,7 +106,7 @@ foreach ($categories as $categorie) {
         <label for="difficulte">Difficulté</label>
         <?= form_dropdown('difficulte', $diff_options, set_value('difficulte'), ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
         <?= validation_show_error('difficulte') ?>
-
+        
         <label for="categorie_id">Catégorie</label>
         <?= form_dropdown('categorie_id', $options_categories, set_value('categorie_id'), $cat) ?>
         <?= validation_show_error('categorie_id') ?>

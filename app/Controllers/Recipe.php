@@ -174,7 +174,7 @@ class Recipe extends BaseController
                 'contenu'           => $contenu,
                 'nb_personnes'      => $this->request->getPost('nb_personnes'),
                 'difficulte'        => $this->request->getPost('difficulte'),
-                'statut'            => 'pending',
+                'statut'            => 'En attente',
                 'nb_vues'           => 0,
             ];
             //gestion des tables de liaison:

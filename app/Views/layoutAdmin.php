@@ -12,11 +12,14 @@
 
     <nav class="navbar navbar-dark bg-dark" style="height: 100px;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/admin">
-            <img src="<?= base_url('img/eddy-bd.jpeg') ?>" height="80" alt="Chef Eddy">
-            </a>
+           
+                <a class="navbar-brand" href="/Admin">
+                    <img src="<?= base_url('img/eddy-bd.jpeg') ?>" height="80" alt="Chef Eddy">
+                </a>
+
             <span class="navbar-brand"> Admin Chef Eddy</span>
             <div>
+                <a href="/dashboard" class="btn btn-outline-light btn-sm me-2">Tableau de bord</a>
                 <a href="/Admin/recipes-index" class="btn btn-outline-light btn-sm me-2">Recettes</a>
                 <a href="/Admin/users-index" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
                 <a href="/" class="btn btn-outline-warning btn-sm">Site</a>
