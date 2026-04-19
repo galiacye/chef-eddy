@@ -12,6 +12,7 @@ use HTMLPurifier_Config;
 class Recipe extends BaseController
 {
     private $model;
+    protected $returnType = 'object';
 
     public function __construct()
     {

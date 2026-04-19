@@ -10,7 +10,7 @@ use App\Models\TagModel;
 class Categorie extends BaseController
 {
     protected $model;
-
+    protected $returnType = 'object';
     public function __construct()
     {
         $this->model = model('CategorieModel');
@@ -48,7 +48,7 @@ class Categorie extends BaseController
             "nom_categorie" => "météo"
         ];
         $this->model->addCategorie($data);
-        echo 'insertion reussi';
+        echo 'insertion reussie';
     }
 
 
@@ -65,14 +65,14 @@ class Categorie extends BaseController
         $categorieModel = model('CategorieModel');
         $categorie = $categorieModel->find($categorie_id);
     }
-//renommage se fera dans branche dédiée
+    //renommage se fera dans branche dédiée
     public function deleteCategory(int $categorie_id)
     {
         $categorieModel = model('CategorieModel');
         $categorieModel->delete($categorie_id);
     }
-//option Alexis dans blog:
-    public function cDeleteCategorie(int $idCategorie):void
+    //option Alexis dans blog:
+    public function cDeleteCategorie(int $idCategorie): void
     {
         $this->model->deleteCategorie($idCategorie);
         echo 'Suppression';

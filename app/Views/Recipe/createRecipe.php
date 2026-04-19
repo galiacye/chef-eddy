@@ -71,10 +71,11 @@ $options_ingredients = [
     'liquides'  => 'Liquides',
     'autres'    => 'Autres'
 ];
+
 //form_dropdown génère le html select à partir du tab $options_categories
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
 foreach ($categories as $categorie) {
-    $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
+    $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id) = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
 <div class="formulaire">
