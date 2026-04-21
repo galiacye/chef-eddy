@@ -45,7 +45,7 @@ class Auth extends BaseController
         $user = $this->UserModel->getUserByEmail($email);
 
         if (!$user) {
-            return redirect()->to('login')->with('error', 'Email introuvable');
+            return redirect()->to('login')->with('error', "Cet email n'existe pas");
         }
 
         if (!password_verify($password, $user->password)) {
