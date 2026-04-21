@@ -33,8 +33,8 @@
         theme: 'snow',
     });
     const existingContent = document.getElementById('contenu').value;
-    if (existingContent) {
-        quill.root.innerHTML = existingContent;
+    if (existingContent) { //ou if existingContent != "" (""est une string vide)
+        quill.root.innerHTML = existingContent;//quill.root accède à la zone d'édition quill
     }
 
     // Ajouter les tooltips en français
@@ -44,10 +44,7 @@
     document.querySelector('.ql-list[value="ordered"]').setAttribute('title', 'Liste numérotée');
     document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste à puces');
 
-   
-
-
-    // Gestion de la soumission du formulaire
+       // Gestion de la soumission du formulaire
     document.getElementById('form').addEventListener('submit', (e) => {
         const html = quill.root.innerHTML;
         document.getElementById('contenu').value = html;
