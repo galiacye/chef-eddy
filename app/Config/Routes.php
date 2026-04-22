@@ -72,3 +72,4 @@ $routes->get('categorie/index', 'Categorie::index');
 $routes->get('categorie/(:num)', 'Categorie::showRecipesByCategorie/$1');
 
 
+$routes->get('edit-recipe','Recipe::editRecipe');

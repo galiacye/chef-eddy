@@ -106,7 +106,7 @@ foreach ($categories as $categorie) {
         <label for="difficulte">Difficulté</label>
         <?= form_dropdown('difficulte', $diff_options, set_value('difficulte'), ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
         <?= validation_show_error('difficulte') ?>
-        
+
         <label for="categorie_id">Catégorie</label>
         <?= form_dropdown('categorie_id', $options_categories, set_value('categorie_id'), $cat) ?>
         <?= validation_show_error('categorie_id') ?>
@@ -122,7 +122,7 @@ foreach ($categories as $categorie) {
                         id="tag_<?= $tag->id ?>"
                         class="form-check-input"
                         <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
-                    <label class="form-check-label" for="tag_nom"<?= $tag->id ?>">
+                    <label class="form-check-label" for="tag_nom" <?= $tag->id ?>">
                         <?= $tag->nom ?>
                     </label>
                 </div>
@@ -136,24 +136,35 @@ foreach ($categories as $categorie) {
                 <?php
                 $ing_nom = [
                     'name'        => 'ingredients[0][nom]',
-                    'placeholder' => 'Nom',
-                    'class'       => 'form-control'
+                    'type'        => 'hidden',
+                    'id'          => 'ing-nom-0'
                 ];
                 $ing_qte = [
                     'name'        => 'ingredients[0][quantite]',
-                    'placeholder' => 'Quantité',
-                    'type'        => 'number',
-                    'class'       => 'form-control w-25'
+                    'type'        => 'hidden',
+                    'id'          => 'ing-qte-0'
                 ];
                 $ing_unite = [
                     'name'        => 'ingredients[0][unite]',
-                    'placeholder' => 'Unité (g, ml…)',
-                    'class'       => 'form-control w-25'
+                    'type'        => 'hidden',
+                    'id'          => 'ing-unite-0'
                 ];
                 ?>
+
+                <!-- Champ visible unique -->
+                <input type="text"
+                    class="form-control ingredient-input"
+                    placeholder="Ex: 200g farine, 2 oeufs..."
+                    data-index="0">
+
+                <!-- Champs cachés qui stockent les 3 valeurs -->
                 <?= form_input($ing_nom) ?>
                 <?= form_input($ing_qte) ?>
                 <?= form_input($ing_unite) ?>
+
+                <!-- Aperçu du parsing -->
+                <small class="text-muted parsing-preview w-100"></small>
+
                 <?= form_dropdown('ingredients[0][categorie]', $options_ingredients, '', ['class' => 'form-select w-25']) ?>
                 <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
             </div>

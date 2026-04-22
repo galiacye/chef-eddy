@@ -6,6 +6,7 @@ use App\Models\RecipeModel;
 use App\Models\TagModel;
 use App\Models\CategorieModel;
 use App\Models\IngredientModel;
+use App\Models\UniteModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -19,6 +20,16 @@ class Recipe extends BaseController
         helper('form');
 
         $this->model = Model('RecipeModel');
+    }
+
+    public function editRecipe()
+    {
+        $uniteModel = model('UniteModel');
+        $unite = array_column($uniteModel->findAll(),'nom');//array_column(tableau, 'colonne_voulue')
+        if($this->request->is('post')===false){
+            return view('Recipe/editRecipe',['unite'=>$unite]);
+        }
+        
     }
 
     public function showRecipe(int $id)
