@@ -39,6 +39,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
             </li>
+            <li>
+                <a class="nav-link" href="<?= base_url('/edit-recipe') ?>">Proposez une recette</a>
+                <!--enverra sur s'inscrire-->
+            </li>
         </ul>
         </div>
         <div class="right">

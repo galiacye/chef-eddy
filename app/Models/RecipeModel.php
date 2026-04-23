@@ -26,13 +26,13 @@ class RecipeModel extends Model
   protected $returnType = 'object';
 
   public function createRecipe(array $data)
-  {
-    return $this->insert($data);
-  }
+    {
+      return $this->insert($data);
+    }
 
   public function getRecipe(int $id)
-  { //syntaxe ci4 diff syntaxe sql
-    return $this->select('recettes.id,
+    { //syntaxe ci4 diff syntaxe sql
+      return $this->select('recettes.id,
                           recettes.titre, 
                           recettes.image_url, 
                           recettes.difficulte, 
@@ -48,56 +48,57 @@ class RecipeModel extends Model
       ->join('categories', 'categories.id = recette_categories.categorie_id', 'left')
       ->join('users', 'users.id = recettes.user_id')
       ->where('recettes.id', $id)
-      ->get()->getRow(); //ici on ne joint pas ing ni recettes_ing car les ingr sont déjà chargés par 
-    //le contrôleur avec $ingredientModel->getRecipeIngredients($id)
+      ->get()->getRow(); //ici on ne joint pas ing ni recettes_ing car les ingr sont déjà chargés 
+      //par le contrôleur avec $ingredientModel->getRecipeIngredients($id)
 
     //dd($query->getCompiledSelect());pour voir le sql
 
-  }
+    }
+
   public function getIngredients($id)
-  {
-    return $this->db->table('recette_ingredients')
-      ->select('ingredients.nom, ingredients.categorie, recette_ingredients.quantite, recette_ingredients.unite')
-      ->join('ingredients', 'recette_ingredients.ingredient_id = ingredients.id')
-      ->where('recette_id', $id)
-      ->get()->getResult();
-  }
+    {
+      return $this->db->table('recette_ingredients')
+        ->select('ingredients.nom, ingredients.categorie, recette_ingredients.quantite, recette_ingredients.unite')
+        ->join('ingredients', 'recette_ingredients.ingredient_id = ingredients.id')
+        ->where('recette_id', $id)
+        ->get()->getResult();
+    }
 
 
 
   public function updateRecipe($id, $data)
-  {
-    return $this->update($id, $data);
-  }
+    {
+      return $this->update($id, $data);
+    }
 
-  public function getRecipeAuthor()
-  {
-    return $this->select('recettes.*, users.username')
-      ->join('users', 'users.id = recettes.user_id')
-      ->findAll(); //ici sql renvoie un résultat ds lequel username devient un attribut de $recipe
-    //d'où le $recipe->username ds views/Admin/recipes-index
-  }
-
-  public function getRecipesByStatus($status = null)
-  {
-    if ($status) { // false si $status est null, true si $status vaut 'En attente', 'Approuvée', etc.
+  public function getRecipesWithAuthor()
+    {
       return $this->select('recettes.*, users.username')
         ->join('users', 'users.id = recettes.user_id')
-        ->where('recettes.statut', $status)
-        ->findAll();
-    }
-    return $this->select('recettes.*, users.username')
-      ->join('users', 'users.id = recettes.user_id')
-      ->findAll();
-  }
+        ->findAll(); //ici sql renvoie un résultat ds lequel username devient un attribut de $recipe
+      //d'où le $recipe->username ds views/Admin/recipes-index
+   }
+
+  public function getRecipesByStatus($status = null)
+    {
+      if ($status) { // false si $status est null, true si $status vaut 'En attente', 'Approuvée', etc.
+        return $this->select('recettes.*, users.username')
+          ->join('users', 'users.id = recettes.user_id')
+          ->where('recettes.statut', $status)
+          ->findAll();
+        }
+        return $this->select('recettes.*, users.username')
+          ->join('users', 'users.id = recettes.user_id')
+          ->findAll();
+      }
 
   public function getRecipeByUser($id)
-  {
-    return $this->select('recettes.*, users.username')
-      ->join('users', 'users.id = recettes.user_id')
-      ->where('recettes.user_id', $id)
-      ->findAll();
-  }
+    {
+      return $this->select('recettes.*, users.username')
+        ->join('users', 'users.id = recettes.user_id')
+        ->where('recettes.user_id', $id)
+        ->findAll();
+    }
 
   //  recettes aléatoires avec tag chef-eddy
   public function getChefEddyRecipes(int $limit = 6)

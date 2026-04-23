@@ -215,23 +215,37 @@ foreach ($categories as $categorie) {
     //bouton ajouter un ing:
     const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
     let index = 1;
-
+    //ci dessous:
     document.getElementById('ajouter-ingredient').addEventListener('click', () => {
-        const container = document.getElementById('ingredients-container');
-        const row = document.createElement('div');
-        row.classList.add('ingredient-row', 'gap-2', 'mb-2');
+                const container = document.getElementById('ingredients-container');
 
-        const options = Object.entries(categoriesIngredient)
-            .map(([val, label]) => `<option value="${val}">${label}</option>`)
-            .join('');
+                //ajouter une ligne
+                const row = document.createElement('div');
+                row.classList.add('ingredient-row', 'gap-2', 'mb-2');
 
-        row.innerHTML = `
-        <input type="text"   name="ingredients[${index}][nom]"      placeholder="Nom"            class="form-control">
-        <input type="number" name="ingredients[${index}][quantite]" placeholder="Quantité"       class="form-control w-25">
-        <input type="text"   name="ingredients[${index}][unite]"    placeholder="Unité (g, ml…)" class="form-control w-25">
-        <select name="ingredients[${index}][categorie]" class="form-select w-25">${options}</select>
-        <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
-    `;
+                const options = Object.entries(categoriesIngredient)
+                    .map(([val, label]) => `<option value="${val}">${label}</option>`)
+                    .join('');
+
+                row.innerHTML = `
+    <input type="text"
+        class="form-control ingredient-input"
+        placeholder="Ex: 200g farine"
+        data-index="${index}">
+
+    <input type="hidden" name="ingredients[${index}][nom]" id="ing-nom-${index}">
+    <input type="hidden" name="ingredients[${index}][quantite]" id="ing-qte-${index}">
+    <input type="hidden" name="ingredients[${index}][unite]" id="ing-unite-${index}">
+
+    <small class="text-muted parsing-preview w-100"></small>
+
+    <select name="ingredients[${index}][categorie]" class="form-select w-25">
+        ${options}
+    </select>
+
+    <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
+`;
+                
         container.appendChild(row);
         index++;
     });

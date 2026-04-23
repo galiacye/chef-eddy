@@ -72,4 +72,4 @@ $routes->get('categorie/index', 'Categorie::index');
 $routes->get('categorie/(:num)', 'Categorie::showRecipesByCategorie/$1');
 
 
-$routes->get('edit-recipe','Recipe::editRecipe');
+$routes->get('edit-recipe','Recipe::editRecipe');//test 3 champs cachés

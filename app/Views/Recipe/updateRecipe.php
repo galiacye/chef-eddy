@@ -74,7 +74,7 @@ $options_ingredients = [
 //form_dropdown génère le html select à partir du tab $options_categories
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
 foreach ($categories as $categorie) {
-    $options_categories[$categorie['id']] = $categorie['nom']; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
+    $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
 <?= form_open_multipart('update-recipe/' . $recipe->id, ['id' => 'form']) ?>
@@ -112,7 +112,8 @@ foreach ($categories as $categorie) {
 
         <label>Ingrédients</label>
         <div id="ingredients-container">
-            <?php foreach ($ingredients as $i => $ing): ?>
+            <?php foreach ($ingredients as $i => $ing): ?><!--tableaux imbriqués-->
+                <!--changer  pour champ unique  avec 3champs cachés voir createRecipe-->
                 <div class="ingredient-row gap-2 mb-2">
                     <?= form_input(['name' => "ingredients[$i][nom]", 'value' => $ing->nom, 'class' => 'form-control']) ?>
                     <?= form_input(['name' => "ingredients[$i][quantite]", 'value' => $ing->quantite, 'type' => 'number', 'class' => 'form-control w-25']) ?>

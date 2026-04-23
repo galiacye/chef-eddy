@@ -103,3 +103,13 @@ $ing_unite = [
 \\s* : espace(s) optionnel(s)
 (.+) : capture le reste = le nom
 $ : fin du texte -->
+
+
+
+//<!--createRecipe ajouter un ingredients anciennnes lignes-->
+    row.innerHTML = `
+        <input type="text"   name="ingredients[${index}][nom]"      placeholder="Nom"            class="form-control">
+        <input type="number" name="ingredients[${index}][quantite]" placeholder="Quantité"       class="form-control w-25">
+        <input type="text"   name="ingredients[${index}][unite]"    placeholder="Unité (g, ml…)" class="form-control w-25">
+        <select name="ingredients[${index}][categorie]" class="form-select w-25">${options}</select>
+        <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
