@@ -252,11 +252,11 @@ class Recipe extends BaseController
         {
             $recipe = $this->model->getRecipe($id); //car find() na fait pas les jointures !
             $tagModel = model('TagModel');
-            $categorieModel = model('CategorieModel');
+            $categoryModel = model('CategoryModel');
             return view('Recipe/update-recipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
-                'categories' => $categorieModel->findAll(),
+                'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getIngredients($id)
             ]);
         } else { //si pas get, post donc traitement
@@ -340,7 +340,7 @@ class Recipe extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->find($id),
                     'tags' => model('TagModel')->findAll(),
-                    'categories' => model('CategorieModel')->findAll(),
+                    'categories' => model('CategoryModel')->findAll(),
                     'ingredients' => $this->model->getIngredients($id)
                 ]);
             }

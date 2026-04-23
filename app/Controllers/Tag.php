@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\TagModel;
 use App\Models\RecipeModel;
 use App\Models\IngredientModel;
-use App\Models\CategorieModel;
+use App\Models\CategoryModel;
 
 
 class Tag extends BaseController
