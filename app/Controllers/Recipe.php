@@ -163,7 +163,7 @@ class Recipe extends BaseController
             }
             // Gestion de l'image
             $image = $this->request->getFile('image_url');
-            if ($image && $image->isValid() && !$image->hasMoved()) {
+            if ($image && $image->isValid() && !$image->hasMoved()) {//car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
                 $newName = $image->getRandomName();
                 $image_path = 'uploads/recipes/' . $newName;
                 $image->move(ROOTPATH . 'public/uploads/recipes', $newName);
