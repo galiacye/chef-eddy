@@ -143,3 +143,6 @@ writable/logs/*
 # Cache
 writable/cache/*
 !writable/cache/.gitkeep
+
+public/uploads/recipes/*
+!public/uploads/recipes/.gitkeep
