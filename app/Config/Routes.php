@@ -49,7 +49,7 @@ $routes->match(['get','post'], 'update-user/(:num)','User::updateUser/$1');
 $routes->get('all-roles','Role::allRoles');
 $routes->get('role','Role::getRole');
 //recipe
-$routes->get('recipeIndex','Recipe::recipeIndex');
+$routes->get('recipe-index','Recipe::recipeIndex');
 $routes->get('recipe/(:num)','Recipe::showRecipe/$1');
 $routes->match(['get','post'],'add-recipe','Recipe::createRecipe');
 $routes->match(['get','post'],'update-recipe/(:num)','Recipe::updateRecipe/$1');
@@ -68,8 +68,8 @@ $routes->get('recipesByNameJs','Api::recipesByName');
 $routes->get('tag/index', 'Tag::index');
 $routes->get('tag/(:num)', 'Tag::showRecipesByTag/$1');
 
-$routes->get('categorie/index', 'Categorie::index');
-$routes->get('categorie/(:num)', 'Categorie::showRecipesByCategorie/$1');
+$routes->get('category/index', 'Category::index');
+$routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 
 
 $routes->get('edit-recipe','Recipe::editRecipe');//test 3 champs cachés

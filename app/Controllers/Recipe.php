@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\RecipeModel;
 use App\Models\TagModel;
-use App\Models\CategorieModel;
+use App\Models\CategoryModel;
 use App\Models\IngredientModel;
 use App\Models\UniteModel;
 use HTMLPurifier;
@@ -27,7 +27,7 @@ class Recipe extends BaseController
         $uniteModel = model('UniteModel');
         $unite = array_column($uniteModel->findAll(),'nom');//array_column(tableau, 'colonne_voulue')
         if($this->request->is('post')===false){
-            return view('Recipe/editRecipe',['unite'=>$unite]);
+            return view('Recipe/edit-recipe',['unite'=>$unite]);
         }
         
     }
@@ -37,7 +37,7 @@ class Recipe extends BaseController
         $recipeModel     = model('RecipeModel');
         $tagModel = model('TagModel');
         $ingredientModel = model('IngredientModel');
-        $categorieModel  = model('CategorieModel');
+        $categoryModel  = model('CategoryModel');
         
         $recipe = $recipeModel->getRecipe($id);
 
@@ -47,10 +47,10 @@ class Recipe extends BaseController
             'recipe'      => $recipeModel->getRecipe($id),
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
-            'categories'  => $categorieModel->getRecipeCategories($id), // ← plural, une recette peut avoir plusieurs catégories
+            'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
         ];
 
-        return view('Recipe/showRecipe', $data);
+        return view('Recipe/show-recipe', $data);
     }
 
     public function recipeIndex(): string
@@ -58,7 +58,7 @@ class Recipe extends BaseController
         //$recipes = $this->model->getRecipeAuthor();
         //$data = ['recipes' => $recipes]; équivaut à :
         $data['recipes'] = $this->model->getRecipesWithAuthor();
-        return view('Recipe/recipeIndex', $data);
+        return view('Recipe/recipe-index', $data);
     }
 
 
@@ -68,11 +68,11 @@ class Recipe extends BaseController
     {
         if ($this->request->is('post') === false) {
             $tagModel       = new TagModel();
-            $categorieModel = new CategorieModel();
+            $categoryModel = new CategoryModel();
 
-            return view('Recipe/createRecipe', [
+            return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
-                'categories' => $categorieModel->findAll()
+                'categories' => $categoryModel->findAll()
             ]);
         } else {
             // L'user_id vient de la session
@@ -155,10 +155,10 @@ class Recipe extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('Recipe/createRecipe', [
+                return view('Recipe/create-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'tags'       => (new TagModel())->findAll(),
-                    'categories' => (new CategorieModel())->findAll()
+                    'categories' => (new CategoryModel())->findAll()
                 ]);
             }
             // Gestion de l'image
@@ -242,7 +242,7 @@ class Recipe extends BaseController
                 }
             }
 
-            return redirect()->to('/recipeIndex')->with('success', 'Recette créée avec succès !');
+            return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
         }
     }
 
@@ -253,7 +253,7 @@ class Recipe extends BaseController
             $recipe = $this->model->getRecipe($id); //car find() na fait pas les jointures !
             $tagModel = model('TagModel');
             $categorieModel = model('CategorieModel');
-            return view('Recipe/updateRecipe', [
+            return view('Recipe/update-recipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
                 'categories' => $categorieModel->findAll(),
@@ -336,7 +336,7 @@ class Recipe extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                return view('Recipe/updateRecipe', [
+                return view('Recipe/update-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->find($id),
                     'tags' => model('TagModel')->findAll(),
@@ -415,7 +415,7 @@ class Recipe extends BaseController
                     ]);
                 }
             }
-            return redirect()->to('/recipeIndex')->with('success', 'Recette modifiée avec succès !');
+            return redirect()->to('/recipe-index')->with('success', 'Recette modifiée avec succès !');
         }
     }
 }
