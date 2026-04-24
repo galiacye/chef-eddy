@@ -112,7 +112,8 @@ foreach ($categories as $categorie) {
 
         <label>Ingrédients</label>
         <div id="ingredients-container">
-            <?php foreach ($ingredients as $i => $ing): ?>
+            <?php foreach ($ingredients as $i => $ing): ?><!--tableaux imbriqués-->
+                <!--changer  pour champ unique  avec 3champs cachés voir createRecipe-->
                 <div class="ingredient-row gap-2 mb-2">
                     <?= form_input(['name' => "ingredients[$i][nom]", 'value' => $ing->nom, 'class' => 'form-control']) ?>
                     <?= form_input(['name' => "ingredients[$i][quantite]", 'value' => $ing->quantite, 'type' => 'number', 'class' => 'form-control w-25']) ?>

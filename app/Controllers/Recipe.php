@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use App\Models\RecipeModel;
 use App\Models\TagModel;
-use App\Models\CategorieModel;
+use App\Models\CategoryModel;
 use App\Models\IngredientModel;
+use App\Models\UniteModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -21,13 +22,23 @@ class Recipe extends BaseController
         $this->model = Model('RecipeModel');
     }
 
+    public function editRecipe()
+    {
+        $uniteModel = model('UniteModel');
+        $unite = array_column($uniteModel->findAll(), 'nom'); //array_column(tableau, 'colonne_voulue')
+        if ($this->request->is('post') === false) {
+            return view('Recipe/edit-recipe', ['unite' => $unite]);
+        }
+    }
+
     public function showRecipe(int $id)
     {
         $recipeModel     = model('RecipeModel');
         $tagModel = model('TagModel');
         $ingredientModel = model('IngredientModel');
-        $categorieModel  = model('CategorieModel');
-        
+        $categoryModel  = model('CategoryModel');
+        $uniteModel = model('UniteModel');
+
         $recipe = $recipeModel->getRecipe($id);
 
         //dd($recipe, $id);
@@ -36,18 +47,19 @@ class Recipe extends BaseController
             'recipe'      => $recipeModel->getRecipe($id),
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
-            'categories'  => $categorieModel->getRecipeCategories($id), // ← plural, une recette peut avoir plusieurs catégories
+            'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
+        
         ];
 
-        return view('Recipe/showRecipe', $data);
+        return view('Recipe/show-recipe', $data);
     }
 
     public function recipeIndex(): string
     { //avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
         //$recipes = $this->model->getRecipeAuthor();
         //$data = ['recipes' => $recipes]; équivaut à :
-        $data['recipes'] = $this->model->getRecipeAuthor();
-        return view('Recipe/recipeIndex', $data);
+        $data['recipes'] = $this->model->getRecipesWithAuthor();
+        return view('Recipe/recipe-index', $data);
     }
 
 
@@ -57,11 +69,13 @@ class Recipe extends BaseController
     {
         if ($this->request->is('post') === false) {
             $tagModel       = new TagModel();
-            $categorieModel = new CategorieModel();
+            $categoryModel = new CategoryModel();
+            $uniteModel = new UniteModel();
 
-            return view('Recipe/createRecipe', [
+            return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
-                'categories' => $categorieModel->findAll()
+                'categories' => $categoryModel->findAll(),
+                'unites' => array_column($uniteModel->findAll(), 'nom') // ['kg','g','ml'...]
             ]);
         } else {
             // L'user_id vient de la session
@@ -144,15 +158,16 @@ class Recipe extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('Recipe/createRecipe', [
+                return view('Recipe/create-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'tags'       => (new TagModel())->findAll(),
-                    'categories' => (new CategorieModel())->findAll()
+                    'categories' => (new CategoryModel())->findAll(),
+                     'unites'     => array_column((new UniteModel())->findAll(), 'nom')
                 ]);
             }
             // Gestion de l'image
             $image = $this->request->getFile('image_url');
-            if ($image && $image->isValid() && !$image->hasMoved()) {
+            if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
                 $newName = $image->getRandomName();
                 $image_path = 'uploads/recipes/' . $newName;
                 $image->move(ROOTPATH . 'public/uploads/recipes', $newName);
@@ -180,60 +195,66 @@ class Recipe extends BaseController
             //gestion des tables de liaison:
             $recipe_id = $this->model->createRecipe($data); //ici insertion en base
             $db = \Config\Database::connect();
-            $categorie_id = $this->request->getPost('categorie_id');
-            if ($categorie_id) {
+            $category_id = $this->request->getPost('category_id');
+            if ($category_id) {
                 $db->table('recette_categories')->insert([
                     'recette_id'   => $recipe_id,
-                    'categorie_id' => $categorie_id
+                    'category_id' => $category_id
                 ]);
             }
             $tag_ids = $this->request->getPost('tags');
             if ($tag_ids) {
+                // force en tableau
+                $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                 foreach ($tag_ids as $tag_id) {
-                    $db->table('recette_tags')->insert([
+                    $db->table('recettes_tags')->insert([
                         'recette_id' => $recipe_id,
                         'tag_id'     => $tag_id
                     ]);
                 }
             }
-            // Sauvegarde des ingrédients
-            $ingredients = $this->request->getPost('ingredients');
-            if ($ingredients) {
-                foreach ($ingredients as $ingredient) {
-                    $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
-                    if (empty($nom)) continue; // on saute les lignes vides
+                // Sauvegarde des ingrédients
+                $ingredients = $this->request->getPost('ingredients');
 
-                    // 1. Chercher si l'ingrédient existe déjà
-                    $ing_existant = $db->table('ingredients')
-                        ->where('nom', $nom)
-                        ->get()
-                        ->getRowArray();
+                log_message('debug', print_r($ingredients, true));
 
-                    if ($ing_existant) {
-                        // 2a. Il existe → on récupère son id
-                        $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
-                    } else {
-                        // 2b. Il n'existe pas → on l'insère
-                        $db->table('ingredients')->insert([
-                            'nom'       => $nom,
-                            'categorie' => $ingredient['categorie']
+                if ($ingredients) {
+                    foreach ($ingredients as $ingredient) {
+                        $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
+                        if (empty($nom)) continue; // on saute les lignes vides
+
+                        //  Chercher si l'ingrédient existe déjà
+                        $ing_existant = $db->table('ingredients')
+                            ->where('nom', $nom)
+                            ->get()
+                            ->getRowArray();
+
+                        if ($ing_existant) {
+                            // 1. Il existe -> on récupère son id
+                            $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
+                        } else {
+                            // 2. Il n'existe pas -> on l'insère
+                            $db->table('ingredients')->insert([
+                                'nom'       => $nom,
+                                'categorie' => $ingredient['categorie']
+                            ]);
+                            $ingredient_id = $db->insertID();
+                        }
+
+                        // 3. Insérer dans recette_ingredients
+                        $db->table('recette_ingredients')->insert([
+                            'recette_id'    => $recipe_id,
+                            'ingredient_id' => $ingredient_id,
+                            'quantite'      => $ingredient['quantite'] ?: null,
+                            'unite'         => $ingredient['unite'] ?: null
                         ]);
-                        $ingredient_id = $db->insertID();
                     }
-
-                    // 3. Insérer dans recette_ingredients
-                    $db->table('recette_ingredients')->insert([
-                        'recette_id'    => $recipe_id,
-                        'ingredient_id' => $ingredient_id,
-                        'quantite'      => $ingredient['quantite'] ?: null,
-                        'unite'         => $ingredient['unite'] ?: null
-                    ]);
                 }
-            }
 
-            return redirect()->to('/recipeIndex')->with('success', 'Recette créée avec succès !');
+                return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
+            }
         }
-    }
+    
 
     public function updateRecipe($id)
     {
@@ -241,11 +262,11 @@ class Recipe extends BaseController
         {
             $recipe = $this->model->getRecipe($id); //car find() na fait pas les jointures !
             $tagModel = model('TagModel');
-            $categorieModel = model('CategorieModel');
-            return view('Recipe/updateRecipe', [
+            $categoryModel = model('CategoryModel');
+            return view('Recipe/update-recipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
-                'categories' => $categorieModel->findAll(),
+                'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getIngredients($id)
             ]);
         } else { //si pas get, post donc traitement
@@ -325,11 +346,11 @@ class Recipe extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                return view('Recipe/updateRecipe', [
+                return view('Recipe/update-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->find($id),
                     'tags' => model('TagModel')->findAll(),
-                    'categories' => model('CategorieModel')->findAll(),
+                    'categories' => model('CategoryModel')->findAll(),
                     'ingredients' => $this->model->getIngredients($id)
                 ]);
             }
@@ -404,7 +425,7 @@ class Recipe extends BaseController
                     ]);
                 }
             }
-            return redirect()->to('/recipeIndex')->with('success', 'Recette modifiée avec succès !');
+            return redirect()->to('/recipe-index')->with('success', 'Recette modifiée avec succès !');
         }
     }
 }

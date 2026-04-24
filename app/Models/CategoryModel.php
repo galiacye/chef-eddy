@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategorieModel extends Model
+class CategoryModel extends Model
 {
     protected $table = 'categories';
     protected $primaryKey = 'id';
@@ -33,12 +33,12 @@ class CategorieModel extends Model
         return $this->delete($id);
     }
 
-    public function getCategorie($id)
+    public function getCategory($id)
     {
         return $this->find($id);
     }
  //la catégorie d'une recette
-    public function getRecipeCategorie(int $recipe_id)
+    public function getRecipeCategory(int $recipe_id)
     {
         return $this->select('categories.nom')
             ->join('recette_categories', 'recette_categories.categorie_id = categories.id')
@@ -47,12 +47,12 @@ class CategorieModel extends Model
             ->getResult();
     }
     // Toutes les recettes d'une catégorie
-    public function getRecipesByCategorie(int $categorie_id)
+    public function getRecipesByCategory(int $category_id)
     {
         return $this->db->table('recette_categories')
             ->select('recettes.id, recettes.titre, recettes.image_url')
             ->join('recettes', 'recettes.id = recette_categories.recette_id')
-            ->where('recette_categories.categorie_id', $categorie_id)
+            ->where('recette_categories.categorie_id', $category_id)
             ->get()
             ->getResult();
     }

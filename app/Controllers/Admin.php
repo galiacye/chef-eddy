@@ -6,7 +6,7 @@ use App\Models\UserModel;
 use App\Models\RoleModel;
 use App\Models\RecipeModel;
 use App\Models\TagModel;
-use App\Models\CategorieModel;
+use App\Models\CategoryModel;
 use App\Models\IngredientModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
@@ -17,7 +17,7 @@ class Admin extends BaseController
     protected $roleModel;
     protected $recipeModel;
     protected $ingredientModel;
-    protected $categorieModel;
+    protected $categoryModel;
     protected $tagModel;
 
     public function __construct()
@@ -28,7 +28,7 @@ class Admin extends BaseController
         $this->roleModel = Model('RoleModel');
         $this->recipeModel = Model('RecipeModel');
         $this->ingredientModel = Model('IngredientModel');
-        $this->categorieModel = Model('CategorieModel');
+        $this->categoryModel = Model('CategoryModel');
         $this->tagModel = Model('TagModel');
     }
 
@@ -165,7 +165,7 @@ class Admin extends BaseController
             if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
 
                 $newName = $avatar_file->getRandomName();
-                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
+                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);//FCPATH -> chemin absolu vers public
 
                 $avatar_url = 'uploads/avatars/' . $newName;
             } else {

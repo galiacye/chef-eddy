@@ -78,10 +78,12 @@ foreach ($categories as $categorie) {
     $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id) = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
+<?= validation_list_errors() ?>
+<?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
 <div class="formulaire">
     <!-- $status et $views gérées ds ctrlr -->
     <div class="infos">
-        <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
+        
 
         <label for="titre">Titre</label>
         <?= form_input($title) ?>
@@ -106,7 +108,7 @@ foreach ($categories as $categorie) {
         <label for="difficulte">Difficulté</label>
         <?= form_dropdown('difficulte', $diff_options, set_value('difficulte'), ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
         <?= validation_show_error('difficulte') ?>
-        
+
         <label for="categorie_id">Catégorie</label>
         <?= form_dropdown('categorie_id', $options_categories, set_value('categorie_id'), $cat) ?>
         <?= validation_show_error('categorie_id') ?>
@@ -122,7 +124,7 @@ foreach ($categories as $categorie) {
                         id="tag_<?= $tag->id ?>"
                         class="form-check-input"
                         <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
-                    <label class="form-check-label" for="tag_nom"<?= $tag->id ?>">
+                    <label class="form-check-label" for="tag_nom" <?= $tag->id ?>">
                         <?= $tag->nom ?>
                     </label>
                 </div>
@@ -136,24 +138,35 @@ foreach ($categories as $categorie) {
                 <?php
                 $ing_nom = [
                     'name'        => 'ingredients[0][nom]',
-                    'placeholder' => 'Nom',
-                    'class'       => 'form-control'
+                    'type'        => 'hidden',
+                    'id'          => 'ing-nom-0'
                 ];
                 $ing_qte = [
                     'name'        => 'ingredients[0][quantite]',
-                    'placeholder' => 'Quantité',
-                    'type'        => 'number',
-                    'class'       => 'form-control w-25'
+                    'type'        => 'hidden',
+                    'id'          => 'ing-qte-0'
                 ];
                 $ing_unite = [
                     'name'        => 'ingredients[0][unite]',
-                    'placeholder' => 'Unité (g, ml…)',
-                    'class'       => 'form-control w-25'
+                    'type'        => 'hidden',
+                    'id'          => 'ing-unite-0'
                 ];
                 ?>
+
+                <!-- Champ visible unique -->
+                <input type="text"
+                    class="form-control ingredient-input"
+                    placeholder="Ex: 200g farine, 2 oeufs..."
+                    data-index="0">
+
+                <!-- Champs cachés qui stockent les 3 valeurs -->
                 <?= form_input($ing_nom) ?>
                 <?= form_input($ing_qte) ?>
                 <?= form_input($ing_unite) ?>
+
+                <!-- Aperçu du parsing -->
+                <small class="text-muted parsing-preview w-100"></small>
+
                 <?= form_dropdown('ingredients[0][categorie]', $options_ingredients, '', ['class' => 'form-select w-25']) ?>
                 <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
             </div>
@@ -176,80 +189,22 @@ foreach ($categories as $categorie) {
         <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu') ?>">
 
         <button type="submit" class="btn btn-primary">Envoyer</button>
-        <?= form_close() ?>
+        
     </div>
 </div>
+<?= form_close() ?>
+
+<?= $this->endSection() ?>
 <?= $this->section('custom-js') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    const quill = new Quill('#editor', {
-        modules: { //relie la toolbar qui est en dehors du form
-            toolbar: '#toolbar'
-        },
-        placeholder: 'Écrivez votre recette ici...',
-        theme: 'snow',
-    });
-    const existingContent = document.getElementById('contenu').value;
-    if (existingContent) {
-        quill.root.innerHTML = existingContent;
-    }
-
-    // Ajouter les tooltips en français
-    document.querySelector('.ql-bold').setAttribute('title', 'Gras');
-    document.querySelector('.ql-italic').setAttribute('title', 'Italique');
-    document.querySelector('.ql-underline').setAttribute('title', 'Souligné');
-    document.querySelector('.ql-list[value="ordered"]').setAttribute('title', 'Liste numérotée');
-    document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste à puces');
-
-    //bouton ajouter un ing:
+    // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    let index = 1;
-
-    document.getElementById('ajouter-ingredient').addEventListener('click', () => {
-        const container = document.getElementById('ingredients-container');
-        const row = document.createElement('div');
-        row.classList.add('ingredient-row', 'gap-2', 'mb-2');
-
-        const options = Object.entries(categoriesIngredient)
-            .map(([val, label]) => `<option value="${val}">${label}</option>`)
-            .join('');
-
-        row.innerHTML = `
-        <input type="text"   name="ingredients[${index}][nom]"      placeholder="Nom"            class="form-control">
-        <input type="number" name="ingredients[${index}][quantite]" placeholder="Quantité"       class="form-control w-25">
-        <input type="text"   name="ingredients[${index}][unite]"    placeholder="Unité (g, ml…)" class="form-control w-25">
-        <select name="ingredients[${index}][categorie]" class="form-select w-25">${options}</select>
-        <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
-    `;
-        container.appendChild(row);
-        index++;
-    });
-
-    document.getElementById('ingredients-container').addEventListener('click', (e) => {
-        if (e.target.classList.contains('supprimer-ligne')) {
-            const rows = document.querySelectorAll('.ingredient-row');
-            if (rows.length > 1) {
-                e.target.closest('.ingredient-row').remove();
-            } else {
-                alert('Il faut au moins un ingrédient !');
-            }
-        }
-    });
-
-    // Gestion de la soumission du formulaire
-    document.getElementById('form').addEventListener('submit', (e) => {
-        const html = quill.root.innerHTML;
-        document.getElementById('contenu').value = html;
-
-        // Vérifier que ce n'est pas vide
-        const text = quill.getText().trim();
-        if (text.length === 0) {
-            e.preventDefault(); //empêche l'envoi par défaut
-            alert('Veuillez écrire une recette avant d\'envoyer');
-        }
-    });
+    const unites = <?= json_encode($unites) ?>;
 </script>
-
+<script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>
 
-<?= $this->endSection() ?>
+
+
+

@@ -85,7 +85,7 @@ class Ingredient extends BaseController
             $data = [
                 'nom'       => $this->request->getPost('nom'),
                 'image_url' => $image_url,
-                'categorie_id' => $this->request->getPost('categorie_id')
+                'category_id' => $this->request->getPost('category_id')
             ];
 
             $this->model->insert($data);

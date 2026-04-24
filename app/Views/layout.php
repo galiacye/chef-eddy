@@ -31,13 +31,17 @@
                 <a class="nav-link" href="<?= base_url('index.php') ?>">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('recipeIndex') ?>">Toutes les recettes</a>
+                <a class="nav-link" href="<?= base_url('recipe-index') ?>">Toutes les recettes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('categorie/index') ?>"> Les Catégories</a>
+                <a class="nav-link" href="<?= base_url('category/index') ?>"> Les Catégories</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
+            </li>
+            <li>
+                <a class="nav-link" href="<?= base_url('/edit-recipe') ?>">Proposez une recette</a>
+                <!--enverra sur s'inscrire-->
             </li>
         </ul>
         </div>

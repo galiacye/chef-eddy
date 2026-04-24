@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\RecipeModel;
 use App\Models\TagModel;
-use App\Models\CategorieModel;
+use App\Models\CategoryModel;
 use App\Models\IngredientModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
