@@ -78,6 +78,7 @@ foreach ($categories as $categorie) {
     $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id) = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
+<?= validation_list_errors() ?>
 <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
 <div class="formulaire">
     <!-- $status et $views gérées ds ctrlr -->
@@ -192,6 +193,7 @@ foreach ($categories as $categorie) {
     </div>
 </div>
 <?= form_close() ?>
+
 <?= $this->endSection() ?>
 <?= $this->section('custom-js') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>

@@ -161,7 +161,8 @@ class Recipe extends BaseController
                 return view('Recipe/create-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'tags'       => (new TagModel())->findAll(),
-                    'categories' => (new CategoryModel())->findAll()
+                    'categories' => (new CategoryModel())->findAll(),
+                     'unites'     => array_column((new UniteModel())->findAll(), 'nom')
                 ]);
             }
             // Gestion de l'image
@@ -222,17 +223,17 @@ class Recipe extends BaseController
                         $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
                         if (empty($nom)) continue; // on saute les lignes vides
 
-                        // 1. Chercher si l'ingrédient existe déjà
+                        //  Chercher si l'ingrédient existe déjà
                         $ing_existant = $db->table('ingredients')
                             ->where('nom', $nom)
                             ->get()
                             ->getRowArray();
 
                         if ($ing_existant) {
-                            // 2a. Il existe → on récupère son id
+                            // 1. Il existe -> on récupère son id
                             $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
                         } else {
-                            // 2b. Il n'existe pas → on l'insère
+                            // 2. Il n'existe pas -> on l'insère
                             $db->table('ingredients')->insert([
                                 'nom'       => $nom,
                                 'categorie' => $ingredient['categorie']
