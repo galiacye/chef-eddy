@@ -9,7 +9,9 @@ INSERT INTO unites (nom) VALUES
 ('litre'), ('litres'), ('L'), ('cl'), ('ml'),
  ('tranche'), ('tranches'), ('pièce'), ('pièces');
 
-
+ 
+ INSERT INTO unites (nom)
+ VALUES ('centilitres'), ('millilitres'), ('décilitres'), ('décilitre');
 
 
 
