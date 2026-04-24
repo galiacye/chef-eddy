@@ -78,10 +78,11 @@ foreach ($categories as $categorie) {
     $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id) = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
+<?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
 <div class="formulaire">
     <!-- $status et $views gérées ds ctrlr -->
     <div class="infos">
-        <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
+        
 
         <label for="titre">Titre</label>
         <?= form_input($title) ?>
@@ -187,94 +188,21 @@ foreach ($categories as $categorie) {
         <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu') ?>">
 
         <button type="submit" class="btn btn-primary">Envoyer</button>
-        <?= form_close() ?>
+        
     </div>
 </div>
+<?= form_close() ?>
+<?= $this->endSection() ?>
 <?= $this->section('custom-js') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    const quill = new Quill('#editor', {
-        modules: { //relie la toolbar qui est en dehors du form
-            toolbar: '#toolbar'
-        },
-        placeholder: 'Écrivez votre recette ici...',
-        theme: 'snow',
-    });
-    const existingContent = document.getElementById('contenu').value;
-    if (existingContent) {
-        quill.root.innerHTML = existingContent;
-    }
-
-    // Ajouter les tooltips en français
-    document.querySelector('.ql-bold').setAttribute('title', 'Gras');
-    document.querySelector('.ql-italic').setAttribute('title', 'Italique');
-    document.querySelector('.ql-underline').setAttribute('title', 'Souligné');
-    document.querySelector('.ql-list[value="ordered"]').setAttribute('title', 'Liste numérotée');
-    document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste à puces');
-
-    //bouton ajouter un ing:
+    // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    let index = 1;
-    //ci dessous:
-    document.getElementById('ajouter-ingredient').addEventListener('click', () => {
-                const container = document.getElementById('ingredients-container');
-
-                //ajouter une ligne
-                const row = document.createElement('div');
-                row.classList.add('ingredient-row', 'gap-2', 'mb-2');
-
-                const options = Object.entries(categoriesIngredient)
-                    .map(([val, label]) => `<option value="${val}">${label}</option>`)
-                    .join('');
-
-                row.innerHTML = `
-    <input type="text"
-        class="form-control ingredient-input"
-        placeholder="Ex: 200g farine"
-        data-index="${index}">
-
-    <input type="hidden" name="ingredients[${index}][nom]" id="ing-nom-${index}">
-    <input type="hidden" name="ingredients[${index}][quantite]" id="ing-qte-${index}">
-    <input type="hidden" name="ingredients[${index}][unite]" id="ing-unite-${index}">
-
-    <small class="text-muted parsing-preview w-100"></small>
-
-    <select name="ingredients[${index}][categorie]" class="form-select w-25">
-        ${options}
-    </select>
-
-    <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
-`;
-                
-        container.appendChild(row);
-        index++;
-    });
-
-    document.getElementById('ingredients-container').addEventListener('click', (e) => {
-        if (e.target.classList.contains('supprimer-ligne')) {
-            const rows = document.querySelectorAll('.ingredient-row');
-            if (rows.length > 1) {
-                e.target.closest('.ingredient-row').remove();
-            } else {
-                alert('Il faut au moins un ingrédient !');
-            }
-        }
-    });
-
-    // Gestion de la soumission du formulaire
-    document.getElementById('form').addEventListener('submit', (e) => {
-        const html = quill.root.innerHTML;
-        document.getElementById('contenu').value = html;
-
-        // Vérifier que ce n'est pas vide
-        const text = quill.getText().trim();
-        if (text.length === 0) {
-            e.preventDefault(); //empêche l'envoi par défaut
-            alert('Veuillez écrire une recette avant d\'envoyer');
-        }
-    });
+    const unites = <?= json_encode($unites) ?>;
 </script>
-
+<script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>
 
-<?= $this->endSection() ?>
+
+
+

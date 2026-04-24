@@ -53,6 +53,7 @@ $routes->get('recipe-index','Recipe::recipeIndex');
 $routes->get('recipe/(:num)','Recipe::showRecipe/$1');
 $routes->match(['get','post'],'add-recipe','Recipe::createRecipe');
 $routes->match(['get','post'],'update-recipe/(:num)','Recipe::updateRecipe/$1');
+$routes->get('edit-recipe','Recipe::editRecipe');//test 3 champs cachés
 
 //ingredients
 $routes->get('all-ing','Ingredients::indexIngredients');
@@ -72,4 +73,3 @@ $routes->get('category/index', 'Category::index');
 $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 
 
-$routes->get('edit-recipe','Recipe::editRecipe');//test 3 champs cachés

@@ -165,7 +165,7 @@ class Admin extends BaseController
             if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
 
                 $newName = $avatar_file->getRandomName();
-                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
+                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);//FCPATH -> chemin absolu vers public
 
                 $avatar_url = 'uploads/avatars/' . $newName;
             } else {

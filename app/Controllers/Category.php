@@ -25,7 +25,7 @@ class Category extends BaseController
             'categories' => $categories
         ];
 
-        return view('Categorie/index', $data);
+        return view('Category/index', $data);
     }
     //les recettes d'une catégorie: show
     public function showRecipesByCategory(int $category_id)

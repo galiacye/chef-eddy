@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const hiddenInput = document.querySelector("#contenu");//pont quill-serveur
     const form = document.querySelector("form");
 
-    // Pré-remplissage: si on modifie une recette existante,
+    // Pré-remplissage: si on modifie une recette existante,(voir aussi existingContent)
     // PHP a déjà mis le contenu dans le champ caché
     if (hiddenInput.value) {
       quill.root.innerHTML = hiddenInput.value;//=si le champ caché est rempli quill affiche sa valeur 

@@ -10,6 +10,11 @@ use App\Models\CategoryModel;
 
 class Tag extends BaseController
 {
+   
+    public function __construct(){
+        helper('form');
+   
+    }
 //tous les tags
     public function index()
     {
