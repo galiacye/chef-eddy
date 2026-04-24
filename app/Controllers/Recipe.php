@@ -62,7 +62,6 @@ class Recipe extends BaseController
         return view('Recipe/recipe-index', $data);
     }
 
-
     // createRecipe:
     // validation upload image purification Quill tables de liaison gestion ingrédients intelligente 
     public function createRecipe()
@@ -230,10 +229,10 @@ class Recipe extends BaseController
                             ->getRowArray();
 
                         if ($ing_existant) {
-                            // 1. Il existe -> on récupère son id
+                            // 1. Il existe : on récupère son id
                             $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
                         } else {
-                            // 2. Il n'existe pas -> on l'insère
+                            // 2. Il n'existe pas : on l'insère
                             $db->table('ingredients')->insert([
                                 'nom'       => $nom,
                                 'categorie' => $ingredient['categorie']
@@ -241,7 +240,7 @@ class Recipe extends BaseController
                             $ingredient_id = $db->insertID();
                         }
 
-                        // 3. Insérer dans recette_ingredients
+                        // Insérer dans recette_ingredients
                         $db->table('recette_ingredients')->insert([
                             'recette_id'    => $recipe_id,
                             'ingredient_id' => $ingredient_id,
