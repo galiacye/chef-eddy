@@ -81,7 +81,7 @@ foreach ($categories as $categorie) {
 <div class="formulaire">
     <!-- $status et $views gérées ds ctrlr -->
     <div class="infos">
-        
+
         <label for="titre">Titre</label>
         <?= form_input($title) ?>
         <?= validation_show_error('titre') ?>
@@ -103,26 +103,52 @@ foreach ($categories as $categorie) {
         <?= validation_show_error('nb_personnes') ?>
 
         <label for="difficulte">Difficulté</label>
-        <?= form_dropdown('difficulte', $diff_options, set_value('difficulte', isset($recipe->difficulte) ? $recipe->difficulte : ''), ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
+        <?= form_dropdown('difficulte', $diff_options, 
+            set_value('difficulte', isset($recipe->difficulte) ? $recipe->difficulte : ''), 
+            ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
         <?= validation_show_error('difficulte') ?>
 
         <label for="categorie_id">Catégorie</label>
-        <?= form_dropdown('categorie_id', $options_categories, set_value('categorie_id', isset($recipe->categorie_id) ? $recipe->categorie_id : ''), $cat) ?>
+        <?= form_dropdown('categorie_id', $options_categories, 
+            set_value('categorie_id', isset($recipe->categorie_id) ? $recipe->categorie_id : ''), $cat) ?>
         <?= validation_show_error('categorie_id') ?>
 
         <label>Ingrédients</label>
-        <div id="ingredients-container">
-            <?php foreach ($ingredients as $i => $ing): ?><!--tableaux imbriqués-->
-                <!--changer  pour champ unique  avec 3champs cachés voir createRecipe-->
-                <div class="ingredient-row gap-2 mb-2">
-                    <?= form_input(['name' => "ingredients[$i][nom]", 'value' => $ing->nom, 'class' => 'form-control']) ?>
-                    <?= form_input(['name' => "ingredients[$i][quantite]", 'value' => $ing->quantite, 'type' => 'number', 'class' => 'form-control w-25']) ?>
-                    <?= form_input(['name' => "ingredients[$i][unite]", 'value' => $ing->unite, 'class' => 'form-control w-25']) ?>
-                    <?= form_dropdown("ingredients[$i][categorie]", $options_ingredients, $ing->categorie, ['class' => 'form-select w-25']) ?>
-                    <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
-                </div>
-            <?php endforeach ?>
+ 
+   <div id="ingredients-container">
+    <?php if(!empty($ingredients)) : ?>
+    <?php foreach ($ingredients as $index => $ingredient) : ?>
+        <div class="ingredients-row gap-2 mb-2">
+            <input type="text" name="ingredients[<?= $index ?>][nom]" placeholder="Nom" class="form-control" value="<?= set_value("ingredients[{$index}][nom]", $ingredient->nom) ?>">
+            <input type="number" name="ingredients[<?= $index ?>][quantite]" placeholder="Quantité" class="form-control w-25" value="<?= set_value("ingredients[{$index}][quantite]", $ingredient->quantite) ?>">
+            <input type="text" name="ingredients[<?= $index ?>][unite]" placeholder="Unité (g, ml…)" class="form-control w-25" value="<?= set_value("ingredients[{$index}][unite]", $ingredient->unite) ?>">
+            <select name="ingredients[<?= $index ?>][categorie]" class="form-select w-25">
+                <?php foreach ($options_ingredients as $val => $label) : ?>
+                    <option value="<?= $val ?>" <?= set_select("ingredients[{$index}][categorie]", $val, isset($ingredient->categorie) && $ingredient->categorie == $val) ?>><?= $label ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
         </div>
+    <?php endforeach; ?>
+    <?php else : ?>
+        <div class="ingredients-row gap-2 mb-2">
+            <input type="text" name="ingredients[0][nom]" placeholder="Nom" class="form-control">
+            <input type="number" name="ingredients[0][quantite]" placeholder="Quantité" class="form-control w-25">
+            <input type="text" name="ingredients[0][unite]" placeholder="Unité (g, ml…)" class="form-control w-25">
+            <select name="ingredients[0][categorie]" class="form-select w-25">
+                <?php foreach ($options_ingredients as $val => $label) : ?>
+                    <option value="<?= $val ?>"><?= $label ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
+        </div>
+    <?php endif; ?>
+   </div>
+
+
+
+   
+    </div>
         <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button><br>
     </div>
 
@@ -141,10 +167,10 @@ foreach ($categories as $categorie) {
         <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu', $recipe->contenu ?? '') ?>">
         <!-- $recipe->contenu pr que l'ancien contenu s'affiche -->
         <button type="submit" class="btn btn-primary">Envoyer</button>
-       
+
     </div>
 </div>
- <?= form_close() ?>
+<?= form_close() ?>
 <?= $this->section('custom-js') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
@@ -169,12 +195,12 @@ foreach ($categories as $categorie) {
 
     //bouton ajouter un ing:
     const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    let index = 1;
+    let index = <?=  !empty($ingredient)?count($ingredients) :1 ?>;
 
     document.getElementById('ajouter-ingredient').addEventListener('click', () => {
         const container = document.getElementById('ingredients-container');
         const row = document.createElement('div');
-        row.classList.add('ingredient-row', 'gap-2', 'mb-2');
+        row.classList.add('ingredients-row', 'gap-2', 'mb-2');
 
         const options = Object.entries(categoriesIngredient)
             .map(([val, label]) => `<option value="${val}">${label}</option>`)
@@ -193,9 +219,9 @@ foreach ($categories as $categorie) {
 
     document.getElementById('ingredients-container').addEventListener('click', (e) => {
         if (e.target.classList.contains('supprimer-ligne')) {
-            const rows = document.querySelectorAll('.ingredient-row');
+            const rows = document.querySelectorAll('.ingredients-row');
             if (rows.length > 1) {
-                e.target.closest('.ingredient-row').remove();
+                e.target.closest('.ingredients-row').remove();
             } else {
                 alert('Il faut au moins un ingrédient !');
             }
