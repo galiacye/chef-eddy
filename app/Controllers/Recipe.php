@@ -350,7 +350,8 @@ class Recipe extends BaseController
                     'recipe' => $this->model->find($id),
                     'tags' => model('TagModel')->findAll(),
                     'categories' => model('CategoryModel')->findAll(),
-                    'ingredients' => $this->model->getIngredients($id)
+                    'ingredients' => $this->model->getIngredients($id),
+                    'unites' => array_column(model('UnitModel')->findAll(), 'nom')
                 ]);
             }
             $image = $this->request->getFile('image_url');
