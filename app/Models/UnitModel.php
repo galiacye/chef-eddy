@@ -3,7 +3,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class UniteModel extends Model
+class UnitModel extends Model
 {
     protected $table = 'unites';
 }
