@@ -6,7 +6,7 @@ use App\Models\RecipeModel;
 use App\Models\TagModel;
 use App\Models\CategoryModel;
 use App\Models\IngredientModel;
-use App\Models\UniteModel;
+use App\Models\UnitModel;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -24,10 +24,10 @@ class Recipe extends BaseController
 
     public function editRecipe()
     {
-        $uniteModel = model('UniteModel');
-        $unite = array_column($uniteModel->findAll(), 'nom'); //array_column(tableau, 'colonne_voulue')
+        $unitModel = model('UnitModel');
+        $unit = array_column($unitModel->findAll(), 'nom'); //array_column(tableau, 'colonne_voulue')
         if ($this->request->is('post') === false) {
-            return view('Recipe/edit-recipe', ['unite' => $unite]);
+            return view('Recipe/edit-recipe', ['unit' => $unit]);
         }
     }
 
@@ -37,7 +37,7 @@ class Recipe extends BaseController
         $tagModel = model('TagModel');
         $ingredientModel = model('IngredientModel');
         $categoryModel  = model('CategoryModel');
-        $uniteModel = model('UniteModel');
+        $unitModel = model('UnitModel');
 
         $recipe = $recipeModel->getRecipe($id);
 
@@ -48,7 +48,7 @@ class Recipe extends BaseController
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
-        
+            'units'         => array_column($unitModel->findAll(), 'nom') // ['kg','g','ml'...]
         ];
 
         return view('Recipe/show-recipe', $data);
@@ -70,12 +70,12 @@ class Recipe extends BaseController
         if ($this->request->is('post') === false) {
             $tagModel       = new TagModel();
             $categoryModel = new CategoryModel();
-            $uniteModel = new UniteModel();
+            $unitModel = new UnitModel();
 
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
-                'unites' => array_column($uniteModel->findAll(), 'nom') // ['kg','g','ml'...]
+                'unites' => array_column($unitModel->findAll(), 'nom') // ['kg','g','ml'...]
             ]);
         } else {
             // L'user_id vient de la session
@@ -162,7 +162,7 @@ class Recipe extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'tags'       => (new TagModel())->findAll(),
                     'categories' => (new CategoryModel())->findAll(),
-                     'unites'     => array_column((new UniteModel())->findAll(), 'nom')
+                     'unites'     => array_column((new UnitModel())->findAll(), 'nom')
                 ]);
             }
             // Gestion de l'image
