@@ -35,17 +35,23 @@
 </div>
 
 <div class="row g-3">
-      <div class="col-md-6">
+      <div class="col-10 col-md-6 col-lg-3">
         <a href="Admin/users-index" class="card p-3 text-decoration-none text-dark d-block">
             <h5>Utilisateurs</h5>
             <p class="text-muted mb-0">Comptes, rôles, accès</p>
         </a>
     </div>
-    <div class="col-md-6">
+    <div class="col-10 col-md-6 col-lg-3">
         <a href="Admin/recipes-index" class="card p-3 text-decoration-none text-dark d-block">
             <!-- text-decoration-none pour ôter le style bleu du lien  <a> -->
             <h5>Recettes</h5>
             <p class="text-muted mb-0">Gérer, modifier, supprimer</p>
+        </a>
+    </div>
+    <div class="col-10 col-md-6 col-lg-3">
+        <a href="Ingredient/ingredients-index" class="card p-3 text-decoration-none text-dark d-block">
+            <h5>Ingrédients</h5>
+            <p class="text-muted mb-0">Voir, supprimer les doublons</p>
         </a>
     </div>
   

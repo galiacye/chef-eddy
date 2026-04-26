@@ -57,7 +57,7 @@ $routes->get('edit-recipe','Recipe::editRecipe');//test 3 champs cachés
 $routes->post('delete-recipe/(:num)', 'Recipe::deleteRecipe/$1');
 
 //ingredients
-$routes->get('all-ing','Ingredients::indexIngredients');
+$routes->get('ingredients-index','Ingredients::ingredientsIndex');
 $routes->get('one-ing/(:num)','Ingredient::showIngredient/$1');
 $routes->get('add-ing', 'Ingredient::createIngredient');
 

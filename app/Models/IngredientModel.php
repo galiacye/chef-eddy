@@ -8,7 +8,7 @@ class IngredientModel extends Model
     protected $table = 'ingredients';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nom','image_url','category_id'];
+    protected $allowedFields = ['nom','category_id'];
     protected $returnType = 'object';
 
     public function getCategory()
