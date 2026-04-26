@@ -1,8 +1,9 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('css/quill.css') ?>" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.min.js"></script>
+
 <link href="<?= base_url('./css/recipes/createRecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
@@ -158,14 +159,24 @@ foreach ($categories as $categorie) {
         <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu', $recipe->contenu ?? '') ?>">
         <!-- $recipe->contenu pr que l'ancien contenu s'affiche -->
         <button type="submit" class="btn btn-primary">Envoyer</button>
-
+        
     </div>
 </div>
 <?= form_close() ?>
+<form action="<?= base_url('/delete-recipe/' . $recipe->id)?>" method="post">
+            <?= csrf_field() ?>
+            <button type="submit" class="btn btn-danger"
+                    onclick="return confirm('Supprimer définitivement cette recette?')">Supprimer</button>
+        </form>
+            
 <?= $this->section('custom-js') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    const quill = new Quill('#editor', {
+    const categoriesIngredients = <?= json_encode($options_ingredients) ?>;
+    let index = <?= !empty($ingredients)? count($ingredients) : 1 ?>
+</script>
+<script>document.addEventListener('DOMContentLoaded', () => {
+const quill = new Quill('#editor', {
         modules: { //relie la toolbar qui est en dehors du form
             toolbar: '#toolbar'
         },
@@ -185,8 +196,6 @@ foreach ($categories as $categorie) {
     document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste à puces');
 
     //bouton ajouter un ing:
-    const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    let index = <?=  !empty($ingredient)?count($ingredients) :1 ?>;
 
     document.getElementById('ajouter-ingredient').addEventListener('click', () => {
         const container = document.getElementById('ingredients-container');
@@ -231,8 +240,7 @@ foreach ($categories as $categorie) {
             alert('Veuillez remplir le formulaire avant d\'envoyer');
         }
     });
-</script>
-
+})</script>
 <?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

@@ -110,4 +110,6 @@ class RecipeModel extends Model
       ->get()
       ->getResult();
   }
+
+ 
 }
