@@ -13,7 +13,8 @@ INSERT INTO unites (nom) VALUES
  INSERT INTO unites (nom)
  VALUES ('centilitres'), ('millilitres'), ('décilitres'), ('décilitre');
 
-
+INSERT INTO unites (nom)
+VALUES ('filet'), ('filets'), ('dos');
 
 
 

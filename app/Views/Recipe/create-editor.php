@@ -5,11 +5,10 @@
 <link href="<?= base_url('css/editor.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
-<?= $this->section('body') ?>
+<?= $this->section('body') ?>è
 <?= form_open('create-editor', ['id' => 'form']) ?>
 
 <label for="contenu"><h2>Votre Recette</h2></label>
-<div id="toolbar">
     <button class="ql-bold"></button>
     <button class="ql-italic"></button>
     <button class="ql-underline"></button>

@@ -21,7 +21,7 @@ class Recipe extends BaseController
 
         $this->model = Model('RecipeModel');
     }
-
+    //fonction de test
     public function editRecipe()
     {
         $unitModel = model('UnitModel');
@@ -48,7 +48,7 @@ class Recipe extends BaseController
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
-            'units'         => array_column($unitModel->findAll(), 'nom') // ['kg','g','ml'...]
+            'unites'         => array_column($unitModel->findAll(), 'nom') // ['kg','g','ml'...]
         ];
 
         return view('Recipe/show-recipe', $data);
@@ -161,7 +161,7 @@ class Recipe extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'tags'       => (new TagModel())->findAll(),
                     'categories' => (new CategoryModel())->findAll(),
-                     'unites'     => array_column((new UnitModel())->findAll(), 'nom')
+                    'unites'     => array_column((new UnitModel())->findAll(), 'nom')
                 ]);
             }
             // Gestion de l'image
@@ -212,21 +212,21 @@ class Recipe extends BaseController
                     ]);
                 }
             }
-                // Sauvegarde des ingrédients
-                $ingredients = $this->request->getPost('ingredients');
+            // Sauvegarde des ingrédients
+            $ingredients = $this->request->getPost('ingredients');
 
-                log_message('debug', print_r($ingredients, true));
+            log_message('debug', print_r($ingredients, true));
 
-                if ($ingredients) {
-                    foreach ($ingredients as $ingredient) {
-                        $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
-                        if (empty($nom)) continue; // on saute les lignes vides
+            if ($ingredients) {
+                foreach ($ingredients as $ingredient) {
+                    $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
+                    if (empty($nom)) continue; // on saute les lignes vides
 
-                        //  Chercher si l'ingrédient existe déjà
-                        $ing_existant = $db->table('ingredients')
-                            ->where('nom', $nom)
-                            ->get()
-                            ->getRowArray();
+                    //  Chercher si l'ingrédient existe déjà
+                    $ing_existant = $db->table('ingredients')
+                        ->where('nom', $nom)
+                        ->get()
+                        ->getRowArray();
 
                         if ($ing_existant) {
                             // 1. Il existe : on récupère son id
@@ -239,7 +239,7 @@ class Recipe extends BaseController
                             ]);
                             $ingredient_id = $db->insertID();
                         }
-
+                        
                         // Insérer dans recette_ingredients
                         $db->table('recette_ingredients')->insert([
                             'recette_id'    => $recipe_id,
@@ -247,13 +247,16 @@ class Recipe extends BaseController
                             'quantite'      => $ingredient['quantite'] ?: null,
                             'unite'         => $ingredient['unite'] ?: null
                         ]);
+                    
                     }
-                }
 
-                return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
-            }
+                }
+            
+
+            return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
         }
     
+    }
 
     public function updateRecipe($id)
     {
@@ -266,7 +269,8 @@ class Recipe extends BaseController
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
-                'ingredients' => $this->model->getIngredients($id)
+                'ingredients' => $this->model->getRecipeIngredients($id),
+                'unite' => array_column(model('UnitModel')->findAll(), 'nom')
             ]);
         } else { //si pas get, post donc traitement
             $user_id = session()->get('user_id');
@@ -350,11 +354,12 @@ class Recipe extends BaseController
                     'recipe' => $this->model->find($id),
                     'tags' => model('TagModel')->findAll(),
                     'categories' => model('CategoryModel')->findAll(),
-                    'ingredients' => $this->model->getIngredients($id),
+                    'ingredients' => $this->model->getRecipeIngredients($id),
                     'unites' => array_column(model('UnitModel')->findAll(), 'nom')
                 ]);
             }
             $image = $this->request->getFile('image_url');
+            //dd($image->isValid(), $image->hasMoved(), $image->getError());           
             if ($image && $image->isValid() && !$image->hasMoved()) //ci4 déplace du doss temporaire vers le doss final,
             // et l'image ne peut être déplacée qu'une fois, donc on évite d'essayer de déplacer un fichier qui l'a déjà été.
             {
@@ -366,6 +371,9 @@ class Recipe extends BaseController
                 $recipe = $this->model->find($id);
                 $image_path = $recipe->image_url;
             }
+
+           
+
             $config = HTMLPurifier_Config::createDefault();
             $purifier = new HTMLPurifier($config);
             $contenu = $purifier->purify($this->request->getPost('contenu'));
@@ -378,10 +386,15 @@ class Recipe extends BaseController
                 'contenu'           => $contenu,
                 'nb_personnes'      => $this->request->getPost('nb_personnes'),
                 'difficulte'        => $this->request->getPost('difficulte'),
-                'statut'            => 'pending',
+                'statut'            => 'En attente',
             ];
+
+            //dd($image->isValid(), $image->hasMoved(), $image->getError());
+
             //pour les tables de liaison:
             $this->model->updateRecipe($id, $data);
+            //dd($result, $this->model->db->affectedRows());
+            //$this->model->updateRecipe($id, $data);
 
             // dd($id, $data); // 
 

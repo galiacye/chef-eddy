@@ -55,17 +55,15 @@ class RecipeModel extends Model
 
     }
 
-  public function getIngredients($id)
+    public function getRecipeIngredients($recipe_id)
     {
-      return $this->db->table('recette_ingredients')
-        ->select('ingredients.nom, ingredients.categorie, recette_ingredients.quantite, recette_ingredients.unite')
-        ->join('ingredients', 'recette_ingredients.ingredient_id = ingredients.id')
-        ->where('recette_id', $id)
-        ->get()->getResult();
+      return $this->select('ingredients.nom, recette_ingredients.quantite, recette_ingredients.unite')
+        ->join('recette_ingredients', 'recettes.id = recette_ingredients.recette_id')
+        ->join('ingredients', 'ingredients.id = recette_ingredients.ingredient_id')
+        ->where('recette_ingredients.recette_id', $recipe_id)
+        ->findAll();
+
     }
-
-
-
   public function updateRecipe($id, $data)
     {
       return $this->update($id, $data);
