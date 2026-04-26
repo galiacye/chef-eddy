@@ -124,5 +124,50 @@ VALUES('Viandes'),('Épices'),('Légumes');
 -- importer bdd
 --fait jusqu'ici.
 
+# Table	Create Table
+comments	CREATE TABLE `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `recette_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `contenu` text NOT NULL,
+  `rating` tinyint DEFAULT NULL,
+  `statut` enum('en_attente','approuve','rejete') DEFAULT 'en_attente',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `recette_id` (`recette_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`recette_id`) REFERENCES `recettes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `comments_chk_1` CHECK ((`rating` between 1 and 5))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+ALTER TABLE comments 
+ADD CONSTRAINT unic_user_recette UNIQUE (user_id, recette_id);
+
+ALTER TABLE comments 
+ADD COLUMN parent_id INT DEFAULT NULL,
+ADD CONSTRAINT fk_parent FOREIGN KEY (parent_id) 
+    REFERENCES comments(id) ON DELETE CASCADE;
 
 
+# Table	Create Table
+comments	CREATE TABLE `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `recette_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `contenu` text NOT NULL,
+  `rating` tinyint DEFAULT NULL,
+  `statut` enum('en_attente','approuve','rejete') DEFAULT 'en_attente',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `parent_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unic_user_recette` (`user_id`,`recette_id`),
+  KEY `recette_id` (`recette_id`),
+  KEY `fk_parent` (`parent_id`),
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`recette_id`) REFERENCES `recettes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_parent` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `comments_chk_1` CHECK ((`rating` between 1 and 5))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
