@@ -30,7 +30,7 @@ class Category extends BaseController
     //les recettes d'une catégorie: show
     public function showRecipesByCategory(int $category_id)
     {
-        $categoryModel  = model('CategorieModel');
+        $categoryModel  = model('CategoryModel');
         $category = $categoryModel->getCategory($category_id);
         $recipes   = $categoryModel->getRecipesByCategory($category_id);
 

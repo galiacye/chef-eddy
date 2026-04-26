@@ -1,7 +1,7 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('body') ?>
 
-<h2 class="text-center"><?= esc($categorie->nom) ?></h2>
+<h2 class="text-center"><?= esc($category->nom) ?></h2>
 
 <div class="container">
     <div class="row">
