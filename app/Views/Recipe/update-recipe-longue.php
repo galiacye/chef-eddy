@@ -104,7 +104,7 @@ foreach ($categories as $categorie) {
 
         <label for="difficulte">Difficulté</label>
         <?= form_dropdown('difficulte', $diff_options, 
-            set_value('difficulte', isset($recipe->difficulte) ? $recipe->difficulte : ''), //set_value vient en 3ème argument
+            set_value('difficulte', isset($recipe->difficulte) ? $recipe->difficulte : ''), 
             ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
         <?= validation_show_error('difficulte') ?>
 
@@ -114,30 +114,37 @@ foreach ($categories as $categorie) {
         <?= validation_show_error('categorie_id') ?>
 
         <label>Ingrédients</label>
-            <!--ici pas de champs unique, posssibilité de retoucher grammage uniquement, par ex-->         
-    <div id="ingredients-container">
-    <?php foreach ($ingredients as $index => $ing) : ?>
-    <div class="ingredients-row gap-2 mb-2">
-        <input type="text"   name="ingredients[<?= $index ?>][nom]"      value="<?= esc($ing->nom) ?>"      placeholder="Nom"            class="form-control">
-        <input type="number" name="ingredients[<?= $index ?>][quantite]" value="<?= esc($ing->quantite) ?>" placeholder="Quantité"       class="form-control w-25">
-        <input type="text"   name="ingredients[<?= $index ?>][unite]"    value="<?= esc($ing->unite) ?>"    placeholder="Unité (g, ml…)" class="form-control w-25">
-        <!--form_dropdown gère champs simples, pas les noms indexés dynamiquement comme ingredient[index][categorie].-->
-        <select name="ingredients[<?= $index ?>][categorie]" class="form-select w-25">
-            <?php foreach($options_ingredients as $key=>$name): ?>
-                <option value = "<?= $key ?>" 
-                    <?= set_select("ingredients[{$index}][categorie]", //set_select() comme set_value relit $POST cas echec validation et le réaffiche (flash conservé par CI4)
-                     $key, isset($ing->categorie)) && $ing->categorie = $key ?>>
-                <?= $name ?>
-                </option>
-            <?php endforeach; ?>
-
-        </select>
-        <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
-    </div>
+ 
+   <div id="ingredients-container">
+    <?php if(!empty($ingredients)) : ?>
+    <?php foreach ($ingredients as $index => $ingredient) : ?>
+        <div class="ingredients-row gap-2 mb-2">
+            <input type="text" name="ingredients[<?= $index ?>][nom]" placeholder="Nom" class="form-control" value="<?= set_value("ingredients[{$index}][nom]", $ingredient->nom) ?>">
+            <input type="number" name="ingredients[<?= $index ?>][quantite]" placeholder="Quantité" class="form-control w-25" value="<?= set_value("ingredients[{$index}][quantite]", $ingredient->quantite) ?>">
+            <input type="text" name="ingredients[<?= $index ?>][unite]" placeholder="Unité (g, ml…)" class="form-control w-25" value="<?= set_value("ingredients[{$index}][unite]", $ingredient->unite) ?>">
+            <select name="ingredients[<?= $index ?>][categorie]" class="form-select w-25">
+                <?php foreach ($options_ingredients as $val => $label) : ?>
+                    <option value="<?= $val ?>" <?= set_select("ingredients[{$index}][categorie]", $val, isset($ingredient->categorie) && $ingredient->categorie == $val) ?>><?= $label ?></option>
+                <?php endforeach; ?><!-- set_select() comme set_value relit $POST cas echec validation et le réaffiche (flash conservé par CI4)-->
+            </select>
+            <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
+        </div>
     <?php endforeach; ?>
-</div>
+    <?php else : ?>
+        <div class="ingredients-row gap-2 mb-2">
+            <input type="text" name="ingredients[0][nom]" placeholder="Nom" class="form-control">
+            <input type="number" name="ingredients[0][quantite]" placeholder="Quantité" class="form-control w-25">
+            <input type="text" name="ingredients[0][unite]" placeholder="Unité (g, ml…)" class="form-control w-25">
+            <select name="ingredients[0][categorie]" class="form-select w-25">
+                <?php foreach ($options_ingredients as $val => $label) : ?>
+                    <option value="<?= $val ?>"><?= $label ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
+        </div>
+    <?php endif; ?>
+   </div>
 
-            
    
     </div>
         <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button><br>
