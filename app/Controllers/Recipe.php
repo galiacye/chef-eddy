@@ -70,12 +70,14 @@ class Recipe extends BaseController
             $tagModel       = new TagModel();
             $categoryModel = new CategoryModel();
             $unitModel = new UnitModel();
+            $ingredientModel = new IngredientModel();
 
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
-                'unites' => array_column($unitModel->findAll(), 'nom') // ['kg','g','ml'...]
-            ]);
+                'unites' => array_column($unitModel->findAll(), 'nom'),// ['kg','g','ml'...]
+                'categories_ing_db'  => $ingredientModel->getCategory()
+                ]);
         } else {
             // L'user_id vient de la session
             $user_id = session()->get('user_id');
@@ -162,6 +164,7 @@ class Recipe extends BaseController
                     'tags'       => (new TagModel())->findAll(),
                     'categories' => (new CategoryModel())->findAll(),
                     'unites'     => array_column((new UnitModel())->findAll(), 'nom')
+                    //?
                 ]);
             }
             // Gestion de l'image
@@ -215,7 +218,7 @@ class Recipe extends BaseController
             // Sauvegarde des ingrédients
             $ingredients = $this->request->getPost('ingredients');
 
-            log_message('debug', print_r($ingredients, true));
+            //log_message('debug', print_r($ingredients, true));
 
             if ($ingredients) {
                 foreach ($ingredients as $ingredient) {
@@ -262,12 +265,14 @@ class Recipe extends BaseController
             $recipe = $this->model->getRecipe($id); //car find() na fait pas les jointures !
             $tagModel = model('TagModel');
             $categoryModel = model('CategoryModel');
+            $ingredientModel = model('IngredientModek');
             return view('Recipe/update-recipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getRecipeIngredients($id),
-                'unite' => array_column(model('UnitModel')->findAll(), 'nom')
+                'unite' => array_column(model('UnitModel')->findAll(), 'nom'),
+
             ]);
         } else { //si pas get, post donc traitement
             $user_id = session()->get('user_id');
