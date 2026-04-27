@@ -13,7 +13,9 @@ class IngredientModel extends Model
 
     public function getCategory()
     {
-        return $this->db->table('ingredients_categories')->get()->getResult();
+        return $this->db->table('ingredients_categories')
+        ->orderBy('nom', 'ASC')
+        ->get()->getResult();
     }
 
     public function getRecipeIngredients($recipe_id)

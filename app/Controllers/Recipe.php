@@ -215,7 +215,7 @@ class Recipe extends BaseController
             // Sauvegarde des ingrédients
             $ingredients = $this->request->getPost('ingredients');
 
-            log_message('debug', print_r($ingredients, true));
+            //log_message('debug', print_r($ingredients, true));
 
             if ($ingredients) {
                 foreach ($ingredients as $ingredient) {
