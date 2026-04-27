@@ -265,7 +265,7 @@ class Recipe extends BaseController
             $recipe = $this->model->getRecipe($id); //car find() na fait pas les jointures !
             $tagModel = model('TagModel');
             $categoryModel = model('CategoryModel');
-            $ingredientModel = model('IngredientModek');
+            $ingredientModel = model('IngredientModel');
             return view('Recipe/update-recipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),

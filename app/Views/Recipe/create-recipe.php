@@ -72,13 +72,13 @@ $cat = [
     'autres'    => 'Autres'
 ];
  */
-
+//ingredients_categories
 $options_ingredients = ['' => '-- Catégorie --'];
 foreach ($categories_ing_db as $cat_ing) {
-    // On utilise le nom comme clé , attendu en base
+    
        $options_ingredients[$cat_ing->nom] = $cat_ing->nom; 
 }
-//form_dropdown génère le html select à partir du tab $options_categories
+//recette_categorie
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
 foreach ($categories as $categorie) {
     $options_categories[$categorie->id] = $categorie->nom; 
