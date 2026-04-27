@@ -20,7 +20,7 @@ class IngredientModel extends Model
 
     public function getRecipeIngredients($recipe_id)
     {
-        return $this->select('ingredients.nom, ingredient.categorie, recette_ingredients.quantite, recette_ingredients.unite')
+        return $this->select('ingredients.nom, ingredients.categorie, recette_ingredients.quantite, recette_ingredients.unite')
                     ->join('recette_ingredients','ingredients.id = recette_ingredients.ingredient_id')
                     ->where('recette_ingredients.recette_id',$recipe_id)
                     ->findAll();
