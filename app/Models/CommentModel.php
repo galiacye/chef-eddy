@@ -18,11 +18,29 @@ class CommentModel extends Model
         'status',
         'parent_id'
     ];
+    protected $returnType = 'object';
 
     public function updateCommentStatus($id, $status)
     {
         return $this->update($id, ['status' => $status]);
     }
 
-    
+    public function commentsIndex()
+    {
+        $comments = $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating')
+            ->join('users', 'comments.user_id = users.id')
+            ->join('recettes', 'comments.recette_id = recettes.id')
+            ->findAll();
+        return view('Admin/comments');
+    }
+
+    public function deleteComment($id)
+    {
+        return $this->delete($id);
+    }
+
+    public function addComment()
+    {
+        return view('comment/add-comment');
+    }
 }
