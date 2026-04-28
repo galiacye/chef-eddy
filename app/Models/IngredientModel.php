@@ -26,4 +26,11 @@ class IngredientModel extends Model
                     ->findAll();
     }
 
+    public function ingIndex()
+    {
+        return $this->select('ingredients.nom')
+                    ->orderBy('nom', 'ASC')
+                    ->findAll();
+    }
+
 }

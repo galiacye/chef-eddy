@@ -49,7 +49,7 @@
         </a>
     </div>
     <div class="col-10 col-md-6 col-lg-3">
-        <a href="Ingredient/ingredients-index" class="card p-3 text-decoration-none text-dark d-block">
+        <a href="Admin/ing-index" class="card p-3 text-decoration-none text-dark d-block">
             <h5>Ingrédients</h5>
             <p class="text-muted mb-0">Voir, supprimer les doublons</p>
         </a>

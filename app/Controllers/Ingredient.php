@@ -12,28 +12,41 @@ class Ingredient extends BaseController
     {
         helper('form');
 
-        $this->model = Model('ingredientModel');
+        $this->model = Model('IngredientModel');
     }
 
 
-    public function ingredientsIndex(): string
+    public function ingIndex(): string
     {
-        $ingredients = $this->model->findAll();
+        $ingredients = $this->model->ingIndex();
+       
         $data = [
+            "titre"=> "Tous les ingrédients",
             "ingredients" => $ingredients
         ];
-        return view('Ingredients/ingredients-index', $data);
+        return view('Admin/ing-index', $data);
     }
     //ou plus court :
     // public function ingredientsIndex(): string
     // {
     //    return view('Ingredients/ingredients-index',['ingredients'=>$this->model->findAll()]);
     // }
+//
+//inutile ingredients crées par recette
+
+    // public function addIngredient($data)
+    // {
+    //     $ingredient = $this->model->insert($data);
+    //     $data = [
+    //         'ingredient'=> $ingredient
+    //     ];
+    //     return redirect()->to('Admin/ing-index')->with('success', 'Ingredient ajouté');
+    // }
 
     public function deleteIngredient($id)
     {
         $ingredient = $this->model->delete($id);
-        return redirect()->to('/ingredients-index')->with('success', 'Ingredient supprimé');
+        return redirect()->to('Admin/ing-index')->with('success', 'Ingredient supprimé');
     }
 
 }
