@@ -4,6 +4,7 @@
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
+
 <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success">
         <?= session()->getFlashdata('success') ?>
@@ -20,6 +21,7 @@
             <p class="ing-nom"><?= $ing->nom ?></p>
 
             <a class="btn btn-warning"
+                href="<?= base_url('Admin/ingredients/delete/' . $ing->id) ?>"
                onclick="return confirm('Supprimer définitivement cet ingrédient ?')">
                 Supprimer l'ingrédient
             </a>
