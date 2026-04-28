@@ -35,6 +35,13 @@
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
+
+<?php if (session()->getFlashdata('success')) : ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif ?>
+
 <div class="container-fluid m-3">
     <div class="btn-group">
         <a href="<?= base_url('Admin/recipes-index/by-user') ?>">Par utilisateur</a>
@@ -61,6 +68,11 @@
 
                     </div>
                 </li>
+                <a class="btn btn-danger" type="submit" 
+                    href="<?= base_url('/delete-recipe/' . $recipe->id) ?>"
+                    onclick="return confirm('Supprimer définitivement cette recette?')">
+                    Supprimer la recette
+                </a>
             <?php endforeach ?>
         </ul>
     </div>
