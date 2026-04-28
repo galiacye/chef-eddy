@@ -91,6 +91,9 @@ CREATE TABLE comments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );--fait
 
+ALTER TABLE comments
+MODIFY statut ENUM('pending', 'approved', 'rejected') DEFAULT 'pending';
+
 CREATE TABLE recette_ingredients (
     id INT AUTO_INCREMENT PRIMARY KEY,
     recette_id INT NOT NULL,

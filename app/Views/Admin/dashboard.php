@@ -55,7 +55,7 @@
         </a>
     </div>
     <div class="col-10 col-md-6 col-lg-3">
-        <a href="Comments/comments-index" class="card p-3 text-decoration-none text-dark d-block">
+        <a href="Admin/comments" class="card p-3 text-decoration-none text-dark d-block">
             <h5>Commentaires et notes</h5>
             <p class="text-muted mb-0">Modérer</p>
         </a>

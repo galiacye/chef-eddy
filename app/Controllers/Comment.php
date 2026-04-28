@@ -12,7 +12,7 @@ class Comment extends BaseController
     //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();s
     public function __construct()
     {
-        $this->model = Model('CommentModel');
+        $this->model = new CommentModel();
         helper('form');
     }
 
@@ -24,6 +24,23 @@ class Comment extends BaseController
             "title" => "Tous les commentaires"
         ];
         return view('Admin/comments', $data);
+    }
+
+    public function updateCommentStatus($id, $status)
+    {
+        $comment = $this->model->find($id, $status);
+        if (!$comment) {
+            return redirect()->back()->with('error', 'commentaire introuvable');
+        }
+        $allowed = ['Approuve', 'Rejeté', 'En attente'];
+
+        if (!in_array($status, $allowed)) {
+            return redirect()->back()->with('error', 'Statut invalide');
+        }
+
+        $this->model->updateCommentStatus($id, $status);
+
+        return redirect()->back()->with('success', 'Statut mis à jour');
     }
 
     public function deleteComment($id)
@@ -45,7 +62,7 @@ class Comment extends BaseController
         return view('comment/add-comment');
     }
 
-    public function cSaveComment()
+    public function saveComment()
     {
         $rules = [
             "content" => [
@@ -71,8 +88,8 @@ class Comment extends BaseController
         ];
         if ($this->validate($rules) === false) {
             return view('comment/add-comment', [
-            'errors' => $this->validator->getErrors()
-            ]);//with errors
+                'errors' => $this->validator->getErrors()
+            ]); //with errors
         } else {
             $content = $this->request->getPostGet('content');
             //clean html
@@ -80,7 +97,7 @@ class Comment extends BaseController
             //allow safe tags only
             $content = preg_replace('/<a\s+href="([^"]*)"[^>]*>/i', '<a href="$1" rel="nofollow">', $content);
             $rating = $this->request->getPostGet('rating');
-        
+
             $data = [
                 "content" => $content,
                 "rating" => $rating,
@@ -99,7 +116,7 @@ class Comment extends BaseController
 
     public function updateComment($id)
     {
-         $rules = [
+        $rules = [
             "content" => [
                 "label" => "content",
                 "rules" => "min_length[3]|max_length[1500]|required",
@@ -119,10 +136,10 @@ class Comment extends BaseController
                     "less_than_equal_to" => "La note doit être au plus 5"
                 ]
             ]
-         ];
-            
+        ];
 
-    
+
+
         if ($this->request->is('post') === false) {
             $comment = $this->model->oneComment($id);
             $rating = $comment->rating;
@@ -133,26 +150,23 @@ class Comment extends BaseController
             return view('Comment/updateComment', $data);
         } else {
 
-    if ($this->validate($rules) === false) {
-        $comment = $this->model->oneComment($id);
-        return view('Comment/updateComment', [
-            'comment' => $comment,
-            'rating' => $comment->rating,
-            'errors' => $this->validator->getErrors()
-        ]);
-    }
+            if ($this->validate($rules) === false) {
+                $comment = $this->model->oneComment($id);
+                return view('Comment/updateComment', [
+                    'comment' => $comment,
+                    'rating' => $comment->rating,
+                    'errors' => $this->validator->getErrors()
+                ]);
+            }
 
-    $content = $this->request->getPostGet('content');
-    $rating = $this->request->getPostGet('rating');
-    $data = [
-        "content" => $content,
-        "rating" => $rating
-    ];
-    $this->model->updateComment($id, $data);
-    return redirect()->back();
-
-
+            $content = $this->request->getPostGet('content');
+            $rating = $this->request->getPostGet('rating');
+            $data = [
+                "content" => $content,
+                "rating" => $rating
+            ];
+            $this->model->updateComment($id, $data);
+            return redirect()->back();
         }
     }
-
 }

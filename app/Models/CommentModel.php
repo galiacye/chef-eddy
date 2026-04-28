@@ -27,11 +27,10 @@ class CommentModel extends Model
 
     public function commentsIndex()
     {
-        $comments = $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating')
+        return  $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating')
             ->join('users', 'comments.user_id = users.id')
             ->join('recettes', 'comments.recette_id = recettes.id')
             ->findAll();
-        return view('Admin/comments');
     }
 
     public function deleteComment($id)
@@ -39,8 +38,8 @@ class CommentModel extends Model
         return $this->delete($id);
     }
 
-    public function addComment()
+    public function addComment($data)
     {
-        return view('comment/add-comment');
+        return $this->insert($data);
     }
 }

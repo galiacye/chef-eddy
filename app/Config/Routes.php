@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->setAutoRoute(false);
+
 //home
 $routes->get('/', 'Home::index');
 $routes->get('test', 'Home::salut');
@@ -76,5 +78,9 @@ $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 //ingredients
 $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->get('Admin/delete-ing/(:num)', 'Admin::deleteIngredient/$1');
+
+//comments
+$routes->get('Admin/comments', 'Comment::commentsIndex');
+$routes->post('Admin/comments', 'Comment::saveComment');
 
 
