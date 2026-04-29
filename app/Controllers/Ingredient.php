@@ -46,7 +46,7 @@ class Ingredient extends BaseController
     public function deleteIngredient($id)
     {
         $ingredient = $this->model->delete($id);
-        return redirect()->to('previous_url')->with('success', 'Ingredient supprimé');
+        return redirect()->back()->with('success', 'Ingredient supprimé');
     }
 
 }

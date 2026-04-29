@@ -59,9 +59,9 @@ $routes->get('edit-recipe','Recipe::editRecipe');//test 3 champs cachés
 $routes->post('delete-recipe/(:num)', 'Recipe::deleteRecipe/$1');
 
 //ingredients
-$routes->get('ingredients-index','Ingredients::ingredientsIndex');
-$routes->get('one-ing/(:num)','Ingredient::showIngredient/$1');
-$routes->get('add-ing', 'Ingredient::createIngredient');
+$routes->get('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');
+$routes->get('Admin/ing-index', 'Ingredient::ingIndex');
+$routes->get('Admin/delete-ing/(:num)', 'Admin::deleteIngredient/$1');
 
 //Api
 $routes->get('recipesByCat', 'Api::recipesByCat');
@@ -76,8 +76,7 @@ $routes->get('category/index', 'Category::index');
 $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 
 //ingredients
-$routes->get('Admin/ing-index', 'Ingredient::ingIndex');
-$routes->get('Admin/delete-ing/(:num)', 'Admin::deleteIngredient/$1');
+
 
 //comments
 $routes->get('add-comment', 'Comment::addComment');

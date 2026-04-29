@@ -28,7 +28,7 @@ class IngredientModel extends Model
 
     public function ingIndex()
     {
-        return $this->select('ingredients.nom')
+        return $this->select('ingredients.id, ingredients.nom')
                     ->orderBy('nom', 'ASC')
                     ->findAll();
     }
