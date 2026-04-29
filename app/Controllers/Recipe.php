@@ -369,7 +369,7 @@ class Recipe extends BaseController
                 $image_path = 'uploads/recipes/' . $newName;
                 $image->move(ROOTPATH . 'public/uploads/recipes', $newName); //déplace du doss tempo de ci4 vers uploads avc son nouveau nom
             } else {
-dd($id);
+//dd($id);
                 //get a déjà $recipe mais pas post donc :
                 $recipe = $this->model->find($id);
                 $image_path = $recipe->image_url;
