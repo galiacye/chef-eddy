@@ -50,7 +50,7 @@ $routes->match(['get','post'], 'update-user/(:num)','User::updateUser/$1');
 //role
 $routes->get('all-roles','Role::allRoles');
 $routes->get('role','Role::getRole');
-//recipe
+//user/recipe
 $routes->get('recipe-index','Recipe::recipeIndex');
 $routes->get('recipe/(:num)','Recipe::showRecipe/$1');
 $routes->match(['get','post'],'add-recipe','Recipe::createRecipe');
@@ -80,7 +80,9 @@ $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->get('Admin/delete-ing/(:num)', 'Admin::deleteIngredient/$1');
 
 //comments
+$routes->get('add-comment', 'Comment::addComment');
+$routes->post('edit-comment', 'Comment::edit-comment');
 $routes->get('Admin/comments', 'Comment::commentsIndex');
-$routes->post('Admin/comments', 'Comment::saveComment');
+$routes->post('comment/save', 'Comment::saveComment');
 
 
