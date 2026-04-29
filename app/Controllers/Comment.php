@@ -7,7 +7,7 @@ use App\Models\RecipeModel;
 
 class Comment extends BaseController
 {
-    private $model;
+    private object $model;
 
     //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();s
     public function __construct()
@@ -28,7 +28,7 @@ class Comment extends BaseController
 
     public function updateCommentStatus(int $id, string $status)
     {
-        $comment = $this->model->find($id);
+        $comment = $this->model->find($id);//find n'accepte qu'un param, $id
         if (!$comment) {
             return redirect()->back()->with('error', 'commentaire introuvable');
         }
