@@ -445,7 +445,7 @@ class Recipe extends BaseController
         }
     }
 
-    public function deleteRecipe($id)
+    public function deleteRecipe(int $id)
     {
         $this->model->delete($id);
         return redirect()->to('/recipe-index')->with('success', 'Recette supprimée');

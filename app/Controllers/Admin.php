@@ -270,7 +270,7 @@ class Admin extends BaseController
         return view('Admin/recipe-details', $data);
     }
 
-    public function saveRecipe($id)
+    public function saveRecipe(int $id)
     {
         $recipe = $this->recipeModel->find($id);
         $data = [

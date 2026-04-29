@@ -26,9 +26,9 @@ class Comment extends BaseController
         return view('Admin/comments', $data);
     }
 
-    public function updateCommentStatus($id, $status)
+    public function updateCommentStatus(int $id, string $status)
     {
-        $comment = $this->model->find($id, $status);
+        $comment = $this->model->find($id);
         if (!$comment) {
             return redirect()->back()->with('error', 'commentaire introuvable');
         }
@@ -43,7 +43,7 @@ class Comment extends BaseController
         return redirect()->back()->with('success', 'Statut mis à jour');
     }
 
-    public function deleteComment($id)
+    public function deleteComment(int $id)
     {
         $this->model->deleteComment($id);
         return redirect()->to(previous_url());
@@ -114,7 +114,7 @@ class Comment extends BaseController
     }
 
 
-    public function updateComment($id)
+    public function updateComment(int $id)
     {
         $rules = [
             "content" => [

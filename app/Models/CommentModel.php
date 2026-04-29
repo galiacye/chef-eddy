@@ -8,7 +8,7 @@ class CommentModel extends Model
 {
     protected $table = 'comments';
     protected $primaryKey = 'id';
-    protected $autoIncrement = true;
+    protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id',
         'recette_id',
@@ -20,7 +20,7 @@ class CommentModel extends Model
     ];
     protected $returnType = 'object';
 
-    public function updateCommentStatus($id, $status)
+    public function updateCommentStatus(int $id, string $status)
     {
         return $this->update($id, ['status' => $status]);
     }
@@ -33,13 +33,20 @@ class CommentModel extends Model
             ->findAll();
     }
 
-    public function deleteComment($id)
+    public function deleteComment(int $id)
     {
         return $this->delete($id);
     }
 
-    public function addComment($data)
+    
+
+    public function edit_comment(int $id)
     {
-        return $this->insert($data);
+    $comment = $this->commentModel->find($id);
+        $data = [
+            'status' => 'approved'
+        ];
+        $this->recipeModel->update($id, $data);
+        return redirect()->to('Admin/recipes-index')->with('success', 'Recette validée');
     }
 }
