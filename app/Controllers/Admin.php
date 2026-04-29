@@ -259,7 +259,7 @@ class Admin extends BaseController
     return view('Admin/recipes-index', $data);
 }
 
-    public function recipeDetails($id)
+    public function recipeDetails(int $id)
     {
         $recipe = $this->recipeModel->find($id);
         $ingredients = $this->ingredientModel->getRecipeIngredients($id);

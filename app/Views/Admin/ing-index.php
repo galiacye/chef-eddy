@@ -1,3 +1,6 @@
+<?php
+/** @var object[] $ingredients */
+?>
 <?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Tous les ingredients<?= $this->endSection() ?>
 <?= $this->section('customcss') ?>
@@ -21,8 +24,8 @@
             <p class="ing-nom"><?= $ing->nom ?></p>
 
             <a class="btn btn-warning"
-                href="<?= base_url('Admin/ingredients/delete/' . $ing->id) ?>"
-               onclick="return confirm('Supprimer définitivement cet ingrédient ?')">
+                href="<?= site_url('admin/ingredients/delete/' . $ing->id) ?>"
+                onclick="return confirm('Supprimer définitivement cet ingrédient ?')">
                 Supprimer l'ingrédient
             </a>
         </div>

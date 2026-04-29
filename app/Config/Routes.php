@@ -76,7 +76,8 @@ $routes->get('category/index', 'Category::index');
 $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 
 //ingredients
-
+$routes->get('Admin/ing-index', 'Ingredient::ingIndex');
+$routes->get('Admin/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
 //comments
 $routes->get('add-comment', 'Comment::addComment');
