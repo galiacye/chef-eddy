@@ -1,6 +1,12 @@
 <?php
 /** @var object[] $ingredients */
 ?>
+<<<<<<< HEAD
+=======
+<?= $this->extend('layoutAdmin') ?>
+
+
+>>>>>>> 60cf7b8 (comments-success->pending)
 <?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Tous les ingredients<?= $this->endSection() ?>
 <?= $this->section('customcss') ?>
@@ -17,16 +23,16 @@
 <h2 class="text-center mb-4">Tous les ingredients</h2>
 
 <div class="row">
-
+    
     <?php foreach ($ingredients as $ing): ?>
 
         <div class="col-12 col-md-6 col-lg-4 mb-3">
             <p class="ing-nom"><?= $ing->nom ?></p>
 
-            <a class="btn btn-warning"
-                href="<?= site_url('admin/ingredients/delete/' . $ing->id) ?>"
-                onclick="return confirm('Supprimer définitivement cet ingrédient ?')">
-                Supprimer l'ingrédient
+            <a class="btn btn-warning mt-0 mb-4"
+                href="<?= base_url('Admin/ingredients/delete/' . $ing->id) ?>"
+               onclick="return confirm('Supprimer définitivement cet ingrédient ?')">
+                Supprimer 
             </a>
         </div>
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\Entities\Recipe $recipe
  * @var array $tags
@@ -32,11 +33,15 @@
 
 <?= $this->section('body') ?>
 
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+<?php endif ?>
+
 <h2>Ajoutez un commentaire</h2>
 
 <form id="form" method="post" action="<?= base_url('comment/save') ?>">
-<?= csrf_field() ?> 
-<input type="hidden" name="recipe_id" value="<?= $recipe_id ?>">
+    <?= csrf_field() ?>
+    <input type="hidden" name="recipe_id" value="<?= $recipe_id ?>">
     <div id="toolbar">
         <span class="ql-formats">
             <button class="ql-bold"></button>
@@ -73,4 +78,3 @@
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script src="<?= base_url('/js/quill-comment.js') ?>"></script>
 <?= $this->endSection() ?>
-
