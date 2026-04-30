@@ -93,12 +93,15 @@ class Comment extends BaseController
             ]
 
         ];
+
+        $recipe_id = $this->request->getPostGet('recipe_id');//ici s'ecrit comme la var mais c'est le nom du champs html, ça ne vient pas de la bdd dc en anglais
         if ($this->validate($rules) === false) {
             return view('comment/add-comment', [
-                'errors' => $this->validator->getErrors()
+                'errors' => $this->validator->getErrors(),
+                'recipe_id' => $this->request->getPostGet('recipe_id')
             ]); //with errors
         } else {
-            $recipe_id = $this->request->getPostGet('recipe_id');//ici s'ecrit comme la var mais c'est le nom du champs html, ça ne vient pas de la bdd dc en anglais
+            
             $content = $this->request->getPostGet('content');
             //clean html
             $content = strip_tags($content, '<p><strong><em><u><ul><ol><li><a><br>');
