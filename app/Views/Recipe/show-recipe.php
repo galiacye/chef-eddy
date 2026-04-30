@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var \App\Entities\Recipe $recipe
+ * @var array $tags
+ * @var array $ingredients
+ */
+?>
+
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
@@ -31,7 +39,7 @@
                 <h3>Ingredients</h3>
                 <ul>
                 <?php foreach($ingredients as $ingredient):?>
-                        <li><?= $ingredient->nom ?> : <?= $ingredient->quantite ?>  <?= $ingredient->unite ?>.</li>
+                        <li><?= $ingredient->nom ?> : <?= $ingredient->quantite ?>  <?= $ingredient->unit ?>.</li>
                 <?php endforeach ?>
                 </ul>
 </div>
@@ -39,9 +47,9 @@
 
 <!-- pour quill-js : -->
 <div class="editor">
-        <p><?= $recipe->contenu ?></p>
+        <p><?= $recipe->content ?></p>
 </div>
 
-
+<a href="/add-comment/<?= $recipe->id ?>" class="btn m-3">Je l'ai faite </a>
 
 <?= $this->endSection() ?>

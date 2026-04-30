@@ -40,7 +40,7 @@ class CommentModel extends Model
 
     
 
-    public function edit_comment(int $id)
+   /*  public function edit_comment(int $id)
     {
     $comment = $this->commentModel->find($id);
         $data = [
@@ -48,5 +48,5 @@ class CommentModel extends Model
         ];
         $this->recipeModel->update($id, $data);
         return redirect()->to('Admin/recipes-index')->with('success', 'Recette validée');
-    }
+    } */
 }
