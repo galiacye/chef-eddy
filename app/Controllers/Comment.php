@@ -7,12 +7,13 @@ use App\Models\RecipeModel;
 
 class Comment extends BaseController
 {
-    private object $model;
+    
+    private CommentModel $model;
 
     //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();s
     public function __construct()
     {
-        $this->model = new CommentModel();
+     $this->model = model('CommentModel');
         helper('form');
     }
 

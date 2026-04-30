@@ -84,5 +84,6 @@ $routes->get('add-comment/(:num)', 'Comment::addComment/$1');
 $routes->post('edit-comment', 'Comment::edit-comment');
 $routes->get('Admin/comments', 'Comment::commentsIndex');
 $routes->post('comment/save', 'Comment::saveComment');
+$routes->post('update-comment-status/(:num)', 'Comment::updateCommentStatus');
 
 
