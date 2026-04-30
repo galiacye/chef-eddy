@@ -57,13 +57,20 @@ class Comment extends BaseController
     }
 */
 
-    public function addComment()
+    public function addComment(int $recipe_id)
     {
-        return view('comment/add-comment');
+        // if(!session()->get('user_id')) {
+        //     return redirect()->to('register');
+        // }
+            return view('comment/add-comment', ['recipe_id'=>$recipe_id]);
     }
 
     public function saveComment()
     {
+//dd($this->request->getPost());
+        // if(!session()->get('user_id')){
+        //     return redirect()->to('/register');
+        // }
         $rules = [
             "content" => [
                 "label" => "content",
@@ -91,6 +98,7 @@ class Comment extends BaseController
                 'errors' => $this->validator->getErrors()
             ]); //with errors
         } else {
+            $recipe_id = $this->request->getPostGet('recipe_id');//ici s'ecrit comme la var mais c'est le nom du champs html, ça ne vient pas de la bdd dc en anglais
             $content = $this->request->getPostGet('content');
             //clean html
             $content = strip_tags($content, '<p><strong><em><u><ul><ol><li><a><br>');
@@ -99,7 +107,8 @@ class Comment extends BaseController
             $rating = $this->request->getPostGet('rating');
 
             $data = [
-                "content" => $content,
+                'recette_id' => $recipe_id,
+                'content' => $content,
                 "rating" => $rating,
                 'user_id' => 1, //session('user_id'),
                 'status' => 'pending'
@@ -107,7 +116,7 @@ class Comment extends BaseController
 
             //dd(session()->get());
 
-            $this->model->addComment($data);
+            $this->model->insert($data);
             session()->setFlashdata('success', 'Votre commentaire est en attente de modération');
             return redirect()->back();
         }

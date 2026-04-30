@@ -80,7 +80,7 @@ $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->get('Admin/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
 //comments
-$routes->get('add-comment', 'Comment::addComment');
+$routes->get('add-comment/(:num)', 'Comment::addComment/$1');
 $routes->post('edit-comment', 'Comment::edit-comment');
 $routes->get('Admin/comments', 'Comment::commentsIndex');
 $routes->post('comment/save', 'Comment::saveComment');

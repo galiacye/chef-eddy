@@ -1,4 +1,4 @@
- const quill = new Quill('#editor', {
+const quill = new Quill('#editor', {
     modules: {
         toolbar: '#toolbar'
     },
@@ -17,15 +17,16 @@ document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste 
 document.getElementById('form').addEventListener('submit', (e) => {
     const html = quill.root.innerHTML;
     document.getElementById('content').value = html;
-    
+
     // Vérifier que ce n'est pas vide
     const text = quill.getText().trim();
     if (text.length === 0) {
         e.preventDefault();//empêche l'envoi par défaut
         alert('Veuillez écrire un commentaire avant d\'envoyer',);
     }
+});
 
-     // Étoiles
+    // Étoiles
     const stars = document.querySelectorAll('.star');
     const selectedRating = document.getElementById('selected-rating');
     let currentRating = 0;
@@ -59,6 +60,5 @@ document.getElementById('form').addEventListener('submit', (e) => {
                 star.classList.remove('bi-star-fill');
                 star.classList.add('bi-star');
             }
-        });
-    }
-});
+        }
+    )};

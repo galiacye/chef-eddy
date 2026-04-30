@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var \App\Entities\Recipe $recipe
+ * @var array $tags
+ * @var array $ingredients
+ * @var int $recipe_id
+ */
+?>
+
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
@@ -27,6 +36,7 @@
 
 <form id="form" method="post" action="<?= base_url('comment/save') ?>">
 <?= csrf_field() ?> 
+<input type="hidden" name="recipe_id" value="<?= $recipe_id ?>">
     <div id="toolbar">
         <span class="ql-formats">
             <button class="ql-bold"></button>
