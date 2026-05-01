@@ -163,7 +163,8 @@ class Recipe extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'tags'       => (new TagModel())->findAll(),
                     'categories' => (new CategoryModel())->findAll(),
-                    'unites'     => array_column((new UnitModel())->findAll(), 'nom')
+                    'unites'     => array_column((new UnitModel())->findAll(), 'nom'),
+                    'categories_ing_db' => (new IngredientModel())->getCategory()
                     //?
                 ]);
             }
@@ -258,7 +259,7 @@ class Recipe extends BaseController
         }
     }
 
-    public function updateRecipe($id)
+    public function updateRecipe(int $id)
     {
         if ($this->request->is('get')) //ou is('post')===false
         {
