@@ -12,8 +12,8 @@ use HTMLPurifier_Config;
 
 class Recipe extends BaseController
 {
-    private $model;
-    protected $returnType = 'object';
+    private object $model;
+    protected object $returnType;
 
     public function __construct()
     {
@@ -272,7 +272,7 @@ class Recipe extends BaseController
                 'tags' => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getRecipeIngredients($id),
-                'unite' => array_column(model('UnitModel')->findAll(), 'nom'),
+                'unites' => array_column(model('UnitModel')->findAll(), 'nom'),
 
             ]);
         } else { //si pas get, post donc traitement
@@ -341,24 +341,19 @@ class Recipe extends BaseController
                         "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
                     ]
                 ],
-                "categorie_id" => [
-                    "label" => "Catégorie",
-                    "rules" => "required|integer|greater_than_equal_to[1]",
-                    "errors" => [
-                        "required" => "La catégorie est requise",
-                        "integer"  => "Catégorie invalide",
-                    ]
-                ],
+                
 
             ];
             if (!$this->validate($rules)) {
+                dd($this->validator->getErrors());
                 return view('Recipe/update-recipe', [
                     'errors' => $this->validator->getErrors(),
-                    'recipe' => $this->model->find($id),
+                    'recipe' => $this->model->getRecipe($id),
                     'tags' => model('TagModel')->findAll(),
                     'categories' => model('CategoryModel')->findAll(),
                     'ingredients' => $this->model->getRecipeIngredients($id),
-                    'unites' => array_column(model('UnitModel')->findAll(), 'nom')
+                    'unites' => array_column(model('UnitModel')->findAll(), 'nom'),
+                    'categories_ing_db'=> model('IngredientModel')->getCategory()
                 ]);
             }
             $image = $this->request->getFile('image_url');
@@ -370,7 +365,7 @@ class Recipe extends BaseController
                 $image_path = 'uploads/recipes/' . $newName;
                 $image->move(ROOTPATH . 'public/uploads/recipes', $newName); //déplace du doss tempo de ci4 vers uploads avc son nouveau nom
             } else {
-dd($id);
+//dd($id);
                 //get a déjà $recipe mais pas post donc :
                 $recipe = $this->model->find($id);
                 $image_path = $recipe->image_url;

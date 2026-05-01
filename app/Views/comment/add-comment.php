@@ -13,21 +13,9 @@
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link href="<?= base_url('assets/css/add-comment.css') ?>" rel="stylesheet">
+<link href="<?= base_url('/css/add-comment.css') ?>" rel="stylesheet">
 <style>
-    #editor {
-        background-color: white;
-        height: 200px;
-        margin-left: 2rem;
-        margin-right: 2rem;
-
-    }
-
-    #toolbar {
-        background-color: white;
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
+   
 </style>
 <?= $this->endSection() ?>
 

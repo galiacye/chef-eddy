@@ -6,7 +6,7 @@ use CodeIgniter\Controllers;
 
 class Ingredient extends BaseController
 {
-    private $model;
+    private object $model;
 
     public function __construct()
     {
@@ -19,9 +19,9 @@ class Ingredient extends BaseController
     public function ingIndex(): string
     {
         $ingredients = $this->model->ingIndex();
-       
+
         $data = [
-            "titre"=> "Tous les ingrédients",
+            "titre" => "Tous les ingrédients",
             "ingredients" => $ingredients
         ];
         return view('Admin/ing-index', $data);
@@ -31,8 +31,8 @@ class Ingredient extends BaseController
     // {
     //    return view('Ingredients/ingredients-index',['ingredients'=>$this->model->findAll()]);
     // }
-//
-//inutile ingredients crées par recette
+    //
+    //inutile ingredients crées par recette
 
     // public function addIngredient($data)
     // {
@@ -43,10 +43,9 @@ class Ingredient extends BaseController
     //     return redirect()->to('Admin/ing-index')->with('success', 'Ingredient ajouté');
     // }
 
-    public function deleteIngredient($id)
+    public function deleteIngredient(int $id)
     {
         $ingredient = $this->model->delete($id);
         return redirect()->back()->with('success', 'Ingredient supprimé');
     }
-
 }

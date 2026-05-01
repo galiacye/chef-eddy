@@ -76,12 +76,14 @@ $routes->get('category/index', 'Category::index');
 $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 
 //ingredients
-
+$routes->get('Admin/ing-index', 'Ingredient::ingIndex');
+$routes->get('Admin/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
 //comments
 $routes->get('add-comment/(:num)', 'Comment::addComment/$1');
 $routes->post('edit-comment', 'Comment::edit-comment');
 $routes->get('Admin/comments', 'Comment::commentsIndex');
 $routes->post('comment/save', 'Comment::saveComment');
+$routes->post('update-comment-status/(:num)', 'Comment::updateCommentStatus');
 
 

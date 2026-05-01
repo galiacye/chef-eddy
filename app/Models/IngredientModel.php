@@ -18,7 +18,7 @@ class IngredientModel extends Model
         ->get()->getResult();
     }
 
-    public function getRecipeIngredients($recipe_id)
+    public function getRecipeIngredients(int $recipe_id)
     {
         return $this->select('ingredients.nom, ingredients.categorie, recette_ingredients.quantite, recette_ingredients.unite')
                     ->join('recette_ingredients','ingredients.id = recette_ingredients.ingredient_id')
@@ -28,7 +28,7 @@ class IngredientModel extends Model
 
     public function ingIndex()
     {
-        return $this->select('ingredients.id, ingredients.nom')
+        return $this->select('ingredients.nom, ingredients.id')
                     ->orderBy('nom', 'ASC')
                     ->findAll();
     }

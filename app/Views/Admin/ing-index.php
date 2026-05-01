@@ -1,6 +1,7 @@
 <?php
 /** @var object[] $ingredients */
 ?>
+
 <?= $this->extend('layoutAdmin') ?>
 
 
