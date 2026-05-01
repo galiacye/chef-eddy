@@ -33,7 +33,7 @@ class Comment extends BaseController
         if (!$comment) {
             return redirect()->back()->with('error', 'commentaire introuvable');
         }
-        $allowed = ['Approuve', 'Rejeté', 'En attente'];
+        $allowed = ['pending', 'approved', 'rejected'];
 
         if (!in_array($status, $allowed)) {
             return redirect()->back()->with('error', 'Statut invalide');
@@ -47,8 +47,8 @@ class Comment extends BaseController
     public function deleteComment(int $id)
     {
         $this->model->deleteComment($id);
-        return redirect()->to(previous_url());
-        //ou redirect()->back() qui appelle previous_url en interne!
+        return redirect()->back()->with('success', 'Commentaire supprimé');
+        // redirect()->back() appelle previous_url en interne
     }
 
     /*
@@ -120,12 +120,17 @@ class Comment extends BaseController
 
             //dd(session()->get());
 
-            $this->model->insert($data);
+            $this->model->insert($data); 
+            //pour que user ne commente qu'une seule fois , utiliser addComment du model et :
+            //
+            //phpif (!$this->model->addComment($data)) {
+            //session()->setFlashdata('error', 'Vous avez déjà commenté cette recette');
+            //return redirect()->back();
+            }
             session()->setFlashdata('success', 'Votre commentaire est en attente de modération');
             return redirect()->back();
-        }
     }
-
+    
 
     public function updateComment(int $id)
     {

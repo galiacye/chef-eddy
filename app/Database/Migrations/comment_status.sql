@@ -6,4 +6,4 @@ UPDATE comments SET statut = 'rejected' WHERE statut = 'rejete';
 
 si pas de données:
 ALTER TABLE comments
-MODIFY statut ENUM('pending', 'approved', 'rejected') DEFAULT 'pending';
+MODIFY status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending';

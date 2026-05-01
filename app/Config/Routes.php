@@ -80,10 +80,10 @@ $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->get('Admin/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
 //comments
-$routes->get('add-comment/(:num)', 'Comment::addComment/$1');
-$routes->post('edit-comment', 'Comment::edit-comment');
+$routes->get('add-comment/(:num)', 'Comment::addComment/$1');//form user
+$routes->post('comment/save', 'Comment::saveComment');//mis en base en pending. id passé par post pas de num
 $routes->get('Admin/comments', 'Comment::commentsIndex');
-$routes->post('comment/save', 'Comment::saveComment');
-$routes->post('update-comment-status/(:num)', 'Comment::updateCommentStatus');
+$routes->post('update-comment-status/(:num)', 'Comment::updateCommentStatus/$1');
+$routes->get('comment/delete/(:num)', 'Comment::deleteComment/$1');
 
 

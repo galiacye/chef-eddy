@@ -19,7 +19,7 @@ class CommentModel extends Model
         'parent_id'
     ];
     protected $returnType = 'object';
-
+//admin
     public function updateCommentStatus(int $id, string $status)
     {
         return $this->update($id, ['status' => $status]);
@@ -38,15 +38,21 @@ class CommentModel extends Model
         return $this->delete($id);
     }
 
+//user
+//seulement si je veux qu'ils ne commentent qu'une seule fois les recettes. 
+//pour l'instant on pars sur la boucle sociale avc parent_id ds table comments
+
+    // public function addComment(array $data)
+    // {
+    //     $everCommented = $this->where('user_id', $data['user_id'])
+    //                             ->where('recette_id', $data['recette_id'])
+    //                             ->first();
+
+    //     if($everCommented){
+    //         return false;
+    //     }
+    //     return $this->insert($data);
+    // }
     
 
-   /*  public function edit_comment(int $id)
-    {
-    $comment = $this->commentModel->find($id);
-        $data = [
-            'status' => 'approved'
-        ];
-        $this->recipeModel->update($id, $data);
-        return redirect()->to('Admin/recipes-index')->with('success', 'Recette validée');
-    } */
 }

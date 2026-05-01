@@ -186,8 +186,17 @@ INSERT INTO ingredients_categories (nom) VALUES
     ('Liquides'),
     ('Autres');
 
- ALTER TABLE ingredients ADD COLUMN categorie VARCHAR(50) DEFAULT NULL;   
+ALTER TABLE ingredients ADD COLUMN categorie VARCHAR(50) DEFAULT NULL; 
 
+Pour que sql envoie erreur si ingrédient à supprimer est dans une recette: (PAS FAIT pour l''instant on 
+a ON CASCADE qui supp l''ingr de toutes les recettes où il est utilisé) :
+
+ALTER TABLE recette_ingredients 
+DROP FOREIGN KEY  recette_ingredients_ibfk_2;
+
+ALTER TABLE recette_ingredients 
+ADD CONSTRAINT recette_ingredients_ibfk_2 
+FOREIGN KEY (ingredient_id) REFERENCES ingredients(id) ON DELETE RESTRICT;
 
 
 
