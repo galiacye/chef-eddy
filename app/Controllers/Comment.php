@@ -126,9 +126,10 @@ class Comment extends BaseController
             //phpif (!$this->model->addComment($data)) {
             //session()->setFlashdata('error', 'Vous avez déjà commenté cette recette');
             //return redirect()->back();
-            }
+            
             session()->setFlashdata('success', 'Votre commentaire est en attente de modération');
             return redirect()->back();
+        }
     }
     
 

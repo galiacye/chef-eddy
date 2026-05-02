@@ -50,7 +50,7 @@
     <input type="hidden" name="rating" id="rating">
     <input type="submit" value="envoyer" class="btn btn-primary">
 </form>
-<h2>Donnez-nous une note</h2>
+<h2>Donnez une note à la recette</h2>
 <div class="rating-stars">
     <i class="bi bi-star star" data-rating="1"></i>
     <i class="bi bi-star star" data-rating="2"></i>

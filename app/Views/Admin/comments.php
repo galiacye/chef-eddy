@@ -26,33 +26,36 @@
 
                 <div class="btn-group mb-2">
 
-                    <a class="btn btn-success btn-sm"
-                        onclick="return confirm('Supprimer définitivement ce commentaire ?')"
-                        href="<?= base_url('comment/status/' . $c->id . '/approved') ?>">
+                <form method="post" action="<?= base_url('comment/status/' . $c->id . '/approved') ?>" class="d-inline">
+                    <?= csrf_field() ?>
+                    <button class="btn btn-success btn-sm" onclick="return confirm('Approuver ce commentaire ?')">
                         Approuver
-                    </a>
+                    </button>
+                </form>
 
-                    <a class="btn btn-danger btn-sm"
-                        onclick="return confirm('Supprimer définitivement ce commentaire ?')"
-                        href="<?= base_url('comment/status/' . $c->id . '/rejected') ?>">
+                <form method ="post" action="<?= base_url('comment/status/' . $c->id . '/rejected') ?>" class="d-inline">
+                    <?= csrf_field() ?>
+                    <button class="btn btn-danger btn-sm" onclick="return confirm('Rejeter ce commentaire ?')">
                         Rejeter
-                    </a>
-                    //refaire les boutons
-                    <a class="btn btn-warning btn-sm"
-                        onclick="return confirm('Remettre ce commentaire en attente?')"
-                        href="<?= base_url('/comment/status/' . $c->id . '/pending') ?>">
-                        Procrastiner
-                    </a>
+                    </button>
+                </form>
 
+                <form method="post" action="<?= base_url('comment/status/' . $c->id . '/pending') ?>" class="d-inline">
+                    <?= csrf_field() ?>
+                    <button class="btn btn-warning btn-sm" onclick="return confirm('Remettre ce commentaire en attente ? ')">
+                        Procrastiner et remettre en attente
+                    </button>
+                </form>
                 </div>
 
-               <a class="btn btn-warning"
-                    onclick="return confirm('Supprimer définitivement ce commentaire ?')"
-                    href="<?= base_url('/delete-comment/' . $c->id) ?>">
-                    Supprimer le commentaire
-                </a>
-            </div>
+                <form method="post" action="<?= base_url('comment/delete/' . $c->id) ?>" class="d-inline">
+                    <?= csrf_field() ?>
+                    <button class="btn btn-warning btn-sm" onclick="return confirm('Supprimer définitivement ce commentaire ? ')">
+                        Supprimer
+                    </button>
+                </form>
 
+      
         <?php endforeach; ?>
     <?php else : ?>
     <?php endif; ?>

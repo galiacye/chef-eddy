@@ -83,7 +83,6 @@ $routes->get('Admin/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 $routes->get('add-comment/(:num)', 'Comment::addComment/$1');//form user
 $routes->post('comment/save', 'Comment::saveComment');//mis en base en pending. id passé par post pas de num
 $routes->get('Admin/comments', 'Comment::commentsIndex');
-$routes->post('update-comment-status/(:num)', 'Comment::updateCommentStatus/$1');
-$routes->get('comment/delete/(:num)', 'Comment::deleteComment/$1');
-
-
+$routes->post('comment/status/(:num)', 'Comment::updateCommentStatus/$1');
+$routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1/$2');
+$routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
