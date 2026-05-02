@@ -19,28 +19,33 @@ class CommentModel extends Model
         'parent_id'
     ];
     protected $returnType = 'object';
-//admin
+    //admin
     public function updateCommentStatus(int $id, string $status)
     {
         return $this->update($id, ['status' => $status]);
     }
 
-    public function commentsIndex()
-    {
-        return  $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating')
-            ->join('users', 'comments.user_id = users.id')
-            ->join('recettes', 'comments.recette_id = recettes.id')
-            ->findAll();
+   public function commentsIndex(?string $status = null)
+{
+    $query = $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating, comments.recette_id, comments.status')
+        ->join('users', 'comments.user_id = users.id')
+        ->join('recettes', 'comments.recette_id = recettes.id');
+
+    if ($status) {
+        $query->where('comments.status', $status);
     }
+
+    return $query->findAll();
+}
 
     public function deleteComment(int $id)
     {
         return $this->delete($id);
     }
 
-//user
-//seulement si je veux qu'ils ne commentent qu'une seule fois les recettes. 
-//pour l'instant on pars sur la boucle sociale avc parent_id ds table comments
+    //user
+    //seulement si je veux qu'ils ne commentent qu'une seule fois les recettes. 
+    //pour l'instant on pars sur la boucle sociale avc parent_id ds table comments
 
     // public function addComment(array $data)
     // {
@@ -53,6 +58,6 @@ class CommentModel extends Model
     //     }
     //     return $this->insert($data);
     // }
-    
+
 
 }

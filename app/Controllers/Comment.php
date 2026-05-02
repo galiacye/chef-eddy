@@ -7,29 +7,41 @@ use App\Models\RecipeModel;
 
 class Comment extends BaseController
 {
-    
+
     private CommentModel $model;
 
     //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();s
     public function __construct()
     {
-     $this->model = model('CommentModel');
+        $this->model = model('CommentModel');
         helper('form');
     }
 
+    // public function commentsIndex()
+    // {
+    //     $comments = $this->model->commentsIndex();
+    //     $data = [
+    //         "comments" => $comments,
+    //         "title" => "Tous les commentaires"
+    //     ];
+    //     return view('Admin/comments', $data);
+    // }
+
     public function commentsIndex()
     {
-        $comments = $this->model->commentsIndex();
+        $status = $this->request->getGet('status');
+        $comments = $this->model->commentsIndex($status);//le ? devant string signifie string ou null
         $data = [
-            "comments" => $comments,
-            "title" => "Tous les commentaires"
+            'comments' => $comments,
+            'status'   => $status
         ];
         return view('Admin/comments', $data);
     }
 
+
     public function updateCommentStatus(int $id, string $status)
     {
-        $comment = $this->model->find($id);//find n'accepte qu'un param, $id
+        $comment = $this->model->find($id); //find n'accepte qu'un param, $id
         if (!$comment) {
             return redirect()->back()->with('error', 'commentaire introuvable');
         }
@@ -63,12 +75,12 @@ class Comment extends BaseController
         // if(!session()->get('user_id')) {
         //     return redirect()->to('register');
         // }
-            return view('comment/add-comment', ['recipe_id'=>$recipe_id]);
+        return view('comment/add-comment', ['recipe_id' => $recipe_id]);
     }
 
     public function saveComment()
     {
-//dd($this->request->getPost());
+        //dd($this->request->getPost());
         // if(!session()->get('user_id')){
         //     return redirect()->to('/register');
         // }
@@ -95,14 +107,14 @@ class Comment extends BaseController
 
         ];
 
-        $recipe_id = $this->request->getPostGet('recipe_id');//ici s'ecrit comme la var mais c'est le nom du champs html, ça ne vient pas de la bdd dc en anglais
+        $recipe_id = $this->request->getPostGet('recipe_id'); //ici s'ecrit comme la var mais c'est le nom du champs html, ça ne vient pas de la bdd dc en anglais
         if ($this->validate($rules) === false) {
             return view('comment/add-comment', [
                 'errors' => $this->validator->getErrors(),
                 'recipe_id' => $this->request->getPostGet('recipe_id')
             ]); //with errors
         } else {
-            
+
             $content = $this->request->getPostGet('content');
             //clean html
             $content = strip_tags($content, '<p><strong><em><u><ul><ol><li><a><br>');
@@ -120,18 +132,18 @@ class Comment extends BaseController
 
             //dd(session()->get());
 
-            $this->model->insert($data); 
+            $this->model->insert($data);
             //pour que user ne commente qu'une seule fois , utiliser addComment du model et :
             //
             //phpif (!$this->model->addComment($data)) {
             //session()->setFlashdata('error', 'Vous avez déjà commenté cette recette');
             //return redirect()->back();
-            
+
             session()->setFlashdata('success', 'Votre commentaire est en attente de modération');
             return redirect()->back();
         }
     }
-    
+
 
     public function updateComment(int $id)
     {

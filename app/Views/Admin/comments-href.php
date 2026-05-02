@@ -26,7 +26,7 @@
 
                 <div class="btn-group mb-2">
 
-                   <!--  <a class="btn btn-success btn-sm"
+                    <a class="btn btn-success btn-sm"
                         onclick="return confirm('Approuver ce commentaire ?')"
                         href="<?= base_url('comment/status/' . $c->id . '/approved') ?>">
                         Approuver
@@ -52,7 +52,7 @@
                     Supprimer le commentaire
                 </a>
             </div>
- -->
+
         <?php endforeach; ?>
     <?php else : ?>
     <?php endif; ?>

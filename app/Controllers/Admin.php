@@ -151,7 +151,7 @@ class Admin extends BaseController
             $role_id = $this->request->getPost('role_id') ?: 1;
 
             // Gestion du fichier avatar : store inexistant dans ci4 ?
-           // $avatar_file = $this->request->getFile('avatar_url');
+            // $avatar_file = $this->request->getFile('avatar_url');
             /*$avatar_url = null;
             if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
                 $avatar_url = $avatar_file->store();
@@ -165,7 +165,7 @@ class Admin extends BaseController
             if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
 
                 $newName = $avatar_file->getRandomName();
-                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);//FCPATH -> chemin absolu vers public
+                $avatar_file->move(FCPATH . 'uploads/avatars', $newName); //FCPATH -> chemin absolu vers public
 
                 $avatar_url = 'uploads/avatars/' . $newName;
             } else {
@@ -191,10 +191,7 @@ class Admin extends BaseController
         }
     }
 
-    public function saveUser(int $id)
-    {
-        
-    }
+    public function saveUser(int $id) {}
 
 
     public function deleteUser(int $id)
@@ -240,24 +237,24 @@ class Admin extends BaseController
     //}
 
     public function recipesIndex(): string
-{
-    $user   = $this->request->getGet('user');
-    $status = $this->request->getGet('statut');
+    {
+        $user   = $this->request->getGet('user');
+        $status = $this->request->getGet('statut');
 
-    if ($user) {
-        $recipes = $this->recipeModel->getRecipeByUser($user);
-    } else {
-        $recipes = $this->recipeModel->getRecipesByStatus($status);
+        if ($user) {
+            $recipes = $this->recipeModel->getRecipeByUser($user);
+        } else {
+            $recipes = $this->recipeModel->getRecipesByStatus($status);
+        }
+
+        $data = [
+            'recipes' => $recipes,
+            'statut'  => $status,
+            'user'    => $user
+        ];
+
+        return view('Admin/recipes-index', $data);
     }
-
-    $data = [
-        'recipes' => $recipes,
-        'statut'  => $status,
-        'user'    => $user
-    ];
-
-    return view('Admin/recipes-index', $data);
-}
 
     public function recipeDetails(int $id)
     {
