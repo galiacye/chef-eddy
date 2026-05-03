@@ -3,6 +3,7 @@
  * @var \App\Entities\Recipe $recipe
  * @var array $tags
  * @var array $ingredients
+ * @var array $comments
  */
 ?>
 
@@ -51,7 +52,22 @@
         <p><?= $recipe->contenu ?></p>
 </div>
 
-<a href="/add-comment/<?= $recipe->id ?>" class="btn m-3">Je l'ai faite </a>
+<div class="comment m-4">
+    <h3>Voir les avis</h3>
+    <?php if(!empty($comments)): ?>
+        <?php foreach($comments as $comment): ?>
+            <div class="comment m-3">
+                <p><?= $comment->content ?></p>
+                <p>Note : <?= $comment->rating ?>/5</p>
+            </div>
+        <?php endforeach ?>
+    <?php else : ?>
+        <p>Aucun avis pour l'instant</p>
+        <?php endif ?>
+</div>
+
+
+<a href="/add-comment/<?= $recipe->id ?>" class="btn btn-success btn-lg m-3">Je l'ai faite</a>
 
 <?= $this->endSection() ?>
 
