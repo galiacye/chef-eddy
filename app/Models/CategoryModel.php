@@ -48,7 +48,7 @@ class CategoryModel extends Model
     }
     // Toutes les recettes d'une catégorie
     public function getRecipesByCategory(int $category_id)
-    {
+    {//on utilise $db quand on est pas dans le model de la table appelée
         return $this->db->table('recette_categories')
             ->select('recettes.id, recettes.titre, recettes.image_url')
             ->join('recettes', 'recettes.id = recette_categories.recette_id')

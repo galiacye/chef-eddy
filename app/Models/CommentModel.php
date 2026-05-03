@@ -25,39 +25,58 @@ class CommentModel extends Model
         return $this->update($id, ['status' => $status]);
     }
 
-   public function commentsIndex(?string $status = null)
-{
-    $query = $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating, comments.recette_id, comments.status')
-        ->join('users', 'comments.user_id = users.id')
-        ->join('recettes', 'comments.recette_id = recettes.id');
-
-    if ($status) {
-        $query->where('comments.status', $status);
+    public function commentsIndex(?string $status = null)
+    {
+        if ($status) { //si un statut est fourni on retourne uniquement les comments qui ont ce statut
+            return $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating, comments.recette_id, comments.status')
+                ->join('users', 'comments.user_id = users.id')
+                ->join('recettes', 'comments.recette_id = recettes.id')
+                ->where('comments.status', $status)
+                ->findAll();
+        } else { // : pour l'affichage par défaut
+            return $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating, comments.recette_id, comments.status')
+                ->join('users', 'comments.user_id = users.id')
+                ->join('recettes', 'comments.recette_id = recettes.id')
+                ->findAll();
+        }
     }
 
-    return $query->findAll();
-}
+    public function commentsByRecipe(int $recipe_id)
+    {
+        return $this->select('comments.id, recettes.titre as recipe_title, comments.content, comments.rating')
+            ->join('recettes', 'comments.recette_id = recettes.id')
+            ->where('comments.recette_id', $recipe_id)
+            ->findAll();
+    }
+
+    public function commentsByUser(int $user_id)
+    {
+        return $this->select('comments.id, users.username, comments.content, comments.rating')
+            ->join('users', 'comments.user_id = users.id')
+            ->where('comments.user_id', $user_id)
+            ->findAll();
+    }
+
 
     public function deleteComment(int $id)
     {
         return $this->delete($id);
     }
 
-    //user
-    //seulement si je veux qu'ils ne commentent qu'une seule fois les recettes. 
-    //pour l'instant on pars sur la boucle sociale avc parent_id ds table comments
+    // user
+    // seulement si on veut qu'ils ne commentent qu'une seule fois les recettes. 
+    // pour l'instant on pars sur la boucle sociale avc parent_id ds table comments
 
     // public function addComment(array $data)
     // {
     //     $everCommented = $this->where('user_id', $data['user_id'])
-    //                             ->where('recette_id', $data['recette_id'])
-    //                             ->first();
+    //         ->where('recette_id', $data['recette_id'])
+    //         ->first();
 
-    //     if($everCommented){
+    //     if ($everCommented) {
     //         return false;
+    //     } else {
+    //         return $this->insert($data);
     //     }
-    //     return $this->insert($data);
     // }
-
-
 }

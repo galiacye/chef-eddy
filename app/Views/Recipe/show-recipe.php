@@ -16,10 +16,11 @@
 
 <div class="banner">
     <div class="title-and-tags">
-        <h1><?= $recipe->titre ?></h1>
+        
         <?php foreach($tags as $tag): ?>
             <h2><?= $tag->nom ?></h2>
         <?php endforeach ?>
+        <h1><?= $recipe->titre ?></h1>
     </div>
 
     <div class="illustration">
@@ -39,7 +40,7 @@
                 <h3>Ingredients</h3>
                 <ul>
                 <?php foreach($ingredients as $ingredient):?>
-                        <li><?= $ingredient->nom ?> : <?= $ingredient->quantite ?>  <?= $ingredient->unit ?>.</li>
+                        <li><?= $ingredient->nom ?> : <?= $ingredient->quantite ?> . <?= $ingredient->unite ?></li>
                 <?php endforeach ?>
                 </ul>
 </div>
@@ -47,9 +48,11 @@
 
 <!-- pour quill-js : -->
 <div class="editor">
-        <p><?= $recipe->content ?></p>
+        <p><?= $recipe->contenu ?></p>
 </div>
 
 <a href="/add-comment/<?= $recipe->id ?>" class="btn m-3">Je l'ai faite </a>
 
 <?= $this->endSection() ?>
+
+

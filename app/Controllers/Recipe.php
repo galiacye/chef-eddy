@@ -38,19 +38,20 @@ class Recipe extends BaseController
         $ingredientModel = model('IngredientModel');
         $categoryModel  = model('CategoryModel');
         $unitModel = model('UnitModel');
+        $commentModel = model('CommentModel');
 
-        $recipe = $recipeModel->getRecipe($id);
-
-        //dd($recipe, $id);
+           //dd($recipe, $id);
 
         $data = [
             'recipe'      => $recipeModel->getRecipe($id),
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
-            'unites'         => array_column($unitModel->findAll(), 'nom') // ['kg','g','ml'...]
+            'unites'      => array_column($unitModel->findAll(), 'nom'), // ['kg','g','ml'...],
+          
+            'comments'    => $commentModel->commentsByRecipe($id)
         ];
-
+// dd($data['ingredients']);
         return view('Recipe/show-recipe', $data);
     }
 

@@ -38,6 +38,8 @@ class Comment extends BaseController
         return view('Admin/comments', $data);
     }
 
+    
+
 
     public function updateCommentStatus(int $id, string $status)
     {
@@ -80,7 +82,7 @@ class Comment extends BaseController
 
     public function saveComment()
     {
-        //dd($this->request->getPost());
+      
         // if(!session()->get('user_id')){
         //     return redirect()->to('/register');
         // }

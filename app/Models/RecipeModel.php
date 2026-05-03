@@ -76,21 +76,22 @@ class RecipeModel extends Model
         ->findAll(); //ici sql renvoie un résultat ds lequel username devient un attribut de $recipe
       //d'où le $recipe->username ds views/Admin/recipes-index
    }
-
-  public function getRecipesByStatus($status = null)
-    {
-      if ($status) { // false si $status est null, true si $status vaut 'En attente', 'Approuvée', etc.
-        return $this->select('recettes.*, users.username')
-          ->join('users', 'users.id = recettes.user_id')
-          ->where('recettes.statut', $status)
-          ->findAll();
+ public function getRecipesByStatus($status = null)
+    {//si un statut existe on retourne les comments qui ont ce statu
+        if ($status) { // false si $status est null, true si la recette a un statut
+            return $this->select('recettes.*, users.username')
+                ->join('users', 'users.id = recettes.user_id')
+                ->where('recettes.statut', $status)
+                ->findAll();
+        } else {//sinon tous : juste pour l'affichage par défaut
+            return $this->select('recettes.*, users.username')
+                ->join('users', 'users.id = recettes.user_id')
+                ->findAll();
         }
-        return $this->select('recettes.*, users.username')
-          ->join('users', 'users.id = recettes.user_id')
-          ->findAll();
-      }
+    }
 
-  public function getRecipeByUser($id)
+
+  public function getRecipeByUser(int $id)
     {
       return $this->select('recettes.*, users.username')
         ->join('users', 'users.id = recettes.user_id')
