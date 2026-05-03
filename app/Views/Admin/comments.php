@@ -18,10 +18,6 @@
         class="btn <?= $status === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
     <a href="<?= base_url('Admin/comments?status=approved') ?>"
         class="btn <?= $status === 'approved' ? 'btn-success' : 'btn-outline-success' ?>">Approuvés</a>
-    <a href="<?= base_url('Admin/comments?status=by-recipe') ?>"
-        class="btn <?= $status === 'by-recipe' ? 'btn-info' : 'btn-outline-info' ?>">Par recette</a>
-    <a href="<?= base_url('Admin/comments?status=by-user') ?>"
-        class="btn <?= $status === 'by-user' ? 'btn-secondary' : 'btn-outline-secondary' ?>">Par utilisateur</a>
 </div>
 
 <table class="table table-striped table-hover align-middle">

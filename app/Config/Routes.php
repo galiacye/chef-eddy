@@ -79,10 +79,13 @@ $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->get('Admin/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
-//comments
+//comments-user
 $routes->get('add-comment/(:num)', 'Comment::addComment/$1');//form user
 $routes->post('comment/save', 'Comment::saveComment');//mis en base en pending. id passé par post pas de num
+$routes->match(['get', 'post'], 'comment/update/(:num)', 'Comment::updateComment/$1');
+//admin
 $routes->get('Admin/comments', 'Comment::commentsIndex');
 $routes->post('comment/status/(:num)', 'Comment::updateCommentStatus/$1');
 $routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1/$2');
 $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
+

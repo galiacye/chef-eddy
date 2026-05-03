@@ -175,6 +175,7 @@ class Comment extends BaseController
 
         if ($this->request->is('post') === false) {
             $comment = $this->model->oneComment($id);
+    dd($comment);
             $rating = $comment->rating;
             $data = [
                 "comment" => $comment,
