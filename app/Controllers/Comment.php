@@ -174,19 +174,19 @@ class Comment extends BaseController
 
 
         if ($this->request->is('post') === false) {
-            $comment = $this->model->oneComment($id);
-    dd($comment);
+            $comment = $this->model->find($id);
+    //dd($comment);
             $rating = $comment->rating;
             $data = [
                 "comment" => $comment,
                 "rating" => $rating
             ];
-            return view('Comment/updateComment', $data);
+            return view('comment/update-comment', $data);
         } else {
 
             if ($this->validate($rules) === false) {
-                $comment = $this->model->oneComment($id);
-                return view('Comment/updateComment', [
+                $comment = $this->model->find($id);
+                return view('comment/update-comment', [
                     'comment' => $comment,
                     'rating' => $comment->rating,
                     'errors' => $this->validator->getErrors()
@@ -200,7 +200,7 @@ class Comment extends BaseController
                 "rating" => $rating
             ];
             $this->model->updateComment($id, $data);
-            return redirect()->back();
+            return redirect()->back()->with('success','La modification de votre commentaire est en attente de modération');
         }
     }
 }

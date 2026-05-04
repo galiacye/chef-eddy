@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @var object $comment
+ * @var int $rating
+ *
+ */
+?>
+<?= $this->extend('layout') ?>
+
+<?= $this->section('custom-css') ?>
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="<?= base_url('/css/add-comment.css') ?>" rel="stylesheet">
+<?= $this->endSection() ?>
+
+<?= $this->section('body') ?>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+<?php endif ?>
+
+<h2>Modifier votre commentaire</h2>
+
+<form id="form" method="post" action="<?= base_url('comment/update/' . $comment->id) ?>">
+    <?= csrf_field() ?>
+    <input type="hidden" name="id" value="<?= $comment->id ?>">
+    <div id="toolbar">
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-link"></button>
+        </span>
+    </div>
+    <div id="editor"></div>
+    <textarea name="content" id="content" hidden ></textarea>
+
+    <input type="hidden" name="rating" id="rating">
+    <input type="submit" value="envoyer" class="btn btn-primary">
+</form>
+<h2>Donnez une note à la recette</h2>
+
+
+<div class="rating-stars" id="rating-stars" data-rating="<?= $comment->rating ?? 0 ?>">
+    <i class="bi bi-star star" data-rating="1"></i>
+    <i class="bi bi-star star" data-rating="2"></i>
+    <i class="bi bi-star star" data-rating="3"></i>
+    <i class="bi bi-star star" data-rating="4"></i>
+    <i class="bi bi-star star" data-rating="5"></i>
+</div>
+<p>Votre note : <span id="selected-rating">0</span>/5</p>
+
+<?= $this->endSection() ?>
+
+<?= $this->section('custom-js') ?>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="<?= base_url('/js/quill-comment.js') ?>"></script>
+<script>
+    quill.root.innerHTML = `<?= addslashes($comment->content ?? '') ?>`;
+    //addslashes echappe les caracteres speciaux en js (esc ->CI4)
+
+    // Pré-remplir les étoiles
+    const initialRating = <?= $comment->rating ?? 0 ?>;
+    if (initialRating > 0) {
+        currentRating = initialRating;
+        document.getElementById('rating').value = initialRating;
+        document.getElementById('selected-rating').textContent = initialRating;
+        highlightStars(initialRating);
+    }
+   
+</script>
+<?= $this->endSection() ?>

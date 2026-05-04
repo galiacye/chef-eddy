@@ -10,7 +10,6 @@ class CommentModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
-        'id',
         'recette_id',
         'user_id',
         'content',
@@ -57,6 +56,10 @@ class CommentModel extends Model
             ->findAll();
     }
 
+    public function updateComment(int $id, array $data)
+    {
+        return $this->update($id, $data);
+    }
 
     public function deleteComment(int $id)
     {

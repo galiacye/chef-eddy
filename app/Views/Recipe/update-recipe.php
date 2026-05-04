@@ -1,3 +1,12 @@
+<?php 
+/**
+ * @var object $recipe
+ * @var object $categories
+ * @var int $id
+ * @var object $ingredients
+ * @var object $ing
+ */
+?>
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
