@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var object $status
+ */ 
+?>
 <?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
 <?= $this->section('customcss') ?>
