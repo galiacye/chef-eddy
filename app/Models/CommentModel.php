@@ -68,7 +68,7 @@ class CommentModel extends Model
 
     // user
     // seulement si on veut qu'ils ne commentent qu'une seule fois les recettes. 
-    // pour l'instant on pars sur la boucle sociale avc parent_id ds table comments
+    // pour l'instant on pars sur la boucle sociale avc parent_id ds table comments et une methode save qui utilise insert ds le ctrlr
 
     // public function addComment(array $data)
     // {
