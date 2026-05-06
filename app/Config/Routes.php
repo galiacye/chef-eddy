@@ -47,6 +47,10 @@ $routes->get('user-chef/(:num)','User::userChef/$1');
 $routes->get('all-users','User::UserIndex');
 $routes->match(['get','post'], 'update-user/(:num)','User::updateUser/$1');
 
+//PROFIL
+$routes->match(['get', 'post'], 'profile/(:num)', 'User::profile/$1');
+$routes->match(['get', 'post'], 'toy', 'User::');
+
 //role
 $routes->get('all-roles','Role::allRoles');
 $routes->get('role','Role::getRole');

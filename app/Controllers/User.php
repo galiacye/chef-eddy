@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\RedirectResponse;
+
 class User extends BaseController
 {
     private $model;
@@ -15,39 +17,39 @@ class User extends BaseController
         $this->roleModel = Model('RoleModel');
     }
 
-    public function register()//ou dans Auth ???
+    public function register() //ou dans Auth ???
     {
         if ($this->request->getMethod() !== 'post') {
-        $data['roles'] = $this->roleModel->findAll();
-        return view('User/register', $data);
-        }else{
-
-        $avatar_file = $this->request->getFile('avatar_url');
-        $avatar_url = null;
-
-        if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
-
-            $newName = $avatar_file->getRandomName();
-            $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
-
-            $avatar_url = 'uploads/avatars/' . $newName;
+            $data['roles'] = $this->roleModel->findAll();
+            return view('User/register', $data);
         } else {
-            $avatar_url = 'uploads/avatars/fantome.png';
-        }
 
-        $data = [
-            'username'   => $this->request->getPost('username'),
-            'email'      => $this->request->getPost('email'),
-            'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
-            'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'nom'        => $this->request->getPost('nom'),
-            'prenom'     => $this->request->getPost('prenom'),
-            'avatar_url' => $avatar_url
-        ];
+            $avatar_file = $this->request->getFile('avatar_url');
+            $avatar_url = null;
 
-        $this->model->register($data);
+            if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
 
-        return redirect()->to('/login');
+                $newName = $avatar_file->getRandomName();
+                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
+
+                $avatar_url = 'uploads/avatars/' . $newName;
+            } else {
+                $avatar_url = 'uploads/avatars/fantome.png';
+            }
+
+            $data = [
+                'username'   => $this->request->getPost('username'),
+                'email'      => $this->request->getPost('email'),
+                'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
+                'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'nom'        => $this->request->getPost('nom'),
+                'prenom'     => $this->request->getPost('prenom'),
+                'avatar_url' => $avatar_url
+            ];
+
+            $this->model->register($data);
+
+            return redirect()->to('/login');
         }
     }
 
@@ -87,7 +89,7 @@ class User extends BaseController
     {
         $user = $this->model->find($id);
         if (($this->request->is('post')) === false) {
-            return view('User/updateUser', ["user" => $user]);
+            return view('User/updateUser', ['user' => $user]);
         } else {
 
             $rules = [
@@ -199,5 +201,94 @@ class User extends BaseController
             'user' => $this->model->find($id)
         ];
         return view('User/userChef', $data);
+    }
+
+    public function profile(?int $id = null): string|RedirectResponse
+    {
+        // Si pas d'id passé, on prend l'utilisateur connecté en session
+        $session = session();
+        $userId  = $id ?? $session->get('user_id');
+
+        if (! $userId) {
+            return redirect()->to('/login')->with('error', 'Vous devez être connecté.');
+        }
+
+        $user = $this->model->find($userId);
+
+        if (! $user) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$userId introuvable.");
+        }
+
+        $data = [
+            'title'       => 'Profil — ' . esc($user->username),
+            'user'        => $user,
+            'isOwnProfile' => ($session->get('user_id') === (int) $user->id),
+        ];
+
+        return view('User/profile', $data);
+    }
+
+    public function edit(): string|RedirectResponse
+    {
+        $session = session();
+        $userId  = $session->get('user_id');
+
+        if (! $userId) {
+            return redirect()->to('/login')->with('error', 'Vous devez être connecté.');
+        }
+
+        $user = $this->model->find($userId);
+
+        return view('user/edit', [
+            'title'  => 'Modifier mon profil',
+            'user'   => $user,
+            'errors' => session()->getFlashdata('errors') ?? [],
+        ]);
+    }
+
+    public function updateProfile(): RedirectResponse
+    {
+        $session = session();
+        $userId  = $session->get('user_id');
+
+        if (! $userId) {
+            return redirect()->to('/login');
+        }
+        $rules = [
+            'firstname' => 'required|min_length[2]|max_length[100]',
+            'lastname'  => 'required|min_length[2]|max_length[100]',
+            'phone'     => 'permit_empty|min_length[10]|max_length[20]',
+            'email'     => "required|valid_email|is_unique[users.email,id,$userId]",
+        ];
+
+        // Mot de passe seulement si rempli
+        if ($this->request->getPost('password')) {
+            $rules['password']         = 'min_length[8]|regex_match[/.*[0-9].*/]';
+            $rules['password_confirm'] = 'matches[password]';
+
+
+            if (! $this->validate($rules)) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('errors', $this->validator->getErrors());
+            }
+            $data = [
+                'firstname' => $this->request->getPost('firstname'),
+                'lastname'  => $this->request->getPost('lastname'),
+                'phone'     => $this->request->getPost('phone'),
+                'email'     => $this->request->getPost('email'),
+            ];
+
+            if ($this->request->getPost('password')) {
+                $data['password'] = password_hash(
+                    $this->request->getPost('password'),
+                    PASSWORD_DEFAULT
+                );
+            }
+            $this->model->update($userId, $data);
+
+            return redirect()->to('User/profile')
+                ->with('success', 'Vos informations ont été mises à jour.');
+        }
     }
 }
