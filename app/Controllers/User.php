@@ -275,8 +275,8 @@ class User extends BaseController
             $data = [
                 'firstname' => $this->request->getPost('firstname'),
                 'lastname'  => $this->request->getPost('lastname'),
-                'phone'     => $this->request->getPost('phone'),
                 'email'     => $this->request->getPost('email'),
+                'phone'     => $this->request->getPost('phone'),
             ];
 
             if ($this->request->getPost('password')) {
