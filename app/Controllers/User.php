@@ -210,7 +210,7 @@ class User extends BaseController
         $userId  = $id ?? $session->get('user_id');
 
         if (! $userId) {
-            return redirect()->to('/login')->with('error', 'Vous devez être connecté.');
+            return redirect()->to('/login')->with('errors', 'Vous devez être connecté.');
         }
 
         $user = $this->model->find($userId);
@@ -225,7 +225,7 @@ class User extends BaseController
             'isOwnProfile' => ($session->get('user_id') === (int) $user->id),
         ];
 
-        return view('User/profile', $data);
+        return view('User/toyEditProfile', $data);
     }
 
     public function edit(): string|RedirectResponse
