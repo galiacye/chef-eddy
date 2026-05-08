@@ -57,9 +57,34 @@
                 </form>
 
                 </div>
+<script>
+<?php foreach ($comments as $c): ?>
+(function() {//Immediatly Invoked Function Expression (IIFE) = creation d'une fct dc d'un nouveau scope,
+//permettant de redéclarer const quill plusieurs fois sans conflit. Ici const quill limité au bloc { } le plus proche
+    
 
-                
-      
+                  const quill = new Quill('#editor-reply-<?= $c->id ?>', {
+        modules: { toolbar: '#toolbar-reply-<?= $c->id ?>' },
+        placeholder: 'Répondre...',
+        theme: 'snow',
+    });
+    document.getElementById('form-reply-<?= $c->id ?>').addEventListener('submit', (e) => {
+             console.log('getText:', quill.getText());
+        console.log('length:', quill.getText().trim().length);
+        const text = quill.getText().trim();
+        if (text.length <= 1) {
+            e.preventDefault();
+            alert('Veuillez écrire une réponse');
+            return;
+        }
+        document.getElementById('content-<?= $c->id ?>').value = quill.root.innerHTML;
+   
+    });
+       
+})();
+<?php endforeach; ?>
+</script>
+<?= $this->endSection() ?> 
         <?php endforeach; ?>
     <?php else : ?>
     <?php endif; ?>

@@ -30,7 +30,7 @@ class Comment extends BaseController
     public function commentsIndex()
     {
         $status = $this->request->getGet('status');
-        $comments = $this->model->commentsIndex($status);//le ? devant string signifie string ou null
+        $comments = $this->model->commentsIndex($status); //le ? devant string signifie string ou null
         $data = [
             'comments' => $comments,
             'status'   => $status
@@ -38,7 +38,7 @@ class Comment extends BaseController
         return view('Admin/comments', $data);
     }
 
-    
+
 
 
     public function updateCommentStatus(int $id, string $status)
@@ -82,7 +82,7 @@ class Comment extends BaseController
 
     public function saveComment()
     {
-      
+
         // if(!session()->get('user_id')){
         //     return redirect()->to('/register');
         // }
@@ -172,17 +172,17 @@ class Comment extends BaseController
         ];
 
 
-
+        //get: on recup le comment en base
         if ($this->request->is('post') === false) {
             $comment = $this->model->find($id);
-    //dd($comment);
+            //dd($this->model->findAll());
             $rating = $comment->rating;
             $data = [
                 "comment" => $comment,
-                "rating" => $rating
+                "rating" => $rating,
             ];
             return view('comment/update-comment', $data);
-        } else {
+        } else { //post: envoyer, validation
 
             if ($this->validate($rules) === false) {
                 $comment = $this->model->find($id);
@@ -197,10 +197,24 @@ class Comment extends BaseController
             $rating = $this->request->getPostGet('rating');
             $data = [
                 "content" => $content,
-                "rating" => $rating
+                "rating" => $rating,
+                "status" => 'pending'
             ];
-            $this->model->updateComment($id, $data);
-            return redirect()->back()->with('success','La modification de votre commentaire est en attente de modération');
+            $this->model->updateComment($id, $data); //on envoie en base
+            return redirect()->back()->with('success', 'La modification de votre commentaire est en attente de modération');
         }
+    }
+    public function replyComment()
+    {
+        $data = [
+            'recette_id' => $this->request->getPost('recette_id'),
+            'parent_id'  => $this->request->getPost('parent_id'),
+            'content'    => $this->request->getPost('content'),
+            'user_id'    => 1, // session('user_id') plus tard
+            'status'     => 'approved',
+            'rating'     => null
+        ];
+        $this->model->insert($data);
+        return redirect()->back()->with('success', 'Réponse publiée');
     }
 }

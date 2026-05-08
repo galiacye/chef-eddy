@@ -91,3 +91,5 @@ $routes->post('comment/status/(:num)', 'Comment::updateCommentStatus/$1');
 $routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1/$2');
 $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
 
+$routes->post('comment/reply', 'Comment::replyComment');
+
