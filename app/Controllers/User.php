@@ -6,10 +6,10 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class User extends BaseController
 {
-    private $model;
-    protected $roleModel;
+    private object $model;
+    protected object $roleModel;
 
-
+    //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();
     public function __construct()
     {
         helper('form');

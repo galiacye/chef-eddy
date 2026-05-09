@@ -14,6 +14,11 @@ $routes->get('afficher','Home::afficher');
 $routes->get('monpdf','Home::creerPdf');
 $routes->get('upload','Article::upload');
 
+//Auth
+$routes->get('login', 'Auth::login');//afiche le form
+$routes->post('login', 'Auth::connect');
+$routes->match(['get','post'], 'register', 'Auth::register');
+$routes->post('logout', 'Auth::logout');
 //Admin
 $routes->get('dashboard','Admin::dashboard');
     //admin::user
@@ -94,4 +99,6 @@ $routes->get('Admin/comments', 'Comment::commentsIndex');
 $routes->post('comment/status/(:num)', 'Comment::updateCommentStatus/$1');
 $routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1/$2');
 $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
+
+$routes->post('comment/reply', 'Comment::replyComment');
 

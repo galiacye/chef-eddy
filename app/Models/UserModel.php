@@ -27,7 +27,7 @@ class UserModel extends Model
         $user = $this->insert($data);
     }
 
-    //login
+    //connect
     public function getUserByEmail(string $email)
     {
         return $this->where('email', $email)->first(); // = get()->getRow() pour un objet unique

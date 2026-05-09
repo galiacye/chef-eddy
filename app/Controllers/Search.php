@@ -12,7 +12,7 @@ use HTMLPurifier_Config;
 
 class Search extends BaseController
 {
-    private $model;
+    private object $model;
     public function __construct()
     {
         helper('form');

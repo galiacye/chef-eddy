@@ -59,23 +59,25 @@
 
         <div><?= $recipe->contenu ?></div>
     </div>
-    <?php
-    if ($recipe->statut === 'En attente') { ?>
-        <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
-            <button type="submit" class="btn btn-secondary">Rejeter</button>
-        </form>
+    <div class="btn-box d-flex">
+        <?php
+        if ($recipe->statut === 'En attente') { ?>
+            <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+                <button type="submit" class="btn btn-warning">Rejeter</button>
+            </form>
 
-        <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
-            <button type="submit" class="btn btn-danger">Approuver</button>
-        </form>
-    <?php } elseif($recipe->statut ==='Approuvée') { ?>
-        <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
-            <button type="submit" class="btn btn-secondary">Rejeter</button>
-        </form>
-    <?php  } elseif($recipe->statut === 'Rejetée') { ?>
-        <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
-            <button type="submit" class="btn btn-danger">Approuver</button>
-        </form>
-    <?php } ?>
+            <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
+                <button type="submit" class="btn btn-info">Approuver</button>
+            </form>
+        <?php } elseif ($recipe->statut === 'Approuvée') { ?>
+            <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+                <button type="submit" class="btn btn-warning">Rejeter</button>
+            </form>
+        <?php  } elseif ($recipe->statut === 'Rejetée') { ?>
+            <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
+                <button type="submit" class="btn btn-info">Approuver</button>
+            </form>
+        <?php } ?>
+    </div>
 </div>
 <?= $this->endSection() ?>

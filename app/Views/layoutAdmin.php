@@ -1,4 +1,3 @@
-<!-- app/Views/layouts/admin.php -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,7 +28,9 @@
 
     <main class="container mt-4">
         <?= $this->renderSection('body') ?>
+        
     </main>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?= $this->renderSection('customjs') ?>
 </body>
 </html>
