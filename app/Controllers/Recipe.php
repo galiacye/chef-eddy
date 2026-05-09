@@ -15,6 +15,8 @@ class Recipe extends BaseController
     private object $model;
     protected object $returnType;
 
+    //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();
+
     public function __construct()
     {
         helper('form');
@@ -40,7 +42,7 @@ class Recipe extends BaseController
         $unitModel = model('UnitModel');
         $commentModel = model('CommentModel');
 
-           //dd($recipe, $id);
+        //dd($recipe, $id);
 
         $data = [
             'recipe'      => $recipeModel->getRecipe($id),
@@ -48,10 +50,10 @@ class Recipe extends BaseController
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
             'unites'      => array_column($unitModel->findAll(), 'nom'), // ['kg','g','ml'...],
-          
+
             'comments'    => $commentModel->commentsByRecipe($id)
         ];
-// dd($data['ingredients']);
+        // dd($data['ingredients']);
         return view('Recipe/show-recipe', $data);
     }
 
@@ -67,7 +69,8 @@ class Recipe extends BaseController
     // validation upload image purification Quill tables de liaison gestion ingrédients intelligente 
     public function createRecipe()
     {
-        if ($this->request->is('post') === false) {
+
+        if ($this->request->is('post') === false) { // =if ($this->request->getMethod() !== 'post')
             $tagModel       = new TagModel();
             $categoryModel = new CategoryModel();
             $unitModel = new UnitModel();
@@ -76,187 +79,189 @@ class Recipe extends BaseController
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
-                'unites' => array_column($unitModel->findAll(), 'nom'),// ['kg','g','ml'...]
+                'unites' => array_column($unitModel->findAll(), 'nom'), // ['kg','g','ml'...]
                 'categories_ing_db'  => $ingredientModel->getCategory()
-                ]);
+            ]);
         } else {
             // L'user_id vient de la session
-            $user_id = session()->get('user_id');
+            $role_id = session()->get('role_id');
+            if ($role_id === 2 || $role_id === 3) {
 
-            $rules = [
-                "titre" => [
-                    "label" => "Titre",
-                    "rules" => "required|min_length[2]|max_length[50]",
-                    "errors" => [
-                        "required"   => "Titre requis",
-                        "min_length" => "Titre trop court",
-                        "max_length" => "Titre trop long",
-                    ]
-                ],
-                "image_url" => [
-                    "label" => "Image",
-                    "rules" => "permit_empty|is_image[image_url]|max_size[image_url,2048]|mime_in[image_url,image/jpg,image/jpeg,image/png]",
-                    "errors" => [
-                        "is_image" => "Le fichier doit être une image",
-                        "max_size" => "L'image ne doit pas dépasser 2 Mo",
-                        "mime_in"  => "Le fichier doit être au format JPG ou PNG"
-                    ]
-                ],
-                "temps_preparation" => [
-                    "label" => "Temps de préparation",
-                    "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                    "errors" => [
-                        "integer"               => "Le temps de préparation doit être un nombre entier",
-                        "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
-                        "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
-                    ]
-                ],
-                "temps_cuisson" => [
-                    "label" => "Temps de cuisson",
-                    "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                    "errors" => [
-                        "integer"               => "Le temps de cuisson doit être un nombre entier",
-                        "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
-                        "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
-                    ]
-                ],
-                "contenu" => [
-                    "label" => "Étapes de la recette",
-                    "rules" => "permit_empty|string|max_length[65535]",
-                    "errors" => [
-                        "string"     => "La recette doit être une chaîne de caractères",
-                        "max_length" => "La recette est trop longue"
-                    ]
-                ],
-                "nb_personnes" => [
-                    "label" => "Nombre de personnes",
-                    "rules" => "required|integer|greater_than_equal_to[1]|less_than_equal_to[1000]",
-                    "errors" => [
-                        "required"           => "Le nombre de personnes est requis",
-                        "integer"            => "Le nombre de personnes doit être un entier",
-                        "greater_than_equal_to" => "Le nombre de personnes doit être au moins 1",
-                        "less_than_equal_to" => "Le nombre de personnes ne peut pas dépasser 1000"
-                    ]
-                ],
-                "difficulte" => [
-                    "label" => "Difficulté",
-                    "rules" => "required|in_list[facile,moyen,difficile]",
-                    "errors" => [
-                        "required" => "La difficulté est requise",
-                        "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
-                    ]
-                ],
-                "categorie_id" => [
-                    "label" => "Catégorie",
-                    "rules" => "required|integer|greater_than_equal_to[1]",
-                    "errors" => [
-                        "required" => "La catégorie est requise",
-                        "integer"  => "Catégorie invalide",
-                    ]
-                ],
-                "tags" => [
-                    "label" => "Tags",
-                    "rules" => "permit_empty",
-                ],
-            ];
-            if (!$this->validate($rules)) {
-                return view('Recipe/create-recipe', [
-                    'errors' => $this->validator->getErrors(),
-                    'tags'       => (new TagModel())->findAll(),
-                    'categories' => (new CategoryModel())->findAll(),
-                    'unites'     => array_column((new UnitModel())->findAll(), 'nom'),
-                    'categories_ing_db' => (new IngredientModel())->getCategory()
-                    //?
-                ]);
-            }
-            // Gestion de l'image
-            $image = $this->request->getFile('image_url');
-            if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
-                $newName = $image->getRandomName();
-                $image_path = 'uploads/recipes/' . $newName;
-                $image->move(ROOTPATH . 'public/uploads/recipes', $newName);
-            } else {
-                $image_path = null; // ou une image par défaut
-            }
-
-            // Purification du HTML de Quill
-            $config = HTMLPurifier_Config::createDefault();
-            $purifier = new HTMLPurifier($config);
-            $contenu = $purifier->purify($this->request->getPost('contenu'));
-            $data = [
-                'user_id'           => 3, //$user_id plus tard, là on teste avec admin
-                'titre'             => $this->request->getPost('titre'),
-                'image_url'         => $image_path,
-                'temps_preparation' => $this->request->getPost('temps_preparation') ?: null,
-                //ternaire syntaxe simplifiée = $this->request->getPost('temps_preparation')? $this->request->getPost('temps_preparation'): null
-                'temps_cuisson'     => $this->request->getPost('temps_cuisson') ?: null,
-                'contenu'           => $contenu,
-                'nb_personnes'      => $this->request->getPost('nb_personnes'),
-                'difficulte'        => $this->request->getPost('difficulte'),
-                'statut'            => 'En attente',
-                'nb_vues'           => 0,
-            ];
-            //gestion des tables de liaison:
-            $recipe_id = $this->model->createRecipe($data); //ici insertion en base
-            $db = \Config\Database::connect();
-            $category_id = $this->request->getPost('category_id');
-            if ($category_id) {
-                $db->table('recette_categories')->insert([
-                    'recette_id'   => $recipe_id,
-                    'category_id' => $category_id
-                ]);
-            }
-            $tag_ids = $this->request->getPost('tags');
-            if ($tag_ids) {
-                // force en tableau
-                $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
-                foreach ($tag_ids as $tag_id) {
-                    $db->table('recettes_tags')->insert([
-                        'recette_id' => $recipe_id,
-                        'tag_id'     => $tag_id
+                $rules = [
+                    "titre" => [
+                        "label" => "Titre",
+                        "rules" => "required|min_length[2]|max_length[50]",
+                        "errors" => [
+                            "required"   => "Titre requis",
+                            "min_length" => "Titre trop court",
+                            "max_length" => "Titre trop long",
+                        ]
+                    ],
+                    "image_url" => [
+                        "label" => "Image",
+                        "rules" => "permit_empty|is_image[image_url]|max_size[image_url,2048]|mime_in[image_url,image/jpg,image/jpeg,image/png]",
+                        "errors" => [
+                            "is_image" => "Le fichier doit être une image",
+                            "max_size" => "L'image ne doit pas dépasser 2 Mo",
+                            "mime_in"  => "Le fichier doit être au format JPG ou PNG"
+                        ]
+                    ],
+                    "temps_preparation" => [
+                        "label" => "Temps de préparation",
+                        "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
+                        "errors" => [
+                            "integer"               => "Le temps de préparation doit être un nombre entier",
+                            "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
+                            "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
+                        ]
+                    ],
+                    "temps_cuisson" => [
+                        "label" => "Temps de cuisson",
+                        "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
+                        "errors" => [
+                            "integer"               => "Le temps de cuisson doit être un nombre entier",
+                            "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
+                            "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
+                        ]
+                    ],
+                    "contenu" => [
+                        "label" => "Étapes de la recette",
+                        "rules" => "permit_empty|string|max_length[65535]",
+                        "errors" => [
+                            "string"     => "La recette doit être une chaîne de caractères",
+                            "max_length" => "La recette est trop longue"
+                        ]
+                    ],
+                    "nb_personnes" => [
+                        "label" => "Nombre de personnes",
+                        "rules" => "required|integer|greater_than_equal_to[1]|less_than_equal_to[1000]",
+                        "errors" => [
+                            "required"           => "Le nombre de personnes est requis",
+                            "integer"            => "Le nombre de personnes doit être un entier",
+                            "greater_than_equal_to" => "Le nombre de personnes doit être au moins 1",
+                            "less_than_equal_to" => "Le nombre de personnes ne peut pas dépasser 1000"
+                        ]
+                    ],
+                    "difficulte" => [
+                        "label" => "Difficulté",
+                        "rules" => "required|in_list[facile,moyen,difficile]",
+                        "errors" => [
+                            "required" => "La difficulté est requise",
+                            "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
+                        ]
+                    ],
+                    "categorie_id" => [
+                        "label" => "Catégorie",
+                        "rules" => "required|integer|greater_than_equal_to[1]",
+                        "errors" => [
+                            "required" => "La catégorie est requise",
+                            "integer"  => "Catégorie invalide",
+                        ]
+                    ],
+                    "tags" => [
+                        "label" => "Tags",
+                        "rules" => "permit_empty",
+                    ],
+                ];
+                if (!$this->validate($rules)) {
+                    return view('Recipe/create-recipe', [
+                        'errors' => $this->validator->getErrors(),
+                        'tags'       => (new TagModel())->findAll(),
+                        'categories' => (new CategoryModel())->findAll(),
+                        'unites'     => array_column((new UnitModel())->findAll(), 'nom'),
+                        'categories_ing_db' => (new IngredientModel())->getCategory()
+                        //?
                     ]);
                 }
-            }
-            // Sauvegarde des ingrédients
-            $ingredients = $this->request->getPost('ingredients');
+                // Gestion de l'image
+                $image = $this->request->getFile('image_url');
+                if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
+                    $newName = $image->getRandomName();
+                    $image_path = 'uploads/recipes/' . $newName;
+                    $image->move(ROOTPATH . 'public/uploads/recipes', $newName);
+                } else {
+                    $image_path = null; // ou une image par défaut
+                }
 
-            //log_message('debug', print_r($ingredients, true));
-
-            if ($ingredients) {
-                foreach ($ingredients as $ingredient) {
-                    $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
-                    if (empty($nom)) continue; // on saute les lignes vides
-
-                    //  Chercher si l'ingrédient existe déjà
-                    $ing_existant = $db->table('ingredients')
-                        ->where('nom', $nom)
-                        ->get()
-                        ->getRowArray();
-
-                    if ($ing_existant) {
-                        // 1. Il existe : on récupère son id
-                        $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
-                    } else {
-                        // 2. Il n'existe pas : on l'insère
-                        $db->table('ingredients')->insert([
-                            'nom'       => $nom,
-                            'categorie' => $ingredient['categorie']
+                // Purification du HTML de Quill
+                $config = HTMLPurifier_Config::createDefault();
+                $purifier = new HTMLPurifier($config);
+                $contenu = $purifier->purify($this->request->getPost('contenu'));
+                $data = [
+                    'user_id'           => 3, //$user_id plus tard, là on teste avec admin
+                    'titre'             => $this->request->getPost('titre'),
+                    'image_url'         => $image_path,
+                    'temps_preparation' => $this->request->getPost('temps_preparation') ?: null,
+                    //ternaire syntaxe simplifiée = $this->request->getPost('temps_preparation')? $this->request->getPost('temps_preparation'): null
+                    'temps_cuisson'     => $this->request->getPost('temps_cuisson') ?: null,
+                    'contenu'           => $contenu,
+                    'nb_personnes'      => $this->request->getPost('nb_personnes'),
+                    'difficulte'        => $this->request->getPost('difficulte'),
+                    'statut'            => 'En attente',
+                    'nb_vues'           => 0,
+                ];
+                //gestion des tables de liaison:
+                $recipe_id = $this->model->createRecipe($data); //ici insertion en base
+                $db = \Config\Database::connect();
+                $category_id = $this->request->getPost('category_id');
+                if ($category_id) {
+                    $db->table('recette_categories')->insert([
+                        'recette_id'   => $recipe_id,
+                        'category_id' => $category_id
+                    ]);
+                }
+                $tag_ids = $this->request->getPost('tags');
+                if ($tag_ids) {
+                    // force en tableau
+                    $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
+                    foreach ($tag_ids as $tag_id) {
+                        $db->table('recettes_tags')->insert([
+                            'recette_id' => $recipe_id,
+                            'tag_id'     => $tag_id
                         ]);
-                        $ingredient_id = $db->insertID();
                     }
-
-                    // Insérer dans recette_ingredients
-                    $db->table('recette_ingredients')->insert([
-                        'recette_id'    => $recipe_id,
-                        'ingredient_id' => $ingredient_id,
-                        'quantite'      => $ingredient['quantite'] ?: null,
-                        'unite'         => $ingredient['unite'] ?: null
-                    ]);
                 }
+                // Sauvegarde des ingrédients
+                $ingredients = $this->request->getPost('ingredients');
+
+                //log_message('debug', print_r($ingredients, true));
+
+                if ($ingredients) {
+                    foreach ($ingredients as $ingredient) {
+                        $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
+                        if (empty($nom)) continue; // on saute les lignes vides
+
+                        //  Chercher si l'ingrédient existe déjà
+                        $ing_existant = $db->table('ingredients')
+                            ->where('nom', $nom)
+                            ->get()
+                            ->getRowArray();
+
+                        if ($ing_existant) {
+                            // 1. Il existe : on récupère son id
+                            $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
+                        } else {
+                            // 2. Il n'existe pas : on l'insère
+                            $db->table('ingredients')->insert([
+                                'nom'       => $nom,
+                                'categorie' => $ingredient['categorie']
+                            ]);
+                            $ingredient_id = $db->insertID();
+                        }
+
+                        // Insérer dans recette_ingredients
+                        $db->table('recette_ingredients')->insert([
+                            'recette_id'    => $recipe_id,
+                            'ingredient_id' => $ingredient_id,
+                            'quantite'      => $ingredient['quantite'] ?: null,
+                            'unite'         => $ingredient['unite'] ?: null
+                        ]);
+                    }
+                }
+
+
+                return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
             }
-
-
-            return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
         }
     }
 
@@ -342,7 +347,7 @@ class Recipe extends BaseController
                         "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
                     ]
                 ],
-                
+
 
             ];
             if (!$this->validate($rules)) {
@@ -354,7 +359,7 @@ class Recipe extends BaseController
                     'categories' => model('CategoryModel')->findAll(),
                     'ingredients' => $this->model->getRecipeIngredients($id),
                     'unites' => array_column(model('UnitModel')->findAll(), 'nom'),
-                    'categories_ing_db'=> model('IngredientModel')->getCategory()
+                    'categories_ing_db' => model('IngredientModel')->getCategory()
                 ]);
             }
             $image = $this->request->getFile('image_url');
@@ -366,7 +371,7 @@ class Recipe extends BaseController
                 $image_path = 'uploads/recipes/' . $newName;
                 $image->move(ROOTPATH . 'public/uploads/recipes', $newName); //déplace du doss tempo de ci4 vers uploads avc son nouveau nom
             } else {
-//dd($id);
+                //dd($id);
                 //get a déjà $recipe mais pas post donc :
                 $recipe = $this->model->find($id);
                 $image_path = $recipe->image_url;

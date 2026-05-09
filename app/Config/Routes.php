@@ -14,6 +14,11 @@ $routes->get('afficher','Home::afficher');
 $routes->get('monpdf','Home::creerPdf');
 $routes->get('upload','Article::upload');
 
+//Auth
+$routes->get('login', 'Auth::login');//afiche le form
+$routes->post('login', 'Auth::connect');
+$routes->match(['get','post'], 'register', 'Auth::register');
+$routes->post('logout', 'Auth::logout');
 //Admin
 $routes->get('dashboard','Admin::dashboard');
     //admin::user
