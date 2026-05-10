@@ -16,7 +16,7 @@ Register
 
 <h1 class="text-center">S'inscrire</h1>
 
-<?= form_open_multipart('User/register') ?>
+<?= form_open_multipart('Auth/register') ?>
 
 <?php
 $username = [

@@ -9,7 +9,7 @@ body { background: #f5f2ee;
         .card { border: 1px solid #ddd8d0; border-radius: 12px; overflow: hidden; }
         .card-header-dark { background: #0f0e0d; padding: 2rem 2rem 3.5rem; position: relative; }
         .card-header-dark h1 { font-family: "champ_limo" ; color: #fff; font-size: 2.7rem; margin-top: .8rem; }
-        .card-header-dark h1 span { color: #c8a96e; }
+        .card-header-dark h1 span { color: #4cd98c; }
         .back-link { color: #c8a96e; font-size: .75rem; text-transform: uppercase; letter-spacing: .07em; text-decoration: none; }
         .avatar-wrap { position: absolute; bottom: -2rem; left: 2rem; }
         .avatar { width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; background: #f0e6d3; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #c8a96e; font-weight: 700; overflow: hidden; }

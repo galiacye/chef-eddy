@@ -55,7 +55,7 @@
                             <?php endif ?>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('User/profile') ?>">Mon Profil</a>
+                            <a class="nav-link" href="<?= base_url('profile') ?>">Mon Profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= base_url('mes-recettes') ?>">Mes Recettes</a>

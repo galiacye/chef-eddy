@@ -15,10 +15,11 @@ $routes->get('monpdf','Home::creerPdf');
 $routes->get('upload','Article::upload');
 
 //Auth
-$routes->get('login', 'Auth::login');//afiche le form
+$routes->get('login', 'Auth::login');//affiche le form
 $routes->post('login', 'Auth::connect');
 $routes->match(['get','post'], 'register', 'Auth::register');
-$routes->post('logout', 'Auth::logout');
+$routes->get('logout', 'Auth::logout');
+
 //Admin
 $routes->get('dashboard','Admin::dashboard');
     //admin::user
@@ -37,10 +38,6 @@ $routes->post('Admin/recipe/save/(:num)', 'Admin::saveRecipe/$1'); //pour approu
 $routes->get('delete-user/(:num)','Admin::deleteUser/$1');// dans la vue : <a href="<?= base_url('delete-user/' . $user->id)? >supp</a>
 $routes->get('delete-recipe/(:num)','Admin::deleteRecipe/$1');
 
-//Auth
-$routes->post('login', 'Auth::connect');
-$routes->get('register', 'Auth::connect');
-$routes->get('logout', 'Auth::logout');
 
 //search
 $routes->get('search','Search::search');
@@ -54,8 +51,8 @@ $routes->get('all-users','User::UserIndex');
 $routes->match(['get','post'], 'update-user/(:num)','User::updateUser/$1');
 
 //PROFIL
-$routes->match(['get', 'post'], 'User/profile', 'User::profile');
-$routes->match(['get', 'post'], 'toy', 'User::');
+$routes->match(['get', 'post'], 'profile', 'User::profile');
+
 
 //role
 $routes->get('all-roles','Role::allRoles');

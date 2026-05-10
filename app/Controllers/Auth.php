@@ -36,11 +36,12 @@ class Auth extends BaseController
         $config = HTMLPurifier_Config::createDefault();
         $purifier = new HTMLPurifier($config);
 
-        if ($this->request->getMethod() !== 'post') { //=   if ($this->request->is('post') === false) 
+        if ($this->request->is('post')===false) { //= recommandé car insensible à la casse 'POST':  if ($this->request->getMethod() !== post) 
+//dd($this->request->getMethod());
             $data['roles'] = $this->RoleModel->findAll();
             return view('Auth/register', $data);
         } else {
-
+//dd($this->request->getPost());
             $avatar_file = $this->request->getFile('avatar_url');
             $avatar_url = null;
 
@@ -66,7 +67,7 @@ class Auth extends BaseController
 
             $this->UserModel->register($data);
 
-            return redirect()->to('/login');
+            return redirect()->to('/')->with('success', 'Votre profil a bien été crée');
         }
     }
 

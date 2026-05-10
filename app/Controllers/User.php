@@ -169,9 +169,15 @@ class User extends BaseController
             // Gestion du fichier avatar
 
             $avatar_file = $this->request->getFile('avatar_url');
-            $avatar_url = $user->avatar_url;
-            if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {  //car ne peut être déplacé qu'une fois et l'a déjà été en tant que fichier temporaire au moment du chargement
-                $avatar_url = $avatar_file->store(); //native de ci4 stocke direct les uploads ds writable
+            $avatar_url = $user->avatar_url; // garde l'avatar actuel par défaut
+            if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
+                //car ne peut être déplacé qu'une fois et l'a déjà été en tant que fichier temporaire au moment du chargement
+                $newName = $avatar_file->getRandomName();
+                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
+                $avatar_url = 'uploads/avatars/' . $newName;
+            }
+                    //$avatar_url = $avatar_file->store(); //native de ci4 stocke direct les uploads 
+                    //ds writable et nous on veut ds uploads
             }
 
             // Préparation des données pour le modèle
@@ -192,9 +198,9 @@ class User extends BaseController
             $this->model->update($id, $data); //update fct native ci4
 
             // Retour view succès
-            return view('success');
+            return redirect()->to('profile')->with('success','Vos modifications ont été enregistrées');
         }
-    }
+    
     public function userChef(int $id)
     {
         $data = [
@@ -205,6 +211,7 @@ class User extends BaseController
 
     public function profile(?int $id = null): string|RedirectResponse
     {
+       
         // Si pas d'id passé, on prend l'utilisateur connecté en session
         $session = session();
         $userId  = $id ?? $session->get('user_id');
@@ -214,7 +221,7 @@ class User extends BaseController
         }
 
         $user = $this->model->find($userId);
-
+//dd($session->get('user_id'), $user->id);
         if (! $user) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$userId introuvable.");
         }
@@ -222,73 +229,12 @@ class User extends BaseController
         $data = [
             'title'       => 'Profil — ' . esc($user->username),
             'user'        => $user,
-            'isOwnProfile' => ($session->get('user_id') === (int) $user->id),
+            'isOwnProfile' => ($session->get('user_id') == (int) $user->id),
         ];
-
+ //dd($data['isOwnProfile']);
         return view('User/profile', $data);
     }
 
-    public function edit(): string|RedirectResponse
-    {
-        $session = session();
-        $userId  = $session->get('user_id');
+    
 
-        if (! $userId) {
-            return redirect()->to('/login')->with('error', 'Vous devez être connecté.');
-        }
-
-        $user = $this->model->find($userId);
-
-        return view('user/edit', [
-            'title'  => 'Modifier mon profil',
-            'user'   => $user,
-            'errors' => session()->getFlashdata('errors') ?? [],
-        ]);
-    }
-
-    public function updateProfile(): RedirectResponse
-    {
-        $session = session();
-        $userId  = $session->get('user_id');
-
-        if (! $userId) {
-            return redirect()->to('/login');
-        }
-        $rules = [
-            'firstname' => 'required|min_length[2]|max_length[100]',
-            'lastname'  => 'required|min_length[2]|max_length[100]',
-            'phone'     => 'permit_empty|min_length[10]|max_length[20]',
-            'email'     => "required|valid_email|is_unique[users.email,id,$userId]",
-        ];
-
-        // Mot de passe seulement si rempli
-        if ($this->request->getPost('password')) {
-            $rules['password']         = 'min_length[8]|regex_match[/.*[0-9].*/]';
-            $rules['password_confirm'] = 'matches[password]';
-
-
-            if (! $this->validate($rules)) {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('errors', $this->validator->getErrors());
-            }
-            $data = [
-                'firstname' => $this->request->getPost('firstname'),
-                'lastname'  => $this->request->getPost('lastname'),
-                'email'     => $this->request->getPost('email'),
-                'phone'     => $this->request->getPost('phone'),
-            ];
-
-            if ($this->request->getPost('password')) {
-                $data['password'] = password_hash(
-                    $this->request->getPost('password'),
-                    PASSWORD_DEFAULT
-                );
-            }
-            $this->model->update($userId, $data);
-
-            return redirect()->to('User/profile')
-                ->with('success', 'Vos informations ont été mises à jour.');
-        }
-    }
 }

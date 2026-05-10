@@ -39,14 +39,14 @@ $password = [
 $nom = [
     'name' => 'nom',
     'id' => 'nom',
-    'value' => set_value('nom'),
+    'value' => set_value('nom', $user->nom),
     'class' => 'form-control w-50'
 ];
 
 $prenom = [
     'name' => 'prenom',
     'id' => 'prenom',
-    'value' => set_value('prenom'),
+    'value' => set_value('prenom', $user->prenom),
     'class' => 'form-control w-50'
 ];
 
@@ -87,6 +87,9 @@ $role_id = [
 <?= validation_show_error('prenom') ?><br>
 
 <label for="avatar_url">Avatar</label>
+<?php if(!empty($user->avatar_url)):?>
+    <img src="<?= base_url($user->avatar_url) ?>" alt="avatar actuel" width="80"  class="d-block mb-2">
+<?php endif ?>
 <?= form_upload($avatar) ?>
 <?= validation_show_error('avatar_url') ?><br>
 
@@ -95,7 +98,7 @@ $role_id = [
 <?= form_fieldset_close() ?>
 
 <div class="container text-center mt-3">
-    <?= form_submit('submit', 'Créer l’utilisateur', ['class' => 'btn btn-info']) ?>
+    <?= form_submit('submit', 'Enregistrer les modifs', ['class' => 'btn btn-info']) ?>
 </div>
 
 <?= form_close() ?>
