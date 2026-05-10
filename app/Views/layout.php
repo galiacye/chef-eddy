@@ -41,7 +41,7 @@
                         <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="<?= base_url('/add-recipe') ?>">Proposez une recette</a>
+                        <a class="nav-link" href="<?= base_url('/register') ?>">Proposez une recette</a>
                         <!--enverra sur s'inscrire-->
                     </li>
                 </ul>
@@ -67,10 +67,10 @@
             <?php else: ?>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('Auth/login') ?>">Déjà membre</a>
+                        <a class="nav-link" href="<?= base_url('login') ?>">Déjà membre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('Auth/register') ?>">S'inscrire</a>
+                        <a class="nav-link" href="<?= base_url('register') ?>">S'inscrire</a>
                     </li>
                 </ul>
             <?php endif; ?>
