@@ -207,4 +207,9 @@ class Comment extends BaseController
         $this->model->insert($data);
         return redirect()->back()->with('success', 'Réponse publiée');
     }
+
+    public function commentsByUser()
+    {
+        $comments = $this->model->commentsByUser();
+    }
 }

@@ -15,10 +15,10 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<div class="py-4 py-md-5">
+<div class="d-flex py-4 py-md-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-7">
+            <div class="col-12 col-md-8 col-lg-6">
                 <div class="card shadow-sm">
 
                     <!-- En-tête -->
@@ -80,6 +80,33 @@
             </div> 
         </div> 
     </div> 
+
+    <div class="container2">
+    <?php if (!empty($comments)): ?>
+        <h3>Mes commentaires</h3>
+        <div class="row justify-content-center comments mt-4">
+            <div class="col-12 col-md-8 col-lg-6">
+                <?php foreach ($comments as $comment): ?>
+                    <?php if ($comment->parent_id === null): ?>
+                        <div class="comment mb-3">
+                            <p><?= $comment->content ?></p>
+                            <p>Note : <?= $comment->rating ?></p>
+                            <!-- réponse chef -->
+                            <?php foreach ($comments as $reply): ?>
+                                <?php if ($reply->parent_id == $comment->id): ?>
+                                    <div class="reply ms-4 mt-2">
+                                        <p><strong>Le chef répond :</strong></p>
+                                        <p><?= $reply->content ?></p>
+                                    </div>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </div>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </div>
+        </div>
+    <?php endif ?>
+</div>
 </div> 
 
 <?= $this->endSection() ?>

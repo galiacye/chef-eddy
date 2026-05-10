@@ -40,10 +40,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="<?= base_url('/register') ?>">Proposez une recette</a>
-                        <!--enverra sur s'inscrire-->
-                    </li>
+                    <?php if (session()->get('role_id') >= 2): ?>
+                        <li>
+                            <a class="nav-link" href="<?= base_url('add-recipe') ?>">Proposer une recette</a>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a class="nav-link" href="<?= base_url('register') ?>">Proposer une recette</a>
+                        </li>
+                    <?php endif ?>
                 </ul>
             </div>
             <div class="right">

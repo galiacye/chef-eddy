@@ -50,7 +50,7 @@ class CommentModel extends Model
 
     public function commentsByUser(int $user_id)
     {
-        return $this->select('comments.id, users.username, comments.content, comments.rating')
+        return $this->select('comments.id, users.username, comments.content, comments.rating, comments.parent_id, comments.status')
             ->join('users', 'comments.user_id = users.id')
             ->where('comments.user_id', $user_id)
             ->findAll();

@@ -8,6 +8,7 @@ class User extends BaseController
 {
     private object $model;
     protected object $roleModel;
+    protected object $commentModel;
 
     //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();
     public function __construct()
@@ -15,7 +16,12 @@ class User extends BaseController
         helper('form');
         $this->model = Model('UserModel');
         $this->roleModel = Model('RoleModel');
+        $this->commentModel = Model('CommentModel');
     }
+
+
+
+
 
     public function register() //ou dans Auth ???
     {
@@ -53,6 +59,10 @@ class User extends BaseController
         }
     }
 
+
+
+
+
     public function showUser(int $id)
     {
         $user = $this->model->find($id);
@@ -61,8 +71,6 @@ class User extends BaseController
         ];
         return view('User/showUser', $data);
     }
-
-
 
     public function cIdUser(int $id)
     {
@@ -176,31 +184,35 @@ class User extends BaseController
                 $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
                 $avatar_url = 'uploads/avatars/' . $newName;
             }
-                    //$avatar_url = $avatar_file->store(); //native de ci4 stocke direct les uploads 
-                    //ds writable et nous on veut ds uploads
-            }
-
-            // Préparation des données pour le modèle
-            $data = [
-                "username" => $username,
-                "email" => $email,
-                "nom" => $nom,
-                "prenom" => $prenom,
-                "avatar_url" => $avatar_url,
-                "role_id" => $role_id
-            ];
-            $password = $this->request->getPost('password');
-            if (!empty($password)) {
-                $data['password'] = password_hash($password, PASSWORD_DEFAULT);
-            }
-
-            // Insertion dans la base
-            $this->model->update($id, $data); //update fct native ci4
-
-            // Retour view succès
-            return redirect()->to('profile')->with('success','Vos modifications ont été enregistrées');
+            //$avatar_url = $avatar_file->store(); //native de ci4 stocke direct les uploads 
+            //ds writable et nous on veut ds uploads
         }
-    
+
+        // Préparation des données pour le modèle
+        $data = [
+            "username" => $username,
+            "email" => $email,
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "avatar_url" => $avatar_url,
+            "role_id" => $role_id
+        ];
+        $password = $this->request->getPost('password');
+        if (!empty($password)) {
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        // Insertion dans la base
+        $this->model->update($id, $data); //update fct native ci4
+
+        // Retour view succès
+        return redirect()->to('profile')->with('success', 'Vos modifications ont été enregistrées');
+    }
+
+
+
+
+
     public function userChef(int $id)
     {
         $data = [
@@ -209,32 +221,35 @@ class User extends BaseController
         return view('User/userChef', $data);
     }
 
-    public function profile(?int $id = null): string|RedirectResponse
+
+
+
+
+                            //id peut être null
+    public function profile(?int $id = null): string|RedirectResponse //convention pas vraiment de string ici 
     {
-       
+
         // Si pas d'id passé, on prend l'utilisateur connecté en session
         $session = session();
-        $userId  = $id ?? $session->get('user_id');
+        $user_id  = $id ?? $session->get('user_id');
 
-        if (! $userId) {
+        if (! $user_id) {
             return redirect()->to('/login')->with('errors', 'Vous devez être connecté.');
         }
 
-        $user = $this->model->find($userId);
-//dd($session->get('user_id'), $user->id);
+        $user = $this->model->find($user_id);
+        //dd($session->get('user_id'), $user->id);
         if (! $user) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$userId introuvable.");
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$user_id introuvable.");
         }
-
+        $commentModel = model('CommentModel');
         $data = [
             'title'       => 'Profil — ' . esc($user->username),
             'user'        => $user,
             'isOwnProfile' => ($session->get('user_id') == (int) $user->id),
+            'comments' => $commentModel->commentsByUser($user_id)
         ];
- //dd($data['isOwnProfile']);
+        //dd($data['isOwnProfile']);
         return view('User/profile', $data);
     }
-
-    
-
 }
