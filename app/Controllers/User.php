@@ -225,7 +225,7 @@ class User extends BaseController
             'isOwnProfile' => ($session->get('user_id') === (int) $user->id),
         ];
 
-        return view('User/toyEditProfile', $data);
+        return view('User/profile', $data);
     }
 
     public function edit(): string|RedirectResponse

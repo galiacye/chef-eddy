@@ -39,4 +39,11 @@ class UserModel extends Model
             ->join('roles', 'roles.id = users.role_id')
             ->findAll();
     }
+
+    public function getRole()
+    {
+        return $this->select('users.role_id, roles.nom')
+        ->join('roles', 'users.role_id = roles.id')
+        ->find();
+    }
 }
