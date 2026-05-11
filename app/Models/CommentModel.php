@@ -68,7 +68,8 @@ class CommentModel extends Model
             ->getResultArray();
 
         $ids = array_column($userCommentsIds, 'id');
-
+//dd($userCommentsIds);
+//dd($ids);
         if (empty($ids)) return [];
 
         //user comments's and chef replies
