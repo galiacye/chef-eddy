@@ -249,6 +249,8 @@ class User extends BaseController
             'isOwnProfile' => ($session->get('user_id') == (int) $user->id),
             'comments' => $commentModel->commentsByUser($user_id)
         ];
+       // dd($user_id);
+        //dd($commentModel->commentsByUser($user_id));
         //dd($data['isOwnProfile']);
         return view('User/profile', $data);
     }

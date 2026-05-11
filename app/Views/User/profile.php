@@ -15,6 +15,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
+<?php //dd($comments); ?>
 <div class="d-flex py-4 py-md-5">
     <div class="container">
         <div class="row justify-content-center">
