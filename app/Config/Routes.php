@@ -99,3 +99,8 @@ $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
 
 $routes->post('comment/reply', 'Comment::replyComment');
 
+//password-forgot
+$routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
+$routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
+
+
