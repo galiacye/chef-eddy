@@ -1,84 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <?= $this->renderSection('metadescription') ?>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <?= $this->renderSection('customcss') ?>
-    <link href="<?= base_url('assets/css/layout.css') ?>" rel="stylesheet">
-  
-
-    <title><?= $this->renderSection('title') ?></title>
+    <title>Admin - <?= $this->renderSection('titre') ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?= $this->renderSection('custom-css') ?>
 </head>
+<body class="bg-light">
 
-<body class="d-flex flex-column min-vh-100">
-
-    <!-- HEADER FULL WIDTH -->
-    <!-- header id pour scrip js cas sticky -->
-    <header id="mainHeader" class="border-bottom shadow vert w-100">
-        <div class="container-fluid py-2">
-            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-
-                <!-- LOGO -->
-                <a href="/">
-                    <img src="<?= base_url('assets/img/logo_text.png') ?>"
-                        alt="ToyCycle Logo"
-                        style="height: 120px;">
+    <nav class="navbar navbar-dark bg-dark" style="height: 100px;">
+        <div class="container-fluid">
+           
+                <a class="navbar-brand" href="/Admin">
+                    <img src="<?= base_url('img/eddy-bd.jpeg') ?>" height="80" alt="Chef Eddy">
                 </a>
 
-                <!-- NAV -->
-                <nav class="d-flex gap-3 flex-wrap justify-content-center">
-                    <a href="<?= base_url('backdoor/toys/1') ?>" class="btn btn-custom">Jouets</a>
-                    <a href="<?= base_url('backdoor/admin/users') ?>" class="btn btn-custom">Utilisateurs</a>
-                    <a href="<?= base_url('backdoor/orders') ?>" class="btn btn-custom">Commandes</a>
-                    <a href="<?= base_url('backdoor/comments') ?>" class="btn btn-custom">Commentaires</a>
-                </nav>
-
-                <div class="d-flex gap-3 align-items-center">
-                    <a href="<?= base_url('backdoor/admin') ?>" class="btn btn-dashboard" style="background-color: orange;">Tableau de bord</a>
-                   
-                   
-                </div>
-
+            <span class="navbar-brand"> Admin Chef Eddy</span>
+            <div>
+                <a href="/dashboard" class="btn btn-outline-light btn-sm me-2">Tableau de bord</a>
+                <a href="/Admin/recipes-index" class="btn btn-outline-light btn-sm me-2">Recettes</a>
+                <a href="/Admin/users-index" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
+                <a href="/" class="btn btn-outline-warning btn-sm">Site</a>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-grow-1">
+    <main class="container mt-4">
         <?= $this->renderSection('body') ?>
+        
     </main>
-
-    <!-- FOOTER FULL WIDTH -->
-    <footer class="bg-dark text-light mt-auto w-100">
-        <div class="container-fluid py-4 text-center">
-            <!-- TEXTE -->
-            <p class="mb-1">
-                &copy; <?= date('Y') ?> ToyCycle
-            </p>
-
-            <small>
-                Jouets reconditionnés <img src="<?= base_url('assets/img/footernoir.jpeg') ?>" style="height:30px;">
-            </small>
-
-        </div>
-    </footer>
-
-    <?= $this->renderSection('customJs') ?>
-    <!-- cas sticky header: -->
-    <!-- <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('mainHeader');
-    const main = document.querySelector('main');
-    if(header && main){
-        main.style.marginTop = header.offsetHeight + 'px';
-    }
-});
-</script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?= $this->renderSection('customjs') ?>
 </body>
 </html>

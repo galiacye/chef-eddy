@@ -1,10 +1,9 @@
 
   body {
-    background-image: url("/img/desserts/citroncoupe.png");
-    background-size: cover;
+  background-color: rgb(255, 249, 247);
   }
-  h1 {
-    font-size: 4em;
+  .ban h1 {
+    font-size: 6em;
     color: white;
     text-shadow: 2px 2px black;
   }
@@ -19,4 +18,16 @@
   }
   .photo1 {
     height: 15rem;
+  }
+  .one {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+  }
+  .txt {
+    color: black;
+  }
+  .eddy {
+    margin-bottom: 15px;
   }

@@ -37,16 +37,28 @@
 
 <div class="row mt-4">
     <div class="col-sm-12 md-4 lg-3">
-        <h2>Recettes de Chef Eddy</h2>
+        <div class="row one w-100">
+            <div class="col-2 ">
+                <img src="./img/eddy-bd.jpeg" class="eddy">
+            </div>
+            <div class="col-6 ">
+                <h1>Les recettes du Chef Eddy</h1>
+                <h2 class="txt">On ne rigole pas avec les grammages...</h2>
+            </div>
+            <!-- <div clacc="col-2">
+                <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
+            </div> -->
+        </div>
+
         <div class="row">
             <?php foreach ($Recipes as $recipe) : ?>
                 <div class="col-10 col-md-6 col-lg-4  mb-4">
                     <div class="card h-100">
-                       <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>" 
-                                    class="card-img-top" alt="<?= esc($recipe->titre) ?>">
+                        <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>"
+                            class="card-img-top" alt="<?= esc($recipe->titre) ?>">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
-                            
+
                             <a href="<?= base_url('recipe/' . $recipe->id) ?>" class="btn btn-primary mt-auto">Voir la recette</a>
                         </div>
                     </div>
@@ -55,5 +67,5 @@
         </div>
     </div>
 </div>
-                
+
 <?= $this->endSection() ?>

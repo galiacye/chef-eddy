@@ -183,3 +183,6 @@ CREATE TABLE `password_resets` (
     KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  ENGINE spécifie le moteur de stockage MySQL et DEFAULT CHARSET=utf8mb4 supporte tous les caractères Unicode, y compris les emojis. utf8 classique ne supporte que 3 octets par caractère, utf8mb4 en supporte 4.
+
+INSERT INTO categories(nom)
+VALUES('Chef Eddy');

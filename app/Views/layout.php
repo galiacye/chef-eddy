@@ -1,139 +1,95 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <?= $this->renderSection('metadescription') ?>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <?= $this->renderSection('customcss') ?>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
-
-   <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
-    <style>
-      
-
-        
-    </style>
-
-    <title><?= $this->renderSection('title') ?></title>
+    <?= $this->renderSection('title') ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url('./css/header-mq.css') ?>" rel="stylesheet">
+    <?= $this->renderSection('custom-css') ?>
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <!-- HEADER FULL WIDTH -->
-<header id="mainHeader" class="border-bottom shadow vert w-100">
 
-    <div class="container-fluid header-wrapper">
+<body>
 
-        <!-- LEFT -->
-        <div class="header-left">
-            <img src="<?= base_url('assets/img/logo_text.png') ?>"
-                 alt="ToyCycle Logo"
-                 class="header-logo">
-        </div>
-
-        <!-- BURGER MOBILE -->
-        <button class="navbar-toggler d-lg-none"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#headerCenter">
-            ☰
-        </button>
-
-        <!-- CENTER -->
-        <div class="collapse d-lg-flex header-center" id="headerCenter">
-
-            <!-- NAV -->
-            <nav class="header-nav">
-                <a href="<?= base_url('store/toy/category/figurines') ?>" class="btn btn-custom">Figurines</a>
-
-                <a href="<?= base_url('store/toy/category/jouetenbois') ?>" class="btn btn-custom">
-                    Jouets en bois
-                </a>
-
-                <a href="<?= base_url('store/toy/category/jeudesociete') ?>" class="btn btn-custom">
-                    Jeux de société
-                </a>
-
-                <a href="<?= base_url('store/toy/category/vehicules') ?>" class="btn btn-custom">
-                    Véhicules
-                </a>
-            </nav>
-
-            <!-- SEARCH -->
-            <form method="GET"
-                  action="<?= base_url('store/toy/search') ?>"
-                  class="search-form">
-
-                <input class="form-control"
-                       type="search"
-                       name="q"
-                       placeholder="Rechercher...">
-
-                <button class="btn search-btn" type="submit">
-                    <img src="<?= base_url('assets/img/lupe.png') ?>">
-                </button>
-
-            </form>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="header-right">
-
-            <a href="<?= base_url('store') ?>">
-                <img src="<?= base_url('assets/img/shop.png') ?>" class="header-icon">
-            </a>
-
-            <a href="<?= base_url('Profile/profile') ?>">
-                <img src="<?= base_url('assets/img/konto.png') ?>" class="header-icon">
-            </a>
-
-            <a href="<?= base_url('store/cart') ?>">
-                <img src="<?= base_url('assets/img/caddy3.png') ?>" class="header-icon">
-            </a>
-
-            <a href="<?= base_url('logout') ?>"
-               class="btn btn-logout btn-secondary">
-                Déconnexion
-            </a>
+    <header class="cupcake text-light py-3"> <!-- py = top+bottom -->
+        <div class="ban ">
+           
+            <div class="container text-center">
+                <h1 class="hero-title">Chef Eddy </h1>
+                
+            </div>
+           
 
         </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4"> <!-- expand-lg =>se replie en deçà de 1024 -->
 
-    </div>
-</header>
+        <div class="container d-flex justify-content-between">
+            <div class="left">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('index.php') ?>">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('recipe-index') ?>">Toutes les recettes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('category/index') ?>"> Les Catégories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
+                    </li>
+                    <?php if (session()->get('role_id') >= 2): ?>
+                        <li>
+                            <a class="nav-link" href="<?= base_url('add-recipe') ?>">Proposer une recette</a>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a class="nav-link" href="<?= base_url('register') ?>">Proposer une recette</a>
+                        </li>
+                    <?php endif ?>
+                </ul>
+            </div>
+            <div class="right">
+                <ul class="navbar-nav">
+                    <?php if (session()->has('user_id')): ?>
+                        <li class="nav-item">
+                            <?php if (session()->get('role_id') == 3): ?>
+                                <a href="<?= base_url('/dashboard') ?>" class="nav-link btn btn-outline-info btn-sm">Admin</a>
+                            <?php endif ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('profile') ?>">Mon Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('mes-recettes') ?>">Mes Recettes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('logout') ?>">Se Déconnecter</a>
+                        </li>
+                </ul>
+            <?php else: ?>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('login') ?>">Déjà membre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('register') ?>">S'inscrire</a>
+                    </li>
+                </ul>
+            <?php endif; ?>
+            </div>
+    </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-grow-1">
+    <main class="container mt-4">
         <?= $this->renderSection('body') ?>
     </main>
 
-    <!-- FOOTER FULL WIDTH -->
-    <footer class="bg-dark text-light mt-auto w-100">
-        <div class="container-fluid py-4 text-center">
-            <!-- TEXTE -->
-            <p class="mb-1">
-                &copy; <?= date('Y') ?> ToyCycle
-            </p>
+    <?= $this->renderSection('custom-js') ?>
 
-            <small>
-                Jouets reconditionnés <img src="<?= base_url('assets/img/footernoir.jpeg') ?>" style="height:30px;">
-            </small>
 
-        </div>
-    </footer>
-    <?= $this->renderSection('customJs') ?>
-    <!-- cas sticky header: -->
-    <!-- <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('mainHeader');
-    const main = document.querySelector('main');
-    if(header && main){
-        main.style.marginTop = header.offsetHeight + 'px';
-    }
-});
-</script> -->
+
 </body>
+
 </html>
