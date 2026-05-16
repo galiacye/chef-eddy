@@ -20,32 +20,7 @@
   background-image: url('../img/gateaux-varies.jpg');
   background-size: cover;
 }
-.cupcake {
-  /* background-color: aqua; */
 
-}
-/*camouflage mouvant*/
-/* .hero-title {
-  font-family: "dirty_war";
-  font-size: 2.2em;
-  text-shadow: none;
-  background: url("../img/camouflage.jpg") repeat;
-  background-size: 300px;
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: camoMove 5s linear infinite;
-} */
-
-@keyframes camoMove {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 300px 0;
-  }
-}
 
  .hero-title {
     font-family: "tenada";
