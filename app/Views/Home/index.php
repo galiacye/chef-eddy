@@ -80,7 +80,7 @@
                                 
                                     <div class="d-flex justify-content-center align-items-center mb-2 ">
                                         <a href="<?= site_url('tag/' . $tag->id) ?>"
-                                            class="btn btn-outline-primary">
+                                            class="btn btn-tag">
                                             <?= esc($tag->nom) ?>
                                         </a>
                                     </div>
