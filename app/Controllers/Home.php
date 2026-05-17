@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Libraries\Pdf;
 use App\Models\IngredientModel;
 use App\Models\IngredientsCategoriesModel;
@@ -19,21 +20,29 @@ class Home extends BaseController
         $ingredients = $ingredientModel->findAll();
 
         $ingredientsCategoriesModel = model('IngredientsCategoriesModel');
-        $ingredientsCategories = $ingredientsCategoriesModel->findAll();
+
+        $ingredientsCategories = $ingredientsCategoriesModel
+            ->orderBy('nom', 'ASC')
+            ->findAll();
+
+        $tagModel = model('TagModel');
+        $tags = $tagModel->findAll();
+
         $data = [
             'Recipes' => $Recipes,
             'ingredients' => $ingredients,
-            'categories' =>$ingredientsCategories
+            'categories' => $ingredientsCategories,
+            'tags' => $tags
         ];
         return view('Home/index', $data);
     }
-    
+
     public function salut()
     {
         return view('Home/test');
     }
 
-       public function afficher()
+    public function afficher()
     {
         return view('Home/afficher');
     }

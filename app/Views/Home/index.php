@@ -1,6 +1,3 @@
-
-
-
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
@@ -75,12 +72,22 @@
         <div class="row mt-4">
 
             <div class="col-2">
-                <div class="row">
+                <div class="row ">
                     <div class="col-12">
-                        <h2>Tags</h2>
-                        <ul>
-                            <li></li>
-                        </ul>
+                        <h2 class="text-center">Tags</h2>
+                     
+                            <?php foreach ($tags as $tag) : ?>
+                                
+                                    <div class="d-flex justify-content-center align-items-center mb-2 ">
+                                        <a href="<?= site_url('tag/' . $tag->id) ?>"
+                                            class="btn btn-outline-primary">
+                                            <?= esc($tag->nom) ?>
+                                        </a>
+                                    </div>
+                                
+                            <?php endforeach ?>
+
+                        
                     </div>
                 </div>
             </div>

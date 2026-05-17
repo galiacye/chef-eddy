@@ -70,49 +70,8 @@ class SearchModel extends Model
             ->getResultObject();
     }
 
-    // public function searchWithout(string $category)
-    // {
-    //     return $this->select('recettes.id,
-    //                         recettes.titre,
-    //                         recettes.image_url,
-    //                         recettes.difficulte,
-    //                         recettes.temps_preparation,recettes.temps_cuisson,
-    //                         recettes.nb_personnes')
-    //             ->whereNotIn('recettes.id', function($builder) use ($category) {
-    //                 return $builder->select('recette_ingredients.recette_id')
-    //                    ->from('recette_ingredients')
-    //                    ->join('ingredients', 'ingredients.id = recette_ingredients.ingredient_id')
-    //                    ->where('ingredients.categorie', $category);
-    //                 })
-    //             ->get()
-    //             ->getResultObject();
-    // }
 
-
-
-    //     public function searchWithout(string $category)
-    // {
-    //     // 1. on récupère les ids de recettes à exclure
-    //     $exclude = $this->select('recettes.id')
-    //         ->join('recette_ingredients', 'recettes.id = recette_ingredients.recette_id')
-    //         ->join('ingredients', 'ingredients.id = recette_ingredients.ingredient_id')
-    //         ->where('ingredients.categorie', $category)
-    //         ->get()
-    //         ->getResultObject();
-
-    //     $excludeIds = array_column($exclude, 'id');
-    // dd($excludeIds);
-    //     // 2. on retourne toutes les recettes sauf celles-là
-    //     return $this->select('recettes.id,
-    //                             recettes.titre,
-    //                             recettes.image_url,
-    //                             recettes.difficulte,
-    //                             recettes.temps_preparation,recettes.temps_cuisson,
-    //                             recettes.nb_personnes')
-    //         ->whereNotIn('recettes.id', empty($excludeIds) ? [0] : $excludeIds)
-    //         ->get()
-    //         ->getResultObject();
-    // }
+  
 
     public function searchWithout(string $category)
     {
@@ -120,6 +79,7 @@ class SearchModel extends Model
             ->select('recette_ingredients.recette_id AS id')
             ->join('ingredients', 'ingredients.id = recette_ingredients.ingredient_id')
             ->where('ingredients.categorie', $category)
+           
             ->get()
             ->getResultObject();
 
