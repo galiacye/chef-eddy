@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use App\Libraries\Pdf;
 use App\Models\IngredientModel;
+use App\Models\IngredientsCategoriesModel;
+use App\Models\RecipeModel;
 
 
 class Home extends BaseController
@@ -12,11 +14,16 @@ class Home extends BaseController
         helper('form');
         $recipeModel = model('RecipeModel');
         $Recipes = $recipeModel->findAll();
+
         $ingredientModel = model('IngredientModel');
         $ingredients = $ingredientModel->findAll();
+
+        $ingredientsCategoriesModel = model('IngredientsCategoriesModel');
+        $ingredientsCategories = $ingredientsCategoriesModel->findAll();
         $data = [
             'Recipes' => $Recipes,
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'categories' =>$ingredientsCategories
         ];
         return view('Home/index', $data);
     }

@@ -1,3 +1,6 @@
+
+
+
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
@@ -32,40 +35,83 @@
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </div>
 
+    <div class="col-auto">OU SANS </div>
+
+    <div class="col-auto">
+        <select name="without" class="form-select">
+            <option value="">-- Sans restriction --</option>
+            <?php foreach ($categories as $cat) : ?>
+                <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </div>
+
+
+
 </div>
 <?= form_close() ?>
 
-<div class="row mt-4">
-    <div class="col-sm-12 md-4 lg-3">
-        <div class="row one w-100">
-            <div class="col-2 ">
-                <img src="./img/eddy-bd.jpeg" class="eddy">
+<div class="row mt-4 w-100">
+    <div class="col-12">
+        <div class="row one justify-content-between align-items-center">
+
+            <div class="col-2">
+                <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
             </div>
-            <div class="col-6 ">
+
+            <div class="col-8 text-center">
                 <h1>Les recettes du Chef Eddy</h1>
                 <h2 class="txt">On ne rigole pas avec les grammages...</h2>
             </div>
-            <!-- <div clacc="col-2">
-                <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
-            </div> -->
+
+            <div class="col-2 ">
+                <img src="./img/eddy-bd.jpeg" class="eddy">
+            </div>
         </div>
 
-        <div class="row">
-            <?php foreach ($Recipes as $recipe) : ?>
-                <div class="col-10 col-md-6 col-lg-4  mb-4">
-                    <div class="card h-100">
-                        <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>"
-                            class="card-img-top" alt="<?= esc($recipe->titre) ?>">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
+        <div class="row mt-4">
 
-                            <a href="<?= base_url('recipe/' . $recipe->id) ?>" class="btn btn-primary mt-auto">Voir la recette</a>
-                        </div>
+            <div class="col-2">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Tags</h2>
+                        <ul>
+                            <li></li>
+                        </ul>
                     </div>
                 </div>
-            <?php endforeach ?>
+            </div>
+
+            <div class="col-10">
+                <div class="row">
+
+                    <?php foreach ($Recipes as $recipe) : ?>
+
+                        <div class="col-10 col-md-6 col-lg-4 mb-4">
+                            <div class="card w-custom ">
+                                <div class="img-wrapper">
+                                    <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>"
+                                        class="card-img-top" alt="<?= esc($recipe->titre) ?>">
+                                </div>
+
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
+
+                                    <a href="<?= base_url('recipe/' . $recipe->id) ?>" class="btn btn-see mt-auto">Voir</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
 </div>
 
 <?= $this->endSection() ?>
