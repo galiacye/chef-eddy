@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?= $this->renderSection('title') ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <link href="<?= base_url('./css/header-mq.css') ?>" rel="stylesheet">
     <?= $this->renderSection('custom-css') ?>
 </head>
@@ -16,7 +19,7 @@
         <img src="<?= base_url('./img/eddy-bd.jpeg') ?>" class="eddy">
         <div class="container text-center">
             <h1 class="hero-title">Chef Eddy  </h1>
-            <h2 class="txt">On ne rigole pas avec les grammages...</h2>
+            <h2 class="text-light">On ne rigole pas avec les grammages...</h2>
         </div>
         <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
 
@@ -36,9 +39,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('category/index') ?>"> Les Catégories</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('tag/index') ?>">Tags</a>
-            </li>
+         
             <li>
                 <a class="nav-link" href="<?= base_url('/edit-recipe') ?>">Proposez une recette</a>
                 <!--enverra sur s'inscrire-->
