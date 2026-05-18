@@ -1,4 +1,4 @@
-<?= $this->extend('layout') ?>
+<?= $this->extend('layoutFront') ?>
 
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('css/index.css') ?>" rel="stylesheet">
