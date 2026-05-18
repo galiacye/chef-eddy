@@ -41,7 +41,7 @@
             </li>
          
             <li>
-                <a class="nav-link" href="<?= base_url('/edit-recipe') ?>">Proposez une recette</a>
+                <a class="nav-link" href="<?= base_url('/add-recipe') ?>">Proposez une recette</a>
                 <!--enverra sur s'inscrire-->
             </li>
         </ul>
