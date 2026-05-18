@@ -16,9 +16,9 @@
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </div>
 
-    <div class="col-auto">OU</div>
+    <div class="col-auto d-none d-md-flex">OU</div>
 
-    <div class="col-auto">
+    <div class="col-auto d-none d-md-flex">
         <input list="ingredients-list" id="ingredients_input"
             name="ingredient" class="form-control"
             placeholder="Recettes par ingrédient">
@@ -28,13 +28,13 @@
             <?php endforeach ?>
         </datalist>
     </div>
-    <div class="col-auto">
+    <div class="col-auto d-none d-md-flex">
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </div>
 
-    <div class="col-auto">OU SANS </div>
+    <div class="col-auto d-none d-md-flex">OU SANS </div>
 
-    <div class="col-auto">
+    <div class="col-auto d-none d-md-flex">
         <select name="without" class="form-select">
             <option value="">-- Sans restriction --</option>
             <?php foreach ($categories as $cat) : ?>
@@ -42,7 +42,7 @@
             <?php endforeach ?>
         </select>
     </div>
-    <div class="col-auto">
+    <div class="col-auto d-none d-md-flex">
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </div>
 
@@ -69,26 +69,40 @@
             </div>
         </div>
 
+        <button class="btn btn-primary d-md-none mb-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#tagsCollapse"
+            aria-expanded="false"
+            id="tagsBtn">
+         <i class="bi bi-list fs-4" id="tagsIcon" style="font-style: normal;">Tags</i>
+        </button>
+
+
         <div class="row mt-4">
 
             <div class="col-2">
-                <div class="row tags">
-                    <div class="col-12">
-                        <h2 class="text-center">Tags</h2>
-                     
+
+                <div class="collapse d-md-block" id="tagsCollapse">
+                    <div class="row tags">
+                        <div class="col-12">
+                            <h2 class="text-center">Tags</h2>
+
                             <?php foreach ($tags as $tag) : ?>
-                                
-                                    <div class="d-flex justify-content-center align-items-center mb-4">
-                                        <a href="<?= site_url('tag/' . $tag->id) ?>"
-                                            class="btn btn-tag">
-                                            <?= esc($tag->nom) ?>
-                                        </a>
-                                    </div>
-                                
+
+                                <div class="d-flex justify-content-center align-items-center mb-4">
+                                    <a href="<?= site_url('tag/' . $tag->id) ?>"
+                                        class="btn btn-tag">
+                                        <?= esc($tag->nom) ?>
+                                    </a>
+                                </div>
+
                             <?php endforeach ?>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="col-10">
                 <div class="row">
@@ -119,4 +133,20 @@
 </div>
 </div>
 
+<?= $this->endSection() ?>
+<?= $this->section('custom-js') ?>
+<script>
+    const collapse = document.getElementById('tagsCollapse');
+    const icon = document.getElementById('tagsIcon');
+
+    collapse.addEventListener('show.bs.collapse', function() {
+        icon.classList.remove('bi-list');
+        icon.classList.add('bi-x-lg');
+    });
+
+    collapse.addEventListener('hide.bs.collapse', function() {
+        icon.classList.remove('bi-x-lg');
+        icon.classList.add('bi-list');
+    });
+</script>
 <?= $this->endSection() ?>
