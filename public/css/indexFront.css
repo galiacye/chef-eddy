@@ -28,7 +28,9 @@ body {
   max-width: 120px;
   object-fit: cover;
 } */
-
+.tags {
+  gap: 3rem;
+}
 .img-wrapper {
   padding: 10px;
   width: 100%;

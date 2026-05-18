@@ -10,7 +10,18 @@
   font-family: "tenada";
   src: url("/fonts/tenada/tenada.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "creamer";
+  src: url('/fonts/creamer/creamer.ttf') format("truetype");
+}
+@font-face {
+  font-family: "champ_limo";
+  src: url('/fonts/champ_limo/champ_limo.ttf') format("truetype");
+}
+@font-face {
+  font-family: "nexa";
+  src: url('/fonts/nexa/Nexa3.ttf') format("truetype");
+}
 
 .ban {
   display: flex;
@@ -21,24 +32,12 @@
   background-size: cover;
 }
 
-
- .hero-title {
-    font-family: "tenada";
-    font-size: 4em;
-background-color: aliceblue;
-    /* background-image: url('../img/mignardises.jpg'); */
-    background-size: cover;
-    background-position: center;
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    -webkit-text-fill-color: transparent;  
-    color: transparent;
-text-shadow: 2px 2px 2px black;
-   
-    
-}  
+.hero-title {
+    font-family: "nexa";
+    font-size: 3em;
+    color: white;
+    text-shadow: 2px 4px 6px black;
+}
 
 .txt {
   color: white;
@@ -87,12 +86,7 @@ text-shadow: 2px 2px 2px black;
   .hero-title {
     font-size: 5em;
   }
-  .fusil {
-    display: inline;
-    font-size: 3rem;
-    -webkit-text-fill-color: pink;
-    color: pink !important;
-  }
+
   .eddy {
     height: 170px;
     margin-left: 20px;
