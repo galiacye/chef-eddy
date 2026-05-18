@@ -14,7 +14,7 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- Ton CSS -->
+  
     <link href="<?= base_url('./css/layout.css') ?>" rel="stylesheet">
 
     <?= $this->renderSection('custom-css') ?>
