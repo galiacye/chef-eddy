@@ -12,7 +12,7 @@
 
 <body>
 
-    <header class="cupcake text-light py-3"> <!-- py = top+bottom -->
+    <header class="text-light py-3"> <!-- py = top+bottom -->
         <div class="ban ">
            
             <div class="container text-center">
@@ -24,6 +24,72 @@
         </div>
     </header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4"> <!-- expand-lg =>se replie en deçà de 1024 -->
+
+
+
+
+
+
+    
+        <!--
+            <button class="navbar-toggler d-lg-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#cupcake">
+                <i class="bi bi-list"></i>
+            </button>
+
+
+            <div class="collapse d-lg-flex header-center" id="headerCenter">
+
+                <nav class="header-nav">
+                    <a href="<?= base_url('store/toy/category/figurines') ?>" class="btn btn-custom">Figurines</a>
+
+                    <a href="<?= base_url('store/toy/category/jouetenbois') ?>" class="btn btn-custom">
+                        Jouets en bois
+                    </a>
+
+                    <a href="<?= base_url('store/toy/category/jeudesociete') ?>" class="btn btn-custom">
+                        Jeux de société
+                    </a>
+
+                    <a href="<?= base_url('store/toy/category/vehicules') ?>" class="btn btn-custom">
+                        Véhicules
+                    </a>
+                </nav>
+
+                
+                <form method="GET"
+                    action="<?= base_url('store/toy/search') ?>"
+                    class="search-form">
+
+                    <input class="form-control"
+                        type="search"
+                        name="q"
+                        placeholder="Rechercher...">
+
+                    <button class="btn search-btn" type="submit">
+                        <img src="<?= base_url('assets/img/lupe.png') ?>">
+                    </button>
+
+                </form>
+            </div> -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="container d-flex justify-content-between">
             <div class="left">
