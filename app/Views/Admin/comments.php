@@ -6,8 +6,13 @@
 ?>
 <?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
-<?= $this->section('customcss') ?>
+<?= $this->section('custom-css') ?>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<style>
+    body {
+        background-color: blue;
+    }
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -84,7 +89,7 @@
                                     </span>
                                 </div>
                                 <div id="editor-reply-<?= $c->id ?>" style="background:white; height:100px;"></div>
-                                <textarea name="content" id="content-<?= $c->id ?>" hidden style="display:none"></textarea>
+                                <input type="hidden" name="content" id="content-<?= $c->id ?>">
                                 <input type="submit" value="envoyer" class="btn btn-primary btn-sm mt-2">
                             </form>
                         </div>
@@ -102,9 +107,15 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('customjs') ?>
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"></script>
+
 <script>
+     document.addEventListener('DOMContentLoaded', () => {
     <?php foreach ($comments as $c): ?>
+       
+
             (function() {
                 let quill = null;
 
@@ -134,6 +145,8 @@
                     document.getElementById('content-<?= $c->id ?>').value = quill.root.innerHTML;
                 });
             })();
+       
     <?php endforeach; ?>
+     });
 </script>
 <?= $this->endSection() ?>
