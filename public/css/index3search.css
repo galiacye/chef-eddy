@@ -1,10 +1,5 @@
 body {
-background: linear-gradient(
-  120deg,
-  rgb(214, 247, 231) 0%,
-  rgb(160, 230, 200) 60%,
-  rgb(245, 255, 250) 100%
-);
+  background-color: rgb(214, 247, 231);
 }
 
 
@@ -40,18 +35,6 @@ background: linear-gradient(
 
 
 
-.search-filters {
-    width: 110px;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.search-filters select {
-  flex: 1;
-  font-size: 0.9rem;
-  padding: 0.35rem 0.5rem;
-}
-
 
 
 .rech {
@@ -65,9 +48,6 @@ background: linear-gradient(
   height: 15rem;
 }
 
-.chef-titre {
-    
-}
 .txt {
   color: black;
 }
@@ -79,9 +59,8 @@ background: linear-gradient(
   max-width: 120px;
   object-fit: cover;
 } */
-.tag-title {
-    font-family: "nexa";
-    font-size: 4em;
+.tags {
+  gap: 3rem;
 }
 .img-wrapper {
   padding: 10px;
@@ -116,9 +95,6 @@ background: linear-gradient(
   font-size: small;
 }
 .btn-see {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   width: 80px;
   height: 30px;
   background: linear-gradient(135deg, #ff9966, #ff5e62);
@@ -142,26 +118,20 @@ background: linear-gradient(
 .btn-tag {
   width: 150px;
   height: 35px;
-   
-  background: linear-gradient(
-    135deg,
-    #f78457,   /* corail vif */
-    #f14c83    /* rose intense */
-  );
-  color: white;
-  border: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(255, 61, 127, 0.25);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-weight: 500;
+  background: linear-gradient(135deg, #5aa4f8, #5effa1);
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.25s ease;
 }
 .btn-tag:hover {
   width: 150px;
   height: 35px;
   color: white;
-  background: linear-gradient(135deg, #f5437e , #f5903d);
-  border-radius: 999px;
+  background: linear-gradient(135deg, #0dc588, #136cd3);
+  border-radius: 10px;
   border: 1px solid;
   padding: 8px 14px;
   font-size: 0.9rem;

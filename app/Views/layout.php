@@ -14,7 +14,8 @@
 
 <body>
 
-   <header class="bg-dark text-light py-3"> <!-- py = top+bottom -->
+   <header class="bg-dark text-light py-3"> 
+    <!-- py = top+bottom -->
     <div class="ban ">
         <img src="<?= base_url('./img/eddy-bd.jpeg') ?>" class="eddy">
         <div class="container text-center">

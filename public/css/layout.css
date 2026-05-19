@@ -28,8 +28,8 @@
   align-items: center;
   justify-content: space-between;
   height: 100px;
-  background-image: url("../img/gateaux-varies.jpg");
-  background-size: cover;
+ background-image: url("../img/gateaux-varies.jpg");
+  background-size: cover; 
 }
 
 .ban h1 {
