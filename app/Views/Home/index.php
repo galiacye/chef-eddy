@@ -10,24 +10,27 @@
 
     <div class="search-scroll">
 
-        <div class="search-box">
-            <div class="col-auto">
-                <input type="text" name="search" id="search_input"
-                    class="form-control" placeholder="Rechercher une recette">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+        <div class="search-box position-relative">
+            <div class="input-group">
+                <input type="text" class="form-control pe-5" placeholder="Rechercher une recette">
+
+                <button type="submit"
+                    class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
+                    <i class="bi bi-search"></i>
+                </button>
             </div>
         </div>
 
 
-        <div class="search-box">
-            <div class="col-auto d-none d-md-flex">OU</div>
+        <div class="search-box position-relative">
 
-            <div class="col-auto d-none d-md-flex">
+
+            <div class="col-auto  d-flex">
+
+
                 <input list="ingredients-list" id="ingredients_input"
                     name="ingredient" class="form-control"
-                    placeholder="Recettes par ingrédient">
+                    placeholder="Avec...">
                 <datalist id="ingredients-list">
                     <?php foreach ($ingredients as $ingr) : ?>
                         <option value="<?= esc($ingr->nom) ?>"></option>
@@ -35,27 +38,32 @@
                 </datalist>
             </div>
 
-            <div class="col-auto d-none d-md-flex">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+            <div class="col-auto d-flex">
+                <button type="submit" class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
+                     <i class="bi bi-search"></i>
+                </button>
             </div>
         </div>
 
-        <div class="search-box">
-            <div class="col-auto d-none d-md-flex">OU SANS </div>
+        <div class="search-box position-relative">
 
-            <div class="col-auto d-none d-md-flex">
+
+            <div class="col-auto d-flex">
                 <select name="without" class="form-select">
-                    <option value="">-- Sans restriction --</option>
+                    <option value=""> Sans... </option>
                     <?php foreach ($categories as $cat) : ?>
                         <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
             <div class="col-auto d-none d-md-flex">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+                <button type="submit" class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
+                  
+            </button>
             </div>
         </div>
     </div>
+   
 </div>
 
 <?= form_close() ?>

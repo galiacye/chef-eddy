@@ -17,19 +17,21 @@ body {
 }
 
 .search-box {
+
+  flex: 0 0 100%;/*chaque box centrée exclut les autres: effet carroussel*/
   min-width: 280px;
 
   flex-shrink: 0;/*empêche flexbox de réduire les box pour les faire rentrer ds l'écran*/
 
-  scroll-snap-align: start;/*s'aligne avec flex-start du container*/
+  scroll-snap-align: center;/*start s'aligne avec flex-start du container*/
 }
-.search-scroll::-webkit-scrollbar {
-  display: none;/*cacher la scrollbar*/
-}
-
+/*.search-scroll::-webkit-scrollbar {
+  display: none;cacher la scrollbar*/
+/*}*/
+/* 
 .search-scroll {
   scrollbar-width: none;
-}
+} */
 
 
 
