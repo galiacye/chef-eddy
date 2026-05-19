@@ -92,7 +92,7 @@
             data-bs-target="#tagsCollapse"
             aria-expanded="false"
             id="tagsBtn">
-            <i class="bi bi-list fs-4" id="tagsIcon" style="font-style: normal;">Tags</i>
+            <i class="bi bi-list fs-4" id="tagsIcon">Tags</i>
         </button>
 
 

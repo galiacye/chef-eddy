@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "creamer";
+  src: url("/fonts/creamer/Creamer.otf") format("truetype");
+}
+@font-face {
+  font-family: "champ_limo";
+  src: url("/fonts/champ_limo/champ_limo.ttf") format("truetype");
+}
+@font-face {
+  font-family: "nexa";
+  src: url("/fonts/nexa/Nexa3.ttf") format("truetype");
+}
+
+
 body {
 background: linear-gradient(
   90deg,
@@ -81,7 +95,7 @@ background: linear-gradient(
   object-fit: cover;
 } */
 .tag-title {
-    font-family: "nexa";
+    font-family: "nexa"!important;
     font-size: 4em;
 }
 .img-wrapper {
@@ -134,6 +148,9 @@ background: linear-gradient(
   transition: 0.25s ease;
 }
 
+.tag-title {
+  font-family: "nexa";
+}
 .btn-see:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
