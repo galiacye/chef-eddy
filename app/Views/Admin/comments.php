@@ -7,7 +7,7 @@
 <?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
-
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>

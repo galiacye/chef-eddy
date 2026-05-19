@@ -8,47 +8,56 @@
 <?= form_open('search', ['method' => 'GET']) ?>
 <div class="row d-flex align-items-center">
 
-    <div class="col-auto">
-        <input type="text" name="search" id="search_input"
-            class="form-control" placeholder="Rechercher une recette">
+    <div class="search-scroll">
+
+        <div class="search-box">
+            <div class="col-auto">
+                <input type="text" name="search" id="search_input"
+                    class="form-control" placeholder="Rechercher une recette">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+
+
+        <div class="search-box">
+            <div class="col-auto d-none d-md-flex">OU</div>
+
+            <div class="col-auto d-none d-md-flex">
+                <input list="ingredients-list" id="ingredients_input"
+                    name="ingredient" class="form-control"
+                    placeholder="Recettes par ingrédient">
+                <datalist id="ingredients-list">
+                    <?php foreach ($ingredients as $ingr) : ?>
+                        <option value="<?= esc($ingr->nom) ?>"></option>
+                    <?php endforeach ?>
+                </datalist>
+            </div>
+
+            <div class="col-auto d-none d-md-flex">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <div class="col-auto d-none d-md-flex">OU SANS </div>
+
+            <div class="col-auto d-none d-md-flex">
+                <select name="without" class="form-select">
+                    <option value="">-- Sans restriction --</option>
+                    <?php foreach ($categories as $cat) : ?>
+                        <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="col-auto d-none d-md-flex">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
     </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    </div>
-
-    <div class="col-auto d-none d-md-flex">OU</div>
-
-    <div class="col-auto d-none d-md-flex">
-        <input list="ingredients-list" id="ingredients_input"
-            name="ingredient" class="form-control"
-            placeholder="Recettes par ingrédient">
-        <datalist id="ingredients-list">
-            <?php foreach ($ingredients as $ingr) : ?>
-                <option value="<?= esc($ingr->nom) ?>"></option>
-            <?php endforeach ?>
-        </datalist>
-    </div>
-    <div class="col-auto d-none d-md-flex">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    </div>
-
-    <div class="col-auto d-none d-md-flex">OU SANS </div>
-
-    <div class="col-auto d-none d-md-flex">
-        <select name="without" class="form-select">
-            <option value="">-- Sans restriction --</option>
-            <?php foreach ($categories as $cat) : ?>
-                <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
-            <?php endforeach ?>
-        </select>
-    </div>
-    <div class="col-auto d-none d-md-flex">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    </div>
-
-
-
 </div>
+
 <?= form_close() ?>
 
 <div class="row mt-4 w-100">
@@ -75,7 +84,7 @@
             data-bs-target="#tagsCollapse"
             aria-expanded="false"
             id="tagsBtn">
-         <i class="bi bi-list fs-4" id="tagsIcon" style="font-style: normal;">Tags</i>
+            <i class="bi bi-list fs-4" id="tagsIcon" style="font-style: normal;">Tags</i>
         </button>
 
 

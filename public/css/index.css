@@ -1,11 +1,40 @@
 body {
   background-color: rgb(214, 247, 231);
 }
-.ban h1 {
-  font-size: 6em;
-  color: white;
-  text-shadow: 2px 2px black;
+
+
+
+
+
+.search-scroll {
+  display: flex;
+  gap: 1rem;
+
+  overflow-x: auto; /*x=axe horizontal, ici scroll horiz autorisé si dépasse de l'écran.*/
+  scroll-snap-type: x mandatory;/*aimant: le scroll s'arrête sur une box pas n'importe où*/
+/*snap: calage auto->ne reste pas entre 2 positions*/
+  padding-bottom: 10px;
 }
+
+.search-box {
+  min-width: 280px;
+
+  flex-shrink: 0;/*empêche flexbox de réduire les box pour les faire rentrer ds l'écran*/
+
+  scroll-snap-align: start;/*s'aligne avec flex-start du container*/
+}
+.search-scroll::-webkit-scrollbar {
+  display: none;/*cacher la scrollbar*/
+}
+
+.search-scroll {
+  scrollbar-width: none;
+}
+
+
+
+
+
 .rech {
   background-color: white;
 }
@@ -137,12 +166,29 @@ body {
   }
 }
 
-@media screen and (min-width: 1024px) {
+
   /* .card-img-top {
     flex: 1 1 180px;
     max-width: 220px;
     object-fit: cover;
   } */
+
+
+@media screen and (min-width: 1024px) {
+
+  .search-scroll {
+    overflow-x: visible;
+    justify-content: center;
+  }
+
+  .search-box {
+    min-width: auto;
+    flex: 1;
+  }
+
+
+
+
 
   .img-wrapper {
     width: 100%;
@@ -163,4 +209,5 @@ body {
     transition: 0.25s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
+
 }
