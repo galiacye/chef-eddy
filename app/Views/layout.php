@@ -133,8 +133,8 @@
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('mes-recettes') ?>">
-                                Mes recettes
+                               href="<?= base_url('favorites') ?>">
+                                Mes favorites
                             </a>
                         </li>
 
