@@ -52,6 +52,30 @@
         <p><?= $recipe->contenu ?></p>
 </div>
 
+
+
+<!--bouton favorites commence ici -->
+<?php
+$user_id    = session()->get('user_id');
+$isFav     = false;
+if ($user_id) {
+    $favoriteModel = model('FavoriteModel');
+    $isFav = $favoriteModel->isFavorite($user_id, $recipe->id);
+}
+?>
+
+<?php if ($user_id) : ?>
+    <form action="<?= site_url('favorites/toggle/' . $recipe->id) ?>" method="post">
+        <?= csrf_field() ?>
+        <button type="submit" class="btn <?= $isFav ? 'btn-warning' : 'btn-outline-warning' ?>">
+            <?= $isFav ? '★ Retirer des favoris' : '☆ Ajouter aux favoris' ?>
+        </button>
+    </form>
+<?php endif; ?>
+ <!--et se termine là-->
+ 
+
+
 <div class="comment m-4">
     <h3>Voir les avis</h3>
     <?php if(!empty($comments)): ?>

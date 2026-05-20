@@ -99,3 +99,11 @@ $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
 
 $routes->post('comment/reply', 'Comment::replyComment');
 
+//favorites
+
+$routes->post('favorites/toggle/(:num)', 'Favorite::toggle/$1');
+$routes->get('favorites', 'Favorite::index');
+
+
+
+
