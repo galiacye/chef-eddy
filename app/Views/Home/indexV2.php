@@ -15,71 +15,76 @@
 
 <?= $this->section('body') ?>
 
-<div class="container-fluid px-0 w-100">
+<div class="container-fluid d-flex justify-content-center px-0 w-100">
 
     <?= form_open('search', ['method' => 'GET']) ?>
 
-    <div class="search-box position-relative mb-2">
-        <input type="text"
-            name="q"
-            class="form-control pe-5"
-            placeholder="Rechercher une recette">
+    <div class="search-wrapper">
 
-        <button type="submit"
-            class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
-            <i class="bi bi-search"></i>
-        </button>
-    </div>
-
-    <div class="row align-items-center filters">
-
-    
-        <div class="col-10">
-
-            <div class="search-filters mb-2">
-                <select name="ingredient" class="form-select">
-                    <option value="">Avec...</option>
-                    <?php foreach ($ingredients as $ingr): ?>
-                        <option value="<?= esc($ingr->nom) ?>">
-                            <?= esc($ingr->nom) ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-
-            <div class="search-filters">
-                <select name="without" class="form-select">
-                    <option value="">Sans...</option>
-                    <?php foreach ($categories as $cat): ?>
-                        <option value="<?= esc($cat->nom) ?>">
-                            <?= esc($cat->nom) ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-
-        </div>
-
-        <!-- lupe -->
-        <div class="col-2 d-flex justify-content-center align-items-center">
+       
+        <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
+            <input type="text"
+                name="q"
+                class="form-control pe-5"
+                placeholder="Rechercher une recette">
 
             <button type="submit"
                 class="btn border-0 bg-transparent p-0">
                 <i class="bi bi-search"></i>
             </button>
-
         </div>
 
+        <div class="row align-items-center filters">
+        
+
+            <div class="col-10">
+                <div class="filters d-flex gap-2">
+
+                   <div class="filter-half d-flex align-items-center">
+
+                        <select name="ingredient" class="form-select">
+                            <option value="">Avec</option>
+
+                            <?php foreach ($ingredients as $ingr): ?>
+                                <option value="<?= esc($ingr->nom) ?>">
+                                    <?= esc($ingr->nom) ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+
+                        <button type="submit"
+                            class="btn border-0 bg-transparent p-0">
+                            <i class="bi bi-search"></i>
+                        </button>
+
+                    </div>
+
+                   <div class="filter-half d-flex align-items-center">
+
+                        <select name="without" class="form-select">
+                            <option value="">Sans</option>
+
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?= esc($cat->nom) ?>">
+                                    <?= esc($cat->nom) ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+
+                        <button type="submit"
+                            class="btn border-0 bg-transparent p-0">
+                            <i class="bi bi-search"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
 </div>
-
-
-
 <?= form_close() ?>
-
+</div>
 
 <div class="row mt-4 w-100">
     <div class="col-12">

@@ -28,6 +28,9 @@
             <div class="container text-center">
                 <h1 class="hero-title">Chef Eddy</h1>
             </div>
+            <div class="col-3 ">
+                <img src="./img/eddy-bd.jpeg" class="eddy">
+            </div> 
         </div>
     </header>
 
@@ -167,7 +170,7 @@
     </nav>
 
     <!-- main content -->
-    <main class="container-fluid px-1 w-100">
+    <main class="container-fluid px-2 w-100">
         <?= $this->renderSection('body') ?>
     </main>
 

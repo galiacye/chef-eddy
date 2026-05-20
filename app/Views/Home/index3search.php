@@ -1,16 +1,16 @@
-<?= $this->extend('layoutFront') ?>
+<?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/index.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/index3search.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 <?= form_open('search', ['method' => 'GET']) ?>
-<div class="row d-flex align-items-center">
+<div class="row d-flex align-items-center ">
 
     <div class="search-scroll">
 
-        <div class="search-box position-relative">
+        <div class="search-box position-relative mt-2">
             <div class="input-group">
                 <input type="text" class="form-control pe-5" placeholder="Rechercher une recette">
 
@@ -22,7 +22,7 @@
         </div>
 
 
-        <div class="search-box position-relative">
+        <div class="search-box position-relative mt-2">
 
 
             <div class="col-auto  d-flex">
@@ -45,21 +45,25 @@
             </div>
         </div>
 
-        <div class="search-box position-relative">
+        <div class="search-box align-items-center mt-2">
 
 
-            <div class="col-auto d-flex">
-                <select name="without" class="form-select">
-                    <option value=""> Sans... </option>
-                    <?php foreach ($categories as $cat) : ?>
-                        <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="col-auto d-none d-md-flex">
-                <button type="submit" class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
-                  
-            </button>
+            <div class="col-auto d-flex select-with-icon">
+           
+                <select name="without" class="form-select pe-5">
+                            <option value="">Sans</option>
+
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?= esc($cat->nom) ?>">
+                                    <?= esc($cat->nom) ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+
+                        <button type="submit"
+                            class="search-icon-btn">
+                            <i class="bi bi-search"></i>
+                        </button>
             </div>
         </div>
     </div>
@@ -70,20 +74,20 @@
 
 <div class="row mt-4 w-100">
     <div class="col-12">
-        <div class="row one justify-content-between align-items-center">
+        <div class="row one  d-none d-md-flex align-items-center">
 
-            <div class="col-2">
+            <div class="col-2 ms-4 ps-4">
                 <img src="<?= base_url('./img/logo.png') ?>" alt="logo" class="logo">
             </div>
 
-            <div class="col-8 text-center">
-                <h1>Les recettes du Chef Eddy</h1>
+            <div class="col-8 text-center mb-0">
+                <h1>Les recettes du Chef</h1>
                 <h2 class="txt">On ne rigole pas avec les grammages...</h2>
             </div>
 
-            <div class="col-2 ">
+            <!-- <div class="col-3 ">
                 <img src="./img/eddy-bd.jpeg" class="eddy">
-            </div>
+            </div> -->
         </div>
 
         <button class="btn btn-primary d-md-none mb-3"

@@ -11,17 +11,40 @@
   src: url("/fonts/nexa/Nexa3.ttf") format("truetype");
 }
 
-
 body {
-background: linear-gradient(
-  90deg,
-  rgb(214, 247, 231) 0%,
-  rgb(160, 230, 200) 60%,
- rgb(155, 247, 234)
-); 
-
+  background: linear-gradient(
+    90deg,
+    rgb(214, 247, 231) 0%,
+    rgb(160, 230, 200) 60%,
+    rgb(155, 247, 234)
+  );
 }
 
+.search-scroll {
+  display: flex;
+  gap: 1rem;
+
+  overflow-x: auto; /*x=axe horizontal, ici scroll horiz autorisé si dépasse de l'écran.*/
+  scroll-snap-type: x mandatory; /*aimant: le scroll s'arrête sur une box pas n'importe où*/
+  /*snap: calage auto->ne reste pas entre 2 positions*/
+  padding-bottom: 10px;
+}
+
+.search-box1 {
+  flex: 0 0 100%; /*chaque box centrée exclut les autres: effet carroussel*/
+  max-width: 350px;
+
+  flex-shrink: 0; /*empêche flexbox de réduire les box pour les faire rentrer ds l'écran*/
+
+  scroll-snap-align: center; /*start s'aligne avec flex-start du container*/
+}
+/*.search-scroll::-webkit-scrollbar {
+  display: none;cacher la scrollbar*/
+/*}*/
+/* 
+.search-scroll {
+  scrollbar-width: none;
+} */
 
 
 
@@ -55,19 +78,29 @@ background: linear-gradient(
 
 
 
-.search-filters {
-    width: 110px;
-  display: flex;
-  gap: 0.5rem;
+.search-wrapper {
+  width: 100%;
+  max-width: 300px;
 }
 
-.search-filters select {
+.search-box1 {
+  width: 100%;
+}
+
+.filters {
+  width: 100%;
+}
+
+.filter-half {
   flex: 1;
-  font-size: 0.9rem;
-  padding: 0.35rem 0.5rem;
+  min-width: 0; /* CRUCIAL pour éviter dépassement flex */
+  gap: 4px;
 }
 
-
+.filter-half select {
+  flex: 1;
+  min-width: 0;
+}
 
 .rech {
   background-color: white;
@@ -80,9 +113,7 @@ background: linear-gradient(
   height: 15rem;
 }
 
-.chef-titre {
-    
-}
+
 .txt {
   color: black;
 }
@@ -94,9 +125,9 @@ background: linear-gradient(
   max-width: 120px;
   object-fit: cover;
 } */
-.tag-title {
-    font-family: "nexa"!important;
-    font-size: 4em;
+.tag-title, h2 {
+  font-family: "nexa" !important;
+  font-size: 4em;
 }
 .img-wrapper {
   padding: 10px;
@@ -131,9 +162,9 @@ background: linear-gradient(
   font-size: small;
 }
 .btn-see {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 80px;
   height: 30px;
   background: linear-gradient(135deg, #ff9966, #ff5e62);
@@ -160,11 +191,11 @@ background: linear-gradient(
 .btn-tag {
   width: 150px;
   height: 35px;
-   
+
   background: linear-gradient(
     135deg,
-    #f78457,   /* corail vif */
-    #f14c83    /* rose intense */
+    #fc6863,
+    /* corail vif */ #f0268b /* rose intense */
   );
   color: white;
   border: none;
@@ -178,7 +209,7 @@ background: linear-gradient(
   width: 150px;
   height: 35px;
   color: white;
-  background: linear-gradient(135deg, #f5437e , #f5903d);
+  background: linear-gradient(135deg, #f397b5, #f7a766);
   border-radius: 999px;
   border: 1px solid;
   padding: 8px 14px;
@@ -216,16 +247,13 @@ background: linear-gradient(
   }
 }
 
-
-  /* .card-img-top {
+/* .card-img-top {
     flex: 1 1 180px;
     max-width: 220px;
     object-fit: cover;
   } */
 
-
 @media screen and (min-width: 1024px) {
-
   .search-scroll {
     overflow-x: visible;
     justify-content: center;
@@ -235,10 +263,6 @@ background: linear-gradient(
     min-width: auto;
     flex: 1;
   }
-
-
-
-
 
   .img-wrapper {
     width: 100%;
@@ -259,5 +283,4 @@ background: linear-gradient(
     transition: 0.25s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-
 }

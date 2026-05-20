@@ -3,7 +3,26 @@ body {
 }
 
 
+.select-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+.select-with-icon .form-select {
+  padding-right: 2.5rem; /* laisse place à la loupe */
+}
+
+.search-icon-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: white; /* petit “cadre blanc” */
+  padding: 2px 6px;
+  border-radius: 6px;
+}
 
 
 .search-scroll {
