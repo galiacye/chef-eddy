@@ -188,8 +188,8 @@ INSERT INTO categories(nom)
 VALUES('Chef Eddy');
 
 CREATE TABLE favorites (
-    user_id    INT UNSIGNED NOT NULL,
-    recipe_id  INT UNSIGNED NOT NULL,
+    user_id    INT NOT NULL,
+    recipe_id  INT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id, recipe_id),
     FOREIGN KEY (user_id)   REFERENCES users(id)    ON DELETE CASCADE,
