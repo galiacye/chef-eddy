@@ -242,11 +242,14 @@ class User extends BaseController
         if (! $user) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$user_id introuvable.");
         }
+        $recipeModel = model('RecipeModel');
+        $userRecipes = $recipeModel->getRecipeByUser($user_id);
         $commentModel = model('CommentModel');
         $data = [
             'title'       => 'Profil — ' . esc($user->username),
             'user'        => $user,
             'isOwnProfile' => ($session->get('user_id') == (int) $user->id),
+            'userRecipes' => $userRecipes,
             'comments' => $commentModel->commentsByUser($user_id)
         ];
        // dd($user_id);

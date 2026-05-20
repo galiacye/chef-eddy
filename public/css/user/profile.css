@@ -1,25 +1,35 @@
+
+@font-face {
+  font-family: "creamer";
+  src: url("/fonts/creamer/Creamer.otf") format("truetype");
+}
 @font-face {
   font-family: "champ_limo";
-  src: url("/fonts/champ_limo/champ_limo.ttf") format("truetype"); /*truetype pour ttf opentype pr otf*/
+  src: url("/fonts/champ_limo/champ_limo.ttf") format("truetype");
+}
+@font-face {
+  font-family: "nexa";
+  src: url("/fonts/nexa/Nexa3.ttf") format("truetype");
 }
 
-body { background: #f5f2ee; 
-            font-family: "Glass Antiqua";
-        }
-        .card { border: 1px solid #ddd8d0; border-radius: 12px; overflow: hidden; }
-        .card-header-dark { background: #0f0e0d; padding: 2rem 2rem 3.5rem; position: relative; }
-        .card-header-dark h1 { font-family: "champ_limo" ; color: #fff; font-size: 2.7rem; margin-top: .8rem; }
-        .card-header-dark h1 span { color: #4cd98c; }
-        .back-link { color: #c8a96e; font-size: .75rem; text-transform: uppercase; letter-spacing: .07em; text-decoration: none; }
-        .avatar-wrap { position: absolute; bottom: -2rem; left: 2rem; }
-        .avatar { width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; background: #f0e6d3; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #c8a96e; font-weight: 700; overflow: hidden; }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .own-badge { background: #f0e6d3; color: #c8a96e; font-size: .7rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; padding: .2rem .7rem; border-radius: 99px; border: 1px solid #c8a96e; }
-        .info-item { background: #f5f2ee; border: 1px solid #ddd8d0; border-radius: 10px; padding: .9rem 1.1rem; transition: border-color .2s; }
-        .info-item:hover { border-color: #c8a96e; }
-        .info-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: #8a857e; font-weight: 500; margin-bottom: .2rem; }
-        .info-value { font-size: .95rem; color: #0f0e0d; word-break: break-word; }
-        .btn-edit { background: #0f0e0d; color: #fff; border: none; border-radius: 10px; font-size: .88rem; font-weight: 500; padding: .65rem 1.4rem; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; transition: background .2s; }
-        .btn-edit:hover { background: #2a2825; color: #fff; }
-        .card-foot { border-top: 1px solid #ddd8d0; font-size: .75rem; color: #8a857e; }
-   
+
+body {
+ 
+  background:
+    linear-gradient(
+      145deg,
+      #0f0f0f 0%,
+      #2b2b2b 20%,
+      #3d3d3d 40%,
+      #1e1e1e 60%,
+      #4a4a4a 80%,
+      #121212 100%
+    );
+}
+
+.pseudo {
+  font-family: "creamer";
+}
+.avatar {
+  border-radius: 50%;
+}
