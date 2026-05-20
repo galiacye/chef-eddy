@@ -31,5 +31,27 @@ body {
   font-family: "creamer";
 }
 .avatar {
+  height: 120px;
   border-radius: 50%;
 }
+h1 {
+  font-family: "creamer";
+}
+h4{
+  font-family: "creamer";
+}
+
+@media screen and (min-width: 768px) {
+  .avatar {
+    height: 180px;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  .avatar {
+    height: 220px;
+  }
+}
+
+
