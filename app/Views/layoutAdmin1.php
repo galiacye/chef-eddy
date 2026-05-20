@@ -26,7 +26,7 @@
         </div>
     </nav>
 
-    <main class="container mt-4">
+    <main class="container-fluid px-0">
         <?= $this->renderSection('body') ?>
         
     </main>

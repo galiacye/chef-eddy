@@ -1,65 +1,76 @@
-<?= $this->extend('layoutFront') ?>
+<?php
+
+/**
+ * @var object $ingredient
+ * @var int $categories
+ *
+ */
+?>
+
+<?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('css/index.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<?= password_hash('scooby-doo',PASSWORD_DEFAULT) ?>
-<?= form_open('search', ['method' => 'GET']) ?>
 
-<div class="search-box position-relative mb-2">
-    <input type="text"
-        name="q"
-        class="form-control pe-5"
-        placeholder="Rechercher une recette">
+<div class="container-fluid px-0 w-100">
 
-    <button type="submit"
-        class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
-        <i class="bi bi-search"></i>
-    </button>
-</div>
+    <?= form_open('search', ['method' => 'GET']) ?>
 
-<div class="row align-items-center filters">
-
-    <!-- filtres -->
-    <div class="col-10">
-
-        <div class="search-filters mb-2">
-            <select name="ingredient" class="form-select">
-                <option value="">Avec...</option>
-                <?php foreach ($ingredients as $ingr): ?>
-                    <option value="<?= esc($ingr->nom) ?>">
-                        <?= esc($ingr->nom) ?>
-                    </option>
-                <?php endforeach ?>
-            </select>
-        </div>
-
-        <div class="search-filters">
-            <select name="without" class="form-select">
-                <option value="">Sans...</option>
-                <?php foreach ($categories as $cat): ?>
-                    <option value="<?= esc($cat->nom) ?>">
-                        <?= esc($cat->nom) ?>
-                    </option>
-                <?php endforeach ?>
-            </select>
-        </div>
-
-    </div>
-
-    <!-- lupe -->
-    <div class="col-2 d-flex justify-content-center align-items-center">
+    <div class="search-box position-relative mb-2">
+        <input type="text"
+            name="q"
+            class="form-control pe-5"
+            placeholder="Rechercher une recette">
 
         <button type="submit"
-            class="btn border-0 bg-transparent p-0">
+            class="btn position-absolute top-50 end-0 translate-middle-y me-2 border-0 bg-transparent">
             <i class="bi bi-search"></i>
         </button>
-
     </div>
 
-</div>
+    <div class="row align-items-center filters">
+
+    
+        <div class="col-10">
+
+            <div class="search-filters mb-2">
+                <select name="ingredient" class="form-select">
+                    <option value="">Avec...</option>
+                    <?php foreach ($ingredients as $ingr): ?>
+                        <option value="<?= esc($ingr->nom) ?>">
+                            <?= esc($ingr->nom) ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+
+            <div class="search-filters">
+                <select name="without" class="form-select">
+                    <option value="">Sans...</option>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= esc($cat->nom) ?>">
+                            <?= esc($cat->nom) ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- lupe -->
+        <div class="col-2 d-flex justify-content-center align-items-center">
+
+            <button type="submit"
+                class="btn border-0 bg-transparent p-0">
+                <i class="bi bi-search"></i>
+            </button>
+
+        </div>
+
+    </div>
 
 
 
@@ -118,7 +129,7 @@
                         </div>
                 </div> -->
                 <div class="row  chef-recipes">
-                
+
                     <?php foreach ($Recipes as $recipe) : ?>
 
                         <div class="col-10 col-md-6 col-lg-4 mb-4">
@@ -140,8 +151,9 @@
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
+</div>
 </div>
 </div>
 
