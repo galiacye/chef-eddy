@@ -97,7 +97,14 @@ pour show-recipe1
   
 }
 
-
+.ingredients {
+  background-color: azure;
+ padding: 15px;
+    border-radius: 6px;
+    border: rgb(135, 150, 150);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15),
+      0 5px 10px rgba(0, 0, 0, 0.08);
+}
 
 @media screen and (min-width: 768px) {
   .banner .recipe-img {
@@ -140,6 +147,10 @@ pour show-recipe1
   .recipe-block {
         padding: 3rem 10rem; 
     }
+  .ingredients {
+    max-width:700px;
+   
+  }
 }
 
 @media (min-width: 1200px) {

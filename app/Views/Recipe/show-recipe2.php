@@ -15,19 +15,10 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<div class="container-fluid">
+<div class="container-fluid px-4">
 
     <div class="banner d-flex flex-column flex-lg-row align-items-center justify-content-between">
 
-       <div class="title-and-tags text-center text-lg-start">
-            <?php foreach ($tags as $tag): ?>
-                <h2 class="tagName"><?= $tag->nom ?></h2>
-            <?php endforeach ?>
-
-            <h1 class="recipeTitle ms-lg-4 my-0">
-                <?= $recipe->titre ?>
-            </h1>
-        </div>
         <div class="illustration">
             <?php if (!empty($recipe->image_url)): ?>
                 <img src="<?= base_url($recipe->image_url) ?>"
@@ -36,7 +27,15 @@
             <?php endif; ?>
         </div>
 
-     
+        <div class="title-and-tags text-center text-lg-start">
+            <?php foreach ($tags as $tag): ?>
+                <h2 class="tagName"><?= $tag->nom ?></h2>
+            <?php endforeach ?>
+
+            <h1 class="recipeTitle ms-lg-4 my-0">
+                <?= $recipe->titre ?>
+            </h1>
+        </div>
 
         <div class="infos d-flex flex-column gap-2 text-center text-lg-end me-4">
             <div><span class="info">Difficulté : </span><?= $recipe->difficulte ?></div>
