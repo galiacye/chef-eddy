@@ -16,41 +16,50 @@
 
 <?= $this->section('body') ?>
 <div class="container-fluid px-0">
+    <div class="row align-items-center banner justify-content-center">
 
-    <div class="banner d-flex flex-column flex-lg-row align-items-center justify-content-between">
-
-        <div class="illustration">
-            <?php if (!empty($recipe->image_url)): ?>
+        <div class="col-2 col-md-3 illustration">
+            <?php if (!empty($recipe) && !empty($recipe->image_url)): ?>
                 <img src="<?= base_url($recipe->image_url) ?>"
-                     alt="image recette"
-                     class="recipe-img mt-2">
+                    alt="image recette"
+                    class="recipe-img my-2">
             <?php endif; ?>
         </div>
 
-        <div class="title-and-tags text-center text-lg-start">
-            <?php foreach ($tags as $tag): ?>
-                <h2 class="tagName"><?= $tag->nom ?></h2>
-            <?php endforeach ?>
+        <div class="col-4 col-md-6 title-and-tags">
+            <?php if (!empty($recipe)): ?>
 
-            <h1 class="recipeTitle ms-lg-4 my-0">
-                <?= $recipe->titre ?>
-            </h1>
-        </div>
+                <?php foreach ($tags as $tag): ?>
+                    <h2 class="tagName"><?= $tag->nom ?></h2>
+                <?php endforeach ?>
+                <h1 class="recipeTitle ms-4">
+                    <?= $recipe->titre ?>
+                </h1>
 
-        <div class="infos d-flex flex-column gap-2 text-center text-lg-end me-4">
-            <div><span class="info">Difficulté : </span><?= $recipe->difficulte ?></div>
-            <div><span class="info">Préparation : </span><?= $recipe->temps_preparation ?> min</div>
-            <div><span class="info">Cuisson : </span><?= $recipe->temps_cuisson ?> min</div>
-            <div><span class="info">Personnes : </span><?= $recipe->nb_personnes ?></div>
+            <?php endif; ?>
         </div>
 
     </div>
+</div>
 
+<div class="row infos justify-content-around align-items-center my-2 py-2">
+    <div class="col-auto diff">
+        Difficulté : <?= $recipe->difficulte ?>
+    </div>
+    <div class="col-auto t-p">
+        Temps de préparation : <?= $recipe->temps_preparation ?> minutes
+    </div>
+    <div class="col-auto t-c">
+        Temps de cuisson : <?= $recipe->temps_cuisson ?> minutes
+    </div>
+    <div class="col-auto nb">
+        Nombre de personnes : <?= $recipe->nb_personnes ?>
+    </div>
 </div>
 <div class="row my-2">
 <div class="container ingredients mx-0">
 
-    <h3 class="ingTitle">Les Ingrédients</h3>
+    <h3 class="ingTitle">Ingrédients</h3>
 
     <div class="row g-3">
 
@@ -71,13 +80,11 @@
 </div>
 </div>
 
-<h2 class="larecette text-center">La Recette</h2>
+
 <!-- pour quill-js : -->
- <div class="recipe-bloc container-fluid me-4">
 <div class="editor">
-    <?= $recipe->contenu ?>
+    <p><?= $recipe->contenu ?></p>
 </div>
- </div>
 
 
 
@@ -103,11 +110,11 @@ if ($user_id) {
 
 
 
-<div class="comment-bloc m-4">
-    <h3>Les commentaires</h3>
+<div class="comment m-4">
+    <h3>Voir les avis</h3>
     <?php if (!empty($comments)): ?>
         <?php foreach ($comments as $comment): ?>
-            <div class="comments m-3">
+            <div class="comment m-3">
                 <p><?= $comment->content ?></p>
                 <p>Note : <?= $comment->rating ?>/5</p>
             </div>
