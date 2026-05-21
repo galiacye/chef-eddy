@@ -101,46 +101,35 @@
 
 <?= $this->endSection() ?>
 
-<?= $this->section('customjs') ?>
+<?= $this->section('customJs') ?>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"></script>
 
 <script>
-     document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
     <?php foreach ($comments as $c): ?>
-       
+    (function() {
+        // Quill initialisé directement, pas dans shown.bs.collapse
+        const quill = new Quill('#editor-reply-<?= $c->id ?>', {
+            modules: { toolbar: '#toolbar-reply-<?= $c->id ?>' },
+            placeholder: 'Répondre...',
+            theme: 'snow',
+        });
 
-            (function() {
-                let quill = null;
+        document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-bold').setAttribute('title', 'Gras');
+        document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-italic').setAttribute('title', 'Italique');
+        document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-underline').setAttribute('title', 'Souligné');
 
-                document.getElementById('reply-<?= $c->id ?>').addEventListener('shown.bs.collapse', function() {
-        if (!quill) {
-            quill = new Quill('#editor-reply-<?= $c->id ?>', {
-                modules: { toolbar: '#toolbar-reply-<?= $c->id ?>' },
-                placeholder: 'Répondre...',
-                theme: 'snow',
-            });
-            // Tooltips ajoutés ici
-            document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-bold').setAttribute('title', 'Gras');
-            document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-italic').setAttribute('title', 'Italique');
-            document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-underline').setAttribute('title', 'Souligné');
-        }
-    });
-                document.getElementById('form-reply-<?= $c->id ?>').addEventListener('submit', (e) => {
-                    console.log('submit déclenché');
-                    console.log('quill:', quill);
-                    console.log('getText:', JSON.stringify(quill.getText()));
-                    console.log('trim length:', quill.getText().trim().length);
-                    if (!quill || quill.getText().trim().length <= 1) {
-                        e.preventDefault();
-                        alert('Veuillez écrire une réponse');
-                        return;
-                    }
-                    document.getElementById('content-<?= $c->id ?>').value = quill.root.innerHTML;
-                });
-            })();
-       
+        document.getElementById('form-reply-<?= $c->id ?>').addEventListener('submit', (e) => {
+            if (quill.getText().trim().length <= 1) {
+                e.preventDefault();
+                alert('Veuillez écrire une réponse');
+                return;
+            }
+            document.getElementById('content-<?= $c->id ?>').value = quill.root.innerHTML;
+        });
+    })();
     <?php endforeach; ?>
-     });
+});
 </script>
 <?= $this->endSection() ?>
