@@ -1,0 +1,234 @@
+body {
+  background-color: rgb(214, 247, 231);
+}
+
+
+.select-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select-with-icon .form-select {
+  padding-right: 2.5rem; /* laisse place à la loupe */
+}
+
+.search-icon-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: white; /* petit “cadre blanc” */
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+
+.search-scroll {
+  display: flex;
+  gap: 1rem;
+
+  overflow-x: auto; /*x=axe horizontal, ici scroll horiz autorisé si dépasse de l'écran.*/
+  scroll-snap-type: x mandatory;/*aimant: le scroll s'arrête sur une box pas n'importe où*/
+/*snap: calage auto->ne reste pas entre 2 positions*/
+  padding-bottom: 10px;
+}
+
+.search-box {
+
+  flex: 0 0 100%;/*chaque box centrée exclut les autres: effet carroussel*/
+  min-width: 280px;
+
+  flex-shrink: 0;/*empêche flexbox de réduire les box pour les faire rentrer ds l'écran*/
+
+  scroll-snap-align: center;/*start s'aligne avec flex-start du container*/
+}
+/*.search-scroll::-webkit-scrollbar {
+  display: none;cacher la scrollbar*/
+/*}*/
+/* 
+.search-scroll {
+  scrollbar-width: none;
+} */
+
+
+
+
+
+.rech {
+  background-color: white;
+}
+
+.divers {
+  margin-top: 10rem;
+}
+.photo1 {
+  height: 15rem;
+}
+
+.txt {
+  color: black;
+}
+.eddy {
+  margin-bottom: 5px;
+}
+/* .card-img-top {
+  flex: 1 1 100px;
+  max-width: 120px;
+  object-fit: cover;
+} */
+.tags {
+  gap: 3rem;
+}
+.img-wrapper {
+  padding: 10px;
+  width: 100%;
+  height: 160px; /* taille fixe  */
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /*  contain pour voir l'image entière */
+}
+.w-custom {
+  gap: 20px;
+  flex: 1 1 220px;
+  max-width: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.w-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.card-title {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: small;
+}
+.btn-see {
+  width: 80px;
+  height: 30px;
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: 0.25s ease;
+}
+
+.btn-see:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.btn-tag {
+  width: 150px;
+  height: 35px;
+  background: linear-gradient(135deg, #5aa4f8, #5effa1);
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+.btn-tag:hover {
+  width: 150px;
+  height: 35px;
+  color: white;
+  background: linear-gradient(135deg, #0dc588, #136cd3);
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 768px) {
+  /*  .card-img-top {
+    flex: 1 1 150px;
+    max-width: 170px;
+    object-fit: cover;
+  } */
+
+  .img-wrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .w-custom {
+    flex: 1 1 200px;
+    max-width: 280px;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+  /* .card-img-top {
+    flex: 1 1 180px;
+    max-width: 220px;
+    object-fit: cover;
+  } */
+
+
+@media screen and (min-width: 1024px) {
+
+  .search-scroll {
+    overflow-x: visible;
+    justify-content: center;
+  }
+
+  .search-box {
+    min-width: auto;
+    flex: 1;
+  }
+
+
+
+
+
+  .img-wrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .w-custom {
+    flex: 1 1 280px;
+    max-width: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+}

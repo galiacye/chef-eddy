@@ -11,6 +11,9 @@ class RoleModel extends Model
     protected $allowedFields = ['nom'];
     protected $returnType = 'object';
 
-    
+    public function getRole($user_id)
+    {
+        return $this->select('role.nom');
+    }
     
 }

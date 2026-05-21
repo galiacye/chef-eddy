@@ -10,27 +10,17 @@ class Comment extends BaseController
 
     private CommentModel $model;
 
-    //il y a plusieurs façons d'instancier en CI4 : $this->model = new CommentModel();s
+
     public function __construct()
     {
         $this->model = model('CommentModel');
         helper('form');
     }
 
-    // public function commentsIndex()
-    // {
-    //     $comments = $this->model->commentsIndex();
-    //     $data = [
-    //         "comments" => $comments,
-    //         "title" => "Tous les commentaires"
-    //     ];
-    //     return view('Admin/comments', $data);
-    // }
-
     public function commentsIndex()
     {
         $status = $this->request->getGet('status');
-        $comments = $this->model->commentsIndex($status); //le ? devant string signifie string ou null
+        $comments = $this->model->commentsIndex($status); 
         $data = [
             'comments' => $comments,
             'status'   => $status
@@ -74,18 +64,18 @@ class Comment extends BaseController
 
     public function addComment(int $recipe_id)
     {
-        // if(!session()->get('user_id')) {
-        //     return redirect()->to('register');
-        // }
+     if(!session()->get('user_id')) {
+             return redirect()->to('register');
+         }
         return view('comment/add-comment', ['recipe_id' => $recipe_id]);
     }
 
     public function saveComment()
     {
 
-        // if(!session()->get('user_id')){
-        //     return redirect()->to('/register');
-        // }
+         if(!session()->get('user_id')){
+            return redirect()->to('/register');
+         }
         $rules = [
             "content" => [
                 "label" => "content",
@@ -128,11 +118,11 @@ class Comment extends BaseController
                 'recette_id' => $recipe_id,
                 'content' => $content,
                 "rating" => $rating,
-                'user_id' => 1, //session('user_id'),
+                'user_id' => session()->get('user_id'),
                 'status' => 'pending'
             ];
 
-            //dd(session()->get());
+       
 
             $this->model->insert($data);
             //pour que user ne commente qu'une seule fois , utiliser addComment du model et :
@@ -210,11 +200,13 @@ class Comment extends BaseController
             'recette_id' => $this->request->getPost('recette_id'),
             'parent_id'  => $this->request->getPost('parent_id'),
             'content'    => $this->request->getPost('content'),
-            'user_id'    => 1, // session('user_id') plus tard
+            'user_id'    => session()->get('user_id'),
             'status'     => 'approved',
             'rating'     => null
         ];
         $this->model->insert($data);
         return redirect()->back()->with('success', 'Réponse publiée');
     }
+
+   
 }

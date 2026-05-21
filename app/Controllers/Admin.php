@@ -13,7 +13,7 @@ use HTMLPurifier_Config;
 
 class Admin extends BaseController
 {
-    protected $userModel;
+    protected object $userModel;
     protected $roleModel;
     protected $recipeModel;
     protected $ingredientModel;
@@ -73,17 +73,18 @@ class Admin extends BaseController
     public function addUser()
     {
         if (($this->request->is('post')) === false) {
-            return view('Admin/add-user', ['roles' => $this->userModel->getUsersWithRole()]);
+            return view('Admin/add-user', ['roles' => $this->roleModel->findAll()]);
         } else {
 
             $rules = [
                 "username" => [
                     "label" => "Pseudo",
-                    "rules" => "min_length[2]|max_length[50]|required",
+                    "rules" => "min_length[2]|max_length[50]|required|is_unique[users.username]",
                     "errors" => [
                         "min_length" => "username trop court",
                         "max_length" => "username trop long",
-                        "required" => "username requis"
+                        "required" => "username requis",
+                        "is_unique" => "Ce pseudo est déjà utilisé"
                     ]
                 ],
                 "email" => [
@@ -105,7 +106,7 @@ class Admin extends BaseController
                 ],
                 "nom" => [
                     "label" => "Nom",
-                    "rules" => "permit_empty|min_length[2]|max_length[30]|required_if_role_author",
+                    "rules" => "permit_empty|min_length[2]|max_length[30]|permit_empty",//required_if_role_author à faire dans app/validations
                     "errors" => [
                         "min_length" => "Nom trop court",
                         "max_length" => "Nom trop long",
@@ -114,7 +115,7 @@ class Admin extends BaseController
                 ],
                 "prenom" => [
                     "label" => "Prénom",
-                    "rules" => "permit_empty|min_length[2]|max_length[30]|required_if_role_author",
+                    "rules" => "permit_empty|min_length[2]|max_length[30]| permit_empty",//required_if_role_author
                     //faire un fichier customRules ds app/validation+public rulesets ds config/validation
                     "errors" => [
                         "min_length" => "Prenom trop court",
@@ -134,7 +135,7 @@ class Admin extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                // dd($this->validator->getErrors());
+             
                 // cas echec validation on retourne le formulaire avec les erreurs
                 return view('Admin/add-user', [
                     'errors' => $this->validator->getErrors(),
@@ -145,7 +146,7 @@ class Admin extends BaseController
             // cas données valides : on les récupère
             $username = $this->request->getPost('username');
             $email = $this->request->getPost('email');
-            $password = password_hash(random_bytes(8), PASSWORD_DEFAULT); //temporaire aléatoire
+            $password = password_hash(bin2hex(random_bytes(8)), PASSWORD_DEFAULT); //temporaire aléatoire
             $nom = $this->request->getPost('nom');
             $prenom = $this->request->getPost('prenom');
             $role_id = $this->request->getPost('role_id') ?: 1;
@@ -187,7 +188,7 @@ class Admin extends BaseController
             // Insertion dans la base
             $this->userModel->insert($data); //insert = tjrs fct nat ci4
 
-            return view('success');
+            return redirect()->to('users-index')->with('success', 'Utilisateur crée avec succès');
         }
     }
 

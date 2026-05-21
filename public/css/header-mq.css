@@ -20,10 +20,12 @@
   background: url("../img/camouflage.jpg") repeat;
   background-size: 300px;
 
-  -webkit-background-clip: text;
+  -webkit-background-clip: text!important;
   -webkit-text-fill-color: transparent!important;
-text-shadow: none!important;
+  text-shadow: none!important; 
   animation: camoMove 5s linear infinite;
+
+
 }
 
 @keyframes camoMove {
@@ -53,9 +55,7 @@ text-shadow: none!important;
     text-shadow: none;  au cas où 
     
 }  */
-.fusil {
-  display: none;
-}
+
 .txt {
   color: white;
   font-size: 0.8em;

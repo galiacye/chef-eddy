@@ -14,12 +14,18 @@ $routes->get('afficher','Home::afficher');
 $routes->get('monpdf','Home::creerPdf');
 $routes->get('upload','Article::upload');
 
+//Auth
+$routes->get('login', 'Auth::login');//affiche le form
+$routes->post('login', 'Auth::connect');
+$routes->match(['get','post'], 'register', 'Auth::register');
+$routes->get('logout', 'Auth::logout');
+
 //Admin
 $routes->get('dashboard','Admin::dashboard');
     //admin::user
 $routes->get('Admin/users-index','Admin::usersIndex');
 $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
-$routes->get('Admin/add-user','Admin::addUser');
+$routes->match(['get', 'post'], 'Admin/add-user','Admin::addUser');
 $routes->post('register', 'Auth::saveUser');
 $routes->post('Admin/changeUserRole/(:num)', 'Admin::changeUserRole/$1');
 $routes->get('Admin/deleteUser/(:num)', 'Admin::deleteUser/$1');
@@ -32,20 +38,21 @@ $routes->post('Admin/recipe/save/(:num)', 'Admin::saveRecipe/$1'); //pour approu
 $routes->get('delete-user/(:num)','Admin::deleteUser/$1');// dans la vue : <a href="<?= base_url('delete-user/' . $user->id)? >supp</a>
 $routes->get('delete-recipe/(:num)','Admin::deleteRecipe/$1');
 
-//Auth
-$routes->post('login', 'Auth::connect');
-$routes->get('auth/register', 'Auth::connect');
 
 //search
 $routes->get('search','Search::search');
 //user
 $routes->match(['get','post'],'User/register', 'User::register' );
 $routes->get('user/(:num)', 'User::showUser/$1');
-$routes->match(['get', 'post'], 'add-user', 'User::createUser');
+//$routes->match(['get', 'post'], 'add-user', 'User::createUser');
 $routes->get('user/(:num)', 'User::cIdUser/$1');
 $routes->get('user-chef/(:num)','User::userChef/$1');
 $routes->get('all-users','User::UserIndex');
 $routes->match(['get','post'], 'update-user/(:num)','User::updateUser/$1');
+
+//PROFIL
+$routes->match(['get', 'post'], 'profile', 'User::profile');
+
 
 //role
 $routes->get('all-roles','Role::allRoles');
@@ -68,7 +75,6 @@ $routes->get('recipesByCat', 'Api::recipesByCat');
 $routes->get('recipesByNameJs','Api::recipesByName');
 
 //categories et tags
-// Routes.php
 $routes->get('tag/index', 'Tag::index');
 $routes->get('tag/(:num)', 'Tag::showRecipesByTag/$1');
 
@@ -92,4 +98,12 @@ $routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1
 $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
 
 $routes->post('comment/reply', 'Comment::replyComment');
+
+//favorites
+
+$routes->post('favorites/toggle/(:num)', 'Favorite::toggle/$1');
+$routes->get('favorites', 'Favorite::index');
+
+
+
 

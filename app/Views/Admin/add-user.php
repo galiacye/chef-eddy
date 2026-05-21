@@ -6,13 +6,19 @@
 
 <?= $this->section('custom-css')?>
     <link href="add-user.css" rel="stylesheet">
+    <style>
+    body {
+        background-image: url('<?= base_url('img/camouforange.jpg') ?>');
+        background-size: cover;
+    }
+    </style>
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
     <h1 class="text-center">Ajouter un utilisateur</h1>
 
-    <?= form_open_multipart('add-user') ?>
+    <?= form_open_multipart('Admin/add-user') ?>
 
 <?php
 $username = [
@@ -33,7 +39,8 @@ $password = [
     'name' => 'password',
     'id' => 'password',
     'type' => 'password',
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-50',
+    'placeholder'=>'Mot de passe temporaire généré automatiquement'
 ];
 
 $nom = [
@@ -78,7 +85,7 @@ foreach ($roles as $role) {
 <?= validation_show_error('role_id') //$role_id récupéré par la session?>
 
 <label for="password">Mot de passe</label>
-<?= form_input($password) ?>
+<?= form_input($password)?>
 <?= validation_show_error('password') ?><br>
 
 <label for="nom">Nom</label>

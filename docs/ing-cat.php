@@ -1,12 +1,10 @@
-pour des cat d'ing dynamiques :
-
-controller Recipe: 
 <?php
+
 public function createRecipe()
 {
     if ($this->request->is('post') === false) {
         $tagModel       = new TagModel();
-        $categoryModel  = new CategoryModel(); // Catégories de RECETTES
+        $categoryModel  = new CategoryModel(); // catégories de recettes
         $unitModel      = new UnitModel();
         $ingModel       = new IngredientModel(); //  modèle d'ingrédients
 
@@ -14,17 +12,17 @@ public function createRecipe()
             'tags'               => $tagModel->findAll(),
             'categories'         => $categoryModel->findAll(),
             'unites'             => array_column($unitModel->findAll(), 'nom'),
-            // AJOUT de  CECI :
+            //nouvelle clé
             'categories_ing_db'  => $ingModel->getCategory() 
         ]);
     }
-    // ... reste du code
+  
 }?>
 
 vue createRecipe : 
 
 <?php
- // Remplacer l'ancien $options_ingredients par celui-ci :
+ //nouvelle $options_ingredients 
 $options_ingredients = ['' => '-- Catégorie --'];
 foreach ($categories_ing_db as $cat_ing) {
     // On utilise le nom comme clé  attendue en base, 

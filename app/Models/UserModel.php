@@ -27,7 +27,7 @@ class UserModel extends Model
         $user = $this->insert($data);
     }
 
-    //login
+    //connect
     public function getUserByEmail(string $email)
     {
         return $this->where('email', $email)->first(); // = get()->getRow() pour un objet unique
@@ -38,5 +38,12 @@ class UserModel extends Model
         return $this->select('users.*, roles.nom as role_name')
             ->join('roles', 'roles.id = users.role_id')
             ->findAll();
+    }
+
+    public function getRole()
+    {
+        return $this->select('users.role_id, roles.nom')
+        ->join('roles', 'users.role_id = roles.id')
+        ->find();
     }
 }

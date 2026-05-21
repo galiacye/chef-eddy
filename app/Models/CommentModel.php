@@ -48,11 +48,38 @@ class CommentModel extends Model
             ->findAll();
     }
 
+    // public function commentByUser(int $user_id)
+    // {
+    //     return $this->select('comments.id, users.username, comments.content, comments.rating, comments.parent_id, comments.status')
+    //         ->join('users', 'comments.user_id = users.id')
+    //         ->where('comments.user_id', $user_id)
+    //         ->findAll();
+    // }
+
     public function commentsByUser(int $user_id)
     {
-        return $this->select('comments.id, users.username, comments.content, comments.rating')
+
+        //définir les  commentaires originels de user:
+        $userCommentsIds = $this->db->table('comments')
+            ->select('id')
+            ->where('user_id', $user_id)
+            ->where('parent_id IS NULL')
+            ->get()
+            ->getResultArray();
+
+        $ids = array_column($userCommentsIds, 'id');
+//dd($userCommentsIds);
+//dd($ids);
+        if (empty($ids)) return [];
+
+        //user comments's and chef replies
+        return $this->select('comments.id, users.username, comments.content, comments.rating,
+                            comments.parent_id, comments.status, comments.user_id')
             ->join('users', 'comments.user_id = users.id')
+            ->groupStart() //parenthèses en sql
             ->where('comments.user_id', $user_id)
+            ->orWhereIn('comments.parent_id', $ids)
+            ->groupEnd()
             ->findAll();
     }
 
@@ -83,5 +110,5 @@ class CommentModel extends Model
     //     }
     // }
 
-    
+
 }

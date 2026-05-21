@@ -171,3 +171,27 @@ comments	CREATE TABLE `comments` (
   CONSTRAINT `fk_parent` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `comments_chk_1` CHECK ((`rating` between 1 and 5))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `password_resets` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `email` varchar(100) NOT NULL,
+    `token` varchar(64) NOT NULL,
+    `expires_at` datetime NOT NULL,
+    `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `email` (`email`),
+    KEY `token` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ ENGINE spécifie le moteur de stockage MySQL et DEFAULT CHARSET=utf8mb4 supporte tous les caractères Unicode, y compris les emojis. utf8 classique ne supporte que 3 octets par caractère, utf8mb4 en supporte 4.
+
+INSERT INTO categories(nom)
+VALUES('Chef Eddy');
+
+CREATE TABLE favorites (
+    user_id    INT NOT NULL,
+    recipe_id  INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, recipe_id),
+    FOREIGN KEY (user_id)   REFERENCES users(id)    ON DELETE CASCADE,
+    FOREIGN KEY (recipe_id) REFERENCES recettes(id) ON DELETE CASCADE
+);

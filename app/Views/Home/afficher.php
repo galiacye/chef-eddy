@@ -8,5 +8,6 @@
 <body>
     <h1>Salut</h1>
     <p><img src="./img/sansa.jpeg" alt="sansa"></p>
+    
 </body>
 </html>
