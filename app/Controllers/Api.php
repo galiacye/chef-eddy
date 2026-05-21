@@ -12,13 +12,13 @@ class Api extends BaseController
     public function recipesByCat()
     {
         $req = $this->client->request('GET','https://www.themealdb.com/api/json/v1/1/categories.php',["verify"=>false]);
-        //["verify"=>false] dit de ne pas vérif le certif ssl(à ne pas faire en prod!)
+        //["verify"=>false] dit de ne pas vérif le certif ssl
         $reponse = $req->getBody();//recup le json brut
         $resultat = json_decode($reponse);
         $data = [
             "resultat"=>$resultat
         ];
-        return view('Api/recipesByCat',$data);//Utilisateur → Contrôleur → Appel API externe (CURL) → JSON → Vue
+        return view('Api/recipesByCat',$data);
     }
 
 

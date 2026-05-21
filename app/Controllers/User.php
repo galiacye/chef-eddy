@@ -161,14 +161,14 @@ class User extends BaseController
                 ]
             ];
             if (!$this->validate($rules)) {
-                // validation échoue → on retourne le formulaire avec les erreurs
+                // echec de validation: on retourne le formulaire avec les erreurs
                 return view('User/updateUser', [
                     'errors' => $this->validator->getErrors(),
                     'user' => $user
                 ]);
             }
 
-            // Validation OK → récupération des données
+            // si validation récupération des données
             $username = $this->request->getPost('username');
             $email = $this->request->getPost('email');
             $nom = $this->request->getPost('nom');
@@ -238,7 +238,7 @@ class User extends BaseController
         }
 
         $user = $this->model->find($user_id);
-        //dd($session->get('user_id'), $user->id);
+   
         if (! $user) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$user_id introuvable.");
         }
