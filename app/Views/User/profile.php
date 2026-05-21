@@ -33,7 +33,7 @@
         <?php if (! empty($userRecipes)) : ?>
             <?php foreach ($userRecipes as $recipe) : ?>
                 <div class="col">
-                    <p><?= esc($recipe->nom_du_champ) ?></p> <!-- adapte le nom du champ -->
+                    <p><?= esc($recipe->title) ?></p>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
@@ -48,7 +48,7 @@
         <?php if (! empty($comments)) : ?>
             <?php foreach ($comments as $comment) : ?>
                 <div class="col">
-                    <p><?= esc($comment->nom_du_champ) ?></p> <!-- adapte le nom du champ -->
+                    <p><?= esc($comment->content) ?></p> <!-- adapte le nom du champ -->
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
