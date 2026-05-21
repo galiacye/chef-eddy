@@ -114,18 +114,18 @@
                 let quill = null;
 
                 document.getElementById('reply-<?= $c->id ?>').addEventListener('shown.bs.collapse', function() {
-
-                    if (!quill) {
-                        quill = new Quill('#editor-reply-<?= $c->id ?>', {
-                            modules: {
-                                toolbar: '#toolbar-reply-<?= $c->id ?>'
-                            },
-                            placeholder: 'Répondre...',
-                            theme: 'snow',
-                        });
-                    }
-                });
-
+        if (!quill) {
+            quill = new Quill('#editor-reply-<?= $c->id ?>', {
+                modules: { toolbar: '#toolbar-reply-<?= $c->id ?>' },
+                placeholder: 'Répondre...',
+                theme: 'snow',
+            });
+            // Tooltips ajoutés ici
+            document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-bold').setAttribute('title', 'Gras');
+            document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-italic').setAttribute('title', 'Italique');
+            document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-underline').setAttribute('title', 'Souligné');
+        }
+    });
                 document.getElementById('form-reply-<?= $c->id ?>').addEventListener('submit', (e) => {
                     console.log('submit déclenché');
                     console.log('quill:', quill);
