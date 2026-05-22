@@ -12,16 +12,42 @@
     </div>
 <?php endif ?>
 
-<?php foreach($recipes as $recipe): ?>
-    <div class="intro">            
-        <?php if ($recipe->image_url): ?>
-            <img src="<?= base_url($recipe->image_url) ?>" alt="image recette" class="recipe-img">
-        <?php else: ?>
-            <img src="<?= base_url('images/default-recipe.png') ?>" alt="image par défaut" class="img">
-        <?php endif ?>
-        <p><?= esc($recipe->titre) ?></p>
-    </div><br>
-<?php endforeach ?>
+<div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3 mt-2">
+
+    <?php foreach($recipes as $recipe): ?>
+        <div class="col">
+
+            <div class="card h-100 shadow-sm">
+
+                <?php if ($recipe->image_url): ?>
+                    <img src="<?= base_url($recipe->image_url) ?>" 
+                         class="card-img-top recipe-img" 
+                         alt="image recette">
+                <?php else: ?>
+                    <img src="<?= base_url('images/default-recipe.png') ?>" 
+                         class="card-img-top recipe-img" 
+                         alt="image par défaut">
+                <?php endif ?>
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title">
+                        <?= esc($recipe->titre) ?>
+                    </h5>
+
+                    <a href="<?= base_url('show-recipe/' . $recipe->id) ?>" 
+                       class="btn btn-recipe btn-sm mt-auto">
+                        Voir la recette
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    <?php endforeach ?>
+
+</div>
 <?= $this->endSection()?>
 
 
