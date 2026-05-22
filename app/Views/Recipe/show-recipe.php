@@ -17,9 +17,9 @@
 <?= $this->section('body') ?>
 <div class="container-fluid">
 
-    <div class="banner d-flex flex-column flex-lg-row align-items-center justify-content-between">
+    <div class="banner d-flex flex-column flex-md-row align-items-center justify-content-between">
 
-       <div class="title-and-tags text-center text-lg-start">
+        <div class="title-and-tags text-center text-lg-start">
             <?php foreach ($tags as $tag): ?>
                 <h2 class="tagName"><?= $tag->nom ?></h2>
             <?php endforeach ?>
@@ -27,18 +27,41 @@
             <h1 class="recipeTitle ms-lg-4 my-0">
                 <?= $recipe->titre ?>
             </h1>
-        </div>
-        <div class="illustration">
-            <?php if (!empty($recipe->image_url)): ?>
-                <img src="<?= base_url($recipe->image_url) ?>"
-                     alt="image recette"
-                     class="recipe-img mt-2">
-            <?php endif; ?>
+            <div class="illustration">
+                <?php if (!empty($recipe->image_url)): ?>
+                    <img src="<?= base_url($recipe->image_url) ?>"
+                        alt="image recette"
+                        class="recipe-img mt-2">
+                <?php endif; ?>
+            </div>
         </div>
 
-     
+        <div class="container ingredients mt-4">
 
-        <div class="infos d-flex flex-column gap-2 text-center text-lg-end me-4">
+                <h3 class="ingTitle">Les Ingrédients</h3>
+
+                <div class="row g-4 justify-content-center">
+
+                    <?php foreach ($ingredients as $ingredient): ?>
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="ingredient-card">
+                                <strong><?= $ingredient->nom ?></strong><br>
+
+                                <?= $ingredient->quantite ?>
+                                <?= $ingredient->unite ?>
+                            </div>
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+            </div>
+
+
+
+
+        <div class="infos d-flex flex-column gap-2 justify-content-center align-items-center me-4">
             <div><span class="info">Difficulté : </span><?= $recipe->difficulte ?></div>
             <div><span class="info">Préparation : </span><?= $recipe->temps_preparation ?> min</div>
             <div><span class="info">Cuisson : </span><?= $recipe->temps_cuisson ?> min</div>
@@ -49,36 +72,16 @@
 
 </div>
 <div class="row my-2 mx-4">
-<div class="container ingredients">
 
-    <h3 class="ingTitle">Les Ingrédients</h3>
-
-    <div class="row g-4 justify-content-center">
-
-        <?php foreach ($ingredients as $ingredient): ?>
-
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="ingredient-card">
-                    <strong><?= $ingredient->nom ?></strong><br>
-
-                    <?= $ingredient->quantite ?>
-                    <?= $ingredient->unite ?>
-                </div>
-            </div>
-
-        <?php endforeach; ?>
-
-    </div>
-</div>
 </div>
 
 <h2 class="larecette text-center">La Recette</h2>
 <!-- pour quill-js : -->
- <div class="recipe-bloc container-fluid me-4">
-<div class="editor">
-    <?= $recipe->contenu ?>
+<div class="recipe-bloc container-fluid me-4">
+    <div class="editor">
+        <?= $recipe->contenu ?>
+    </div>
 </div>
- </div>
 
 
 

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "ginchiest";
+  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format('truetype');
+}
+
 body {
   background: linear-gradient(
     145deg,
@@ -30,13 +35,18 @@ pour show-recipe1
   gap: 2rem;
 }
 .recipeTitle {
-  font-family: "creamer";
-  font-size: 1.2rem;
+  font-family: "ginchiest";
+  font-size: 2.2rem;
 }
 .tagName {
   font-size: 0.5rem;
 }
 
+.title-and-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .info {
   font-style: italic;
@@ -108,12 +118,12 @@ pour show-recipe1
 
 @media screen and (min-width: 768px) {
   .banner .recipe-img {
-    height: 10rem;
+    height: 8rem;
     object-fit: cover;
     display: block;
     margin: 1rem;
     width: 100%;
-    height: auto;
+   
     border-radius: 20px;
     box-shadow:
       0 10px 25px rgba(0, 0, 0, 0.15),
