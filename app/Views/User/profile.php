@@ -31,16 +31,37 @@
         </h4>
 
         <?php if (! empty($userRecipes)) : ?>
-            <?php foreach ($userRecipes as $recipe) : ?>
-                <div class="col">
-                    <p><?= esc($recipe->titre) ?></p>
-                    <?php if ($isOwnProfile) : ?>
-                        <a href="<?= base_url('update-recipe/' . $recipe->id) ?>" class="btn btn-sm btn-warning">Modifier</a>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+            <div class="row row-cols-1 row-cols-md-3 g-3">
+                <?php foreach ($userRecipes as $recipe) : ?>
+                    <div class="col">
+                        <div class="card bg-dark text-light h-100 shadow-sm border-secondary">
+                            <div class="card-body d-flex flex-column justify-content-between">
+
+                                <h5 class="card-title mb-3">
+                                    <?= esc($recipe->titre) ?>
+                                </h5>
+
+                                <?php if ($isOwnProfile) : ?>
+                                    <div class="mt-auto">
+                                        <a href="<?= base_url('update-recipe/' . $recipe->id) ?>"
+                                            class="btn btn-sm btn-info w-100">
+                                            Modifier
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
         <?php else : ?>
-            <p class="text-center text-light">Aucune recette pour l'instant.</p>
+            <div class="text-center py-5">
+                <p class="text-light mb-0 fs-5">
+                    Aucune recette pour l'instant.
+                </p>
+            </div>
         <?php endif; ?>
     </div>
 
