@@ -13,7 +13,7 @@
                          alt="<?= esc($recipe->titre) ?>">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
-                        <a href="<?= site_url('recipe/' . $recipe->id) ?>" 
+                        <a href="<?= base_url('recipe/' . $recipe->id) ?>" 
                            class="btn btn-primary mt-auto">Voir la recette</a>
                     </div>
                 </div>

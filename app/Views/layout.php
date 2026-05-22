@@ -12,41 +12,41 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-  
-    <link href="<?= base_url('./css/layout.css') ?>" rel="stylesheet">
+
+    <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
 
     <?= $this->renderSection('custom-css') ?>
 </head>
 
 <body>
 
-  
+
     <header class="py-3">
         <div class="ban">
             <div class="container text-center">
                 <h1 class="hero-title">Chef Eddy</h1>
             </div>
             <div class="col-3 ">
-                <img src="./img/eddy-bd.jpeg" class="eddy">
-            </div> 
+                <img src="<?= base_url('./img/eddy-bd.jpeg') ?>" class="eddy">
+            </div>
         </div>
     </header>
 
-  
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <div class="container">
 
             <!-- Btn burger-->
             <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#mainNavbar"
-                    aria-controls="mainNavbar"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
                 <span class="navbar-toggler-icon"></span>
 
@@ -60,37 +60,42 @@
 
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="<?= base_url('index.php') ?>">
+                            href="<?= base_url('index.php') ?>">
                             Accueil
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="<?= base_url('recipe-index') ?>">
+                            href="<?= base_url('recipe-index') ?>">
                             Toutes les recettes
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="<?= base_url('category/index') ?>">
+                            href="<?= base_url('category/index') ?>">
                             Les catégories
                         </a>
                     </li>
+                  
+                    <!-- //uri_string mieux que current_url() qui retourne url complète -->
+                     <!-- current_url() != base_url() -->
+                    <?php if (uri_string() != '') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="<?= base_url('tag/index') ?>">
+                                Tags
+                            </a>
+                        </li>
+                    <?php endif; ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="<?= base_url('tag/index') ?>">
-                            Tags
-                        </a>
-                    </li>
 
                     <?php if (session()->get('role_id') >= 2): ?>
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('add-recipe') ?>">
+                                href="<?= base_url('add-recipe') ?>">
                                 Proposer une recette
                             </a>
                         </li>
@@ -99,7 +104,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('register') ?>">
+                                href="<?= base_url('register') ?>">
                                 Proposer une recette
                             </a>
                         </li>
@@ -117,7 +122,7 @@
 
                             <li class="nav-item">
                                 <a href="<?= base_url('/dashboard') ?>"
-                                   class="nav-link">
+                                    class="nav-link">
                                     Admin
                                 </a>
                             </li>
@@ -126,21 +131,21 @@
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('profile') ?>">
+                                href="<?= base_url('profile') ?>">
                                 Mon Profil
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('mes-recettes') ?>">
-                                Mes recettes
+                                href="<?= base_url('favorites') ?>">
+                                Mes favorites
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('logout') ?>">
+                                href="<?= base_url('logout') ?>">
                                 Se déconnecter
                             </a>
                         </li>
@@ -149,14 +154,14 @@
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('login') ?>">
+                                href="<?= base_url('login') ?>">
                                 Déjà membre
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="<?= base_url('register') ?>">
+                                href="<?= base_url('register') ?>">
                                 S'inscrire
                             </a>
                         </li>

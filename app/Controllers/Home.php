@@ -20,7 +20,6 @@ class Home extends BaseController
         $ingredients = $ingredientModel->findAll();
 
         $ingredientsCategoriesModel = model('IngredientsCategoriesModel');
-
         $ingredientsCategories = $ingredientsCategoriesModel
             ->orderBy('nom', 'ASC')
             ->findAll();

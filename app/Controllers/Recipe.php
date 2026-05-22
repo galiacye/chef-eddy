@@ -238,10 +238,10 @@ class Recipe extends BaseController
                             ->getRowArray();
 
                         if ($ing_existant) {
-                            // 1. Il existe : on récupère son id
+                            // si existe : on récupère son id
                             $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
                         } else {
-                            // 2. Il n'existe pas : on l'insère
+                            //sinon on l'insère
                             $db->table('ingredients')->insert([
                                 'nom'       => $nom,
                                 'categorie' => $ingredient['categorie']
@@ -364,12 +364,12 @@ class Recipe extends BaseController
             }
             $image = $this->request->getFile('image_url');
             //dd($image->isValid(), $image->hasMoved(), $image->getError());           
-            if ($image && $image->isValid() && !$image->hasMoved()) //ci4 déplace du doss temporaire vers le doss final,
+            if ($image && $image->isValid() && !$image->hasMoved()) //ci4 déplace du dossier temporaire vers le dossier final,
             // et l'image ne peut être déplacée qu'une fois, donc on évite d'essayer de déplacer un fichier qui l'a déjà été.
             {
-                $newName = $image->getRandomname(); //nom aléatoire unique pour éviter d'écraser un autre fichier nommé "gateau.jpg"!
+                $newName = $image->getRandomname(); //nom aléatoire unique pour éviter d'écraser un autre fichier.
                 $image_path = 'uploads/recipes/' . $newName;
-                $image->move(ROOTPATH . 'public/uploads/recipes', $newName); //déplace du doss tempo de ci4 vers uploads avc son nouveau nom
+                $image->move(ROOTPATH . 'public/uploads/recipes', $newName); //déplace du dossier temporaire de ci4 vers uploads avc son nouveau nom
             } else {
                 //dd($id);
                 //get a déjà $recipe mais pas post donc :
@@ -401,7 +401,6 @@ class Recipe extends BaseController
             //dd($result, $this->model->db->affectedRows());
             //$this->model->updateRecipe($id, $data);
 
-            // dd($id, $data); // 
 
             $recipe_id = $id; //pour les tables intermédiaires
             $db = \Config\Database::connect();
@@ -415,7 +414,7 @@ class Recipe extends BaseController
             }
 
             $ingredients = $this->request->getPost('ingredients');
-            $db->table('recette_ingredients')->where('recette_id', $recipe_id)->delete(); //on supprime les anciens ingr
+            $db->table('recette_ingredients')->where('recette_id', $recipe_id)->delete(); //on supprime les anciens ingrédients
             if ($ingredients) {
                 foreach ($ingredients as $ingredient) {
                     $nom = ucfirst(strtolower(trim($ingredient['nom'])));
