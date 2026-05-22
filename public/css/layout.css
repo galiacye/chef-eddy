@@ -22,6 +22,20 @@
   font-family: "nexa";
   src: url("/fonts/nexa/Nexa3.ttf") format("truetype");
 }
+/* FontSpace */
+@font-face {
+  font-family: "HappyMonday";
+  src: url("/fonts/happy-monday-font/HappyMonday.odf") format('truetype');
+}
+@font-face {
+  font-family: "choko-milky";
+  src: url("/fonts/choko-milky-font/ChokoMilky-gx8gR.otf") format('truetype');
+}
+@font-face {
+  font-family: "ginchiest";
+  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format('truetype');
+}
+
 
 .ban {
   display: flex;
@@ -33,7 +47,7 @@
 }
 
 .ban h1 {
-  font-family: "nexa";
+  font-family: "ginchiest";
   font-size: 3em;
   color: white;
   text-shadow: 6px 8px 6px rgb(201, 40, 121);

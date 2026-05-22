@@ -201,7 +201,7 @@ foreach ($categories as $categorie) {
 <?= form_close() ?>
 
 <?= $this->endSection() ?>
-<?= $this->section('custom-js') ?>
+<?= $this->section('customJs') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
     // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
