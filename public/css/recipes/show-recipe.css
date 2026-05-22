@@ -35,17 +35,19 @@ pour show-recipe1
   gap: 2rem;
 }
 .recipeTitle {
+  margin: 0;
   font-family: "ginchiest";
-  font-size: 2.2rem;
+  font-size: 2rem;
 }
-.tagName {
-  font-size: 0.5rem;
-}
+
 
 .title-and-tags {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.title-and-tag h2 {
+  font-size: 1rem;
 }
 
 .info {
@@ -84,9 +86,7 @@ pour show-recipe1
 } 
 
 .recipe-bloc {
-    width: 100%;
-    padding: 2rem 1rem;
-    margin: 2rem 0;
+ padding: 1rem;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.55);
 
@@ -103,8 +103,11 @@ pour show-recipe1
 .btn-isNot {
     background-color:#6cf8a2; 
 }
-.comments {
-  
+.comment-bloc {
+  padding: 1rem;
+  background-color:#d0eaf5;
+  border: 1px solid rgb(175, 187, 207);
+  border-radius: 10px;
 }
 
 .ingredients {

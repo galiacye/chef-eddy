@@ -15,75 +15,69 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<div class="container-fluid px-0">
-    <div class="row align-items-center banner justify-content-center">
+<div class="container-fluid">
 
-        <div class="col-2 col-md-3 illustration">
-            <?php if (!empty($recipe) && !empty($recipe->image_url)): ?>
-                <img src="<?= base_url($recipe->image_url) ?>"
-                    alt="image recette"
-                    class="recipe-img my-2">
-            <?php endif; ?>
+    <div class="banner d-flex flex-column flex-md-row align-items-center justify-content-between">
+
+        <div class="title-and-tags text-center text-lg-start">
+            <?php foreach ($tags as $tag): ?>
+                <h2 class="tagName"><?= $tag->nom ?></h2>
+            <?php endforeach ?>
+
+            <h1 class="recipeTitle ms-lg-4 my-0">
+                <?= $recipe->titre ?>
+            </h1>
+            <div class="illustration">
+                <?php if (!empty($recipe->image_url)): ?>
+                    <img src="<?= base_url($recipe->image_url) ?>"
+                        alt="image recette"
+                        class="recipe-img mt-2">
+                <?php endif; ?>
+            </div>
         </div>
 
-        <div class="col-4 col-md-6 title-and-tags">
-            <?php if (!empty($recipe)): ?>
+        <div class="container ingredients mt-4">
 
-                <?php foreach ($tags as $tag): ?>
-                    <h2 class="tagName"><?= $tag->nom ?></h2>
-                <?php endforeach ?>
-                <h1 class="recipeTitle ms-4">
-                    <?= $recipe->titre ?>
-                </h1>
+                <h3 class="ingTitle">Les Ingrédients</h3>
 
-            <?php endif; ?>
-        </div>
+                <div class="row g-4 justify-content-center">
 
-    </div>
-</div>
+                    <?php foreach ($ingredients as $ingredient): ?>
 
-<div class="row infos justify-content-around align-items-center my-2 py-2">
-    <div class="col-auto diff">
-        Difficulté : <?= $recipe->difficulte ?>
-    </div>
-    <div class="col-auto t-p">
-        Temps de préparation : <?= $recipe->temps_preparation ?> minutes
-    </div>
-    <div class="col-auto t-c">
-        Temps de cuisson : <?= $recipe->temps_cuisson ?> minutes
-    </div>
-    <div class="col-auto nb">
-        Nombre de personnes : <?= $recipe->nb_personnes ?>
-    </div>
-</div>
-<div class="row my-2">
-<div class="container ingredients mx-0">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="ingredient-card">
+                                <strong><?= $ingredient->nom ?></strong><br>
 
-    <h3 class="ingTitle">Ingrédients</h3>
+                                <?= $ingredient->quantite ?>
+                                <?= $ingredient->unite ?>
+                            </div>
+                        </div>
 
-    <div class="row g-3">
+                    <?php endforeach; ?>
 
-        <?php foreach ($ingredients as $ingredient): ?>
-
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="ingredient-card">
-                    <strong><?= $ingredient->nom ?></strong><br>
-
-                    <?= $ingredient->quantite ?>
-                    <?= $ingredient->unite ?>
                 </div>
             </div>
 
-        <?php endforeach; ?>
+
+
+
+        <div class="infos d-flex flex-column gap-2 justify-content-center align-items-center me-4">
+            <div><span class="info">Difficulté : </span><?= $recipe->difficulte ?></div>
+            <div><span class="info">Préparation : </span><?= $recipe->temps_preparation ?> min</div>
+            <div><span class="info">Cuisson : </span><?= $recipe->temps_cuisson ?> min</div>
+            <div><span class="info">Personnes : </span><?= $recipe->nb_personnes ?></div>
+        </div>
 
     </div>
-</div>
-</div>
 
+</div>
 
 <!-- pour quill-js : -->
-<div class="editor">
-    <p><?= $recipe->contenu ?></p>
+<div class="recipe-bloc m-4">
+    <h2 class="larecette text-center">La Recette</h2>
+    <div class="editor">
+        <?= $recipe->contenu ?>
+    </div>
 </div>
 
 
@@ -110,11 +104,11 @@ if ($user_id) {
 
 
 
-<div class="comment m-4">
-    <h3>Voir les avis</h3>
+<div class="comment-bloc m-4">
+    <h3>Les commentaires</h3>
     <?php if (!empty($comments)): ?>
         <?php foreach ($comments as $comment): ?>
-            <div class="comment m-3">
+            <div class="comments m-3">
                 <p><?= $comment->content ?></p>
                 <p>Note : <?= $comment->rating ?>/5</p>
             </div>
