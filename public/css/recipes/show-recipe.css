@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "ginchiest";
+  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format('truetype');
+}
+
 body {
   background: linear-gradient(
     145deg,
@@ -30,13 +35,20 @@ pour show-recipe1
   gap: 2rem;
 }
 .recipeTitle {
-  font-family: "creamer";
-  font-size: 1.2rem;
-}
-.tagName {
-  font-size: 0.5rem;
+  margin: 0;
+  font-family: "ginchiest";
+  font-size: 2rem;
 }
 
+
+.title-and-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title-and-tag h2 {
+  font-size: 1rem;
+}
 
 .info {
   font-style: italic;
@@ -74,9 +86,7 @@ pour show-recipe1
 } 
 
 .recipe-bloc {
-    width: 100%;
-    padding: 2rem 1rem;
-    margin: 2rem 0;
+ padding: 1rem;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.55);
 
@@ -93,20 +103,30 @@ pour show-recipe1
 .btn-isNot {
     background-color:#6cf8a2; 
 }
-.comments {
-  
+.comment-bloc {
+  padding: 1rem;
+  background-color:#d0eaf5;
+  border: 1px solid rgb(175, 187, 207);
+  border-radius: 10px;
 }
 
-
+.ingredients {
+  background-color: azure;
+ padding: 15px;
+    border-radius: 6px;
+    border: rgb(135, 150, 150);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15),
+      0 5px 10px rgba(0, 0, 0, 0.08);
+}
 
 @media screen and (min-width: 768px) {
   .banner .recipe-img {
-    height: 10rem;
+    height: 8rem;
     object-fit: cover;
     display: block;
     margin: 1rem;
     width: 100%;
-    height: auto;
+   
     border-radius: 20px;
     box-shadow:
       0 10px 25px rgba(0, 0, 0, 0.15),
@@ -140,6 +160,10 @@ pour show-recipe1
   .recipe-block {
         padding: 3rem 10rem; 
     }
+  .ingredients {
+    max-width:700px;
+   
+  }
 }
 
 @media (min-width: 1200px) {

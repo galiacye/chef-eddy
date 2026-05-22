@@ -41,6 +41,13 @@ class Recipe extends BaseController
         $categoryModel  = model('CategoryModel');
         $unitModel = model('UnitModel');
         $commentModel = model('CommentModel');
+        $favoriteModel = model('FavoriteModel');
+
+        $user_id = session()->get('user_id');
+        $isFav = false;
+        if ($user_id) {
+            $isFav = $favoriteModel->isFavorite($user_id, $id);
+        }
 
         //dd($recipe, $id);
 
@@ -50,8 +57,9 @@ class Recipe extends BaseController
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
             'unites'      => array_column($unitModel->findAll(), 'nom'), // ['kg','g','ml'...],
-
-            'comments'    => $commentModel->commentsByRecipe($id)
+            'comments'    => $commentModel->commentsByRecipe($id),
+            'user_id' => session()->get('user_id'),
+            'isFav' => $isFav
         ];
         // dd($data['ingredients']);
         return view('Recipe/show-recipe', $data);
