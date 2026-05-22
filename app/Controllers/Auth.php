@@ -41,6 +41,44 @@ class Auth extends BaseController
             $data['roles'] = $this->RoleModel->findAll();
             return view('Auth/register', $data);
         } else {
+
+            $rules = [
+
+                'username' => [
+                    'rules' => 'required|min_length[3]|is_unique[users.username]',
+                    'errors' => [
+                        'required' => 'Le pseudo est obligatoire.',
+                        'min_length' => '3 caractères minimum.',
+                        'is_unique' => 'Ce pseudo est déjà utilisé.'
+                    ]
+                ],
+
+                'email' => [
+                    'rules' => 'required|valid_email|is_unique[users.email]',
+                    'errors' => [
+                        'required' => 'Email obligatoire.',
+                        'valid_email' => 'Email invalide.',
+                        'is_unique' => 'Cet email est déjà utilisé.'
+                    ]
+                ],
+
+                'password' => [
+                    'rules' => 'required|min_length[8]',
+                    'errors' => [
+                        'required' => 'Mot de passe obligatoire.',
+                        'min_length' => '8 caractères minimum.'
+                    ]
+                ]
+            ];
+
+            // 
+            if (!$this->validate($rules)) {
+
+                return redirect()->back()
+                    ->withInput()
+                    ->with('validation', $this->validator);
+            }
+
             //dd($this->request->getPost());
             $avatar_file = $this->request->getFile('avatar_url');
             $avatar_url = null;
