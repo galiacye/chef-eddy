@@ -1,98 +1,111 @@
 <?php
+
 /**
  * @var \App\Entities\Recipe $recipe
  * @var array $tags
  * @var array $ingredients
  * @var array $comments
+ * @var int $user_id
  */
 ?>
 
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/recipes/showRecipe.css')?>" rel="stylesheet">
+<link href="<?= base_url('css/recipes/crecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-<div class="banner">
-    <div class="title-and-tags">
-        
-        <?php foreach($tags as $tag): ?>
-            <h2><?= $tag->nom ?></h2>
-        <?php endforeach ?>
-        <h1><?= $recipe->titre ?></h1>
-    </div>
-
-    <div class="illustration">
-        <?php if($recipe->image_url): ?>
-            <img src="<?= base_url($recipe->image_url ?? 'img/default.jpg') ?>" alt="image recette" class="recipe-img">
-        <?php endif ?>
-    </div>
-</div>
-<div class="infos">
-    <p>Difficulté : <?= $recipe->difficulte ?></p>
-    <p>Temps de préparation : <?= $recipe->temps_preparation ?> minutes</p>
-    <p>Temps de cuisson : <?= $recipe->temps_cuisson ?> minutes</p>
-    <p>Nombre de personnes : <?= $recipe->nb_personnes ?></p>
-</div>
-
-<div class="ingredients">
-                <h3>Ingredients</h3>
-                <ul>
-                <?php foreach($ingredients as $ingredient):?>
-                        <li><?= $ingredient->nom ?> : <?= $ingredient->quantite ?> . <?= $ingredient->unite ?></li>
-                <?php endforeach ?>
-                </ul>
-</div>
-     
-
-<!-- pour quill-js : -->
-<div class="editor">
-        <p><?= $recipe->contenu ?></p>
-</div>
-
-
-
-<!--bouton favorites commence ici -->
 <?php
-$user_id    = session()->get('user_id');
-$isFav     = false;
+$user_id = session()->get('user_id');
+
+$isFav = false;
 if ($user_id) {
     $favoriteModel = model('FavoriteModel');
     $isFav = $favoriteModel->isFavorite($user_id, $recipe->id);
 }
 ?>
+<div class="container recipe-page">
 
-<?php if ($user_id) : ?>
-    <form action="<?= site_url('favorites/toggle/' . $recipe->id) ?>" method="post">
-        <?= csrf_field() ?>
-        <button type="submit" class="btn <?= $isFav ? 'btn-warning' : 'btn-outline-warning' ?>">
-            <?= $isFav ? '★ Retirer des favoris' : '☆ Ajouter aux favoris' ?>
-        </button>
-    </form>
-<?php endif; ?>
- <!--et se termine là-->
- 
+    <div class="banner">
 
-
-<div class="comment m-4">
-    <h3>Voir les avis</h3>
-    <?php if(!empty($comments)): ?>
-        <?php foreach($comments as $comment): ?>
-            <div class="comment m-3">
-                <p><?= $comment->content ?></p>
-                <p>Note : <?= $comment->rating ?>/5</p>
+        <div class="banner-left">
+            <div class="tags">
+                <?php foreach ($tags as $tag): ?>
+                    <span class="tag"><?= $tag->nom ?></span>
+                <?php endforeach ?>
             </div>
-        <?php endforeach ?>
-    <?php else : ?>
-        <p>Aucun avis pour l'instant</p>
+
+            <h1 class="recipe-title">
+                <?= $recipe->titre ?>
+            </h1>
+
+            <?php if (!empty($recipe->image_url)): ?>
+                <img src="<?= base_url($recipe->image_url) ?>" class="recipe-img">
+            <?php endif; ?>
+        </div>
+
+        <div class="banner-right">
+            <div class="info-card">
+                <div>Difficulté : <b><?= $recipe->difficulte ?></b></div>
+                <div>Préparation : <b><?= $recipe->temps_preparation ?> min</b></div>
+                <div>Cuisson : <b><?= $recipe->temps_cuisson ?> min</b></div>
+                <div>Personnes : <b><?= $recipe->nb_personnes ?></b></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <section class="card-block">
+        <h2>Ingrédients</h2>
+
+        <div class="ingredients-grid">
+            <?php foreach ($ingredients as $ingredient): ?>
+                <div class="ingredient-card">
+                    <b><?= $ingredient->nom ?></b>
+                    <div><?= $ingredient->quantite ?> <?= $ingredient->unite ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="card-block">
+        <h2>La recette</h2>
+        <div class="editor">
+            <?= $recipe->contenu ?>
+        </div>
+    </section>
+
+    <?php if ($user_id) : ?>
+        <form action="<?= site_url('favorites/toggle/' . $recipe->id) ?>" method="post" class="fav-form">
+            <?= csrf_field() ?>
+            <button class="btn-fav <?= $isFav ? 'active' : '' ?>">
+                <?= $isFav ? 'Retirer des favoris' : 'Ajouter aux favoris' ?>
+            </button>
+        </form>
+    <?php endif; ?>
+
+
+    <section class="card-block comments">
+        <h2>Commentaires</h2>
+
+        <?php if (!empty($comments)): ?>
+            <?php foreach ($comments as $comment): ?>
+                <div class="comment">
+                    <p><?= $comment->content ?></p>
+                    <span><?= $comment->rating ?>/5</span>
+                </div>
+            <?php endforeach ?>
+        <?php else : ?>
+            <p>Aucun avis pour l'instant</p>
         <?php endif ?>
+    </section>
+
+    <a href="/add-comment/<?= $recipe->id ?>" class="btn-action">
+        Je l'ai faite
+    </a>
+
 </div>
-
-
-<a href="/add-comment/<?= $recipe->id ?>" class="btn btn-success btn-lg m-3">Je l'ai faite</a>
-
 <?= $this->endSection() ?>
-
-

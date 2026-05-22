@@ -33,7 +33,10 @@
         <?php if (! empty($userRecipes)) : ?>
             <?php foreach ($userRecipes as $recipe) : ?>
                 <div class="col">
-                    <p><?= esc($recipe->title) ?></p>
+                    <p><?= esc($recipe->titre) ?></p>
+                    <?php if ($isOwnProfile) : ?>
+                        <a href="<?= base_url('update-recipe/' . $recipe->id) ?>" class="btn btn-sm btn-warning">Modifier</a>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
