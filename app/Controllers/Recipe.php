@@ -85,7 +85,7 @@ class Recipe extends BaseController
         } else {
             // L'user_id vient de la session
             $role_id = session()->get('role_id');
-            if ($role_id === 2 || $role_id === 3) {
+            if ($role_id == 2 || $role_id == 3) {
 
                 $rules = [
                     "titre" => [
@@ -172,7 +172,7 @@ class Recipe extends BaseController
                         'categories_ing_db' => (new IngredientModel())->getCategory()
                         //?
                     ]);
-                }
+                } 
                 // Gestion de l'image
                 $image = $this->request->getFile('image_url');
                 if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
@@ -261,7 +261,9 @@ class Recipe extends BaseController
 
 
                 return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
-            }
+            }else {
+                    return redirect()->to('/')->with('error', 'Accès refusé.');
+                }
         }
     }
 
