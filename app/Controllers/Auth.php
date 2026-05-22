@@ -31,110 +31,46 @@ class Auth extends BaseController
     // return redirect()->to('login')->with('success', 'Inscription réussie, vous pouvez maintenant vous connecter.');
 
 
-   public function register()
-{
-    $config = HTMLPurifier_Config::createDefault();
-    $purifier = new HTMLPurifier($config);
+    public function register()
+    {
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
 
-    if ($this->request->getMethod() !== 'post') {
+        if ($this->request->is('post') === false) { //= recommandé car insensible à la casse 'POST':  if ($this->request->getMethod() !== post) 
+            //dd($this->request->getMethod());
+            $data['roles'] = $this->RoleModel->findAll();
+            return view('Auth/register', $data);
+        } else {
+            //dd($this->request->getPost());
+            $avatar_file = $this->request->getFile('avatar_url');
+            $avatar_url = null;
 
-        $data['roles'] = $this->RoleModel->findAll();
-        return view('Auth/register', $data);
-    }
-   
-    $rules = [
+            if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
 
-        'username' => [
-            'rules' => 'required|min_length[3]|is_unique[users.username]',
-            'errors' => [
-                'required' => 'Le pseudo est obligatoire.',
-                'min_length' => '3 caractères minimum.',
-                'is_unique' => 'Ce pseudo est déjà utilisé.'
-            ]
-        ],
+                $newName = $avatar_file->getRandomName();
+                $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
 
-        'email' => [
-            'rules' => 'required|valid_email|is_unique[users.email]',
-            'errors' => [
-                'required' => 'Email obligatoire.',
-                'valid_email' => 'Email invalide.',
-                'is_unique' => 'Cet email est déjà utilisé.'
-            ]
-        ],
+                $avatar_url = 'uploads/avatars/' . $newName;
+            } else {
+                $avatar_url = 'uploads/avatars/fantome.png';
+            }
 
-        'password' => [
-            'rules' => 'required|min_length[8]',
-            'errors' => [
-                'required' => 'Mot de passe obligatoire.',
-                'min_length' => '8 caractères minimum.'
-            ]
-        ]
-    ];
+            $data = [
+                'username'   => $this->request->getPost('username'),
+                'email'      => $this->request->getPost('email'),
+                'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
+                'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'nom'        => $this->request->getPost('nom'),
+                'prenom'     => $this->request->getPost('prenom'),
+                'avatar_url' => $avatar_url
+            ];
 
-//cas echec validation
-    if (!$this->validate($rules)) {
+            $this->UserModel->register($data);
 
-        return redirect()->back()
-            ->withInput()
-            ->with('errors', $this->validator->getErrors());
-    }
-
- //gestion du fichier avatar
-
-    $avatar_file = $this->request->getFile('avatar_url');
-    $avatar_url = 'uploads/avatars/fantome.png';
-
-    if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
-
-        $newName = $avatar_file->getRandomName();
-        $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
-
-        $avatar_url = 'uploads/avatars/' . $newName;
-    }
-
-  
-
-    $data = [
-
-        'username'   => $this->request->getPost('username'),
-
-        'email'      => $this->request->getPost('email'),
-
-        'role_id'    => $this->request->getPost('role_id') ?? 1,
-
-        'password'   => password_hash(
-            $this->request->getPost('password'),
-            PASSWORD_DEFAULT
-        ),
-
-        'nom'        => $this->request->getPost('nom'),
-
-        'prenom'     => $this->request->getPost('prenom'),
-
-        'avatar_url' => $avatar_url
-    ];
-
-//insertion en base
-
-    try {
-
-        $this->UserModel->register($data);
-
-    } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
-
-        if ($e->getCode() == 1062) {
-
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Ce nom d’utilisateur est déjà pris.');
+            return redirect()->to('/')->with('success', 'Votre profil a bien été crée');
         }
-
-        throw $e;
     }
 
-    return redirect()->to('/')
-        ->with('success', 'Votre profil a bien été créé');
-}
 
     public function connect()
     {
