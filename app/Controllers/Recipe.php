@@ -85,7 +85,7 @@ class Recipe extends BaseController
         } else {
             // L'user_id vient de la session
             $role_id = session()->get('role_id');
-            if ($role_id === 2 || $role_id === 3) {
+            if ($role_id == 2 || $role_id == 3) {
 
                 $rules = [
                     "titre" => [
