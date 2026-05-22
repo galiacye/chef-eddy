@@ -33,7 +33,7 @@
         <?php if (! empty($userRecipes)) : ?>
             <?php foreach ($userRecipes as $recipe) : ?>
                 <div class="col">
-                    <p><?= esc($recipe->title) ?></p>
+                    <p><?= esc($recipe->titre) ?></p>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
