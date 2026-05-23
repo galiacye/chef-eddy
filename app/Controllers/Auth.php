@@ -154,7 +154,7 @@ class Auth extends BaseController
         $token = bin2hex(random_bytes(32));
 
         // Supprime les anciens tokens de cet email
-        $this->PasswordResetModel->where('email', $email)->delete();//supp toutes les lignes de cet user
+        $this->PasswordResetModel->where('email', $email)->delete(); //supp toutes les lignes de cet user
 
         // Stocke le nouveau token (expire dans 1 heure)
         $this->PasswordResetModel->insert([
@@ -204,11 +204,19 @@ class Auth extends BaseController
 
         $rules = [
             'password' => [
-                'label' => 'Mot de passe',
-                'rules' => 'required|min_length[8]',
+                'label'  => 'Mot de passe',
+                'rules'  => 'required|min_length[8]',
                 'errors' => [
                     'required'   => 'Mot de passe requis',
                     'min_length' => 'Minimum 8 caractères'
+                ]
+            ],
+            'confirm_password' => [
+                'label'  => 'Confirmation',
+                'rules'  => 'required|matches[password]',//matches native CI4 compare password et confirm_password
+                'errors' => [
+                    'required' => 'Confirmation requise',
+                    'matches'  => 'Les mots de passe ne correspondent pas'
                 ]
             ]
         ];

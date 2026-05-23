@@ -101,6 +101,6 @@ $routes->post('comment/reply', 'Comment::replyComment');
 
 //password-forgot
 $routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
-$routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
+$routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');//any prend les / contrairement à segment
 
 
