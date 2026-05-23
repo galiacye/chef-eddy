@@ -161,4 +161,113 @@ class Auth extends BaseController
         session()->destroy();
         return redirect()->to('/');
     }
+
+
+
+
+     public function forgotPassword()
+    {
+        //si c'est get on affiche le form comme à chaque fois
+        if ($this->request->is('post') === false) {
+            return view('Auth/forgot-password');
+        }
+        //on déclare
+
+        $email = $this->request->getPost('email');
+        $user  = $this->UserModel->getUserByEmail($email);
+        //si pas d'user erreur
+        if (!$user) {
+            return redirect()->back()->with('error', "Cet email n'existe pas");
+        }
+
+        // Génération du token
+        $token = bin2hex(random_bytes(32));
+
+        // Supprime les anciens tokens de cet email
+        $this->PasswordResetModel->where('email', $email)->delete(); //supp toutes les lignes de cet user
+
+        // Stocke le nouveau token (expire dans 1 heure)
+        $this->PasswordResetModel->insert([
+            'email'      => $email,
+            'token'      => $token,
+            'expires_at' => date('Y-m-d H:i:s', strtotime('+1 hour'))
+        ]);
+
+        // Envoi de l'email
+        $emailService = \Config\Services::email();
+        $emailService->setFrom('noreply@chef-eddy.fr', 'Chef Eddy');
+        $emailService->setTo($email);
+        $emailService->setSubject('Réinitialisation de votre mot de passe');
+        $emailService->setMessage('
+        <p>Bonjour ' . esc($user->username) . ',</p>
+        <p>Cliquez sur ce lien pour réinitialiser votre mot de passe :</p>
+        <a href="' . base_url('reset-password/' . $token) . '">Réinitialiser mon mot de passe</a>
+        <p>Ce lien expire dans 1 heure.</p>
+    ');
+
+        if ($emailService->send()) {
+            return redirect()->to('login')->with('success', 'Un email vous a été envoyé');
+        } else {
+            return redirect()->back()->with('error', "Erreur lors de l'envoi de l'email");
+        }
+    }
+
+
+
+
+    public function resetPassword(string $token)
+    {
+        $reset = $this->PasswordResetModel
+            ->where('token', $token)
+            ->where('expires_at >', date('Y-m-d H:i:s'))
+            ->first();
+
+        if (!$reset) {
+            return redirect()->to('login')->with('error', 'Lien invalide ou expiré');
+        }
+
+        if ($this->request->is('post') === false) {
+            return view('Auth/reset-password', ['token' => $token]);
+        }
+
+        $password = $this->request->getPost('password');
+
+        $rules = [
+            'password' => [
+                'label'  => 'Mot de passe',
+                'rules'  => 'required|min_length[8]',
+                'errors' => [
+                    'required'   => 'Mot de passe requis',
+                    'min_length' => 'Minimum 8 caractères'
+                ]
+            ],
+            'confirm_password' => [
+                'label'  => 'Confirmation',
+                'rules'  => 'required|matches[password]',//matches native CI4 compare password et confirm_password
+                'errors' => [
+                    'required' => 'Confirmation requise',
+                    'matches'  => 'Les mots de passe ne correspondent pas'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            return view('Auth/reset-password', [
+                'token'  => $token,
+                'errors' => $this->validator->getErrors()
+            ]);
+        }
+
+        // Mise à jour du mot de passe
+        $this->UserModel->where('email', $reset->email)
+            ->set(['password' => password_hash($password, PASSWORD_DEFAULT)])
+            ->update();
+
+        // Suppression du token
+        $this->PasswordResetModel->where('token', $token)->delete();
+
+        return redirect()->to('login')->with('success', 'Mot de passe mis à jour, vous pouvez vous connecter');
+    }
 }
+
+
