@@ -66,19 +66,36 @@
     </div>
 
     <!-- Commentaires -->
-    <div class="row comments py-4">
-        <h4 class="text-center text-light">Commentaires</h4>
+<div class="row comments py-4">
+    <h4 class="text-center text-light">Commentaires</h4>
+    <?php if (!empty($comments)) : ?>
+        <?php foreach ($comments as $comment) : ?>
+            <?php if ($comment->parent_id === null) : ?>
+                <div class="col-12 mb-3">
+                    <!-- Commentaire utilisateur -->
+                    <div class="p-3 bg-dark text-light border border-secondary rounded">
+                        <small class="text-muted">💬 <?= esc($comment->username) ?></small>
+                        <p class="mb-1 mt-1"><?= $comment->content ?></p>
+                        <?php if ($comment->rating) : ?>
+                            <small class="text-warning"><?= $comment->rating ?>/5</small>
+                        <?php endif ?>
+                    </div>
 
-        <?php if (! empty($comments)) : ?>
-            <?php foreach ($comments as $comment) : ?>
-                <div class="col">
-                    <p><?= esc($comment->content) ?></p> <!-- adapte le nom du champ -->
+                    <!-- Réponse du chef si elle existe -->
+                    <?php foreach ($comments as $reply) : ?>
+                        <?php if ($reply->parent_id === $comment->id) : ?>
+                            <div class="p-3 ms-4 mt-2 bg-secondary text-light rounded">
+                                <small class="text-warning">Chef Eddy</small>
+                                <p class="mb-0 mt-1"><?= $reply->content ?></p>
+                            </div>
+                        <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-            <?php endforeach; ?>
-        <?php else : ?>
-            <p class="text-center text-light">Aucun commentaire pour l'instant.</p>
-        <?php endif; ?>
-    </div>
-
+            <?php endif ?>
+        <?php endforeach ?>
+    <?php else : ?>
+        <p class="text-center text-light">Aucun commentaire pour l'instant.</p>
+    <?php endif ?>
+</div>
 </div>
 <?= $this->endSection() ?>
