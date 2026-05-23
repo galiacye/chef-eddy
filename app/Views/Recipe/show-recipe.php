@@ -142,7 +142,7 @@ if ($user_id) {
             const baseQty = parseFloat(el.dataset.base);
             if (!isNaN(baseQty)) {
                 const result = (baseQty * current / base);
-                el.textContent = Number.isInteger(result) ? result : result.toFixed(2);
+                el.textContent = parseFloat(result.toFixed(2));//parseFloat supprime les zéros après la virgule
             }
         });
     }
