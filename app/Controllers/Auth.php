@@ -15,6 +15,7 @@ class Auth extends BaseController
     protected object $model;
     protected object $UserModel;
     protected object $RoleModel;
+    protected object $PasswordResetModel;
 
     public function __construct()
     {
