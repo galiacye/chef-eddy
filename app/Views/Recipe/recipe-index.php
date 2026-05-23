@@ -35,7 +35,7 @@
                         <?= esc($recipe->titre) ?>
                     </h5>
 
-                    <a href="<?= base_url('show-recipe/' . $recipe->id) ?>" 
+                    <a href="<?= base_url('recipe/' . $recipe->id) ?>" 
                        class="btn btn-recipe btn-sm mt-auto">
                         Voir la recette
                     </a>
