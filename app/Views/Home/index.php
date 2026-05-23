@@ -21,69 +21,42 @@
 
     <div class="search-wrapper">
 
-       
         <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
             <input type="text"
                 name="q"
-                class="form-control pe-5"
+                class="form-control"
                 placeholder="Rechercher une recette">
-
-            <button type="submit"
-                class="btn border-0 bg-transparent p-0">
-                <i class="bi bi-search"></i>
-            </button>
         </div>
 
-        <div class="row align-items-center filters">
-        
+        <div class="filters d-flex gap-2 mb-3">
 
-            <div class="col-10">
-                <div class="filters d-flex gap-2">
-
-                   <div class="filter-half d-flex align-items-center">
-
-                        <select name="ingredient" class="form-select">
-                            <option value="">Avec</option>
-
-                            <?php foreach ($ingredients as $ingr): ?>
-                                <option value="<?= esc($ingr->nom) ?>">
-                                    <?= esc($ingr->nom) ?>
-                                </option>
-                            <?php endforeach ?>
-                        </select>
-
-                        <button type="submit"
-                            class="btn border-0 bg-transparent p-0">
-                            <i class="bi bi-search"></i>
-                        </button>
-
-                    </div>
-
-                   <div class="filter-half d-flex align-items-center">
-
-                        <select name="without" class="form-select">
-                            <option value="">Sans</option>
-
-                            <?php foreach ($categories as $cat): ?>
-                                <option value="<?= esc($cat->nom) ?>">
-                                    <?= esc($cat->nom) ?>
-                                </option>
-                            <?php endforeach ?>
-                        </select>
-
-                        <button type="submit"
-                            class="btn border-0 bg-transparent p-0">
-                            <i class="bi bi-search"></i>
-                        </button>
-
-                    </div>
-
-                </div>
+            <div class="filter-half d-flex align-items-center gap-1">
+                <select name="ingredient" class="form-select">
+                    <option value="">Avec</option>
+                    <?php foreach ($ingredients as $ingr): ?>
+                        <option value="<?= esc($ingr->nom) ?>"><?= esc($ingr->nom) ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
+
+            <div class="filter-half d-flex align-items-center gap-1">
+                <select name="without" class="form-select">
+                    <option value="">Sans</option>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+
         </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+            <i class="bi bi-search"></i> Rechercher
+        </button>
+
     </div>
-</div>
-<?= form_close() ?>
+
+    <?= form_close() ?>
 </div>
 
 <div class="row mt-4 w-100">

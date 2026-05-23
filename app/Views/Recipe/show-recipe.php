@@ -62,10 +62,20 @@ if ($user_id) {
         <h2>Ingrédients</h2>
 
         <div class="ingredients-grid">
+            <div class="portions-control">
+                <label>Portions :</label>
+                <button type="button" id="moins">-</button>
+                <span id="nb-personnes"><?= $recipe->nb_personnes ?></span>
+                <button type="button" id="plus">+</button>
+            </div>
             <?php foreach ($ingredients as $ingredient): ?>
                 <div class="ingredient-card">
                     <b><?= $ingredient->nom ?></b>
-                    <div><?= $ingredient->quantite ?> <?= $ingredient->unite ?></div>
+                    <div>
+                        <span class="ingredient-qty" data-base="<?= $ingredient->quantite ?>">
+                            <?= $ingredient->quantite ?>
+                        </span> <?= $ingredient->unite ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -108,4 +118,34 @@ if ($user_id) {
     </a>
 
 </div>
+<?= $this->section('customJs') ?>
+<script>
+    const base = <?= $recipe->nb_personnes ?>;
+    let current = base;
+
+    const quantities = document.querySelectorAll('.ingredient-qty');
+
+    document.getElementById('moins').addEventListener('click', () => {
+        if (current <= 1) return;
+        current--;
+        update();
+    });
+
+    document.getElementById('plus').addEventListener('click', () => {
+        current++;
+        update();
+    });
+
+    function update() {
+        document.getElementById('nb-personnes').textContent = current;
+        quantities.forEach(el => {
+            const baseQty = parseFloat(el.dataset.base);
+            if (!isNaN(baseQty)) {
+                const result = (baseQty * current / base);
+                el.textContent = Number.isInteger(result) ? result : result.toFixed(2);
+            }
+        });
+    }
+</script>
+<?= $this->endSection() ?>
 <?= $this->endSection() ?>
