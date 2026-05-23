@@ -138,11 +138,11 @@ if ($user_id) {
 
     function update() {
         document.getElementById('nb-personnes').textContent = current;
-        quantities.forEach(el => {
-            const baseQty = parseFloat(el.dataset.base);
+        quantities.forEach(element => {
+            const baseQty = parseFloat(element.dataset.base);
             if (!isNaN(baseQty)) {
                 const result = (baseQty * current / base);
-                el.textContent = parseFloat(result.toFixed(2));//parseFloat supprime les zéros après la virgule
+                element.textContent = parseFloat(result.toFixed(2));//parseFloat supprime les zéros après la virgule
             }
         });
     }
