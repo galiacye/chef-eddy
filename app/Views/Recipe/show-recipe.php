@@ -100,15 +100,28 @@ if ($user_id) {
 
     <section class="card-block comments">
         <h2>Commentaires</h2>
-
         <?php if (!empty($comments)): ?>
             <?php foreach ($comments as $comment): ?>
-                <div class="comment">
-                    <p><?= $comment->content ?></p>
-                    <span><?= $comment->rating ?>/5</span>
-                </div>
+                <?php if ($comment->parent_id === null): ?>
+                    <div class="comment">
+                        <small class="comment-author"><?= esc($comment->username) ?></small>
+                        <p><?= esc($comment->content) ?></p>
+                        <?php if ($comment->rating): ?>
+                            <span class="comment-rating"><?= $comment->rating ?>/5</span>
+                        <?php endif ?>
+
+                        <?php foreach ($comments as $reply): ?>
+                            <?php if ($reply->parent_id === $comment->id): ?>
+                                <div class="comment-reply">
+                                    <small class="reply-author">Chef Eddy</small>
+                                    <p><?= esc($reply->content) ?></p>
+                                </div>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                    </div>
+                <?php endif ?>
             <?php endforeach ?>
-        <?php else : ?>
+        <?php else: ?>
             <p>Aucun avis pour l'instant</p>
         <?php endif ?>
     </section>
@@ -142,7 +155,7 @@ if ($user_id) {
             const baseQty = parseFloat(element.dataset.base);
             if (!isNaN(baseQty)) {
                 const result = (baseQty * current / base);
-                element.textContent = parseFloat(result.toFixed(2));//parseFloat supprime les zéros après la virgule
+                element.textContent = parseFloat(result.toFixed(2)); //parseFloat supprime les zéros après la virgule
             }
         });
     }

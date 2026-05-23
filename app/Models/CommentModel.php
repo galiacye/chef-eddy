@@ -40,13 +40,25 @@ class CommentModel extends Model
         }
     }
 
-    public function commentsByRecipe(int $recipe_id)
-    {
-        return $this->select('comments.id, recettes.titre as recipe_title, comments.content, comments.rating')
-            ->join('recettes', 'comments.recette_id = recettes.id')
-            ->where('comments.recette_id', $recipe_id)
-            ->findAll();
-    }
+    // public function commentsByRecipe(int $recipe_id)
+    // {
+    //     return $this->select('comments.id, recettes.titre as recipe_title, comments.content, comments.rating')
+    //         ->join('recettes', 'comments.recette_id = recettes.id')
+    //         ->where('comments.recette_id', $recipe_id)
+    //         ->findAll();
+    // }
+
+public function commentsByRecipe(int $recipe_id)
+{
+    return $this->select('comments.id, comments.parent_id, comments.content, comments.rating, comments.status, users.username')
+        ->join('recettes', 'comments.recette_id = recettes.id')
+        ->join('users', 'comments.user_id = users.id')
+        ->where('comments.recette_id', $recipe_id)
+        ->where('comments.status', 'approved')
+        ->orderBy('comments.id', 'ASC')
+        ->findAll();
+}
+
 
     // public function commentByUser(int $user_id)
     // {
@@ -60,8 +72,7 @@ class CommentModel extends Model
     {
 
         //définir les  commentaires originels de user:
-        $userCommentsIds = $this->db->table('comments')
-            ->select('id')
+        $userCommentsIds = $this->select('id')
             ->where('user_id', $user_id)
             ->where('parent_id IS NULL')
             ->get()
@@ -71,7 +82,7 @@ class CommentModel extends Model
 //dd($userCommentsIds);
 //dd($ids);
         if (empty($ids)) return [];
-
+//temps 2 ramener tout
         //user comments's and chef replies
         return $this->select('comments.id, users.username, comments.content, comments.rating,
                             comments.parent_id, comments.status, comments.user_id')

@@ -104,6 +104,20 @@ body {
   margin-bottom: 0.8rem;
 }
 
+.comment-reply {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border-left: 3px solid #ffc107;
+    background: rgba(255, 193, 7, 0.08);
+    border-radius: 0 8px 8px 0;
+}
+
+.reply-author {
+    font-weight: 500;
+    color: #ffc107;
+}
+
 .btn-fav {
   background: #6cf8a2;
   border: none;
