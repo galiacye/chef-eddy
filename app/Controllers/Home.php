@@ -33,7 +33,7 @@ class Home extends BaseController
             'categories' => $ingredientsCategories,
             'tags' => $tags
         ];
-        return view('Home/indexV2', $data);
+        return view('Home/index', $data);
     }
 
     public function salut()
