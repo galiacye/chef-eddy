@@ -74,7 +74,7 @@
                 <div class="col-12 mb-3">
                     <!-- Commentaire utilisateur -->
                     <div class="p-3 bg-dark text-light border border-secondary rounded">
-                        <small class="text-muted">💬 <?= esc($comment->username) ?></small>
+                        <small class="text-muted"><?= esc($comment->username) ?></small>
                         <p class="mb-1 mt-1"><?= $comment->content ?></p>
                         <?php if ($comment->rating) : ?>
                             <small class="text-warning"><?= $comment->rating ?>/5</small>
