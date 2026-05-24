@@ -27,7 +27,7 @@ class Recipe extends BaseController
     public function editRecipe()
     {
         $unitModel = model('UnitModel');
-        $unit = array_column($unitModel->findAll(), 'nom'); //array_column(tableau, 'colonne_voulue')
+        $unit = array_column($unitModel->findAll(), 'name'); //array_column(tableau, 'colonne_voulue')
         if ($this->request->is('post') === false) {
             return view('Recipe/edit-recipe', ['unit' => $unit]);
         }
@@ -56,7 +56,7 @@ class Recipe extends BaseController
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
-            'unites'      => array_column($unitModel->findAll(), 'nom'), // ['kg','g','ml'...],
+            'units'      => array_column($unitModel->findAll(), 'name'), // ['kg','g','ml'...],
             'comments'    => $commentModel->commentsByRecipe($id),
             'user_id' => session()->get('user_id'),
             'isFav' => $isFav
@@ -87,7 +87,7 @@ class Recipe extends BaseController
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
-                'unites' => array_column($unitModel->findAll(), 'nom'), // ['kg','g','ml'...]
+                'units' => array_column($unitModel->findAll(), 'name'), // ['kg','g','ml'...]
                 'categories_ing_db'  => $ingredientModel->getCategory()
             ]);
         } else {
@@ -96,7 +96,7 @@ class Recipe extends BaseController
             if ($role_id == 2 || $role_id == 3) {
 
                 $rules = [
-                    "titre" => [
+                    "title" => [
                         "label" => "Titre",
                         "rules" => "required|min_length[2]|max_length[50]",
                         "errors" => [
@@ -114,7 +114,7 @@ class Recipe extends BaseController
                             "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                         ]
                     ],
-                    "temps_preparation" => [
+                    "prep_time" => [
                         "label" => "Temps de préparation",
                         "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
                         "errors" => [
@@ -123,7 +123,7 @@ class Recipe extends BaseController
                             "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
                         ]
                     ],
-                    "temps_cuisson" => [
+                    "cook_time" => [
                         "label" => "Temps de cuisson",
                         "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
                         "errors" => [
@@ -132,7 +132,7 @@ class Recipe extends BaseController
                             "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
                         ]
                     ],
-                    "contenu" => [
+                    "content" => [
                         "label" => "Étapes de la recette",
                         "rules" => "permit_empty|string|max_length[65535]",
                         "errors" => [
@@ -140,7 +140,7 @@ class Recipe extends BaseController
                             "max_length" => "La recette est trop longue"
                         ]
                     ],
-                    "nb_personnes" => [
+                    "portions" => [
                         "label" => "Nombre de personnes",
                         "rules" => "required|integer|greater_than_equal_to[1]|less_than_equal_to[1000]",
                         "errors" => [
@@ -150,7 +150,7 @@ class Recipe extends BaseController
                             "less_than_equal_to" => "Le nombre de personnes ne peut pas dépasser 1000"
                         ]
                     ],
-                    "difficulte" => [
+                    "difficulty" => [
                         "label" => "Difficulté",
                         "rules" => "required|in_list[facile,moyen,difficile]",
                         "errors" => [
@@ -158,7 +158,7 @@ class Recipe extends BaseController
                             "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
                         ]
                     ],
-                    "categorie_id" => [
+                    "category_id" => [
                         "label" => "Catégorie",
                         "rules" => "required|integer|greater_than_equal_to[1]",
                         "errors" => [
@@ -176,7 +176,7 @@ class Recipe extends BaseController
                         'errors' => $this->validator->getErrors(),
                         'tags'       => (new TagModel())->findAll(),
                         'categories' => (new CategoryModel())->findAll(),
-                        'unites'     => array_column((new UnitModel())->findAll(), 'nom'),
+                        'units'     => array_column((new UnitModel())->findAll(), 'name'),
                         'categories_ing_db' => (new IngredientModel())->getCategory()
                         //?
                     ]);
@@ -194,27 +194,28 @@ class Recipe extends BaseController
                 // Purification du HTML de Quill
                 $config = HTMLPurifier_Config::createDefault();
                 $purifier = new HTMLPurifier($config);
-                $contenu = $purifier->purify($this->request->getPost('contenu'));
+                $content = $purifier->purify($this->request->getPost('content'));
                 $data = [
                     'user_id'           => 3, //$user_id plus tard, là on teste avec admin
-                    'titre'             => $this->request->getPost('titre'),
+                    'title'             => $this->request->getPost('title'),
                     'image_url'         => $image_path,
-                    'temps_preparation' => $this->request->getPost('temps_preparation') ?: null,
+                    'prep_time' => $this->request->getPost('prep_time') ?: null,
                     //ternaire syntaxe simplifiée = $this->request->getPost('temps_preparation')? $this->request->getPost('temps_preparation'): null
-                    'temps_cuisson'     => $this->request->getPost('temps_cuisson') ?: null,
-                    'contenu'           => $contenu,
-                    'nb_personnes'      => $this->request->getPost('nb_personnes'),
-                    'difficulte'        => $this->request->getPost('difficulte'),
-                    'statut'            => 'En attente',
-                    'nb_vues'           => 0,
+                    'cook_time'     => $this->request->getPost('cook_time') ?: null,
+                    'content'           => $content,
+                    'portions'      => $this->request->getPost('portions'),
+                    'difficulty'        => $this->request->getPost('difficulty'),
+                    'status'            => 'pending',
+                    'views'           => 0,
                 ];
-                //gestion des tables de liaison:
+
+//gestion des tables de liaison:
                 $recipe_id = $this->model->createRecipe($data); //ici insertion en base
                 $db = \Config\Database::connect();
                 $category_id = $this->request->getPost('category_id');
                 if ($category_id) {
-                    $db->table('recette_categories')->insert([
-                        'recette_id'   => $recipe_id,
+                    $db->table('recipe_categories')->insert([
+                        'recipe_id'   => $recipe_id,
                         'category_id' => $category_id
                     ]);
                 }
@@ -223,8 +224,8 @@ class Recipe extends BaseController
                     // force en tableau
                     $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                     foreach ($tag_ids as $tag_id) {
-                        $db->table('recettes_tags')->insert([
-                            'recette_id' => $recipe_id,
+                        $db->table('recipe_tags')->insert([
+                            'recipe_id' => $recipe_id,
                             'tag_id'     => $tag_id
                         ]);
                     }
@@ -236,33 +237,33 @@ class Recipe extends BaseController
 
                 if ($ingredients) {
                     foreach ($ingredients as $ingredient) {
-                        $nom = ucfirst(strtolower(trim($ingredient['nom']))); //éviter les doublons d'orthographe différente
-                        if (empty($nom)) continue; // on saute les lignes vides
+                        $name = ucfirst(strtolower(trim($ingredient['name']))); //éviter les doublons d'orthographe différente
+                        if (empty($name)) continue; // on saute les lignes vides
 
                         //  Chercher si l'ingrédient existe déjà
-                        $ing_existant = $db->table('ingredients')
-                            ->where('nom', $nom)
+                        $existing = $db->table('ingredients')
+                            ->where('name', $name)
                             ->get()
                             ->getRowArray();
 
-                        if ($ing_existant) {
+                        if ($existing) {
                             // si existe : on récupère son id
-                            $ingredient_id = $ing_existant['id']; //syntaxe array car getRowArray() ci-dessus
+                            $ingredient_id = $existing['id']; //syntaxe array car getRowArray() ci-dessus
                         } else {
                             //sinon on l'insère
                             $db->table('ingredients')->insert([
-                                'nom'       => $nom,
-                                'categorie' => $ingredient['categorie']
+                                'name'       => $name,
+                                'category' => $ingredient['category']
                             ]);
                             $ingredient_id = $db->insertID();
                         }
 
                         // Insérer dans recette_ingredients
-                        $db->table('recette_ingredients')->insert([
-                            'recette_id'    => $recipe_id,
+                        $db->table('recipe_ingredients')->insert([
+                            'recipe_id'    => $recipe_id,
                             'ingredient_id' => $ingredient_id,
-                            'quantite'      => $ingredient['quantite'] ?: null,
-                            'unite'         => $ingredient['unite'] ?: null
+                            'quantity'      => $ingredient['quantity'] ?: null,
+                            'unit'         => $ingredient['unit'] ?: null
                         ]);
                     }
                 }
@@ -288,14 +289,14 @@ class Recipe extends BaseController
                 'tags' => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getRecipeIngredients($id),
-                'unites' => array_column(model('UnitModel')->findAll(), 'nom'),
+                'units' => array_column(model('UnitModel')->findAll(), 'name'),
 
             ]);
         } else { //si pas get, post donc traitement
             $user_id = session()->get('user_id');
             // dd($id,$this->request->getPost());//pour voir!
             $rules = [
-                "titre" => [
+                "title" => [
                     "label" => "Titre",
                     "rules" => "required|min_length[2]|max_length[50]",
                     "errors" => [
@@ -313,7 +314,7 @@ class Recipe extends BaseController
                         "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ],
-                "temps_preparation" => [
+                "prep_time" => [
                     "label" => "Temps de préparation",
                     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
                     "errors" => [
@@ -322,7 +323,7 @@ class Recipe extends BaseController
                         "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
                     ]
                 ],
-                "temps_cuisson" => [
+                "cook_time" => [
                     "label" => "Temps de cuisson",
                     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
                     "errors" => [
@@ -331,7 +332,7 @@ class Recipe extends BaseController
                         "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
                     ]
                 ],
-                "contenu" => [
+                "content" => [
                     "label" => "Étapes de la recette",
                     "rules" => "permit_empty|string|max_length[65535]",
                     "errors" => [
@@ -339,7 +340,7 @@ class Recipe extends BaseController
                         "max_length" => "La recette est trop longue"
                     ]
                 ],
-                "nb_personnes" => [
+                "portions" => [
                     "label" => "Nombre de personnes",
                     "rules" => "required|integer|greater_than_equal_to[1]|less_than_equal_to[1000]",
                     "errors" => [
@@ -349,7 +350,7 @@ class Recipe extends BaseController
                         "less_than_equal_to" => "Le nombre de personnes ne peut pas dépasser 1000"
                     ]
                 ],
-                "difficulte" => [
+                "difficulty" => [
                     "label" => "Difficulté",
                     "rules" => "required|in_list[facile,moyen,difficile]",
                     "errors" => [
@@ -368,7 +369,7 @@ class Recipe extends BaseController
                     'tags' => model('TagModel')->findAll(),
                     'categories' => model('CategoryModel')->findAll(),
                     'ingredients' => $this->model->getRecipeIngredients($id),
-                    'unites' => array_column(model('UnitModel')->findAll(), 'nom'),
+                    'units' => array_column(model('UnitModel')->findAll(), 'name'),
                     'categories_ing_db' => model('IngredientModel')->getCategory()
                 ]);
             }
@@ -391,17 +392,17 @@ class Recipe extends BaseController
 
             $config = HTMLPurifier_Config::createDefault();
             $purifier = new HTMLPurifier($config);
-            $contenu = $purifier->purify($this->request->getPost('contenu'));
+            $content = $purifier->purify($this->request->getPost('content'));
             $data = [
                 'user_id'           => 3, //toujours provisoire
-                'titre'             => $this->request->getPost('titre'),
+                'title'             => $this->request->getPost('title'),
                 'image_url'         => $image_path,
-                'temps_preparation' => $this->request->getPost('temps_preparation') ?: null,
-                'temps_cuisson'     => $this->request->getPost('temps_cuisson') ?: null,
-                'contenu'           => $contenu,
-                'nb_personnes'      => $this->request->getPost('nb_personnes'),
-                'difficulte'        => $this->request->getPost('difficulte'),
-                'statut'            => 'En attente',
+                'prep_time' => $this->request->getPost('prep_time') ?: null,
+                'cook_time'     => $this->request->getPost('cook_time') ?: null,
+                'content'           => $content,
+                'portions'      => $this->request->getPost('portions'),
+                'difficulty'        => $this->request->getPost('difficulty'),
+                'status'            => 'pending',
             ];
 
             //dd($image->isValid(), $image->hasMoved(), $image->getError());
@@ -414,41 +415,41 @@ class Recipe extends BaseController
 
             $recipe_id = $id; //pour les tables intermédiaires
             $db = \Config\Database::connect();
-            $categorie_id = $this->request->getPost('categorie_id');
-            $db->table('recette_categories')->where('recette_id', $recipe_id)->delete(); //supp avant réinsertion
-            if ($categorie_id) {
-                $db->table('recette_categories')->insert([
-                    'recette_id' => $recipe_id,
-                    'categorie_id' => $categorie_id
+            $category_id = $this->request->getPost('category_id');
+            $db->table('recipe_categories')->where('recipe_id', $recipe_id)->delete(); //supp avant réinsertion
+            if ($category_id) {
+                $db->table('recipe_categories')->insert([
+                    'recipe_id' => $recipe_id,
+                    'category_id' => $category_id
                 ]);
             }
 
             $ingredients = $this->request->getPost('ingredients');
-            $db->table('recette_ingredients')->where('recette_id', $recipe_id)->delete(); //on supprime les anciens ingrédients
+            $db->table('recipe_ingredients')->where('recipe_id', $recipe_id)->delete(); //on supprime les anciens ingrédients
             if ($ingredients) {
                 foreach ($ingredients as $ingredient) {
-                    $nom = ucfirst(strtolower(trim($ingredient['nom'])));
-                    if (empty($nom)) continue;
+                    $name = ucfirst(strtolower(trim($ingredient['name'])));
+                    if (empty($name)) continue;
 
-                    $ing_existant = $db->table('ingredients')
-                        ->where('nom', $nom)
+                    $existing = $db->table('ingredients')
+                        ->where('name', $name)
                         ->get()
                         ->getRowArray();
 
-                    if ($ing_existant) {
-                        $ingredient_id = $ing_existant['id'];
+                    if ($existing) {
+                        $ingredient_id = $existing['id'];
                     } else {
                         $db->table('ingredients')->insert([
-                            'nom' => $nom,
-                            'categorie' => $ingredient['categorie']
+                            'name' => $name,
+                            'category' => $ingredient['category']
                         ]);
                         $ingredient_id = $db->insertID();
                     }
-                    $db->table('recette_ingredients')->insert([
-                        'recette_id'    => $recipe_id,
+                    $db->table('recipe_ingredients')->insert([
+                        'recipe_id'    => $recipe_id,
                         'ingredient_id' => $ingredient_id,
-                        'quantite'      => $ingredient['quantite'] ?: null,
-                        'unite'         => $ingredient['unite'] ?: null
+                        'quantity'      => $ingredient['quantity'] ?: null,
+                        'unit'         => $ingredient['unit'] ?: null
                     ]);
                 }
             }

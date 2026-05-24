@@ -40,17 +40,16 @@ $password = [
     'class' => 'form-control w-50'
 ];
 
-$nom = [
-    'name' => 'nom',
-    'id' => 'nom',
-    'value' => set_value('nom'),
+$last_name = [
+    'name'  => 'last_name',
+    'id'    => 'last_name',
+    'value' => set_value('last_name'),
     'class' => 'form-control w-50'
 ];
-
-$prenom = [
-    'name' => 'prenom',
-    'id' => 'prenom',
-    'value' => set_value('prenom'),
+$first_name = [
+    'name'  => 'first_name',
+    'id'    => 'first_name',
+    'value' => set_value('first_name'),
     'class' => 'form-control w-50'
 ];
 
@@ -61,7 +60,7 @@ $avatar = [
 ];
 $rolesOptions = ['' => 'Sélectionnez un rôle'];
 foreach ($roles as $role) {
-    $rolesOptions[$role->id] = $role->nom;
+    $rolesOptions[$role->id] = $role->name;
 }
 ?>
 

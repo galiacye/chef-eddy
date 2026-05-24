@@ -13,7 +13,7 @@ body {
             <h2>Réinitialiser mon mot de passe</h2>
 
             <?php if (session()->getFlashdata('error')): ?>
-                <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+                <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div><!--ici je ne l'ai pas factorisé en $error pour garder l'exemple-->
             <?php endif ?>
 
             <?php if (isset($errors)): ?>

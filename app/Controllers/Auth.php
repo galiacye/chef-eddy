@@ -99,8 +99,8 @@ class Auth extends BaseController
                 'email'      => $this->request->getPost('email'),
                 'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
                 'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'nom'        => $this->request->getPost('nom'),
-                'prenom'     => $this->request->getPost('prenom'),
+                'last_name'  => $this->request->getPost('last_name'),
+                'first_name' => $this->request->getPost('first_name'),
                 'avatar_url' => $avatar_url
             ];
 
@@ -166,7 +166,7 @@ class Auth extends BaseController
 
 
 
-     public function forgotPassword()
+    public function forgotPassword()
     {
         //si c'est get on affiche le form comme à chaque fois
         if ($this->request->is('post') === false) {
@@ -244,7 +244,7 @@ class Auth extends BaseController
             ],
             'confirm_password' => [
                 'label'  => 'Confirmation',
-                'rules'  => 'required|matches[password]',//matches native CI4 compare password et confirm_password
+                'rules'  => 'required|matches[password]', //matches native CI4 compare password et confirm_password
                 'errors' => [
                     'required' => 'Confirmation requise',
                     'matches'  => 'Les mots de passe ne correspondent pas'
@@ -270,5 +270,3 @@ class Auth extends BaseController
         return redirect()->to('login')->with('success', 'Mot de passe mis à jour, vous pouvez vous connecter');
     }
 }
-
-

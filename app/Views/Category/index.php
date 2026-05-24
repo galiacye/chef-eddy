@@ -9,9 +9,9 @@
         <?php foreach ($categories as $category) : ?>
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="<?= base_url('img/logo.png') ?>" class="card-img-top" alt="<?= $category->nom ?>">
+                    <img src="<?= base_url('img/logo.png') ?>" class="card-img-top" alt="<?= $category->name ?>">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title"><?= $category->nom ?></h5>
+                        <h5 class="card-title"><?= $category->name ?></h5>
                         <a href="<?= base_url('category/' . $category->id) ?>" class="btn btn-primary mt-auto">Voir les recettes</a>
                     </div>
                 </div>
