@@ -8,109 +8,100 @@ use App\models\IngredientModel;
 
 class RecipeModel extends Model
 {
-  protected $table = 'recettes';
+  protected $table = 'recipes';
   protected $primaryKey = 'id';
   protected $useAutoIncrement = true;
   protected $allowedFields = [
     'user_id',
-    'titre',
+    'title',
     'image_url',
-    'temps_preparation',
-    'temps_cuisson',
-    'contenu',
-    'nb_personnes',
-    'difficulte',
-    'statut',
-    'nb_vues'
+    'prep_time',
+    'cook_time',
+    'content',
+    'portions',
+    'difficulty',
+    'status',
+    'views'
   ];
   protected $returnType = 'object';
 
   public function createRecipe(array $data)
-    {
-      return $this->insert($data);
-    }
-
+  {
+    return $this->insert($data);
+  }
+//syntaxe ci4 diff syntaxe sql
   public function getRecipe(int $id)
-    { //syntaxe ci4 diff syntaxe sql
-      return $this->select('recettes.id,
-                          recettes.titre, 
-                          recettes.image_url, 
-                          recettes.difficulte, 
-                          recettes.temps_preparation,
-                          recettes.temps_cuisson,
-                          recettes.nb_personnes,
-                          recettes.contenu,
-                          recettes.statut,
+  { 
+     return $this->select('recipes.id,
+                          recipes.title,
+                          recipes.image_url,
+                          recipes.difficulty,
+                          recipes.prep_time,
+                          recipes.cook_time,
+                          recipes.portions,
+                          recipes.content,
+                          recipes.status,
                           users.username,
-                          recette_categories.categorie_id,
-                          categories.nom AS nom_categorie')
-      ->join('recette_categories', 'recettes.id = recette_categories.recette_id', 'left') //left pour cas où recette sans catégorie
-      ->join('categories', 'categories.id = recette_categories.categorie_id', 'left')
-      ->join('users', 'users.id = recettes.user_id')
-      ->where('recettes.id', $id)
-      ->get()->getRow(); //ici on ne joint pas ing ni recettes_ing car les ingr sont déjà chargés 
-      //par le contrôleur avec $ingredientModel->getRecipeIngredients($id)
+                          recipe_categories.category_id,
+                          categories.name AS category_name')
+        ->join('recipe_categories', 'recipes.id = recipe_categories.recipe_id', 'left')//left cas pas de categorie
+        ->join('categories', 'categories.id = recipe_categories.category_id', 'left')
+        ->join('users', 'users.id = recipes.user_id')
+        ->where('recipes.id', $id)
+        ->get()->getRow();//ici on ne joint pas ing ni recettes_ing car les ingr sont déjà chargés 
+    //par le contrôleur avec $ingredientModel->getRecipeIngredients($id)
 
     //dd($query->getCompiledSelect());pour voir le sql
 
-    }
-
-    public function getRecipeIngredients($recipe_id)
-    {
-      return $this->select('ingredients.nom, recette_ingredients.quantite, recette_ingredients.unite')
-        ->join('recette_ingredients', 'recettes.id = recette_ingredients.recette_id')
-        ->join('ingredients', 'ingredients.id = recette_ingredients.ingredient_id')
-        ->where('recette_ingredients.recette_id', $recipe_id)
-        ->findAll();
-
-    }
-  public function updateRecipe($id, $data)
-    {
-      return $this->update($id, $data);
-    }
-
-  public function getRecipesWithAuthor()
-    {
-      return $this->select('recettes.*, users.username')
-        ->join('users', 'users.id = recettes.user_id')
-        ->findAll(); //ici sql renvoie un résultat ds lequel username devient un attribut de $recipe
-      //d'où le $recipe->username ds views/Admin/recipes-index
-   }
- public function getRecipesByStatus($status = null)
-    {//si un statut existe on retourne les comments qui ont ce statu
-        if ($status) { // false si $status est null, true si la recette a un statut
-            return $this->select('recettes.*, users.username')
-                ->join('users', 'users.id = recettes.user_id')
-                ->where('recettes.statut', $status)
-                ->findAll();
-        } else {//sinon tous : juste pour l'affichage par défaut
-            return $this->select('recettes.*, users.username')
-                ->join('users', 'users.id = recettes.user_id')
-                ->findAll();
-        }
-    }
-
-
-  public function getRecipeByUser(int $id)
-    {
-      return $this->select('recettes.*, users.username')
-        ->join('users', 'users.id = recettes.user_id')
-        ->where('recettes.user_id', $id)
-        ->findAll();
-    }
-
-  //  recettes aléatoires avec tag chef-eddy
-  public function getChefEddyRecipes(int $limit = 6)
-  {
-    return $this->select('recettes.id, recettes.titre, recettes.image_url')
-      ->join('recette_tags', 'recettes.id = recette_tags.recette_id')
-      ->join('tags', 'tags.id = recette_tags.tag_id')
-      ->where('tags.nom_tag', 'chef-eddy')
-      ->orderBy('', 'RANDOM')
-      ->limit($limit)
-      ->get()
-      ->getResult();
   }
 
- 
+ public function getRecipeIngredients($recipe_id)
+{
+    return $this->select('ingredients.name, recipe_ingredients.quantity, recipe_ingredients.unit')
+        ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id')
+        ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
+        ->where('recipe_ingredients.recipe_id', $recipe_id)
+        ->findAll();
+}
+
+public function getRecipesWithAuthor()
+{
+    return $this->select('recipes.*, users.username')
+        ->join('users', 'users.id = recipes.user_id')
+        ->findAll();
+}
+
+public function getRecipesByStatus($status = null)
+{
+    if ($status) {
+        return $this->select('recipes.*, users.username')
+            ->join('users', 'users.id = recipes.user_id')
+            ->where('recipes.status', $status)
+            ->findAll();
+    } else {
+        return $this->select('recipes.*, users.username')
+            ->join('users', 'users.id = recipes.user_id')
+            ->findAll();
+    }
+}
+
+public function getRecipeByUser(int $id)
+{
+    return $this->select('recipes.*, users.username')
+        ->join('users', 'users.id = recipes.user_id')
+        ->where('recipes.user_id', $id)
+        ->findAll();
+}
+
+public function getChefEddyRecipes(int $limit = 6)
+{
+    return $this->select('recipes.id, recipes.title, recipes.image_url')
+        ->join('recipe_tags', 'recipes.id = recipe_tags.recipe_id')
+        ->join('tags', 'tags.id = recipe_tags.tag_id')
+        ->where('tags.name', 'chef-eddy')
+        ->orderBy('', 'RANDOM')
+        ->limit($limit)
+        ->get()
+        ->getResult();
+}
 }

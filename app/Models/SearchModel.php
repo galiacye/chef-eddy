@@ -6,97 +6,89 @@ use CodeIgniter\Model;
 
 class SearchModel extends Model
 {
-    protected $table = 'recettes';
+    protected $table = 'recipes';
     protected $primaryKey = 'id';
 
     public function searchRecipe(string $search)
     {
-        return $this->select('recettes.id,
-                            recettes.titre,
-                            recettes.image_url,
-                            recettes.difficulte,
-                            recettes.temps_preparation,recettes.temps_cuisson,
-                            recettes.nb_personnes')
-            ->like('recettes.titre', $search)
-            // ->where('recettes.statut','publié')
+        return $this->select('recipes.id,
+                            recipes.title,
+                            recipes.image_url,
+                            recipes.difficulty,
+                            recipes.prep_time, recipes.cook_time,
+                            recipes.portions')
+            ->like('recipes.title', $search)
             ->get()
             ->getResultObject();
     }
 
     public function searchByIngredient(string $search)
     {
-        return $this->select('recettes.id,
-                            recettes.titre,
-                            recettes.image_url,
-                            recettes.difficulte,
-                            recettes.temps_preparation,recettes.temps_cuisson,
-                            recettes.nb_personnes')
-            ->join('recette_ingredients', 'recettes.id = recette_ingredients.recette_id')
-            ->join('ingredients', 'recette_ingredients.ingredient_id = ingredients.id')
-            ->like('ingredients.nom', $search)
+        return $this->select('recipes.id,
+                            recipes.title,
+                            recipes.image_url,
+                            recipes.difficulty,
+                            recipes.prep_time, recipes.cook_time,
+                            recipes.portions')
+            ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id')
+            ->join('ingredients', 'recipe_ingredients.ingredient_id = ingredients.id')
+            ->like('ingredients.name', $search)
             ->get()
             ->getResultObject();
     }
 
     public function searchByTag(string $search)
     {
-        return $this->select('recettes.id,
-                            recettes.titre,
-                            recettes.image_url,
-                            recettes.difficulte,
-                            recettes.temps_preparation,recettes.temps_cuisson,
-                            recettes.nb_personnes')
-            ->join('recette_tags', 'recettes.id = recette_tags.recette_id')
-            ->join('tags', 'recette_tags.tag_id = tags.id')
-            ->like('tags.nom', $search)
-            // ->where('recettes.statut', 'publie') //
+        return $this->select('recipes.id,
+                            recipes.title,
+                            recipes.image_url,
+                            recipes.difficulty,
+                            recipes.prep_time, recipes.cook_time,
+                            recipes.portions')
+            ->join('recipe_tags', 'recipes.id = recipe_tags.recipe_id')
+            ->join('tags', 'recipe_tags.tag_id = tags.id')
+            ->like('tags.name', $search)
             ->get()
             ->getResultObject();
     }
 
     public function searchByCategory(string $search)
     {
-        return $this->select('recettes.id,
-                            recettes.titre,
-                            recettes.image_url,
-                            recettes.difficulte,
-                            recettes.temps_preparation,recettes.temps_cuisson,
-                            recettes.nb_personnes')
-            ->join('recette_categories', 'recettes.id = recette_categories.recette_id')
-            ->join('categories', 'recette_categories.categorie_id = categories.id')
-            ->like('categories.nom', $search)
-            //->where('recettes.statut','publie')//
+        return $this->select('recipes.id,
+                            recipes.title,
+                            recipes.image_url,
+                            recipes.difficulty,
+                            recipes.prep_time, recipes.cook_time,
+                            recipes.portions')
+            ->join('recipe_categories', 'recipes.id = recipe_categories.recipe_id')
+            ->join('categories', 'recipe_categories.category_id = categories.id')
+            ->like('categories.name', $search)
             ->get()
             ->getResultObject();
     }
 
-
-  
-
     public function searchWithout(string $category)
     {
-        $exclude = $this->db->table('recette_ingredients')
-            ->select('recette_ingredients.recette_id AS id')
-            ->join('ingredients', 'ingredients.id = recette_ingredients.ingredient_id')
-            ->where('ingredients.categorie', $category)
-           
+        $exclude = $this->db->table('recipe_ingredients')
+            ->select('recipe_ingredients.recipe_id AS id')
+            ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
+            ->where('ingredients.category', $category)
             ->get()
             ->getResultObject();
 
-
         $excludeIds = array_column($exclude, 'id');
 
-        $query = $this->db->table('recettes')
-            ->select('recettes.id,
-                    recettes.titre,
-                    recettes.image_url,
-                    recettes.difficulte,
-                    recettes.temps_preparation,
-                    recettes.temps_cuisson,
-                    recettes.nb_personnes');
+        $query = $this->db->table('recipes')
+            ->select('recipes.id,
+                    recipes.title,
+                    recipes.image_url,
+                    recipes.difficulty,
+                    recipes.prep_time,
+                    recipes.cook_time,
+                    recipes.portions');
 
         if (!empty($excludeIds)) {
-            $query->whereNotIn('recettes.id', $excludeIds);
+            $query->whereNotIn('recipes.id', $excludeIds);
         }
 
         return $query->get()->getResultObject();

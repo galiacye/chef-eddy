@@ -10,7 +10,7 @@ class CommentModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
-        'recette_id',
+        'recipe_id',
         'user_id',
         'content',
         'rating',
@@ -25,17 +25,17 @@ class CommentModel extends Model
     }
 
     public function commentsIndex(?string $status = null)
-    {
-        if ($status) { //si un statut est fourni on retourne uniquement les comments qui ont ce statut
-            return $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating, comments.recette_id, comments.status')
+    { //si un statut est fourni on retourne uniquement les comments qui ont ce statut
+        if ($status) {
+            return $this->select('comments.id, users.username, users.id as user_id, recipes.title as recipe_title, comments.content, comments.rating, comments.recipe_id, comments.status')
                 ->join('users', 'comments.user_id = users.id')
-                ->join('recettes', 'comments.recette_id = recettes.id')
+                ->join('recipes', 'comments.recipe_id = recipes.id')
                 ->where('comments.status', $status)
-                ->findAll();
-        } else { // : pour l'affichage par défaut
-            return $this->select('comments.id, users.username, users.id as user_id, recettes.titre as recipe_title, comments.content, comments.rating, comments.recette_id, comments.status')
+                ->findAll(); // : pour l'affichage par défaut
+        } else {
+            return $this->select('comments.id, users.username, users.id as user_id, recipes.title as recipe_title, comments.content, comments.rating, comments.recipe_id, comments.status')
                 ->join('users', 'comments.user_id = users.id')
-                ->join('recettes', 'comments.recette_id = recettes.id')
+                ->join('recipes', 'comments.recipe_id = recipes.id')
                 ->findAll();
         }
     }
@@ -48,17 +48,16 @@ class CommentModel extends Model
     //         ->findAll();
     // }
 
-public function commentsByRecipe(int $recipe_id)
-{
-    return $this->select('comments.id, comments.parent_id, comments.content, comments.rating, comments.status, users.username')
-        ->join('recettes', 'comments.recette_id = recettes.id')
-        ->join('users', 'comments.user_id = users.id')
-        ->where('comments.recette_id', $recipe_id)
-        ->where('comments.status', 'approved')
-        ->orderBy('comments.id', 'ASC')
-        ->findAll();
-}
-
+    public function commentsByRecipe(int $recipe_id)
+    {
+        return $this->select('comments.id, comments.parent_id, comments.content, comments.rating, comments.status, users.username')
+            ->join('recipes', 'comments.recipe_id = recipes.id')
+            ->join('users', 'comments.user_id = users.id')
+            ->where('comments.recipe_id', $recipe_id)
+            ->where('comments.status', 'approved')
+            ->orderBy('comments.id', 'ASC')
+            ->findAll();
+    }
 
     // public function commentByUser(int $user_id)
     // {
@@ -79,10 +78,10 @@ public function commentsByRecipe(int $recipe_id)
             ->getResultArray();
 
         $ids = array_column($userCommentsIds, 'id');
-//dd($userCommentsIds);
-//dd($ids);
+        //dd($userCommentsIds);
+        //dd($ids);
         if (empty($ids)) return [];
-//temps 2 ramener tout
+        //temps 2 ramener tout
         //user comments's and chef replies
         return $this->select('comments.id, users.username, comments.content, comments.rating,
                             comments.parent_id, comments.status, comments.user_id')
