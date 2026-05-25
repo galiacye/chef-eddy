@@ -6,6 +6,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class User extends BaseController
 {
+    
     private object $model;
     protected object $roleModel;
     protected object $commentModel;

@@ -6,6 +6,7 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
+    protected $table = 'users';
     //query builder
     protected $allowedFields = [
         'username',
