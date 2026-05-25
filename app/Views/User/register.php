@@ -5,11 +5,7 @@ Register
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
-<style>
-    body {
-        background-image: url('img/camouflage.jpg');
-    }
-</style>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
