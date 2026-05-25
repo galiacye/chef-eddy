@@ -127,7 +127,8 @@ CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nom` (`name`)
+  UNIQUE KEY `nom` (`name`),
+  FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 CREATE TABLE `tags` (
@@ -141,6 +142,7 @@ CREATE TABLE `units` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -157,3 +159,4 @@ CREATE TABLE `users` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
 );
+
