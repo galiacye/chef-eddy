@@ -22,9 +22,9 @@
 
 <?php
 $title = [
-    'name' => 'titre',
-    'id' => 'titre',
-    'value' => set_value('titre', isset($recipe->titre) ? $recipe->titre : ''),
+    'name' => 'title',
+    'id' => 'title',
+    'value' => set_value('title', isset($recipe->title) ? $recipe->title : ''),
     'class' => 'form-control w-50'
 ];
 $image = [
@@ -33,23 +33,23 @@ $image = [
     'value' => set_value('image_url', isset($recipe->image) ? $recipe->image_url : ''),
     'class' => 'form-control w-50'
 ];
-$tp = [
-    'name' => 'temps_preparation',
-    'id' => 'temps_preparation',
-    'value' => set_value('temps_preparation', isset($recipe->temps_preparation) ? $recipe->temps_preparation : ''),
+$pt = [
+    'name' => 'prep_time',
+    'id' => 'prep_time',
+    'value' => set_value('prep_time', isset($recipe->prep_time) ? $recipe->prep_time : ''),
     'class' => 'form-control w-50'
 ];
-$tc = [
-    'name' => 'temps_cuisson',
-    'id' => 'temps_cuisson',
-    'value' => set_value('temps_cuisson', isset($recipe->temps_cuisson) ? $recipe->temps_cuisson : ''),
+$ct = [
+    'name' => 'cook_time',
+    'id' => 'cook_time',
+    'value' => set_value('cook_time', isset($recipe->cook_time) ? $recipe->cook_time : ''),
     'class' => 'form-control w-50'
 ];
 
-$nb_pers = [
-    'name' => 'nb_personnes',
-    'id' => 'nb_personnes',
-    'value' => set_value('nb_personnes', isset($recipe->nb_personnes) ? $recipe->nb_personnes : ''),
+$portions = [
+    'name' => 'portions',
+    'id' => 'portions',
+    'value' => set_value('portions', isset($recipe->portions) ? $recipe->portions : ''),
     'class' => 'form-control w-50'
 ];
 
@@ -60,8 +60,8 @@ $diff_options = [
     'difficile' => 'Difficile',
 ];
 $cat = [
-    'name'  => 'categorie_id',
-    'id'    => 'categorie_id',
+    'name'  => 'category_id',
+    'id'    => 'category_id',
     'class' => 'form-select w-50'
 ];
 $options_ingredients = [
@@ -83,60 +83,60 @@ $options_ingredients = [
 ];
 //form_dropdown génère le html select à partir du tab $options_categories
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
-foreach ($categories as $categorie) {
-    $options_categories[$categorie->id] = $categorie->nom; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
+foreach ($categories as $category) {
+    $options_categories[$category->id] = $category->name; //valeur envoyée en base(id)  = ce que user voit(nom renvoyé par la base pour id)
 }
 ?>
 <?= form_open_multipart('update-recipe/' . $recipe->id, ['id' => 'form']) ?>
-<div class="formulaire">
+<div class="recipe-form">
     <!-- $status et $views gérées ds ctrlr -->
     <div class="infos">
 
-        <label for="titre">Titre</label>
+        <label for="title">Title</label>
         <?= form_input($title) ?>
-        <?= validation_show_error('titre') ?>
+        <?= validation_show_error('title') ?>
 
         <label for="image_url">Illustration</label>
         <?= form_upload($image) ?>
         <?= validation_show_error('image_url') ?>
 
-        <label for="temps_preparation">Temps de préparation</label>
-        <?= form_input($tp) ?>
-        <?= validation_show_error('temps_preparation') ?>
+        <label for="prep_time">Temps de préparation</label>
+        <?= form_input($pt) ?>
+        <?= validation_show_error('prep_time') ?>
 
-        <label for="temps_cuisson">Temps de cuisson</label>
-        <?= form_input($tc) ?>
-        <?= validation_show_error('temps_cuisson') ?>
+        <label for="cook_time">Temps de cuisson</label>
+        <?= form_input($ct) ?>
+        <?= validation_show_error('cook_time') ?>
 
-        <label for="nb_personnes">Nombre de personnes</label>
-        <?= form_input($nb_pers) ?>
-        <?= validation_show_error('nb_personnes') ?>
+        <label for="portions">Nombre de personnes</label>
+        <?= form_input($portions) ?>
+        <?= validation_show_error('portions') ?>
 
-        <label for="difficulte">Difficulté</label>
-        <?= form_dropdown('difficulte', $diff_options, 
-            set_value('difficulte', isset($recipe->difficulte) ? $recipe->difficulte : ''), //set_value vient en 3ème argument
-            ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
-        <?= validation_show_error('difficulte') ?>
+        <label for="difficulty">Difficulté</label>
+        <?= form_dropdown('difficulty', $diff_options, 
+            set_value('difficulty', isset($recipe->difficulty) ? $recipe->difficulty : ''), //set_value vient en 3ème argument
+            ['id' => 'difficulty', 'class' => 'form-select w-50']) ?>
+        <?= validation_show_error('difficulty') ?>
 
-        <label for="categorie_id">Catégorie</label>
-        <?= form_dropdown('categorie_id', $options_categories, 
-            set_value('categorie_id', isset($recipe->categorie_id) ? $recipe->categorie_id : ''), $cat) ?>
-        <?= validation_show_error('categorie_id') ?>
+        <label for="category_id">Catégorie</label>
+        <?= form_dropdown('category_id', $options_categories, 
+            set_value('category_id', isset($recipe->category_id) ? $recipe->category_id : ''), $cat) ?>
+        <?= validation_show_error('category_id') ?>
 
         <label>Ingrédients</label>
             <!--ici pas de champs unique, posssibilité de retoucher grammage uniquement, par ex-->         
     <div id="ingredients-container">
     <?php foreach ($ingredients as $index => $ing) : ?>
     <div class="ingredients-row gap-2 mb-2">
-        <input type="text"   name="ingredients[<?= $index ?>][nom]"      value="<?= esc($ing->nom) ?>"      placeholder="Nom"            class="form-control">
-        <input type="number" name="ingredients[<?= $index ?>][quantite]" value="<?= esc($ing->quantite) ?>" placeholder="Quantité"       class="form-control w-25">
-        <input type="text"   name="ingredients[<?= $index ?>][unite]"    value="<?= esc($ing->unite) ?>"    placeholder="Unité (g, ml…)" class="form-control w-25">
+        <input type="text"   name="ingredients[<?= $index ?>][name]"      value="<?= esc($ing->name) ?>"      placeholder="Nom"            class="form-control">
+        <input type="number" name="ingredients[<?= $index ?>][quantity]" value="<?= esc($ing->quantity) ?>" placeholder="Quantité"       class="form-control w-25">
+        <input type="text"   name="ingredients[<?= $index ?>][unit]"    value="<?= esc($ing->unit) ?>"    placeholder="Unité (g, ml…)" class="form-control w-25">
         <!--form_dropdown gère champs simples, pas les noms indexés dynamiquement comme ingredient[index][categorie].-->
-        <select name="ingredients[<?= $index ?>][categorie]" class="form-select w-25">
+        <select name="ingredients[<?= $index ?>][category]" class="form-select w-25">
             <?php foreach($options_ingredients as $key=>$name): ?>
                 <option value = "<?= $key ?>" 
-                    <?= set_select("ingredients[{$index}][categorie]", //set_select() comme set_value relit $POST cas echec validation et le réaffiche (flash conservé par CI4)
-                     $key, isset($ing->categorie)) && $ing->categorie = $key ?>>
+                    <?= set_select("ingredients[{$index}][category]", //set_select() comme set_value relit $POST cas echec validation et le réaffiche (flash conservé par CI4)
+                     $key, isset($ing->category)) && $ing->category = $key ?>>
                 <?= $name ?>
                 </option>
             <?php endforeach; ?>
@@ -150,11 +150,11 @@ foreach ($categories as $categorie) {
             
    
     </div>
-        <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button><br>
+        <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
     </div>
 
     <div class="editeur">
-        <label for="contenu">
+        <label for="content">
             <h2>Votre Recette</h2>
         </label>
         <div id="toolbar">
@@ -165,7 +165,7 @@ foreach ($categories as $categorie) {
             <button class="ql-list" value="bullet"></button>
         </div>
         <div id="editor"></div>
-        <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu', $recipe->contenu ?? '') ?>">
+        <input type="hidden" name="content" id="content" value="<?= set_value('content', $recipe->content ?? '') ?>">
         <!-- $recipe->contenu pr que l'ancien contenu s'affiche -->
         <button type="submit" class="btn btn-primary">Envoyer</button>
         
@@ -178,7 +178,7 @@ foreach ($categories as $categorie) {
                     onclick="return confirm('Supprimer définitivement cette recette?')">Supprimer</button>
         </form>
             
-<?= $this->section('custom-js') ?>
+<?= $this->section('customJs') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
     const categoriesIngredients = <?= json_encode($options_ingredients) ?>;
@@ -192,7 +192,7 @@ const quill = new Quill('#editor', {
         placeholder: 'Écrivez votre recette ici...',
         theme: 'snow',
     });
-    const existingContent = document.getElementById('contenu').value;
+    const existingContent = document.getElementById('content').value;
     if (existingContent) {
         quill.root.innerHTML = existingContent;
     }
@@ -211,15 +211,15 @@ const quill = new Quill('#editor', {
         const row = document.createElement('div');
         row.classList.add('ingredients-row', 'gap-2', 'mb-2');
 
-        const options = Object.entries(categoriesIngredient)
+        const options = Object.entries(categoriesIngredients)
             .map(([val, label]) => `<option value="${val}">${label}</option>`)
             .join('');
 
         row.innerHTML = `
-        <input type="text"   name="ingredients[${index}][nom]"      placeholder="Nom"            class="form-control">
-        <input type="number" name="ingredients[${index}][quantite]" placeholder="Quantité"       class="form-control w-25">
-        <input type="text"   name="ingredients[${index}][unite]"    placeholder="Unité (g, ml…)" class="form-control w-25">
-        <select name="ingredients[${index}][categorie]" class="form-select w-25">${options}</select>
+        <input type="text"   name="ingredients[${index}][name]"      placeholder="Nom"            class="form-control">
+        <input type="number" name="ingredients[${index}][quantity]" placeholder="Quantité"       class="form-control w-25">
+        <input type="text"   name="ingredients[${index}][unit]"    placeholder="Unité (g, ml…)" class="form-control w-25">
+        <select name="ingredients[${index}][category]" class="form-select w-25">${options}</select>
         <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
     `;
         container.appendChild(row);
@@ -240,7 +240,7 @@ const quill = new Quill('#editor', {
     // Gestion de la soumission du formulaire
     document.getElementById('form').addEventListener('submit', (e) => {
         const html = quill.root.innerHTML;
-        document.getElementById('contenu').value = html;
+        document.getElementById('content').value = html;
 
         // Vérifier que ce n'est pas vide
         const text = quill.getText().trim();

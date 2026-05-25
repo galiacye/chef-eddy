@@ -36,17 +36,17 @@ $password = [
     'class' => 'form-control w-50'
 ];
 
-$nom = [
-    'name' => 'nom',
-    'id' => 'nom',
-    'value' => set_value('nom', $user->nom),
+$last_name = [
+    'name' => 'last_name',
+    'id' => 'last_name',
+    'value' => set_value('last_name', $user->last_name),
     'class' => 'form-control w-50'
 ];
 
-$prenom = [
-    'name' => 'prenom',
-    'id' => 'prenom',
-    'value' => set_value('prenom', $user->prenom),
+$first_name = [
+    'name' => 'first_name',
+    'id' => 'first_name',
+    'value' => set_value('first_name', $user->first_name),
     'class' => 'form-control w-50'
 ];
 
@@ -78,13 +78,13 @@ $role_id = [
 <input type="password" id="password" name="password">
 <?= validation_show_error('password') ?><br>
 
-<label for="nom">Nom</label>
-<?= form_input($nom) ?>
-<?= validation_show_error('nom') ?><br>
+<label for="last_name">Nom</label>
+<?= form_input($last_name) ?>
+<?= validation_show_error('last_name') ?><br>
 
-<label for="prenom">Prénom</label>
-<?= form_input($prenom) ?>
-<?= validation_show_error('prenom') ?><br>
+<label for="first_name">Prénom</label>
+<?= form_input($first_name) ?>
+<?= validation_show_error('first_name') ?><br>
 
 <label for="avatar_url">Avatar</label>
 <?php if(!empty($user->avatar_url)):?>

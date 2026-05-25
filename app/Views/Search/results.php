@@ -11,11 +11,11 @@
                 <div class="card">
                     <img src="<?= base_url($recipe->image_url ?? 'img/default.jpg') ?>" class="card-img-top">
                         <div class="card-body">
-                        <h5 class="card-title"><?= $recipe->titre ?></h5>
-                        <p>Difficulté : <?= $recipe->difficulte ?></p>
-                        <p>Temps de préparation : <?= $recipe->temps_preparation ?></p>
-                        <p>Temps de cuisson : <?= $recipe->temps_cuisson ?></p>
-                        <p>Nombre de personnes : <?= $recipe->nb_personnes ?></p>
+                        <h5 class="card-title"><?= $recipe->title ?></h5>
+                        <p>Difficulté : <?= $recipe->difficulty ?></p>
+                        <p>Temps de préparation : <?= $recipe->prep_time ?></p>
+                        <p>Temps de cuisson : <?= $recipe->cook_time ?></p>
+                        <p>Nombre de personnes : <?= $recipe->portions ?></p>
                         <a href="<?= base_url('recipe/'. $recipe->id) ?>" class="btn btn-primary">Voir la recette</a>
                     </div>
                 </div>

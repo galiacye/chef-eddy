@@ -33,12 +33,12 @@ if ($user_id) {
         <div class="banner-left">
             <div class="tags">
                 <?php foreach ($tags as $tag): ?>
-                    <span class="tag"><?= $tag->nom ?></span>
+                    <span class="tag"><?= $tag->name ?></span>
                 <?php endforeach ?>
             </div>
 
             <h1 class="recipe-title">
-                <?= $recipe->titre ?>
+                <?= $recipe->title ?>
             </h1>
 
             <?php if (!empty($recipe->image_url)): ?>
@@ -48,10 +48,10 @@ if ($user_id) {
 
         <div class="banner-right">
             <div class="info-card">
-                <div>Difficulté : <b><?= $recipe->difficulte ?></b></div>
-                <div>Préparation : <b><?= $recipe->temps_preparation ?> min</b></div>
-                <div>Cuisson : <b><?= $recipe->temps_cuisson ?> min</b></div>
-                <div>Personnes : <b><?= $recipe->nb_personnes ?></b></div>
+                <div>Difficulté : <b><?= $recipe->difficulty ?></b></div>
+                <div>Préparation : <b><?= $recipe->prep_time ?> min</b></div>
+                <div>Cuisson : <b><?= $recipe->cook_time ?> min</b></div>
+                <div>Personnes : <b><?= $recipe->portions ?></b></div>
             </div>
         </div>
 
@@ -65,16 +65,16 @@ if ($user_id) {
             <div class="portions-control">
                 <label>Portions :</label>
                 <button type="button" id="moins">-</button>
-                <span id="nb-personnes"><?= $recipe->nb_personnes ?></span>
+                <span id="portions"><?= $recipe->portions ?></span>
                 <button type="button" id="plus">+</button>
             </div>
             <?php foreach ($ingredients as $ingredient): ?>
                 <div class="ingredient-card">
-                    <b><?= $ingredient->nom ?></b>
+                    <b><?= $ingredient->name ?></b>
                     <div>
-                        <span class="ingredient-qty" data-base="<?= $ingredient->quantite ?>">
-                            <?= $ingredient->quantite ?>
-                        </span> <?= $ingredient->unite ?>
+                        <span class="ingredient-qty" data-base="<?= $ingredient->quantity ?>">
+                            <?= $ingredient->quantity ?>
+                        </span> <?= $ingredient->unit ?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -84,7 +84,7 @@ if ($user_id) {
     <section class="card-block">
         <h2>La recette</h2>
         <div class="editor">
-            <?= $recipe->contenu ?>
+            <?= $recipe->content ?>
         </div>
     </section>
 
@@ -133,7 +133,7 @@ if ($user_id) {
 </div>
 <?= $this->section('customJs') ?>
 <script>
-    const base = <?= $recipe->nb_personnes ?>;
+    const base = <?= $recipe->portions ?>;
     let current = base;
 
     const quantities = document.querySelectorAll('.ingredient-qty');
@@ -150,7 +150,7 @@ if ($user_id) {
     });
 
     function update() {
-        document.getElementById('nb-personnes').textContent = current;
+        document.getElementById('portions').textContent = current;
         quantities.forEach(element => {
             const baseQty = parseFloat(element.dataset.base);
             if (!isNaN(baseQty)) {
