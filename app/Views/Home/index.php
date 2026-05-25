@@ -34,7 +34,7 @@
                 <select name="ingredient" class="form-select">
                     <option value="">Avec</option>
                     <?php foreach ($ingredients as $ingr): ?>
-                        <option value="<?= esc($ingr->nom) ?>"><?= esc($ingr->nom) ?></option>
+                        <option value="<?= esc($ingr->name) ?>"><?= esc($ingr->name) ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -43,7 +43,7 @@
                 <select name="without" class="form-select">
                     <option value="">Sans</option>
                     <?php foreach ($categories as $cat): ?>
-                        <option value="<?= esc($cat->nom) ?>"><?= esc($cat->nom) ?></option>
+                        <option value="<?= esc($cat->name) ?>"><?= esc($cat->name) ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -86,7 +86,7 @@
                                 <div class="d-flex justify-content-center align-items-center mb-4">
                                     <a href="<?= site_url('tag/' . $tag->id) ?>"
                                         class="btn btn-tag">
-                                        <?= esc($tag->nom) ?>
+                                        <?= esc($tag->name) ?>
                                     </a>
                                 </div>
 
@@ -114,11 +114,11 @@
                             <div class="card w-custom ">
                                 <div class="img-wrapper">
                                     <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>"
-                                        class="card-img-top" alt="<?= esc($recipe->titre) ?>">
+                                        class="card-img-top" alt="<?= esc($recipe->title) ?>">
                                 </div>
 
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
+                                    <h5 class="card-title"><?= esc($recipe->title) ?></h5>
 
                                     <a href="<?= base_url('recipe/' . $recipe->id) ?>" class="btn btn-see mt-auto">Voir</a>
                                 </div>

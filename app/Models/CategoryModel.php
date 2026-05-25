@@ -9,7 +9,7 @@ class CategoryModel extends Model
     protected $table = 'categories';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nom'];
+    protected $allowedFields = ['name'];
     protected $returnType = 'object'; // 
 
     public function addCategory(array $data)
@@ -40,19 +40,19 @@ class CategoryModel extends Model
  //la catégorie d'une recette
     public function getRecipeCategory(int $recipe_id)
     {
-        return $this->select('categories.nom')
-            ->join('recette_categories', 'recette_categories.categorie_id = categories.id')
-            ->where('recette_categories.recette_id', $recipe_id)
+        return $this->select('categories.name')
+            ->join('recipe_categories', 'recipe_categories.category_id = categories.id')
+            ->where('recipe_categories.recipe_id', $recipe_id)
             ->get()
             ->getResult();
     }
     // Toutes les recettes d'une catégorie
     public function getRecipesByCategory(int $category_id)
     {//on utilise $db quand on est pas dans le model de la table appelée
-        return $this->db->table('recette_categories')
-            ->select('recettes.id, recettes.titre, recettes.image_url')
-            ->join('recettes', 'recettes.id = recette_categories.recette_id')
-            ->where('recette_categories.categorie_id', $category_id)
+        return $this->db->table('recipe_categories')
+            ->select('recipes.id, recipes.title, recipes.image_url')
+            ->join('recipes', 'recipes.id = recipe_categories.recipe_id')
+            ->where('recipe_categories.category_id', $category_id)
             ->get()
             ->getResult();
     }

@@ -3,9 +3,6 @@
 ?>
 
 <?= $this->extend('layoutAdmin') ?>
-
-
-<?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Tous les ingredients<?= $this->endSection() ?>
 <?= $this->section('customcss') ?>
 <?= $this->endSection() ?>
@@ -25,7 +22,7 @@
     <?php foreach ($ingredients as $ing): ?>
 
         <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <p class="ing-nom"><?= $ing->nom ?></p>
+            <p class="ing-nom"><?= $ing->name ?></p>
 
             <a class="btn btn-warning mt-0 mb-4"
                 href="<?= base_url('Admin/ingredients/delete/' . $ing->id) ?>"

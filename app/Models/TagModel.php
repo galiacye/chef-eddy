@@ -13,7 +13,7 @@ class TagModel extends Model
     protected $returnType = 'object';
 
 
-    public function addTag(array $data)//ou edit ?
+    public function addTag(array $data) //ou edit ?
     {
         return $this->insert($data);
     }
@@ -29,29 +29,26 @@ class TagModel extends Model
     }
 
     public function getAllTags()
-    {  
+    {
         return $this->findAll();
     }
-// chercher les tags d'une recette
-    public function getRecipeTags(int $id) 
+    // chercher les tags d'une recette
+    public function getRecipeTags(int $id)
     {
-        return $this->select('tags.nom AS nom')
-            ->join('recettes_tags', 'tags.id = recettes_tags.tag_id')
-            ->where('recettes_tags.recette_id', $id)
+        return $this->select('tags.name AS name')
+            ->join('recipe_tags', 'tags.id = recipe_tags.tag_id')
+            ->where('recipe_tags.recipe_id', $id)
             ->get()->getResult();
     }
-//les recettes d'un tag
+    //les recettes d'un tag
     public function getRecipesByTag(int $tag_id, int $limit = 6)
     {
-        return $this->select('recettes.id, recettes.titre, recettes.image_url')
-            ->join('recettes_tags', 'tags.id = recettes_tags.tag_id')
-            ->join('recettes', 'recettes.id = recettes_tags.recette_id')
-            ->where('recettes_tags.tag_id', $tag_id)
-            ->orderBy('recettes.id', 'RANDOM') //pour afficher les recettes de façon aléatoire
+        return $this->select('recipes.id, recipes.title, recipes.image_url')
+            ->join('recipe_tags', 'tags.id = recipe_tags.tag_id')
+            ->join('recipes', 'recipes.id = recipe_tags.recipe_id')
+            ->where('recipe_tags.tag_id', $tag_id)
+            ->orderBy('recipes.id', 'RANDOM')
             ->limit($limit)
             ->get()->getResult();
     }
-
-    public function editTag() {}
-    
 }

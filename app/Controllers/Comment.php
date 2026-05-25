@@ -115,7 +115,7 @@ class Comment extends BaseController
             $rating = $this->request->getPostGet('rating');
 
             $data = [
-                'recette_id' => $recipe_id,
+                'recipe_id' => $recipe_id,
                 'content' => $content,
                 "rating" => $rating,
                 'user_id' => session()->get('user_id'),
@@ -197,7 +197,7 @@ class Comment extends BaseController
     public function replyComment()
     {
         $data = [
-            'recette_id' => $this->request->getPost('recette_id'),
+            'recipe_id' => $this->request->getPost('recipe_id'),
             'parent_id'  => $this->request->getPost('parent_id'),
             'content'    => $this->request->getPost('content'),
             'user_id'    => session()->get('user_id'),

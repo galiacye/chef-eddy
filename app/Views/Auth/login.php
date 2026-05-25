@@ -8,9 +8,10 @@
 
 <!-- flashdata = données temporaires de la session -->
  <!--si message d'erreur l'afficher-->
-<?php if (session()->getFlashdata('error')) : ?>
+<?php $error = session()->getFlashdata('error') ?>
+<?php if ($error) : ?>
     <div class="alert alert-danger">
-        <?= session()->getFlashdata('error') ?>
+        <?= $error ?>
     </div>
 <?php endif ?>
 

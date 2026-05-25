@@ -43,17 +43,16 @@ $password = [
     'placeholder'=>'Mot de passe temporaire généré automatiquement'
 ];
 
-$nom = [
-    'name' => 'nom',
-    'id' => 'nom',
-    'value' => set_value('nom'),
+$last_name = [
+    'name'  => 'last_name',
+    'id'    => 'last_name',
+    'value' => set_value('last_name'),
     'class' => 'form-control w-50'
 ];
-
-$prenom = [
-    'name' => 'prenom',
-    'id' => 'prenom',
-    'value' => set_value('prenom'),
+$first_name = [
+    'name'  => 'first_name',
+    'id'    => 'first_name',
+    'value' => set_value('first_name'),
     'class' => 'form-control w-50'
 ];
 
@@ -64,7 +63,7 @@ $avatar = [
 ];
 $rolesOptions = ['' => 'Sélectionnez un rôle'];
 foreach ($roles as $role) {
-    $rolesOptions[$role->id] = $role->nom;
+    $rolesOptions[$role->id] = $role->name;
 }
 ?>
 
@@ -88,13 +87,13 @@ foreach ($roles as $role) {
 <?= form_input($password)?>
 <?= validation_show_error('password') ?><br>
 
-<label for="nom">Nom</label>
-<?= form_input($nom) ?>
-<?= validation_show_error('nom') ?><br>
+<label for="last_name">Nom</label>
+<?= form_input($last_name) ?>
+<?= validation_show_error('last_name') ?><br>
 
-<label for="prenom">Prénom</label>
-<?= form_input($prenom) ?>
-<?= validation_show_error('prenom') ?><br>
+<label for="first_name">Prénom</label>
+<?= form_input($first_name) ?>
+<?= validation_show_error('first_name') ?><br>
 
 <label for="avatar_url">Avatar</label>
 <?= form_upload($avatar) ?>

@@ -5,5 +5,6 @@ use CodeIgniter\Model;
 
 class UnitModel extends Model
 {
-    protected $table = 'unites';
+    protected $table = 'units';
+    protected $allowedFields = ['name'];
 }

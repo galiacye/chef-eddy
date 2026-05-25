@@ -6,23 +6,21 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    //query builder
     protected $table = 'users';
-    protected $primaryKey = 'id';
-    protected $useAutoIncrement = true;
+    //query builder
     protected $allowedFields = [
         'username',
         'email',
         'password',
-        'nom',
-        'prenom',
+        'last_name',
+        'first_name',
         'avatar_url',
         'role_id'
     ];
     protected $returnType = 'object';
 
     //register
-    public function register(array $data) 
+    public function register(array $data)
     {
         $user = $this->insert($data);
     }
@@ -35,15 +33,15 @@ class UserModel extends Model
 
     public function getUsersWithRole()
     {
-        return $this->select('users.*, roles.nom as role_name')
+        return $this->select('users.*, roles.name as role_name')
             ->join('roles', 'roles.id = users.role_id')
             ->findAll();
     }
 
     public function getRole()
     {
-        return $this->select('users.role_id, roles.nom')
-        ->join('roles', 'users.role_id = roles.id')
-        ->find();
+        return $this->select('users.role_id, roles.name')
+            ->join('roles', 'users.role_id = roles.id')
+            ->find();
     }
 }

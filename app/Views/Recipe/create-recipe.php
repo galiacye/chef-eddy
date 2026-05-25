@@ -12,9 +12,9 @@
 
 <?php
 $title = [
-    'name' => 'titre',
-    'id' => 'titre',
-    'value' => set_value('titre'),
+    'name' => 'title',
+    'id' => 'title',
+    'value' => set_value('title'),
     'class' => 'form-control w-50'
 ];
 $image = [
@@ -23,35 +23,35 @@ $image = [
     'value' => set_value('image_url'),
     'class' => 'form-control w-50'
 ];
-$tp = [
-    'name' => 'temps_preparation',
-    'id' => 'temps_preparation',
-    'value' => set_value('temps_preparation'),
+$pt = [
+    'name' => 'prep_time',
+    'id' => 'prep_time',
+    'value' => set_value('prep_time'),
     'class' => 'form-control w-50'
 ];
-$tc = [
-    'name' => 'temps_cuisson',
-    'id' => 'temps_cuisson',
-    'value' => set_value('temps_cuisson'),
+$ct = [
+    'name' => 'cook_time',
+    'id' => 'cook_time',
+    'value' => set_value('cook_time'),
     'class' => 'form-control w-50'
 ];
 
-$nb_pers = [
-    'name' => 'nb_personnes',
-    'id' => 'nb_personnes',
-    'value' => set_value('nb_personnes'),
+$portions = [
+    'name' => 'portions',
+    'id' => 'portions',
+    'value' => set_value('portions'),
     'class' => 'form-control w-50'
 ];
 
 $diff_options = [
     ''          => '-- Choisir --',
-    'facile'    => 'Facile',
-    'moyen'     => 'Moyen',
-    'difficile' => 'Difficile',
+    'easy'    => 'Facile',
+    'medium'     => 'Moyen',
+    'difficult' => 'Difficile',
 ];
 $cat = [
-    'name'  => 'categorie_id',
-    'id'    => 'categorie_id',
+    'name'  => 'categoriyid',
+    'id'    => 'category_id',
     'class' => 'form-select w-50'
 ];
 /* $options_ingredients = [
@@ -76,48 +76,48 @@ $cat = [
 $options_ingredients = ['' => '-- Catégorie --'];
 foreach ($categories_ing_db as $cat_ing) {
     
-       $options_ingredients[$cat_ing->nom] = $cat_ing->nom; 
+       $options_ingredients[$cat_ing->name] = $cat_ing->name; 
 }
 //recette_categorie
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
-foreach ($categories as $categorie) {
-    $options_categories[$categorie->id] = $categorie->nom; 
+foreach ($categories as $category) {
+    $options_categories[$category->id] = $category->name; 
 }
 ?>
 <?= validation_list_errors() ?>
 <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
-<div class="formulaire">
+<div class="recipe-form">
     <!-- $status et $views gérées ds ctrlr -->
     <div class="infos">
         
 
-        <label for="titre">Titre</label>
+        <label for="title">Titre</label>
         <?= form_input($title) ?>
-        <?= validation_show_error('titre') ?>
+        <?= validation_show_error('title') ?>
 
         <label for="image_url">Illustration</label>
         <?= form_upload($image) ?>
         <?= validation_show_error('image_url') ?>
 
-        <label for="temps_preparation">Temps de préparation</label>
-        <?= form_input($tp) ?>
-        <?= validation_show_error('temps_preparation') ?>
+        <label for="prep_time">Temps de préparation</label>
+        <?= form_input($pt) ?>
+        <?= validation_show_error('prep_time') ?>
 
-        <label for="temps_cuisson">Temps de cuisson</label>
-        <?= form_input($tc) ?>
-        <?= validation_show_error('temps_cuisson') ?>
+        <label for="cook_time">Temps de cuisson</label>
+        <?= form_input($ct) ?>
+        <?= validation_show_error('cook_time') ?>
 
-        <label for="nb_personnes">Nombre de personnes</label>
-        <?= form_input($nb_pers) ?>
-        <?= validation_show_error('nb_personnes') ?>
+        <label for="portions">Nombre de personnes</label>
+        <?= form_input($portions) ?>
+        <?= validation_show_error('portions') ?>
 
-        <label for="difficulte">Difficulté</label>
-        <?= form_dropdown('difficulte', $diff_options, set_value('difficulte'), ['id' => 'difficulte', 'class' => 'form-select w-50']) ?>
-        <?= validation_show_error('difficulte') ?>
+        <label for="difficulty">Difficulté</label>
+        <?= form_dropdown('difficulty', $diff_options, set_value('difficulty'), ['id' => 'difficulty', 'class' => 'form-select w-50']) ?>
+        <?= validation_show_error('difficulty') ?>
 
         <label for="categorie_id">Catégorie</label>
-        <?= form_dropdown('categorie_id', $options_categories, set_value('categorie_id'), $cat) ?>
-        <?= validation_show_error('categorie_id') ?>
+        <?= form_dropdown('category_id', $options_categories, set_value('category_id'), $cat) ?>
+        <?= validation_show_error('category_id') ?>
 
         <label>Tags</label>
         <div class="d-flex flex-wrap gap-3">
@@ -130,8 +130,8 @@ foreach ($categories as $categorie) {
                         id="tag_<?= $tag->id ?>"
                         class="form-check-input"
                         <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
-                    <label class="form-check-label" for="tag_nom" <?= $tag->id ?>">
-                        <?= $tag->nom ?>
+                    <label class="form-check-label" for="tag_name" <?= $tag->id ?>">
+                        <?= $tag->name ?>
                     </label>
                 </div>
             <?php endforeach ?>
@@ -142,20 +142,20 @@ foreach ($categories as $categorie) {
         <div id="ingredients-container">
             <div class="ingredient-row gap-2 mb-2">
                 <?php
-                $ing_nom = [
-                    'name'        => 'ingredients[0][nom]',
+                $ing_name = [
+                    'name'        => 'ingredients[0][name]',
                     'type'        => 'hidden',
-                    'id'          => 'ing-nom-0'
+                    'id'          => 'ing-name-0'
                 ];
-                $ing_qte = [
-                    'name'        => 'ingredients[0][quantite]',
+                $ing_qty = [
+                    'name'        => 'ingredients[0][quantity]',
                     'type'        => 'hidden',
-                    'id'          => 'ing-qte-0'
+                    'id'          => 'ing-qty-0'
                 ];
-                $ing_unite = [
-                    'name'        => 'ingredients[0][unite]',
+                $ing_unit = [
+                    'name'        => 'ingredients[0][unit]',
                     'type'        => 'hidden',
-                    'id'          => 'ing-unite-0'
+                    'id'          => 'ing-unit-0'
                 ];
                 ?>
 
@@ -166,22 +166,22 @@ foreach ($categories as $categorie) {
                     data-index="0">
 
                 <!-- Champs cachés qui stockent les 3 valeurs -->
-                <?= form_input($ing_nom) ?>
-                <?= form_input($ing_qte) ?>
-                <?= form_input($ing_unite) ?>
+                <?= form_input($ing_name) ?>
+                <?= form_input($ing_qty) ?>
+                <?= form_input($ing_unit) ?>
 
                 <!-- Aperçu du parsing -->
                 <small class="text-muted parsing-preview w-100"></small>
 
-                <?= form_dropdown('ingredients[0][categorie]', $options_ingredients, '', ['class' => 'form-select w-25']) ?>
+                <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-25']) ?>
                 <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
             </div>
         </div>
-        <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">+ Ajouter un ingrédient</button><br>
+        <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
     </div>
 
     <div class="editeur">
-        <label for="contenu">
+        <label for="content">
             <h2>Votre Recette</h2>
         </label>
         <div id="toolbar">
@@ -192,7 +192,7 @@ foreach ($categories as $categorie) {
             <button class="ql-list" value="bullet"></button>
         </div>
         <div id="editor"></div>
-        <input type="hidden" name="contenu" id="contenu" value="<?= set_value('contenu') ?>">
+        <input type="hidden" name="content" id="content" value="<?= set_value('content') ?>">
 
         <button type="submit" class="btn btn-primary">Envoyer</button>
         
@@ -206,7 +206,7 @@ foreach ($categories as $categorie) {
 <script>
     // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    const unites = <?= json_encode($unites) ?>;
+    const units = <?= json_encode($units) ?>;
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>

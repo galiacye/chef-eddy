@@ -21,7 +21,7 @@ class Home extends BaseController
 
         $ingredientsCategoriesModel = model('IngredientsCategoriesModel');
         $ingredientsCategories = $ingredientsCategoriesModel
-            ->orderBy('nom', 'ASC')
+            ->orderBy('name', 'ASC')
             ->findAll();
 
         $tagModel = model('TagModel');

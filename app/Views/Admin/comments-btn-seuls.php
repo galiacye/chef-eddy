@@ -49,9 +49,9 @@
 
                 <form method="post" action="<?= base_url('comment/reply') ?>" class="mt-2">
                     <?= csrf_field() ?>
-                    <input type="hidden" name="parnet_id" value="<?= $c->id ?>">
-                    <!--ici on a recette_id et pas recipe car l'objet $c est construit à partir de la bdd -->
-                    <input type="hidden" name="recette_id" value="<?= $c->recette_id ?>">
+                    <input type="hidden" name="parent_id" value="<?= $c->id ?>">
+                    <!--ici on a recipe_id et pas recipe car l'objet $c est construit à partir de la bdd -->
+                    <input type="hidden" name="recipe_id" value="<?= $c->recipe_id ?>">
                     <textarea name="content" roxs="2" class="form-control" placeholder="Répondre"></textarea>
                     <button class="btn btn-primary btn-sm mt-2">Répondre</button>
                 </form>

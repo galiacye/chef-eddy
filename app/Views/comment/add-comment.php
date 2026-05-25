@@ -62,7 +62,7 @@
 
 <?= $this->endSection() ?>
 
-<?= $this->section('custom-js') ?>
+<?= $this->section('customJs') ?>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script src="<?= base_url('/js/quill-comment.js') ?>"></script>
 <?= $this->endSection() ?>

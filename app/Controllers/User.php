@@ -6,6 +6,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class User extends BaseController
 {
+    
     private object $model;
     protected object $roleModel;
     protected object $commentModel;
@@ -48,8 +49,8 @@ class User extends BaseController
                 'email'      => $this->request->getPost('email'),
                 'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
                 'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'nom'        => $this->request->getPost('nom'),
-                'prenom'     => $this->request->getPost('prenom'),
+                'last_name'  => $this->request->getPost('last_name'),
+                'first_name' => $this->request->getPost('first_name'),
                 'avatar_url' => $avatar_url
             ];
 
@@ -126,7 +127,7 @@ class User extends BaseController
                         "max_length" => "Mot de passe trop long",
                     ]
                 ],
-                "nom" => [
+                "last_name" => [
                     "label" => "Nom",
                     "rules" => "permit_empty|min_length[2]|max_length[30]",
                     "errors" => [
@@ -134,10 +135,9 @@ class User extends BaseController
                         "max_length" => "Nom trop long",
                     ]
                 ],
-                "prenom" => [
+                "first_name" => [
                     "label" => "Prénom",
                     "rules" => "permit_empty|min_length[2]|max_length[30]",
-                    //faire un fichier customRules ds app/validation+public rulesets ds config/validation
                     "errors" => [
                         "min_length" => "Prenom trop court",
                         "max_length" => "Prenom trop long",
@@ -171,8 +171,8 @@ class User extends BaseController
             // si validation récupération des données
             $username = $this->request->getPost('username');
             $email = $this->request->getPost('email');
-            $nom = $this->request->getPost('nom');
-            $prenom = $this->request->getPost('prenom');
+            $last_name  = $this->request->getPost('last_name');
+            $first_name = $this->request->getPost('first_name');
             $role_id = $this->request->getPost('role_id') ?: 1;
             // Gestion du fichier avatar
 
@@ -192,8 +192,8 @@ class User extends BaseController
         $data = [
             "username" => $username,
             "email" => $email,
-            "nom" => $nom,
-            "prenom" => $prenom,
+            "last_name"  => $last_name,
+            "first_name" => $first_name,
             "avatar_url" => $avatar_url,
             "role_id" => $role_id
         ];
@@ -225,7 +225,7 @@ class User extends BaseController
 
 
 
-                            //id peut être null
+    //id peut être null
     public function profile(?int $id = null): string|RedirectResponse //convention pas vraiment de string ici 
     {
 
@@ -238,7 +238,7 @@ class User extends BaseController
         }
 
         $user = $this->model->find($user_id);
-   
+
         if (! $user) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Utilisateur #$user_id introuvable.");
         }
@@ -252,7 +252,7 @@ class User extends BaseController
             'userRecipes' => $userRecipes,
             'comments' => $commentModel->commentsByUser($user_id)
         ];
-       // dd($user_id);
+        // dd($user_id);
         //dd($commentModel->commentsByUser($user_id));
         //dd($data['isOwnProfile']);
         return view('User/profile', $data);

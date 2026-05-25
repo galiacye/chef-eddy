@@ -6,7 +6,6 @@
 <?= $this->section('body') ?>
 <div class="container">
 
-    <!-- En-tête -->
     <div class="row align-items-center justify-content-around py-4 py-md-5">
         <div class="col-auto">
             <h1 class="text-light">Profil de <span><?= esc($user->username) ?></span></h1>
@@ -38,7 +37,7 @@
                             <div class="card-body d-flex flex-column justify-content-between">
 
                                 <h5 class="card-title mb-3">
-                                    <?= esc($recipe->titre) ?>
+                                    <?= esc($recipe->title) ?>
                                 </h5>
 
                                 <?php if ($isOwnProfile) : ?>

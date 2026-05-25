@@ -11,6 +11,6 @@
         <h1><?= 'Bonjour ' . $user->username . '<br>' ?></h1>
         <img src="<?= base_url($user->avatar_url) ?>" alt="avatar" class="avatar">
 </div>
-<?= $user->prenom .' '. $user->nom .'<br>'. $user->email ?>
+<?= $user->first_name .' '. $user->last_name .'<br>'. $user->email ?>
 
 <?= $this->endSection() ?>

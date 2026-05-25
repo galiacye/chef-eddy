@@ -42,18 +42,7 @@ class Category extends BaseController
         return view('Category/show', $data);
     }
 
-    public function cAddCategory(): void
-    {
-        $data = [
-            "nom_categorie" => "météo"
-        ];
-        $this->model->addCategory($data);
-        echo 'insertion reussie';
-    }
-
-
-
-
+    
     public function addCategory()
     {
         helper('form');

@@ -36,21 +36,22 @@
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
-<?php if (session()->getFlashdata('success')) : ?>
+<?php $success = session()->getFlashdata('success') ?>
+<?php if ($success) : ?>
     <div class="alert alert-success">
-        <?= session()->getFlashdata('success') ?>
+        <?= $success ?>
     </div>
 <?php endif ?>
 
 <div class="container-fluid m-3">
     <div class="btn-group">
         <a href="<?= base_url('Admin/recipes-index/by-user') ?>">Par utilisateur</a>
-        <a href="<?= base_url('Admin/recipes-index?statut=En attente') ?>"
-            class="btn <?= $statut === 'En attente' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
-        <a href="<?= base_url('Admin/recipes-index?statut=Approuvée') ?>"
-            class="btn <?= $statut === 'Approuvée' ? 'btn-success' : 'btn-outline-success' ?>">Approuvées</a>
-        <a href="<?= base_url('Admin/recipes-index?statut=Rejetée') ?>"
-            class="btn <?= $statut === 'Rejetée' ? 'btn-danger' : 'btn-outline-danger' ?>">Rejetées</a>
+        <a href="<?= base_url('Admin/recipes-index?status=En attente') ?>"
+            class="btn <?= $status === 'En attente' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
+        <a href="<?= base_url('Admin/recipes-index?status=Approuvée') ?>"
+            class="btn <?= $status === 'Approuvée' ? 'btn-success' : 'btn-outline-success' ?>">Approuvées</a>
+        <a href="<?= base_url('Admin/recipes-index?status=Rejetée') ?>"
+            class="btn <?= $status === 'Rejetée' ? 'btn-danger' : 'btn-outline-danger' ?>">Rejetées</a>
     </div>
     <div class="row m-3">
         <ul class="grenade-list">
@@ -59,7 +60,7 @@
                 <li>
                     <div class="col m-3">
 
-                        <h4 class="text-light"><span class="text-light"><?= $recipe->titre ?></span></h4>
+                        <h4 class="text-light"><span class="text-light"><?= $recipe->title ?></span></h4>
 
                         <h4 class="text-light"><span class="text-info"><?= $recipe->username ?></span></h4>
 
@@ -81,7 +82,7 @@
    foreach($recipes as $recipe): ?>
     <div class="col m-3">
         <h4>Recette</h4>
-        <?= $recipe->titre ?>
+                <?= $recipe->titre ?>
         <h4>Auteur</h4>
         <?php foreach($users as $user): ?>
             <?php if($user->id == $recipe->user_id): ?>

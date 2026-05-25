@@ -8,6 +8,7 @@
 <?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<link href="<?= base_url('css/comments.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -75,7 +76,7 @@
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="parent_id" value="<?= $c->id ?>">
                                 <!--ici on a recette_id et pas recipe car l'objet $c est construit à partir de la bdd -->
-                                <input type="hidden" name="recette_id" value="<?= $c->recette_id ?>">
+                                <input type="hidden" name="recipe_id" value="<?= $c->recipe_id ?>">
                                 <div id="toolbar-reply-<?= $c->id ?>">
                                     <span class="ql-formats">
                                         <button class="ql-bold"></button>

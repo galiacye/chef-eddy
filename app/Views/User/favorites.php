@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="<?= site_url('recipes/' . $fav['id']) ?>">
-                                    <?= esc($fav['titre']) ?>
+                                    <?= esc($fav['title']) ?><!--$fav est un tab car getByUser utilise getResultArray()-->
                                 </a>
                             </h5>
                         </div>

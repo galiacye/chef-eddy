@@ -31,10 +31,10 @@ class FavoriteModel extends Model
 
     public function getByUser(int $user_id): array
     {
-        return $this->select('recettes.*, favorites.created_at as favorited_at')
-                    ->join('recettes', 'recettes.id = favorites.recipe_id')
-                    ->where('favorites.user_id', $user_id)
-                    ->orderBy('favorites.created_at', 'DESC')
-                    ->findAll();
+         return $this->select('recipes.*, favorites.created_at as favorited_at')
+        ->join('recipes', 'recipes.id = favorites.recipe_id')
+        ->where('favorites.user_id', $user_id)
+        ->orderBy('favorites.created_at', 'DESC')
+        ->findAll();
     }
 }

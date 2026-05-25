@@ -1,7 +1,7 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('body') ?>
 
-<h2 class="text-center"><?= esc($category->nom) ?></h2>
+<h2 class="text-center"><?= esc($category->name) ?></h2>
 
 <div class="container">
     <div class="row">
@@ -10,9 +10,9 @@
                 <div class="card h-100">
                     <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'img/logo.png') ?>"
                          class="card-img-top"
-                         alt="<?= esc($recipe->titre) ?>">
+                         alt="<?= esc($recipe->title) ?>">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title"><?= esc($recipe->titre) ?></h5>
+                        <h5 class="card-title"><?= esc($recipe->title) ?></h5>
                         <a href="<?= base_url('recipe/' . $recipe->id) ?>" 
                            class="btn btn-primary mt-auto">Voir la recette</a>
                     </div>

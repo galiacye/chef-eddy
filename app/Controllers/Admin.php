@@ -37,15 +37,15 @@ class Admin extends BaseController
 
         return view('Admin/dashboard', [
             'nb_users' => $this->userModel->countAll(),
-            'nb_recipes' => $this->recipeModel->countAll(), //devient countAllResults derrière un where:
-            'nb_recipes_pending' => $this->recipeModel->where('statut', 'pending')->countAllResults()
+            'nb_recipes' => $this->recipeModel->countAll(), // countAll devient countAllResults derrière un where:
+            'nb_recipes_pending' => $this->recipeModel->where('status', 'pending')->countAllResults()
         ]);
     }
-
+    //ici pas de $data car le param est passé directement à la vue,mais c'est pareil
     public function usersIndex()
     {
         $users = $this->userModel->findAll();
-        return view('Admin/users-index', ["users" => $users]); //ici pas de $data car le param est passé directement à la vue,mais c'est pareil
+        return view('Admin/users-index', ["users" => $users]);
     } //pareil que :
     //$users = $this->userModel->findAll();
     //$data = ["users" => $users];
@@ -104,19 +104,18 @@ class Admin extends BaseController
                         "required" => "Mot de passe obligatoire"
                     ]
                 ],
-                "nom" => [
+                "last_name" => [
                     "label" => "Nom",
-                    "rules" => "permit_empty|min_length[2]|max_length[30]|permit_empty",//required_if_role_author à faire dans app/validations
+                    "rules" => "permit_empty|min_length[2]|max_length[30]|permit_empty",
                     "errors" => [
                         "min_length" => "Nom trop court",
                         "max_length" => "Nom trop long",
                         "required" => "Nom obligatoire pour publier une recette"
                     ]
                 ],
-                "prenom" => [
+                "first_name" => [
                     "label" => "Prénom",
-                    "rules" => "permit_empty|min_length[2]|max_length[30]| permit_empty",//required_if_role_author
-                    //faire un fichier customRules ds app/validation+public rulesets ds config/validation
+                    "rules" => "permit_empty|min_length[2]|max_length[30]|permit_empty",
                     "errors" => [
                         "min_length" => "Prenom trop court",
                         "max_length" => "Prenom trop long",
@@ -135,7 +134,7 @@ class Admin extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-             
+
                 // cas echec validation on retourne le formulaire avec les erreurs
                 return view('Admin/add-user', [
                     'errors' => $this->validator->getErrors(),
@@ -147,8 +146,8 @@ class Admin extends BaseController
             $username = $this->request->getPost('username');
             $email = $this->request->getPost('email');
             $password = password_hash(bin2hex(random_bytes(8)), PASSWORD_DEFAULT); //temporaire aléatoire
-            $nom = $this->request->getPost('nom');
-            $prenom = $this->request->getPost('prenom');
+            $last_name = $this->request->getPost('last_name');
+            $first_name = $this->request->getPost('first_name');
             $role_id = $this->request->getPost('role_id') ?: 1;
 
             // Gestion du fichier avatar : store inexistant dans ci4 ?
@@ -179,8 +178,8 @@ class Admin extends BaseController
                 "username" => $username,
                 "email" => $email,
                 "password" => $password,
-                "nom" => $nom,
-                "prenom" => $prenom,
+                "last_name"  => $last_name,
+                "first_name" => $first_name,
                 "avatar_url" => $avatar_url,
                 "role_id" => $role_id
             ];
@@ -240,7 +239,7 @@ class Admin extends BaseController
     public function recipesIndex(): string
     {
         $user   = $this->request->getGet('user');
-        $status = $this->request->getGet('statut');
+        $status = $this->request->getGet('status');
 
         if ($user) {
             $recipes = $this->recipeModel->getRecipeByUser($user);
@@ -250,7 +249,7 @@ class Admin extends BaseController
 
         $data = [
             'recipes' => $recipes,
-            'statut'  => $status,
+            'status'  => $status,
             'user'    => $user
         ];
 
@@ -272,7 +271,7 @@ class Admin extends BaseController
     {
         $recipe = $this->recipeModel->find($id);
         $data = [
-            'statut' => 'Approuvée'
+            'status' => 'Approuvée'
         ];
         $this->recipeModel->update($id, $data);
         return redirect()->to('Admin/recipes-index')->with('success', 'Recette validée');

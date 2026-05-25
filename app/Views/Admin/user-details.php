@@ -22,7 +22,7 @@
 
 
 
-    <p><?= $user->nom . ' ' . $user->prenom ?></p>
+    <p><?= $user->last_name . ' ' . $user->first_name ?></p>
     <p><?= $user->email ?></p>
 
     <form action="<?= base_url('Admin/changeUserRole/' . $user->id) ?>" method="post">
