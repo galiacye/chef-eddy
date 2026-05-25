@@ -8,7 +8,7 @@
             <div class="col-auto mb-2">
                 <a href="<?= site_url('tag/' . $tag->id) ?>" 
                    class="btn btn-outline-primary">
-                    <?= esc($tag->nom) ?>
+                    <?= esc($tag->name) ?>
                 </a>
             </div>
         <?php endforeach ?>
