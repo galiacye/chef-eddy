@@ -5,16 +5,13 @@ Register
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
-<style>
-    body {
-        background-image: url('img/camouflage.jpg');
-    }
-</style>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
 <h1 class="text-center">S'inscrire</h1>
+<h2>Coucou</h2>
 
 <?= form_open_multipart('Auth/register') ?>
 
