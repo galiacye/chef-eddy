@@ -23,7 +23,7 @@
 
         <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
             <input type="text"
-                name="q"
+                name="search"
                 class="form-control"
                 placeholder="Rechercher une recette">
         </div>
@@ -136,7 +136,7 @@
 </div>
 
 <?= $this->endSection() ?>
-<?= $this->section('custom-js') ?>
+<?= $this->section('customJs') ?>
 <script>
     const collapse = document.getElementById('tagsCollapse');
     const icon = document.getElementById('tagsIcon');
