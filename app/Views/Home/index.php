@@ -15,6 +15,11 @@
 
 <?= $this->section('body') ?>
 
+<?php $success = session()->getFlashdata('success') ?>
+<?php if ($success) : ?>
+    <div class="alert alert-success"><?= $success ?></div>
+<?php endif ?>
+
 <div class="container-fluid d-flex justify-content-center px-0 w-100">
 
     <?= form_open('search', ['method' => 'GET']) ?>
