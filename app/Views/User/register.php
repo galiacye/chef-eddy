@@ -11,6 +11,7 @@ Register
 <?= $this->section('body') ?>
 
 <h1 class="text-center">S'inscrire</h1>
+<h2>Coucou</h2>
 
 <?= form_open_multipart('Auth/register') ?>
 

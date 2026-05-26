@@ -7,15 +7,23 @@
 
     <?= $this->renderSection('title') ?>
 
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
+
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
     <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chango&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
 
     <?= $this->renderSection('custom-css') ?>
 </head>
@@ -78,9 +86,9 @@
                             Les catégories
                         </a>
                     </li>
-                  
+
                     <!-- //uri_string mieux que current_url() qui retourne url complète -->
-                     <!-- current_url() != base_url() -->
+                    <!-- current_url() != base_url() -->
                     <?php if (uri_string() != '') : ?>
                         <li class="nav-item">
                             <a class="nav-link"
