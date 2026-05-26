@@ -115,7 +115,7 @@
 
                     <?php foreach ($Recipes as $recipe) : ?>
 
-                        <div class="col-10 col-md-6 col-lg-4 mb-4">
+                        <div class="col-10 col-md-6 col-lg-3 mb-4">
                             <div class="card w-custom ">
                                 <div class="img-wrapper">
                                     <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>"
