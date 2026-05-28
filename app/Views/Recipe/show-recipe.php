@@ -73,8 +73,8 @@ if ($user_id) {
                     <b><?= $ingredient->name ?></b>
                     <div>
                         <span class="ingredient-qty" data-base="<?= $ingredient->quantity ?>">
-                            <?= $ingredient->quantity ?>
-                        </span> <?= $ingredient->unit ?>
+                            <?= ($ingredient->quantity == (int)$ingredient->quantity) ? (int)$ingredient->quantity : $ingredient->quantity ?>
+                        </span>
                     </div>
                 </div>
             <?php endforeach; ?>

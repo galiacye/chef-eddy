@@ -57,6 +57,8 @@ class Recipe extends BaseController
         return view('Recipe/show-recipe', $data);
     }
 
+    
+
     public function recipeIndex(): string
     { //avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
         //$recipes = $this->model->getRecipeAuthor();
