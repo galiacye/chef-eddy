@@ -23,15 +23,7 @@ class Recipe extends BaseController
 
         $this->model = Model('RecipeModel');
     }
-    //fonction de test
-    public function editRecipe()
-    {
-        $unitModel = model('UnitModel');
-        $unit = array_column($unitModel->findAll(), 'name'); //array_column(tableau, 'colonne_voulue')
-        if ($this->request->is('post') === false) {
-            return view('Recipe/edit-recipe', ['unit' => $unit]);
-        }
-    }
+
 
     public function showRecipe(int $id)
     {
