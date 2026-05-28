@@ -31,7 +31,7 @@
 <body>
 
 
-    <header class="py-3">
+    <header class=" py-3">
         <div class="ban">
             <div class="container text-center">
                 <h1 class="hero-title">Chef Eddy</h1>
