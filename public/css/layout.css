@@ -25,32 +25,45 @@
 /* FontSpace */
 @font-face {
   font-family: "HappyMonday";
-  src: url("/fonts/happy-monday-font/HappyMonday.odf") format('truetype');
+  src: url("/fonts/happy-monday-font/HappyMonday.odf") format("truetype");
 }
 @font-face {
   font-family: "choko-milky";
-  src: url("/fonts/choko-milky-font/ChokoMilky-gx8gR.otf") format('truetype');
+  src: url("/fonts/choko-milky-font/ChokoMilky-gx8gR.otf") format("truetype");
 }
 @font-face {
   font-family: "ginchiest";
-  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format('truetype');
+  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format("truetype");
 }
-
 
 .ban {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100px;
- background-image: url("../img/gateaux-varies.jpg");
-  background-size: cover; 
+  background-image: url("../img/macaron.png");
+  background-size: cover;
 }
 
 .ban h1 {
-  font-family: "Coiny";
+  font-family: "creamer";
   font-size: 3em;
-  color: pink;
-  text-shadow: 6px 8px 6px black;
+  color: white;
+  text-shadow: 6px 8px 6px rgb(201, 40, 121);
+}
+.logo {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+}
+.gato {
+  max-width: 100%;
+  height: 90px;
+  border-radius: 10%;
+  border: 3px solid white;
+  box-shadow: 2px 5px 9px rgb(138, 136, 136);
 }
 
 .txt {
@@ -63,14 +76,7 @@
   border-radius: 50%;
   margin: 10px;
 
-  box-shadow: 1px 2px 8px 4px  rgb(240, 162, 201);
-}
-
-.logo {
-  height: 70px;
-  width: 70px;
-  border-radius: 10%;
-  margin-right: 10px;
+  box-shadow: 1px 2px 8px 4px rgb(240, 162, 201);
 }
 
 @media screen and (min-width: 768px) {
@@ -88,11 +94,17 @@
   .txt {
     font-size: 1.1em;
   }
-  .logo {
+
+    .logo {
     height: 130px;
-    width: 130px;
-    margin-right: 15px;
   }
+
+  .gato {
+
+  height: 110px;
+  border-radius: 10%;
+}
+
 }
 @media screen and (min-width: 1024px) {
   .ban {
@@ -111,7 +123,12 @@
   }
   .logo {
     height: 150px;
-    width: 150px;
-    margin-right: 20px;
   }
+  .gato {
+
+  height: 150px;
+  border-radius: 20%;
 }
+
+}
+
