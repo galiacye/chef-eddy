@@ -91,4 +91,7 @@ $routes->get('favorites', 'Favorite::index');
 $routes->get('all-roles', 'Role::allRoles');
 $routes->get('role', 'Role::getRole');
 
+//password-forgot
+$routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
+$routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
 
