@@ -22,7 +22,7 @@
                     <label for="email">Votre email</label>
                     <input type="email" name="email" id="email" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Envoyer le lien</button>
+                <button type="submit" class="btn btn-blue">Envoyer le lien</button>
             <?= form_close() ?>
 
             <a href="<?= base_url('login') ?>" class="d-block mt-3">Retour à la connexion</a>

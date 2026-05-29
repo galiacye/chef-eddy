@@ -36,6 +36,13 @@ $password = [
     'class' => 'form-control w-50'
 ];
 
+$confirm_password = [
+    'name'  => 'confirm_password',
+    'id'    => 'confirm_password',
+    'type'  => 'password',
+    'class' => 'form-control w-50'
+];
+
 $last_name = [
     'name'  => 'last_name',
     'id'    => 'last_name',
@@ -76,6 +83,10 @@ foreach ($roles as $role) {
 <label for="password">Mot de passe</label>
 <?= form_input($password) ?>
 <?= validation_show_error('password') ?><br>
+
+<label for="confirm_password">Confirmer le mot de passe</label>
+<?= form_input($confirm_password) ?>
+<?= validation_show_error('confirm_password') ?><br>
 
 <label for="avatar_url">Avatar</label>
 <?= form_upload($avatar) ?>

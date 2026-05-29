@@ -22,6 +22,7 @@ class Auth extends BaseController
         helper('form');
         $this->UserModel = Model('UserModel');
         $this->RoleModel = Model('RoleModel');
+        $this->PasswordResetModel = model('PasswordResetModel');
     }
 
     public function login()
@@ -29,7 +30,7 @@ class Auth extends BaseController
         return view('Auth/login');
     }
 
-    // return redirect()->to('login')->with('success', 'Inscription réussie, vous pouvez maintenant vous connecter.');
+
 
 
     public function register()
@@ -38,55 +39,10 @@ class Auth extends BaseController
         $purifier = new HTMLPurifier($config);
 
         if ($this->request->is('post') === false) { //= recommandé car insensible à la casse 'POST':  if ($this->request->getMethod() !== post) 
-            //dd($this->request->getMethod());
+
             $data['roles'] = $this->RoleModel->findAll();
             return view('Auth/register', $data);
         } else {
-
-            $rules = [
-
-                'username' => [
-                    'rules' => 'required|min_length[3]|is_unique[users.username]',
-                    'errors' => [
-                        'required' => 'Le pseudo est obligatoire.',
-                        'min_length' => '3 caractères minimum.',
-                        'is_unique' => 'Ce pseudo est déjà utilisé.'
-                    ]
-                ],
-
-                'email' => [
-                    'rules' => 'required|valid_email|is_unique[users.email]',
-                    'errors' => [
-                        'required' => 'Email obligatoire.',
-                        'valid_email' => 'Email invalide.',
-                        'is_unique' => 'Cet email est déjà utilisé.'
-                    ]
-                ],
-
-                'password' => [
-                    'rules' => 'required|min_length[8]',
-                    'errors' => [
-                        'required' => 'Mot de passe obligatoire.',
-                        'min_length' => '8 caractères minimum.'
-                    ]
-                ],
-                'confirm_password' => [
-                    'rules'  => 'required|matches[password]',
-                    'errors' => [
-                        'required' => 'Confirmation requise',
-                        'matches'  => 'Les mots de passe ne correspondent pas'
-                    ]
-                ],
-            ];
-
-            // 
-            if (!$this->validate($rules)) {
-
-                return redirect()->back()
-                    ->withInput()
-                    ->with('validation', $this->validator);
-            }
-
             //dd($this->request->getPost());
             $avatar_file = $this->request->getFile('avatar_url');
             $avatar_url = null;
@@ -106,8 +62,8 @@ class Auth extends BaseController
                 'email'      => $this->request->getPost('email'),
                 'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
                 'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'last_name'  => $this->request->getPost('last_name'),
-                'first_name' => $this->request->getPost('first_name'),
+                'nom'        => $this->request->getPost('nom'),
+                'prenom'     => $this->request->getPost('prenom'),
                 'avatar_url' => $avatar_url
             ];
 
@@ -116,6 +72,8 @@ class Auth extends BaseController
             return redirect()->to('/')->with('success', 'Votre profil a bien été crée');
         }
     }
+
+
 
 
     public function connect()
@@ -127,14 +85,12 @@ class Auth extends BaseController
 
         if (!$this->validate($rules)) {
             return redirect()->to('login')->with('error', implode('<br>', $this->validator->getErrors()));
-            //implode colle ensemble  en string les données du tableau errors avc br entre chaque
+            //implode colle ensemble  en string les données du tableau errors avc <br> entre chaque
         }
 
         $email    = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $user = $this->UserModel->getUserByEmail($email);
-
-
 
         if (!$user) {
             return redirect()->to('login')->with('error', "Cet email n'existe pas");
@@ -164,11 +120,17 @@ class Auth extends BaseController
         return redirect()->to('/'); // 1 et 2 par défaut
     }
 
+
+
+
+
     public function logout()
     {
         session()->destroy();
         return redirect()->to('/');
     }
+
+
 
 
 
@@ -192,7 +154,7 @@ class Auth extends BaseController
         $token = bin2hex(random_bytes(32));
 
         // Supprime les anciens tokens de cet email
-        $this->PasswordResetModel->where('email', $email)->delete(); //supp toutes les lignes de cet user
+        $this->PasswordResetModel->where('email', $email)->delete();//supp toutes les lignes de cet user
 
         // Stocke le nouveau token (expire dans 1 heure)
         $this->PasswordResetModel->insert([
@@ -242,19 +204,11 @@ class Auth extends BaseController
 
         $rules = [
             'password' => [
-                'label'  => 'Mot de passe',
-                'rules'  => 'required|min_length[8]',
+                'label' => 'Mot de passe',
+                'rules' => 'required|min_length[8]',
                 'errors' => [
                     'required'   => 'Mot de passe requis',
                     'min_length' => 'Minimum 8 caractères'
-                ]
-            ],
-            'confirm_password' => [
-                'label'  => 'Confirmation',
-                'rules'  => 'required|matches[password]', //matches native CI4 compare password et confirm_password
-                'errors' => [
-                    'required' => 'Confirmation requise',
-                    'matches'  => 'Les mots de passe ne correspondent pas'
                 ]
             ]
         ];
