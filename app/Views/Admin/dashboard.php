@@ -1,6 +1,6 @@
 
 
-<?= $this->extend('layoutAdmin') ?>
+<?= $this->extend('layout') ?>
 <?= $this->section('titre') ?>Dashboard<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="dashboard.css" rel="stylesheet">
@@ -14,6 +14,12 @@
 <?= $this->section('body') ?>
 
 <h1 class="mb-4" style="color: white;">Tableau de bord</h1>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
 
 <div class="row g-3 mb-5">
     <div class="col-md-4">
