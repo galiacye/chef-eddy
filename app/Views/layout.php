@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-    <link href="<?= base_url('css/layoutV3.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
 
     <?= $this->renderSection('custom-css') ?>
 </head>
@@ -37,7 +37,7 @@
 
 
             <div class="logo">
-                <img src="<?= base_url('img/logoV3-1.png') ?>" class="gato">
+                <img src="<?= base_url('img/logoV3-1.png') ?>" class="logo">
             </div>
 
 

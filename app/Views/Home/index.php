@@ -1,7 +1,7 @@
-<?= $this->extend('layoutV3') ?>
+<?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/indexV3.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/index.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
