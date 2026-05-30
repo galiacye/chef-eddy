@@ -1,4 +1,8 @@
 @font-face {
+  font-family: "choko";
+  src: url("/fonts/choko-milky-font/ChokoMilky-gx8gR.otf") format("truetype");
+}
+@font-face {
   font-family: "dirty_war";
   src: url("/fonts/dirty_war/Dirty-War.otf") format("opentype"); /*truetype pour ttf*/
 }
@@ -14,19 +18,13 @@
   font-family: "creamer";
   src: url("/fonts/creamer/Creamer.otf") format("truetype");
 }
-@font-face {
-  font-family: "champ_limo";
-  src: url("/fonts/champ_limo/champ_limo.ttf") format("truetype");
-}
+
 @font-face {
   font-family: "nexa";
   src: url("/fonts/nexa/Nexa3.ttf") format("truetype");
 }
 /* FontSpace */
-@font-face {
-  font-family: "HappyMonday";
-  src: url("/fonts/happy-monday-font/HappyMonday.odf") format("truetype");
-}
+
 @font-face {
   font-family: "choko-milky";
   src: url("/fonts/choko-milky-font/ChokoMilky-gx8gR.otf") format("truetype");
@@ -37,98 +35,175 @@
 }
 
 .ban {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100px;
-  background-image: url("../img/macaron.png");
-  background-size: cover;
-}
-
-.ban h1 {
-  font-family: "creamer";
-  font-size: 3em;
-  color: white;
-  text-shadow: 6px 8px 6px rgb(201, 40, 121);
-}
-.logo {
-  height: 100px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 20px;
+  gap: 140px;
+  height: 100px;
+  overflow: hidden;
+  background: linear-gradient(
+    145deg,
+    #0a0a0a 0%,
+    #1c1c1c 40%,
+    #0f0f0f 100%
+  );
+}
+
+/* couche chrome argenté incliné */
+.ban::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    135deg,
+    rgba(180, 180, 180, 0.15) 0%,
+    rgba(220, 220, 220, 0.25) 35%,
+    rgba(255, 255, 255, 0.2) 60%,
+    rgba(180, 180, 180, 0.1) 100%
+  );
+  transform: rotate(8deg);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* effet glossy chrome animé */
+.ban::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 100%
+  );
+  transform: translateX(-100%) rotate(8deg);
+  animation: shine 5s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-120%) rotate(8deg);
+  }
+  100% {
+    transform: translateX(120%) rotate(8deg);
+  }
+}
+
+.eddy,
+.logo {
+  height: 90px;
+  border-radius: 10px;
 }
 .gato {
-  max-width: 100%;
   height: 90px;
-  border-radius: 10%;
-  border: 3px solid white;
-  box-shadow: 2px 5px 9px rgb(138, 136, 136);
+  border: 1px solid white;
+  border-radius: 6px;
 }
 
-.txt {
+.ban h1 {
+  font-family: "Syncopate";
   color: white;
-  font-size: 0.8em;
+  font-size: 2rem;
 }
 
-.eddy {
-  height: 80px;
-  border-radius: 50%;
-  margin: 10px;
+.navbar {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #ff6f61 0%,
+    #ff8a75 25%,
+    #ffb199 50%,
+    #ff6f61 100%
+  );
+  overflow: hidden;
+}
 
-  box-shadow: 1px 2px 8px 4px rgb(240, 162, 201);
+/* effet brillant 
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.25) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(10deg);
+  animation: shine 4s infinite linear;
+  pointer-events: none;
+}
+
+
+
+
+@keyframes shine {
+  0% {
+    transform: translateX(-40%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(40%) rotate(10deg);
+  }
+}*/
+
+.ban::before,
+.ban::after,
+.logo {
+  z-index: 0;
+}
+
+.ban h1,
+.ban ,
+.ban .eddy,
+.ban .txt {
+  position: relative;
+  z-index: 1;
 }
 
 @media screen and (min-width: 768px) {
   .ban {
-    height: 130px;
+    height: 140px;
   }
   .ban h1 {
-    font-size: 4.5em;
+    font-size: 3rem;
   }
-
   .eddy {
-    height: 120px;
-    margin-left: 10px;
+    height: 125px;
   }
-  .txt {
-    font-size: 1.1em;
-  }
-
-    .logo {
-    height: 130px;
-  }
-
+  .logo {
+  height: 125px;
+  border-radius: 10px;
+}
   .gato {
-
-  height: 110px;
-  border-radius: 10%;
+    height: 120px;
+  }
 }
 
-}
 @media screen and (min-width: 1024px) {
   .ban {
     height: 180px;
   }
-  .ban h1 {
-    font-size: 6em;
+    .ban h1 {
+    font-size: 4rem;
   }
-
   .eddy {
     height: 160px;
-    margin-left: 20px;
-  }
-  .txt {
-    font-size: 1.5em;
   }
   .logo {
-    height: 150px;
-  }
+  height: 160px;
+  border-radius: 10px;
+}
   .gato {
-
-  height: 150px;
-  border-radius: 20%;
+    height: 160px;
+  }
 }
-
-}
-

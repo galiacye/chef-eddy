@@ -7,23 +7,17 @@
 
     <?= $this->renderSection('title') ?>
 
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
-    <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chango&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
+    <link href="<?= base_url('css/layoutV3.css') ?>" rel="stylesheet">
 
     <?= $this->renderSection('custom-css') ?>
 </head>
@@ -31,19 +25,27 @@
 <body>
 
 
-    <header class=" py-3">
-        <div class="ban">
-            <div class="container text-center">
+    <header class="py-3">
+        <div class="ban d-flex align-items-center pe-3">
+
+
+        
+            <div class="title ps-3">
                 <h1 class="hero-title">Chef Eddy</h1>
             </div>
-            <div class="col-3 ">
-                <img src="<?= base_url('./img/eddy-bd.jpeg') ?>" class="eddy">
+
+
+
+            <div class="logo">
+                <img src="<?= base_url('img/logoV3-1.png') ?>" class="gato">
             </div>
+
+
         </div>
     </header>
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-custom">
 
         <div class="container">
 
@@ -160,6 +162,10 @@
 
                     <?php else: ?>
 
+                        <a href="https://facebook.com/tonpage" target="_blank" rel="noopener">
+                            <img src="logo-facebook.webp" alt="Facebook" width="20">
+                        </a>
+
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="<?= base_url('login') ?>">
@@ -182,13 +188,12 @@
         </div>
     </nav>
 
-    <!-- main content -->
+
     <main class="container-fluid px-2 w-100">
         <?= $this->renderSection('body') ?>
     </main>
 
     <?= $this->renderSection('customJs') ?>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
