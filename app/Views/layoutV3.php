@@ -179,14 +179,13 @@
         </div>
     </nav>
 
-    <!-- main content -->
+
     <main class="container-fluid px-2 w-100">
         <?= $this->renderSection('body') ?>
     </main>
 
     <?= $this->renderSection('customJs') ?>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
