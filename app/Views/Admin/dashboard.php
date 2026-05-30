@@ -65,7 +65,40 @@
   
 </div>
 
+<!-- après la row des cards de navigation, avant endSection -->
+
+<div class="row g-3 mt-4">
+    <div class="col-12 col-md-6">
+        <div class="card p-3">
+            <h5>Tag affiché sur la page d'accueil</h5>
+            <p class="text-muted">
+                Actuellement : 
+                <strong>
+                    <?= $homepageTag ? esc($homepageTag->name) : 'Aucun' ?>
+                </strong>
+            </p>
+            <form action="<?= base_url('Admin/set-homepage-tag') ?>" method="post">
+                <?= csrf_field() ?>
+                <div class="d-flex gap-2">
+                    <select name="tag_id" class="form-select">
+                        <?php foreach ($tags as $tag): ?>
+                            <option value="<?= $tag->id ?>" 
+                                <?= ($homepageTag && $homepageTag->id == $tag->id) ? 'selected' : '' ?>>
+                                <?= esc($tag->name) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit" class="btn btn-warning text-white">
+                        Choisir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection() ?>
+
    
 
 

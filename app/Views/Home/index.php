@@ -111,7 +111,7 @@
 
             <div class="row chef-recipes">
 
-                <?php foreach ($Recipes as $recipe) : ?>
+                <?php foreach ($recipes as $recipe) : ?>
 
                     <div class="col-12 col-md-6 col-lg-3 mb-4 d-flex justify-content-center">
 

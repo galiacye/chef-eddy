@@ -23,8 +23,11 @@ $routes->get('logout', 'Auth::logout');
 $routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
 $routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
 
-// Admin - users
+//Admin
 $routes->get('dashboard', 'Admin::dashboard');
+$routes->post('Admin/set-homepage-tag', 'Admin::setHomepageTag');
+
+// Admin - users
 $routes->get('Admin/users-index', 'Admin::usersIndex');
 $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
 $routes->match(['get', 'post'], 'Admin/add-user', 'Admin::addUser');

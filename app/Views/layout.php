@@ -37,7 +37,7 @@
 
 
             <div class="logo">
-                <img src="<?= base_url('img/logoV3-1.png') ?>" class="logo">
+                <img src="<?= base_url('img/logoV3.png') ?>" class="logo">
             </div>
 
 
@@ -162,10 +162,7 @@
 
                     <?php else: ?>
 
-                        <a href="https://facebook.com/tonpage" target="_blank" rel="noopener">
-                            <img src="logo-facebook.webp" alt="Facebook" width="20">
-                        </a>
-
+                    
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="<?= base_url('login') ?>">

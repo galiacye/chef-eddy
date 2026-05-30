@@ -456,4 +456,6 @@ class Recipe extends BaseController
         $this->model->delete($id);
         return redirect()->to('/recipe-index')->with('success', 'Recette supprimée');
     }
+
+    
 }

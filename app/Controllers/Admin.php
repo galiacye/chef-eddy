@@ -38,9 +38,20 @@ class Admin extends BaseController
         return view('Admin/dashboard', [
             'nb_users' => $this->userModel->countAll(),
             'nb_recipes' => $this->recipeModel->countAll(), // countAll devient countAllResults derrière un where:
-            'nb_recipes_pending' => $this->recipeModel->where('status', 'pending')->countAllResults()
+            'nb_recipes_pending' => $this->recipeModel->where('status', 'pending')->countAllResults(),
+            'tags'              => $this->tagModel->findAll(),
+            'homepageTag'       => $this->tagModel->getHomepageTag()
         ]);
     }
+
+    public function setHomepageTag()
+    {
+        $tag_id = $this->request->getPost('tag_id');
+        $this->tagModel->set(['is_homepage' => 0])->update(); // reset tous
+        $this->tagModel->update($tag_id, ['is_homepage' => 1]);
+        return redirect()->to('Admin/dashboard')->with('success', 'Tag homepage mis à jour');
+    }
+
     //ici pas de $data car le param est passé directement à la vue,mais c'est pareil
     public function usersIndex()
     {

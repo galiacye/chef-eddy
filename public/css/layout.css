@@ -42,12 +42,13 @@
   gap: 140px;
   height: 100px;
   overflow: hidden;
-  background: linear-gradient(
+ /* background: linear-gradient(
     145deg,
     #0a0a0a 0%,
     #1c1c1c 40%,
     #0f0f0f 100%
-  );
+  )/*/
+  background-color: black;
 }
 
 /* couche chrome argenté incliné */

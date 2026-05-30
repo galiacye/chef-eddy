@@ -9,7 +9,7 @@ class TagModel extends Model
     protected $table = 'tags';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nom'];
+    protected $allowedFields = ['name', 'is_homepage'];
     protected $returnType = 'object';
 
 
@@ -50,5 +50,10 @@ class TagModel extends Model
             ->orderBy('recipes.id', 'RANDOM')
             ->limit($limit)
             ->get()->getResult();
+    }
+
+    public function getHomepageTag(): ?object
+    {
+        return $this->where('is_homepage', 1)->first();
     }
 }

@@ -6,6 +6,7 @@ use App\Libraries\Pdf;
 use App\Models\IngredientModel;
 use App\Models\IngredientsCategoriesModel;
 use App\Models\RecipeModel;
+use App\Models\TagModel;
 
 
 class Home extends BaseController
@@ -14,8 +15,12 @@ class Home extends BaseController
     {
         helper('form');
         $recipeModel = model('RecipeModel');
-        $Recipes = $recipeModel->findAll();
+        
+        $tagModel = model('TagModel');
+        $tags = $tagModel->findAll();
+        $homepageTag = $tagModel->getHomepageTag();
 
+        $recipes = $homepageTag ? $tagModel->getRecipesByTag($homepageTag->id) : $recipeModel->findAll();
         $ingredientModel = model('IngredientModel');
         $ingredients = $ingredientModel->findAll();
 
@@ -24,14 +29,13 @@ class Home extends BaseController
             ->orderBy('name', 'ASC')
             ->findAll();
 
-        $tagModel = model('TagModel');
-        $tags = $tagModel->findAll();
 
         $data = [
-            'Recipes' => $Recipes,
+            'recipes' => $recipes,
             'ingredients' => $ingredients,
             'categories' => $ingredientsCategories,
-            'tags' => $tags
+            'tags' => $tags,
+            'homepageTag' => $homepageTag//éventuellement pour afficher titre du tag
         ];
         return view('Home/index', $data);
     }

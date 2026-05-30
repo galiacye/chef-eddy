@@ -1,0 +1,1 @@
+ALTER TABLE tags ADD COLUMN is_featured TINYINT(1) DEFAULT 0;
