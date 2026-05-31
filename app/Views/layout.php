@@ -37,7 +37,7 @@
 
 
             <div class="logo">
-                <img src="<?= base_url('img/logoV3.png') ?>" class="logo">
+                <img src="<?= base_url('img/logo-chef-transp.png') ?>" class="logo">
             </div>
 
 
