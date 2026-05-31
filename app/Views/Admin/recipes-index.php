@@ -2,7 +2,8 @@
 <?= $this->section('titre') ?>Recettes<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
+<link href="<?= base_url('css/Admin/recipes-index.css') ?>" rel="stylesheet">
+<!--<style>
     body {
         background-image: url('<?= base_url('img/topo.png') ?>');
         background-size: cover;
@@ -32,7 +33,7 @@
         transform: scale(1.2);
         color: red;
     }
-</style>
+</style>-->
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
@@ -45,7 +46,7 @@
 
 <div class="container-fluid m-3">
     <div class="btn-group">
-        <a href="<?= base_url('Admin/recipes-index/by-user') ?>">Par utilisateur</a>
+       
         <a href="<?= base_url('Admin/recipes-index?status=En attente') ?>"
             class="btn <?= $status === 'En attente' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
         <a href="<?= base_url('Admin/recipes-index?status=Approuvée') ?>"
@@ -58,22 +59,20 @@
 
             <?php foreach ($recipes as $recipe): ?>
                 <li>
-                    <div class="col m-3">
-
-                        <h4 class="text-light"><span class="text-light"><?= $recipe->title ?></span></h4>
-
-                        <h4 class="text-light"><span class="text-info"><?= $recipe->username ?></span></h4>
-
-                        <i class="fa-solid fa-bomb grenade-icon" onclick="alert('Grenade 1 cliquée !')">voir, modifier, supprimer ici</i>
-                        <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-primary">Gérer</a>
-
+                    <div class="recipe-info">
+                        <h4><?= $recipe->title ?></h4>
+                        <p class="recipe-author"><?= $recipe->username ?></p>
+                    </div>
+                    <div class="recipe-actions">
+                        <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-primary">Voir</a>
+                        <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
+                            onsubmit="return confirm('Supprimer définitivement cette recette?')">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
                     </div>
                 </li>
-                <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
-                    onsubmit="return confirm('Supprimer définitivement cette recette?')">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="btn btn-danger">Supprimer la recette</button>
-                </form>
+
             <?php endforeach ?>
         </ul>
     </div>

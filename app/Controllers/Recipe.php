@@ -447,7 +447,7 @@ class Recipe extends BaseController
                     ]);
                 }
             }
-            return redirect()->to('recipe-index')->with('success', 'Recette modifiée avec succès !');
+            return redirect()->to('Recipe/recipesIndex')->with('success', 'Recette modifiée avec succès !');
         }
     }
 
