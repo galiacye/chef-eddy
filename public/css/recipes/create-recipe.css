@@ -1,39 +1,140 @@
+/* #editor->conteneur technique (ne pas styler)
+.ql-container -> cadre
+.ql-editor ->design */
+
 body {
-    background-color: rgb(227, 247, 216);
+  background-color: rgb(224, 244, 213);
 }
-#toolbar {
-    background-color: white;
+
+h1, h2 {
+  font-family: "Syncopate";
 }
+
 .formulaire {
   display: flex;
   gap: 2rem;
 }
 
 .infos {
-    /* flex-grow: 0;     ne grandit PAS au delà de 35% 
-    flex-shrink: 0;  ne rétrécit PAS en dessous de 35% 
-    flex-basis: 25%; taille fixe : exactement 35%   */
-  flex: 0 0 25%;   /* largeur fixe */
-  min-width: 0;    /* évite les débordements dans un contexte flex */
+  flex: 0 0 25%;
+  min-width: 0;
 }
 
+/* container editeur */
 .editeur {
-  flex: 1;         /* prend tout l'espace restant */
+  flex: 1;
   min-width: 0;
-  background-color: white;
+
   display: flex;
   flex-direction: column;
+
+  background: #f7f1e8;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+#toolbar {
+  background: #efe2c5;
+
+  padding: 12px 16px;
+
+  border: none;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* container quill */
 .editeur .ql-container {
-  flex: 1;        /* prend toute la hauteur restante */
-  min-height: 0;
+  border: none !important;
+
+  background: #fffdf8;
 }
+
+/* zone d'écriture */
+.ql-editor {
+  min-height: 600px;
+
+  padding-top: 40px;
+  padding-right: 50px;
+  padding-bottom: 60px;
+  padding-left: 85px;
+
+  line-height: 40px;
+
+  font-size: 1.2rem;
+
+  font-family: "Patrick Hand", cursive;
+
+  color: #5a3d2b;
+
+  position: relative;
+
+  margin: 0;
+
+  background-color: #fffdf8;
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 39px,
+    #d7e7ff 40px
+  );
+}
+
+/* marge */
+.ql-editor::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: 60px;
+
+  width: 2px;
+
+  background: rgba(255, 0, 0, 0.25);
+}
+
+.ql-editor p {
+  margin: 0;
+}
+
+/* marge */
+.ql-editor.ql-blank::before {
+  display: none;
+}
+
 .ingredient-row {
-    flex-direction: column;
-    gap: 0.5rem;
+  flex-direction: column;
+
+  gap: 0.5rem;
 }
 
 .ingredient-row input,
 .ingredient-row select {
-    width: 100% !important; /* écrase les w-25 de Bootstrap */
+  width: 100% !important;
+}
+
+@media screen and (min-width: 768px) {
+  .ql-editor.ql-blank::before {
+    display: block;
+
+    left: 85px !important;
+
+    color: #f1e7d9 !important;
+
+    font-style: normal !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ql-editor.ql-blank::before {
+    display: block;
+}
 }

@@ -8,20 +8,20 @@
 
 <?= $this->section('body') ?>
 
-<h2 class="text-center">Proposez une recette</h2>
+<h2 class="text-center mt-4">Proposez une recette</h2>
 
 <?php
 $title = [
     'name' => 'title',
     'id' => 'title',
     'value' => set_value('title'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-100'
 ];
 $image = [
     'name' => 'image_url',
     'id' => 'image_url',
     'value' => set_value('image_url'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-100'
 ];
 $pt = [
     'name' => 'prep_time',
@@ -52,26 +52,9 @@ $diff_options = [
 $cat = [
     'name'  => 'categoriyid',
     'id'    => 'category_id',
-    'class' => 'form-select w-50'
+    'class' => 'form-select w-100'
 ];
-/* $options_ingredients = [
-    ''          => '-- Catégorie --',
-    'viandes'   => 'Viandes',
-    'poissons'  => 'Poissons',
-    'oeufs'     => 'Oeufs',
-    'legumes'   => 'Légumes',
-    'fruits'    => 'Fruits',
-    'feculents' => 'Féculents',
-    'cereales'  => 'Farines et céréales',
-    'laitiers'  => 'Produits laitiers',
-    'epices'    => 'Épices & herbes',
-    'sucrants'  => 'Sucre et édulcorants',
-    'epicerie_sucree' => 'Épicerie sucrée',
-    'matieres_grasses' => 'Matières grasses',
-    'liquides'  => 'Liquides',
-    'autres'    => 'Autres'
-];
- */
+
 //ingredients_categories
 $options_ingredients = ['' => '-- Catégorie --'];
 foreach ($categories_ing_db as $cat_ing) {
@@ -112,7 +95,7 @@ foreach ($categories as $category) {
         <?= validation_show_error('portions') ?>
 
         <label for="difficulty">Difficulté</label>
-        <?= form_dropdown('difficulty', $diff_options, set_value('difficulty'), ['id' => 'difficulty', 'class' => 'form-select w-50']) ?>
+        <?= form_dropdown('difficulty', $diff_options, set_value('difficulty'), ['id' => 'difficulty', 'class' => 'form-select w-100']) ?>
         <?= validation_show_error('difficulty') ?>
 
         <label for="categorie_id">Catégorie</label>
@@ -174,7 +157,7 @@ foreach ($categories as $category) {
                 <small class="text-muted parsing-preview w-100"></small>
 
                 <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-25']) ?>
-                <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
+                <button type="button" class="btn btn-danger supprimer-ligne">X</button>
             </div>
         </div>
         <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
@@ -182,7 +165,7 @@ foreach ($categories as $category) {
 
     <div class="editeur">
         <label for="content">
-            <h2>Votre Recette</h2>
+            <h2 class="m-4">Votre Recette</h2>
         </label>
         <div id="toolbar">
             <button class="ql-bold"></button>
