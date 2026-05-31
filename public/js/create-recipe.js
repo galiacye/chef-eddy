@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const quill = new Quill("#editor", {
         modules: { toolbar: "#toolbar" },
-        placeholder: "Écrivez votre recette ici...",
         theme: "snow",
     });
 //à garder pour faire plus tard create et update ds même vue

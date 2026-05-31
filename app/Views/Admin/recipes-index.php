@@ -69,11 +69,11 @@
 
                     </div>
                 </li>
-                <a class="btn btn-danger" type="submit" 
-                    href="<?= base_url('/delete-recipe/' . $recipe->id) ?>"
-                    onclick="return confirm('Supprimer définitivement cette recette?')">
-                    Supprimer la recette
-                </a>
+                <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
+                    onsubmit="return confirm('Supprimer définitivement cette recette?')">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-danger">Supprimer la recette</button>
+                </form>
             <?php endforeach ?>
         </ul>
     </div>

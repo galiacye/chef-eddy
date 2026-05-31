@@ -447,14 +447,14 @@ class Recipe extends BaseController
                     ]);
                 }
             }
-            return redirect()->to('/recipe-index')->with('success', 'Recette modifiée avec succès !');
+            return redirect()->to('recipe-index')->with('success', 'Recette modifiée avec succès !');
         }
     }
 
     public function deleteRecipe(int $id)
     {
         $this->model->delete($id);
-        return redirect()->to('/recipe-index')->with('success', 'Recette supprimée');
+        return redirect()->to('Admin/recipes-index')->with('success', 'Recette supprimée');
     }
 
     
