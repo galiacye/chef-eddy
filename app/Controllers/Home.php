@@ -15,7 +15,7 @@ class Home extends BaseController
     {
         helper('form');
         $recipeModel = model('RecipeModel');
-        
+
         $tagModel = model('TagModel');
         $tags = $tagModel->findAll();
         $homepageTag = $tagModel->getHomepageTag();
@@ -35,7 +35,8 @@ class Home extends BaseController
             'ingredients' => $ingredients,
             'categories' => $ingredientsCategories,
             'tags' => $tags,
-            'homepageTag' => $homepageTag//éventuellement pour afficher titre du tag
+            'homepageTag' => $homepageTag, //éventuellement pour afficher titre du tag
+          
         ];
         return view('Home/index', $data);
     }
