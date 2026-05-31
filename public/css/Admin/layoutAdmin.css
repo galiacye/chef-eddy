@@ -1,0 +1,23 @@
+.eddy, .logo {
+    height: 60px;
+}
+.navbar {
+    height: 80px;
+}
+
+@media screen and (min-width: 768px){
+    .eddy, .logo {
+        height: 95px;
+    }
+     .navbar {
+        height: 100px;
+    }
+}
+@media screen and (min-width: 1024px){
+    .eddy, .logo {
+        height: 130px;
+    }
+     .navbar {
+        height: 140px;
+    }
+}
