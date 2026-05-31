@@ -1,0 +1,20 @@
+body {
+  background-color: rgb(247, 222, 213);
+}
+
+btn-custom {
+  background-color: rgb(165, 252, 232);
+  border: 1px solid rgb(2, 129, 129);
+}
+.row {
+  min-height: 80vh;
+  align-items: stretch;
+}
+
+.pink-cake {
+ max-height: 400px;
+    width: 75%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 61, 127, 0.25);
+}

@@ -5,99 +5,119 @@ Register
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
-
+<link href="<?= base_url('css/Auth/register.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-<h1 class="text-center">S'inscrire</h1>
-<h2>coucou</h2>
-<?= form_open_multipart('register') ?>
+<h1 class="text-center mt-4">S'inscrire</h1>
 
-<?php
-$username = [
-    'name' => 'username',
-    'id' => 'username',
-    'value' => set_value('username'),
-    'class' => 'form-control w-50'
-];
+<div class="row g-2 mt-3">
 
-$email = [
-    'name' => 'email',
-    'id' => 'email',
-    'value' => set_value('email'),
-    'class' => 'form-control w-50'
-];
+    <div class="col-12 col-md-6 order-2 order-md-1 formul  d-flex flex-column align-items-center justify-content-center">
+        <!--order vient de flexbox donc native pour bs
+    order-1 order-md-2  -> sur mobile : position 1 (en premier)
+                       sur desktop : position 2 (à droite)
 
-$password = [
-    'name' => 'password',
-    'id' => 'password',
-    'type' => 'password',
-    'class' => 'form-control w-50'
-];
+order-2 order-md-1   -> sur mobile : position 2 (en dessous)
+                       sur desktop : position 1 (à gauche) -->
+        <?= form_open_multipart('register') ?>
 
-$confirm_password = [
-    'name'  => 'confirm_password',
-    'id'    => 'confirm_password',
-    'type'  => 'password',
-    'class' => 'form-control w-50'
-];
+        <?php
+        $username = [
+            'name' => 'username',
+            'id' => 'username',
+            'value' => set_value('username'),
+            'class' => 'form-control w-100'
+        ];
 
-$last_name = [
-    'name'  => 'last_name',
-    'id'    => 'last_name',
-    'value' => set_value('last_name'),
-    'class' => 'form-control w-50'
-];
-$first_name = [
-    'name'  => 'first_name',
-    'id'    => 'first_name',
-    'value' => set_value('first_name'),
-    'class' => 'form-control w-50'
-];
+        $email = [
+            'name' => 'email',
+            'id' => 'email',
+            'value' => set_value('email'),
+            'class' => 'form-control w-100'
+        ];
 
-$avatar = [
-    'name' => 'avatar_url',
-    'id' => 'avatar_url',
-    'class' => 'form-control w-50',
-];
-$rolesOptions = ['' => 'Sélectionnez un rôle'];
-foreach ($roles as $role) {
-    $rolesOptions[$role->id] = $role->name;
-}
-?>
+        $password = [
+            'name' => 'password',
+            'id' => 'password',
+            'type' => 'password',
+            'class' => 'form-control w-100'
+        ];
 
+        $confirm_password = [
+            'name'  => 'confirm_password',
+            'id'    => 'confirm_password',
+            'type'  => 'password',
+            'class' => 'form-control w-100'
+        ];
 
+        $last_name = [
+            'name'  => 'last_name',
+            'id'    => 'last_name',
+            'value' => set_value('last_name'),
+            'class' => 'form-control w-100'
+        ];
+        $first_name = [
+            'name'  => 'first_name',
+            'id'    => 'first_name',
+            'value' => set_value('first_name'),
+            'class' => 'form-control w-100'
+        ];
 
-<?= form_fieldset("Informations de l'utilisateur", ['class' => 'border p-4']) ?>
+        $avatar = [
+            'name' => 'avatar_url',
+            'id' => 'avatar_url',
+            'class' => 'form-control w-100',
+        ];
+        $rolesOptions = ['' => 'Sélectionnez un rôle'];
+        foreach ($roles as $role) {
+            $rolesOptions[$role->id] = $role->name;
+        }
+        ?>
 
-<!-- ici pas d'utilisation de helper('form')-->
-<label for="username">Pseudo</label>
-<?= form_input($username) ?>
-<?= validation_show_error('username') ?>
+        <?= form_fieldset("Vos Informations", ['class' => 'border p-4']) ?>
 
-<label for="email">Email</label>
-<?= form_input($email) ?>
-<?= validation_show_error('email') ?><br>
+        <!-- ici pas d'utilisation de helper('form')-->
+        <label for="username">Pseudo</label>
+        <?= form_input($username) ?>
+        <?= validation_show_error('username') ?>
 
-<label for="password">Mot de passe</label>
-<?= form_input($password) ?>
-<?= validation_show_error('password') ?><br>
+        <label for="email">Email</label>
+        <?= form_input($email) ?>
+        <?= validation_show_error('email') ?><br>
 
-<label for="confirm_password">Confirmer le mot de passe</label>
-<?= form_input($confirm_password) ?>
-<?= validation_show_error('confirm_password') ?><br>
+        <label for="password">Mot de passe</label>
+        <?= form_input($password) ?>
+        <?= validation_show_error('password') ?><br>
 
-<label for="avatar_url">Avatar</label>
-<?= form_upload($avatar) ?>
-<?= validation_show_error('avatar_url') ?><br>
+        <label for="confirm_password">Confirmer le mot de passe</label>
+        <?= form_input($confirm_password) ?>
+        <?= validation_show_error('confirm_password') ?><br>
 
-<?= form_fieldset_close() ?>
+        <label for="avatar_url">Avatar</label>
+        <?= form_upload($avatar) ?>
+        <?= validation_show_error('avatar_url') ?><br>
 
-<div class="container text-center mt-3">
-    <?= form_submit('submit', 'Créer l’utilisateur', ['class' => 'btn btn-info']) ?>
+        <?= form_fieldset_close() ?>
+
+        <div class="container text-center mt-3">
+            <?= form_submit('submit', 'Inscription', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?= form_close() ?>
+
+    </div>
+    <div class="col-12 col-md-6 order-1 order-md-2 d-flex align-items-center justify-content-center">
+      
+          
+                <img src="<?= base_url('img/logo.png') ?>"
+                    class="pink-cake img-fluid"
+                    alt="pink-cake">
+            </div>
+       
+       
+    </div>
 </div>
-
-<?= form_close() ?>
 
 <?= $this->endSection() ?>

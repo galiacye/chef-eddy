@@ -65,13 +65,11 @@
     <div class="col-10 col-md-6 col-lg-3">
         <a href="Admin/comments" class="card p-3 text-decoration-none text-dark d-block">
             <h5>Commentaires et notes</h5>
-            <p class="text-muted mb-0">Modérer</p>
+            <p class="text-dark mb-0">Modérer</p>
         </a>
     </div>
   
 </div>
-
-<!-- après la row des cards de navigation, avant endSection -->
 
 <div class="row g-3 mt-4">
     <div class="col-12 col-md-6">
