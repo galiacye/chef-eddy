@@ -1,111 +1,87 @@
-
-
-<?= $this->extend('layout') ?>
+<?= $this->extend('layoutAdmin') ?>
 <?= $this->section('titre') ?>Dashboard<?= $this->endSection() ?>
+
 <?= $this->section('custom-css') ?>
-<link href="dashboard.css" rel="stylesheet">
-<style>
-    body {
-        background-image: url('<?= base_url('img/camouforange.jpg') ?>');
-        background-size: cover;
-    }
-</style>
+<link href="<?= base_url('css/Admin/dashboard.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
+
 <?= $this->section('body') ?>
 
-<h1 class="mb-4" style="color: white;">Tableau de bord</h1>
+<div class="dashboard-wrap">
 
-<?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success">
-        <?= session()->getFlashdata('success') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="flash-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-<div class="row g-3 mb-5">
-    <div class="col-md-4">
-        <div class="card text-center p-3">
-            <h2><?= $nb_users ?></h2>
-            <p class="text-muted mb-0">Utilisateurs</p>
+    <h1 class="dash-title">Tableau de bord</h1>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <span class="stat-number"><?= $nb_users ?></span>
+            <span class="stat-label">Utilisateurs</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number"><?= $nb_recipes ?></span>
+            <span class="stat-label">Recettes</span>
+        </div>
+        <div class="stat-card stat-warn">
+            <span class="stat-number"><?= $nb_recipes_pending ?></span>
+            <span class="stat-label">En attente</span>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card text-center p-3">
-            <h2><?= $nb_recipes ?></h2>
-            <p class="text-muted mb-0">Recettes</p>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-center p-3 border-warning">
-            <h2><?= $nb_recipes_pending ?></h2>
-            <p class="text-muted mb-0">En attente</p>
-        </div>
-    </div>
-</div>
 
-<div class="row g-3">
-      <div class="col-10 col-md-6 col-lg-3">
-        <a href="Admin/users-index" class="card p-3 text-decoration-none text-dark d-block">
-            <h5>Utilisateurs</h5>
-            <p class="text-muted mb-0">Comptes, rôles, accès</p>
+    <!-- Nav cards -->
+    <div class="nav-grid">
+        <a href="Admin/users-index" class="nav-card">
+            <span class="nav-icon"></span>
+            <span class="nav-title">Utilisateurs</span>
+            <span class="nav-sub">Comptes, rôles, accès</span>
+        </a>
+        <a href="Admin/recipes-index" class="nav-card">
+            <span class="nav-icon"></span>
+            <span class="nav-title">Recettes</span>
+            <span class="nav-sub">Gérer, modifier, supprimer</span>
+        </a>
+        <a href="Admin/ing-index" class="nav-card">
+            <span class="nav-icon"></span>
+            <span class="nav-title">Ingrédients</span>
+            <span class="nav-sub">Voir, supprimer les doublons</span>
+        </a>
+        <a href="Admin/comments" class="nav-card">
+            <span class="nav-icon"></span>
+            <span class="nav-title">Commentaires</span>
+            <span class="nav-sub">Modérer</span>
         </a>
     </div>
-    <div class="col-10 col-md-6 col-lg-3">
-        <a href="Admin/recipes-index" class="card p-3 text-decoration-none text-dark d-block">
-            <!-- text-decoration-none pour ôter le style bleu du lien  <a> -->
-            <h5>Recettes</h5>
-            <p class="text-muted mb-0">Gérer, modifier, supprimer</p>
-        </a>
-    </div>
-    <div class="col-10 col-md-6 col-lg-3">
-        <a href="Admin/ing-index" class="card p-3 text-decoration-none text-dark d-block">
-            <h5>Ingrédients</h5>
-            <p class="text-muted mb-0">Voir, supprimer les doublons</p>
-        </a>
-    </div>
-    <div class="col-10 col-md-6 col-lg-3">
-        <a href="Admin/comments" class="card p-3 text-decoration-none text-dark d-block">
-            <h5>Commentaires et notes</h5>
-            <p class="text-dark mb-0">Modérer</p>
-        </a>
-    </div>
-  
-</div>
 
-<div class="row g-3 mt-4">
-    <div class="col-12 col-md-6">
-        <div class="card p-3">
-            <h5>Tag affiché sur la page d'accueil</h5>
-            <p class="text-muted">
-                Actuellement : 
-                <strong>
-                    <?= $homepageTag ? esc($homepageTag->name) : 'Aucun' ?>
-                </strong>
-            </p>
-            <form action="<?= base_url('Admin/set-homepage-tag') ?>" method="post">
-                <?= csrf_field() ?>
-                <div class="d-flex gap-2">
-                    <select name="tag_id" class="form-select">
-                        <?php foreach ($tags as $tag): ?>
-                            <option value="<?= $tag->id ?>" 
-                                <?= ($homepageTag && $homepageTag->id == $tag->id) ? 'selected' : '' ?>>
-                                <?= esc($tag->name) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button type="submit" class="btn btn-warning text-white">
-                        Choisir
-                    </button>
-                </div>
-            </form>
+    <!-- Homepage tag -->
+    <div class="tag-panel">
+        <div class="tag-panel-header">
+            <span class="tag-panel-icon"></span>
+            <div>
+                <p class="tag-panel-title">Tag affiché sur la page d'accueil</p>
+                <p class="tag-panel-current">
+                    Actuellement : <strong><?= $homepageTag ? esc($homepageTag->name) : 'Aucun' ?></strong>
+                </p>
+            </div>
         </div>
+        <form action="<?= base_url('Admin/set-homepage-tag') ?>" method="post" class="tag-form">
+            <?= csrf_field() ?>
+            <select name="tag_id" class="tag-select">
+                <?php foreach ($tags as $tag): ?>
+                    <option value="<?= $tag->id ?>"
+                        <?= ($homepageTag && $homepageTag->id == $tag->id) ? 'selected' : '' ?>>
+                        <?= esc($tag->name) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit" class="tag-btn">Choisir</button>
+        </form>
     </div>
+
 </div>
 
 <?= $this->endSection() ?>
-
-   
-
-
-
-
-
