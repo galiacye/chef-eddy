@@ -41,14 +41,14 @@ class TagModel extends Model
             ->get()->getResult();
     }
     //les recettes d'un tag
-    public function getRecipesByTag(int $tag_id, int $limit = 6)
+    public function getRecipesByTag(int $tag_id)//, int $limit = 6 en 2ème param pour limiter affichage
     {
         return $this->select('recipes.id, recipes.title, recipes.image_url')
             ->join('recipe_tags', 'tags.id = recipe_tags.tag_id')
             ->join('recipes', 'recipes.id = recipe_tags.recipe_id')
             ->where('recipe_tags.tag_id', $tag_id)
             ->orderBy('recipes.id', 'RANDOM')
-            ->limit($limit)
+            //->limit($limit)
             ->get()->getResult();
     }
 
