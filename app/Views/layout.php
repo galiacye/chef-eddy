@@ -20,8 +20,11 @@
     <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
 
     <?= $this->renderSection('custom-css') ?>
-    
+
 </head>
+
+
+<body>
 
 <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success">
@@ -34,9 +37,6 @@
         <?= session()->getFlashdata('error') ?>
     </div>
 <?php endif; ?>
-
-<body>
-
 
     <header class="py-3">
         <div class="ban d-flex align-items-center pe-3">
