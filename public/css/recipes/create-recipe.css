@@ -4,6 +4,8 @@
 
 body {
   background-color: rgb(224, 244, 213);
+  /* padding-left: 3rem;
+  padding-right: 3rem; */
 }
 
 h1, h2 {
@@ -15,6 +17,7 @@ h1, h2 {
   gap: 2rem;
 }
 
+
 .infos {
   flex: 0 0 25%;
   min-width: 0;
@@ -22,6 +25,7 @@ h1, h2 {
 
 /* container editeur */
 .editeur {
+
   flex: 1;
   min-width: 0;
 

@@ -128,7 +128,7 @@ CREATE TABLE `roles` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom` (`name`),
-  FOREIGN KEY (role_id) REFERENCES roles(id)
+
 );
 
 CREATE TABLE `tags` (
@@ -157,6 +157,7 @@ CREATE TABLE `users` (
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  CONSTRAINT `users_ibfk_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 );
 

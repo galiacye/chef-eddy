@@ -1,1 +1,0 @@
-ALTER TABLE tags ADD COLUMN is_homepage TINYINT(1) DEFAULT 0;
