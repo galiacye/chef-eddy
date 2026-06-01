@@ -113,7 +113,7 @@
 
                 <?php foreach ($recipes as $recipe) : ?>
 
-                    <div class="col-12 col-md-6 col-lg-3 mb-4 d-flex justify-content-center">
+                    <div class="col-12 col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
 
                         <div class="card w-custom mt-4">
 

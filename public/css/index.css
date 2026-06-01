@@ -114,10 +114,18 @@ body {
   height: 100%;
   object-fit: cover; /*  contain pour voir l'image entière */
 }
-.w-custom {
+/* .w-custom {
   gap: 20px;
   flex: 1 1 220px;
   max-width: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+} */
+
+.w-custom {
+  width: 100%;
   border-radius: 15px;
   overflow: hidden;
   transition: 0.25s ease;
