@@ -41,12 +41,10 @@
     <header class="py-3">
         <div class="ban d-flex align-items-center pe-3">
 
-
         
             <div class="title ps-3">
                 <h1 class="hero-title">Chef Eddy</h1>
             </div>
-
 
 
             <div class="logo">

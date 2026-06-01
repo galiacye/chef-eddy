@@ -104,7 +104,7 @@ class Auth extends BaseController
             $data = [
                 'username'   => $this->request->getPost('username'),
                 'email'      => $this->request->getPost('email'),
-                'role_id'    => $this->request->getPost('role_id') ?? 1, // guest par défaut
+                'role_id'    => 2, // guest par défaut avec login, author après inscription
                 'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                 'last_name'  => $this->request->getPost('last_name'),
                 'first_name' => $this->request->getPost('first_name'),
