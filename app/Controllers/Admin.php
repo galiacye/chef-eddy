@@ -48,10 +48,17 @@ class Admin extends BaseController
     {
         $tag_id = $this->request->getPost('tag_id');
 
-        $this->tagModel->where('is_homepage', 1)->set('is_homepage', 0)->update();//remettre à 0 tag affiché
+        $this->tagModel->where('is_homepage', 1)->set('is_homepage', 0)->update(); //remettre à 0 tag affiché
         $this->tagModel->update($tag_id, ['is_homepage' => 1]); // mettre à 1 tag choisi par admin
 
         return redirect()->to('dashboard')->with('success', 'Tag homepage mis à jour');
+    }
+
+    public function addTag()
+    {
+        $name = $this->request->getPost('name');
+        $this->tagModel->addTag(['name' => $name]);
+        return redirect()->to('dashboard')->with('success', 'Tag ajouté');
     }
 
     //ici pas de $data car le param est passé directement à la vue,mais c'est pareil

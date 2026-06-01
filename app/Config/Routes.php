@@ -41,6 +41,9 @@ $routes->get('Admin/recipe-details/(:num)', 'Admin::recipeDetails/$1');
 $routes->post('Admin/recipe/remove/(:num)', 'Admin::deleteRecipe/$1'); // pour rejeter une recette
 $routes->post('Admin/recipe/save/(:num)', 'Admin::saveRecipe/$1'); // pour approuver une recette
 
+//Admin - Tags
+$routes->post('Admin/add-tag', 'Admin::addTag');
+
 // Admin - ingredients
 $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->get('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');

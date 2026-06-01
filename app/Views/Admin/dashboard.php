@@ -78,7 +78,12 @@
                     </option>
                 <?php endforeach; ?>
             </select>
-            <button type="submit" class="tag-btn">Choisir</button>
+            <button type="submit" class="tag-btn mt-2">Choisir</button>
+        </form>
+        <form action="<?= base_url('Admin/add-tag') ?>" method="post" class="mt-2">
+            <?= csrf_field() ?>
+            <input type="text" name="name" class="tag-select" placeholder="Nouveau tag" required>
+            <button type="submit" class="tag-btn">Ajouter</button>
         </form>
     </div>
 
