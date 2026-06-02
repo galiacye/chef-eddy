@@ -46,7 +46,7 @@
 
 <div class="container-fluid m-3">
     <div class="btn-group">
-       
+
         <a href="<?= base_url('Admin/recipes-index?status=En attente') ?>"
             class="btn <?= $status === 'En attente' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
         <a href="<?= base_url('Admin/recipes-index?status=Approuvée') ?>"
@@ -57,47 +57,9 @@
     <div class="row m-3">
 
 
-<!--*******ch---->
-
-<div class="recipe-table">
-
-    <div class="recipe-row recipe-header">
-        <div>Recette</div>
-        <div>Auteur</div>
-        <div class="text-end">Actions</div>
-    </div>
-
-    <?php foreach ($recipes as $recipe) : ?>
-
-        <div class="recipe-row">
-
-            <!-- recette -->
-            <div class="recipe-main">
-                <strong><?= esc($recipe->title) ?></strong>
-            </div>
-
-            <!-- auteur -->
-            <div class="recipe-author">
-                <?= esc($recipe->author ?? '—') ?>
-            </div>
-
-            <!-- actions -->
-            <div class="recipe-actions">
-                <a href="#" class="btn btn-sm btn-primary">Voir</a>
-                <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                <a href="#" class="btn btn-sm btn-danger">Suppr</a>
-            </div>
-
-        </div>
-
-    <?php endforeach ?>
-
-</div>
-
-<!----********chfin-->
 
 
-        <!-- <ul class="grenade-list">
+        <ul class="grenade-list">
 
             <?php foreach ($recipes as $recipe): ?>
                 <li>
@@ -116,7 +78,7 @@
                 </li>
 
             <?php endforeach ?>
-        </ul> -->
+        </ul>
     </div>
 </div>
 <?php /*pour Admin::recipesIndex sans la jointure :
