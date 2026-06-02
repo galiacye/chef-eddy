@@ -5,6 +5,7 @@ body {
     background-attachment: fixed;
     min-height: 100vh;
 }
+
  
 .alert-success {
     background: linear-gradient(135deg, #1a3a1a, #1f4a1f);
@@ -38,6 +39,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    width: 30%;
 }
  
 .grenade-list li {
