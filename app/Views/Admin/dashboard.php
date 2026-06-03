@@ -11,13 +11,13 @@
 
     <?php if (session()->getFlashdata('success')): ?>
         <div class="flash-success">
-            <?= session()->getFlashdata('success') ?>
+            <?= esc(session()->getFlashdata('success')) ?>
         </div>
     <?php endif; ?>
 
     <h1 class="dash-title">Tableau de bord</h1>
 
-    <!-- Stats -->
+    <!-- Stats . Entiers esc inutile-->
     <div class="stats-row">
         <div class="stat-card">
             <span class="stat-number"><?= $nb_users ?></span>

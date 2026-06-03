@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="description" content="<?= $this->renderSection('description') ?>">  -->
+    <meta name="description" content="Chef Eddy - Recettes de cuisine maison">
+    <!-- ou : <meta name="description" content="<?= $this->renderSection('description') ?>">personalis dynamiquement-->
     <?= $this->renderSection('title') ?>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

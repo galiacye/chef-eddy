@@ -46,7 +46,7 @@ $routes->post('Admin/add-tag', 'Admin::addTag');
 
 // Admin - ingredients
 $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
-$routes->get('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');
+$routes->post('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
 // Admin - comments
 $routes->get('Admin/comments', 'Comment::commentsIndex');

@@ -1,4 +1,5 @@
 <?php
+
 /** @var object[] $ingredients */
 ?>
 
@@ -18,17 +19,19 @@
 <h2 class="text-center mb-4">Tous les ingredients</h2>
 
 <div class="row">
-    
+
     <?php foreach ($ingredients as $ing): ?>
 
         <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <p class="ing-nom"><?= $ing->name ?></p>
-
-            <a class="btn btn-warning mt-0 mb-4"
-                href="<?= base_url('Admin/ingredients/delete/' . $ing->id) ?>"
-               onclick="return confirm('Supprimer définitivement cet ingrédient ?')">
-                Supprimer 
-            </a>
+            <p class="ing-nom"><?= esc($ing->name) ?></p>
+<!--form anciennement a href pas secure-->
+            <form method="post" action="<?= base_url('Admin/ingredients/delete/' . $ing->id) ?>">
+                <?= csrf_field() ?>
+                <button class="btn btn-warning mt-0 mb-4"
+                    onclick="return confirm('Supprimer définitivement ?')">
+                    Supprimer
+                </button>
+            </form>
         </div>
 
     <?php endforeach; ?>
