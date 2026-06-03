@@ -131,7 +131,7 @@
                                     <?= esc($recipe->title) ?>
                                 </h5>
 
-                                <a href="<?= base_url('recipe/' . $recipe->id) ?>"
+                                <a href="<?= base_url('recipe/' . (int)$recipe->id) ?>"
                                     class="btn btn-see mt-auto">
 
                                     Voir

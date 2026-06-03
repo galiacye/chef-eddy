@@ -17,14 +17,14 @@
 <?= $this->section('body') ?>
 
 <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
 <?php endif ?>
 
 <h2>Modifier votre commentaire</h2>
 
-<form id="form" method="post" action="<?= base_url('comment/update/' . $comment->id) ?>">
+<form id="form" method="post" action="<?= base_url('comment/update/' . (int)$comment->id) ?>">
     <?= csrf_field() ?>
-    <input type="hidden" name="id" value="<?= $comment->id ?>">
+    <input type="hidden" name="id" value="<?= (int)$comment->id ?>">
     <div id="toolbar">
         <span class="ql-formats">
             <button class="ql-bold"></button>
@@ -48,7 +48,7 @@
 <h2>Donnez une note à la recette</h2>
 
 
-<div class="rating-stars" id="rating-stars" data-rating="<?= $comment->rating ?? 0 ?>">
+<div class="rating-stars" id="rating-stars" data-rating="<?= (int)$comment->rating ?? 0 ?>">
     <i class="bi bi-star star" data-rating="1"></i>
     <i class="bi bi-star star" data-rating="2"></i>
     <i class="bi bi-star star" data-rating="3"></i>
@@ -64,10 +64,12 @@
 <script src="<?= base_url('/js/quill-comment.js') ?>"></script>
 <script>
     quill.root.innerHTML = `<?= addslashes($comment->content ?? '') ?>`;
-    //addslashes echappe les caracteres speciaux en js (esc ->CI4)
+    //addslashes echappe les caracteres speciaux en js (esc ->CI4) 
 
     // Pré-remplir les étoiles
-    const initialRating = <?= $comment->rating ?? 0 ?>;
+    const initialRating = <?= (int)($comment->rating) ?? 0 ?>;//double parenthèse cause priorité des opérateurs 
+    // sinon (int)$comment->rating ?? 0 est interpreté comme : ((int)$comment->rating) ?? 0
+    //de toute façon aucun risque sécu juste pour clarté
     if (initialRating > 0) {
         currentRating = initialRating;
         document.getElementById('rating').value = initialRating;

@@ -74,99 +74,99 @@ foreach ($categories as $category) {
     <div class="col-12 col-md-6"> pour diviser row en deux pour image éventuelle-->
 
 
-        <!-- $status et $views gérées ds ctrlr -->
-        <div class="infos">
+    <!-- $status et $views gérées ds ctrlr -->
+    <div class="infos">
 
 
-            <label for="title">Titre</label>
-            <?= form_input($title) ?>
-            <?= validation_show_error('title') ?>
+        <label for="title">Titre</label>
+        <?= form_input($title) ?>
+        <?= validation_show_error('title') ?>
 
-            <label for="image_url">Illustration</label>
-            <?= form_upload($image) ?>
-            <?= validation_show_error('image_url') ?>
+        <label for="image_url">Illustration</label>
+        <?= form_upload($image) ?>
+        <?= validation_show_error('image_url') ?>
 
-            <label for="prep_time">Temps de préparation</label>
-            <?= form_input($pt) ?>
-            <?= validation_show_error('prep_time') ?>
+        <label for="prep_time">Temps de préparation</label>
+        <?= form_input($pt) ?>
+        <?= validation_show_error('prep_time') ?>
 
-            <label for="cook_time">Temps de cuisson</label>
-            <?= form_input($ct) ?>
-            <?= validation_show_error('cook_time') ?>
+        <label for="cook_time">Temps de cuisson</label>
+        <?= form_input($ct) ?>
+        <?= validation_show_error('cook_time') ?>
 
-            <label for="portions">Nombre de personnes</label>
-            <?= form_input($portions) ?>
-            <?= validation_show_error('portions') ?>
+        <label for="portions">Nombre de personnes</label>
+        <?= form_input($portions) ?>
+        <?= validation_show_error('portions') ?>
 
-            <label for="difficulty">Difficulté</label>
-            <?= form_dropdown('difficulty', $diff_options, set_value('difficulty'), ['id' => 'difficulty', 'class' => 'form-select w-50']) ?>
-            <?= validation_show_error('difficulty') ?>
+        <label for="difficulty">Difficulté</label>
+        <?= form_dropdown('difficulty', $diff_options, set_value('difficulty'), ['id' => 'difficulty', 'class' => 'form-select w-50']) ?>
+        <?= validation_show_error('difficulty') ?>
 
-            <label for="categorie_id">Catégorie</label>
-            <?= form_dropdown('category_id', $options_categories, set_value('category_id'), $cat) ?>
-            <?= validation_show_error('category_id') ?>
+        <label for="categorie_id">Catégorie</label>
+        <?= form_dropdown('category_id', $options_categories, set_value('category_id'), $cat) ?>
+        <?= validation_show_error('category_id') ?>
 
-            <label>Tags</label>
-            <div class="d-flex flex-wrap gap-3 w-50">
-                <?php foreach ($tags as $tag) : ?>
-                    <div class="form-check">
-                        <input
-                            type="checkbox"
-                            name="tags"
-                            value="<?= $tag->id ?>"
-                            id="tag_<?= $tag->id ?>"
-                            class="form-check-input"
-                            <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
-                        <label class="form-check-label" for="tag_name" <?= $tag->id ?>">
-                            <?= $tag->name ?>
-                        </label>
-                    </div>
-                <?php endforeach ?>
-            </div>
-            <?= validation_show_error('tags') ?>
-
-            <label>Ingrédients</label>
-            <div id="ingredients-container" class="w-50">
-                <div class="ingredient-row gap-2 mb-2">
-                    <?php
-                    $ing_name = [
-                        'name'        => 'ingredients[0][name]',
-                        'type'        => 'hidden',
-                        'id'          => 'ing-name-0'
-                    ];
-                    $ing_qty = [
-                        'name'        => 'ingredients[0][quantity]',
-                        'type'        => 'hidden',
-                        'id'          => 'ing-qty-0'
-                    ];
-                    $ing_unit = [
-                        'name'        => 'ingredients[0][unit]',
-                        'type'        => 'hidden',
-                        'id'          => 'ing-unit-0'
-                    ];
-                    ?>
-
-                    <!-- Champ visible unique -->
-                    <input type="text"
-                        class="form-control w-50 ingredient-input"
-                        placeholder="Ex: 200g farine, 2 oeufs..."
-                        data-index="0">
-
-                    <!-- Champs cachés qui stockent les 3 valeurs -->
-                    <?= form_input($ing_name) ?>
-                    <?= form_input($ing_qty) ?>
-                    <?= form_input($ing_unit) ?>
-
-                    <!-- Aperçu du parsing -->
-                    <small class="text-muted parsing-preview w-50"></small>
-
-                    <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50']) ?>
-                    <button type="button" class="btn btn-danger supprimer-ligne">X</button>
+        <label>Tags</label>
+        <div class="d-flex flex-wrap gap-3 w-50">
+            <?php foreach ($tags as $tag) : ?>
+                <div class="form-check">
+                    <input
+                        type="checkbox"
+                        name="tags"
+                        value="<?= (int)$tag->id ?>"
+                        id="tag_<?= (int)$tag->id ?>"
+                        class="form-check-input"
+                        <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="tag_name" <?= $tag->id ?>">
+                        <?= esc($tag->name) ?>
+                    </label>
                 </div>
-            </div>
-            <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
+            <?php endforeach ?>
         </div>
-   <!-- </div>
+        <?= validation_show_error('tags') ?>
+
+        <label>Ingrédients</label>
+        <div id="ingredients-container" class="w-50">
+            <div class="ingredient-row gap-2 mb-2">
+                <?php
+                $ing_name = [
+                    'name'        => 'ingredients[0][name]',
+                    'type'        => 'hidden',
+                    'id'          => 'ing-name-0'
+                ];
+                $ing_qty = [
+                    'name'        => 'ingredients[0][quantity]',
+                    'type'        => 'hidden',
+                    'id'          => 'ing-qty-0'
+                ];
+                $ing_unit = [
+                    'name'        => 'ingredients[0][unit]',
+                    'type'        => 'hidden',
+                    'id'          => 'ing-unit-0'
+                ];
+                ?>
+
+                <!-- Champ visible unique -->
+                <input type="text"
+                    class="form-control w-50 ingredient-input"
+                    placeholder="Ex: 200g farine, 2 oeufs..."
+                    data-index="0">
+
+                <!-- Champs cachés qui stockent les 3 valeurs -->
+                <?= form_input($ing_name) ?>
+                <?= form_input($ing_qty) ?>
+                <?= form_input($ing_unit) ?>
+
+                <!-- Aperçu du parsing -->
+                <small class="text-muted parsing-preview w-50"></small>
+
+                <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50']) ?>
+                <button type="button" class="btn btn-danger supprimer-ligne">X</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
+    </div>
+    <!-- </div>
     <div class="col-12 col-md-6">
     Image 
         <div class="mb-4">
@@ -203,8 +203,13 @@ foreach ($categories as $category) {
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
     // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
-    const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    const units = <?= json_encode($units) ?>;
+    //const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
+    //const units = <?= json_encode($units) ?>;
+
+    const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
+    const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
+//JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le JS.
+
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>
