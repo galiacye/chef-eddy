@@ -16,7 +16,7 @@
                     <?php if (! empty($user->avatar_url)) : ?>
                         <img src="<?= base_url($user->avatar_url) ?>" alt="Avatar" class="avatar">
                     <?php else : ?>
-                        <?= strtoupper(mb_substr($user->username, 0, 1)) ?>
+                        <?= strtoupper(mb_substr($user->username, 0, 1)) ?><!--afficher la 1ère lettre en maj-->
                     <?php endif; ?>
                 </div>
             </div>

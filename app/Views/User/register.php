@@ -65,7 +65,7 @@ foreach ($roles as $role) {
 
 <?= form_fieldset("Informations de l'utilisateur", ['class' => 'border p-4']) ?>
 
-<!-- ici pas d'utilisation de helper('form')-->
+<!--  helper('form') est déjà chargé-->
 <label for="username">Pseudo</label>
 <?= form_input($username) ?>
 <?= validation_show_error('username') ?>

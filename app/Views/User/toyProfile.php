@@ -25,7 +25,7 @@
 
             <?php if (session()->getFlashdata('success')) : ?>
                 <div class="alert alert-success py-2 px-3 mb-3">
-                    <?= session()->getFlashdata('success') ?>
+                    <?= esc(session()->getFlashdata('success')) ?>
                 </div>
             <?php endif; ?>
 

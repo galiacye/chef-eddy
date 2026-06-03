@@ -33,12 +33,12 @@ if ($user_id) {
         <div class="banner-left">
             <div class="tags">
                 <?php foreach ($tags as $tag): ?>
-                    <span class="tag"><?= $tag->name ?></span>
+                    <span class="tag"><?= esc($tag->name) ?></span>
                 <?php endforeach ?>
             </div>
 
             <h1 class="recipe-title">
-                <?= $recipe->title ?>
+                <?= esc($recipe->title) ?>
             </h1>
 
             <?php if (!empty($recipe->image_url)): ?>
@@ -48,10 +48,10 @@ if ($user_id) {
 
         <div class="banner-right">
             <div class="info-card">
-                <div>Difficulté : <b><?= $recipe->difficulty ?></b></div>
-                <div>Préparation : <b><?= $recipe->prep_time ?> min</b></div>
-                <div>Cuisson : <b><?= $recipe->cook_time ?> min</b></div>
-                <div>Personnes : <b><?= $recipe->portions ?></b></div>
+                <div>Difficulté : <b><?= esc($recipe->difficulty) ?></b></div>
+                <div>Préparation : <b><?= esc($recipe->prep_time) ?> min</b></div>
+                <div>Cuisson : <b><?= esc($recipe->cook_time) ?> min</b></div>
+                <div>Personnes : <b><?= esc($recipe->portions) ?></b></div>
             </div>
         </div>
 
@@ -65,12 +65,12 @@ if ($user_id) {
             <div class="portions-control">
                 <label>Portions :</label>
                 <button type="button" id="moins">-</button>
-                <span id="portions"><?= $recipe->portions ?></span>
+                <span id="portions"><?= esc($recipe->portions) ?></span>
                 <button type="button" id="plus">+</button>
             </div>
             <?php foreach ($ingredients as $ingredient): ?>
                 <div class="ingredient-card">
-                    <b><?= $ingredient->name ?></b>
+                    <b><?= esc($ingredient->name) ?></b>
                     <div>
                         <span class="ingredient-qty" data-base="<?= $ingredient->quantity ?>">
                             <?= ($ingredient->quantity == (int)$ingredient->quantity) ? (int)$ingredient->quantity : $ingredient->quantity ?>
@@ -84,12 +84,12 @@ if ($user_id) {
     <section class="card-block">
         <h2>La recette</h2>
         <div class="editor">
-            <?= $recipe->content ?>
+            <?= esc($recipe->content) ?>
         </div>
     </section>
 
     <?php if ($user_id) : ?>
-        <form action="<?= site_url('favorites/toggle/' . $recipe->id) ?>" method="post" class="fav-form">
+        <form action="<?= site_url('favorites/toggle/' . (int)$recipe->id) ?>" method="post" class="fav-form">
             <?= csrf_field() ?>
             <button class="btn-fav <?= $isFav ? 'active' : '' ?>">
                 <?= $isFav ? 'Retirer des favoris' : 'Ajouter aux favoris' ?>
@@ -100,14 +100,14 @@ if ($user_id) {
 
     <section class="card-block comments">
         <h2>Commentaires</h2>
-        <?php if (!empty($comments)): ?>
+        <?php if (!empty(esc($comments))): ?>
             <?php foreach ($comments as $comment): ?>
                 <?php if ($comment->parent_id === null): ?>
                     <div class="comment">
                         <small class="comment-author"><?= esc($comment->username) ?></small>
                         <p><?= esc($comment->content) ?></p>
                         <?php if ($comment->rating): ?>
-                            <span class="comment-rating"><?= $comment->rating ?>/5</span>
+                            <span class="comment-rating"><?= (int)$comment->rating ?>/5</span>
                         <?php endif ?>
 
                         <?php foreach ($comments as $reply): ?>

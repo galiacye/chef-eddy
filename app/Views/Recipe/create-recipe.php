@@ -59,12 +59,12 @@ $cat = [
 $options_ingredients = ['' => '-- Catégorie --'];
 foreach ($categories_ing_db as $cat_ing) {
 
-    $options_ingredients[$cat_ing->name] = $cat_ing->name;
+    $options_ingredients[$cat_ing->name] = esc($cat_ing->name);
 }
 //recette_categorie
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
 foreach ($categories as $category) {
-    $options_categories[$category->id] = $category->name;
+    $options_categories[$category->id] = esc($category->name);
 }
 ?>
 <?= validation_list_errors() ?>
@@ -77,7 +77,7 @@ foreach ($categories as $category) {
     <!-- $status et $views gérées ds ctrlr -->
     <div class="infos">
 
-
+<!--form_input(), form_upload(), form_dropdown(), validation_show_error(), validation_list_errors() échappent déjà -->
         <label for="title">Titre</label>
         <?= form_input($title) ?>
         <?= validation_show_error('title') ?>
@@ -118,6 +118,7 @@ foreach ($categories as $category) {
                         class="form-check-input"
                         <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="tag_name" <?= $tag->id ?>">
+                        <!--<label class="form-check-label" for="tag_<?= (int)$tag->id ?>"> sinon html invalide ?-->
                         <?= esc($tag->name) ?>
                     </label>
                 </div>
@@ -190,7 +191,8 @@ foreach ($categories as $category) {
             <button class="ql-list" value="bullet"></button>
         </div>
         <div id="editor"></div>
-        <input type="hidden" name="content" id="content" value="<?= set_value('content') ?>">
+        <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
+        <!--Sans esc un utilisateur peut casser l’attribut HTML avec des guillemets-->
 
         <button type="submit" class="btn btn-primary">Envoyer</button>
 
@@ -203,9 +205,6 @@ foreach ($categories as $category) {
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
     // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
-    //const categoriesIngredient = <?= json_encode($options_ingredients) ?>;
-    //const units = <?= json_encode($units) ?>;
-
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
 //JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le JS.

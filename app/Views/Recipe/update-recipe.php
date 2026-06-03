@@ -165,7 +165,7 @@ foreach ($categories as $category) {
             <button class="ql-list" value="bullet"></button>
         </div>
         <div id="editor"></div>
-        <input type="hidden" name="content" id="content" value="<?= set_value('content', $recipe->content ?? '') ?>">
+        <input type="hidden" name="content" id="content" value="<?= set_value('content', esc($recipe->content) ?? '') ?>">
         <!-- $recipe->contenu pr que l'ancien contenu s'affiche -->
         <button type="submit" class="btn btn-primary">Envoyer</button>
         

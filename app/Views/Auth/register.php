@@ -75,7 +75,7 @@ order-2 order-md-1   -> sur mobile : position 2 (en dessous)
 
         <?= form_fieldset("Vos Informations", ['class' => 'border p-4']) ?>
 
-        <!-- ici pas d'utilisation de helper('form')-->
+        <!--  helper('form') est chargé globalement dans BaseController (maintenant)-->
         <label for="username">Pseudo</label>
         <?= form_input($username) ?>
         <?= validation_show_error('username') ?>
