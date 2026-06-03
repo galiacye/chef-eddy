@@ -10,7 +10,9 @@
 ?>
 
 <?= $this->extend('layout') ?>
-
+<?= $this->section('title') ?>
+<title>Recette de <?= esc($recipe->title) ?></title>
+<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('css/recipes/crecipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>

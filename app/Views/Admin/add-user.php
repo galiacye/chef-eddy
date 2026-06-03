@@ -1,24 +1,24 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('title') ?>
-    Add User
+<title>Add User</title>
 <?= $this->endSection() ?>
 
-<?= $this->section('custom-css')?>
-    <link href="add-user.css" rel="stylesheet">
-    <style>
+<?= $this->section('custom-css') ?>
+<link href="add-user.css" rel="stylesheet">
+<style>
     body {
         background-image: url('<?= base_url('img/camouforange.jpg') ?>');
         background-size: cover;
     }
-    </style>
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-    <h1 class="text-center">Ajouter un utilisateur</h1>
+<h1 class="text-center">Ajouter un utilisateur</h1>
 
-    <?= form_open_multipart('Admin/add-user') ?>
+<?= form_open_multipart('Admin/add-user') ?>
 
 <?php
 $username = [
@@ -40,7 +40,7 @@ $password = [
     'id' => 'password',
     'type' => 'password',
     'class' => 'form-control w-50',
-    'placeholder'=>'Mot de passe temporaire généré automatiquement'
+    'placeholder' => 'Mot de passe temporaire généré automatiquement'
 ];
 
 $last_name = [
@@ -81,10 +81,11 @@ foreach ($roles as $role) {
 
 <label for="role_id">Rôle</label>
 <?= form_dropdown('role_id', $rolesOptions, set_value('role_id'), ['class' => 'form-control w-50']) ?>
-<?= validation_show_error('role_id') //$role_id récupéré par la session?>
+<?= validation_show_error('role_id') //$role_id récupéré par la session
+?>
 
 <label for="password">Mot de passe</label>
-<?= form_input($password)?>
+<?= form_input($password) ?>
 <?= validation_show_error('password') ?><br>
 
 <label for="last_name">Nom</label>
@@ -109,4 +110,3 @@ foreach ($roles as $role) {
 <?= form_close() ?>
 
 <?= $this->endSection() ?>
-

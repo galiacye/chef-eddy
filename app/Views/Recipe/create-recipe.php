@@ -1,5 +1,7 @@
 <?= $this->extend('layout') ?>
-
+<?= $this->section('title') ?>
+<title>Proposer une recette</title>
+<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link href="<?= base_url('css/quill.css') ?>" rel="stylesheet">

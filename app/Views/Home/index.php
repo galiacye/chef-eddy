@@ -1,5 +1,7 @@
 <?= $this->extend('layout') ?>
-
+<?= $this->section('title') ?>
+<title>Accueil Chef Eddy</title>
+<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('css/index.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>

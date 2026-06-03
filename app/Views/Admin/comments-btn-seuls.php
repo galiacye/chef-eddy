@@ -1,5 +1,5 @@
 <?= $this->extend('layoutAdmin') ?>
-<?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
+<?= $this->section('titre') ?><title>Tous les commentaires</title><?= $this->endSection() ?>
 <?= $this->section('customcss') ?>
 
 <?= $this->endSection() ?>

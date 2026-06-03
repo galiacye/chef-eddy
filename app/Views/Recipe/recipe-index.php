@@ -1,5 +1,7 @@
 <?= $this->extend('layout') ?>
-
+<?= $this->section('title') ?>
+<title>Toutes les recettes</title>
+<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('css/recipes/recipeIndex.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
