@@ -22,14 +22,17 @@
 <?= $this->section('body') ?>
 
 <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
 <?php endif ?>
 
 <h2>Ajoutez un commentaire</h2>
 
 <form id="form" method="post" action="<?= base_url('comment/save') ?>">
     <?= csrf_field() ?>
-    <input type="hidden" name="recipe_id" value="<?= $recipe_id ?>">
+    <input type="hidden" name="recipe_id" value="<?= (int)$recipe_id ?>">
+    <!-- (int) caste la valeur en entier : si quelqu'un injecte du JS ou du HTML
+     dans l'URL, le cast retourne 0 au lieu d'exécuter le code  
+     nota bene : cast : forcer la valeur à prendre forme qu'on veut: garantie que la var est ce que doit-->
     <div id="toolbar">
         <span class="ql-formats">
             <button class="ql-bold"></button>

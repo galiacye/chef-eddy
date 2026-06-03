@@ -12,7 +12,8 @@
                          class="card-img-top"
                          alt="<?= esc($recipe->title) ?>">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title"><?= esc($recipe->title) ?></h5>
+                        <h5 class="card-title"><?= esc($recipe->title) ?></h5><!--on ne précise pas en param où esc doit s'appliquer, par défaut sur balise html
+                        on précise 'attr' si la var est entre guillemets d'une balise, si elle est son attribut, comme ds alt-->
                         <a href="<?= base_url('recipe/' . $recipe->id) ?>" 
                            class="btn btn-primary mt-auto">Voir la recette</a>
                     </div>

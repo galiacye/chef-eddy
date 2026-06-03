@@ -1,9 +1,9 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('custom-css') ?>
 <style>
-body {
-    background-color: pink;
-}
+    body {
+        background-color: pink;
+    }
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
@@ -13,7 +13,7 @@ body {
             <h2>Réinitialiser mon mot de passe</h2>
 
             <?php if (session()->getFlashdata('error')): ?>
-                <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div><!--ici je ne l'ai pas factorisé en $error pour garder l'exemple-->
+                <div class="alert alert-danger"><?= esc(session()->getFlashdata('error')) ?></div><!--ici je ne l'ai pas factorisé en $error pour garder l'exemple-->
             <?php endif ?>
 
             <?php if (isset($errors)): ?>
@@ -27,20 +27,20 @@ body {
             <?php endif ?>
 
             <?= form_open('reset-password/' . $token) ?>
+            <?= csrf_field() ?>
+            <div class="mb-3">
+                <label for="password">Nouveau mot de passe</label>
+                <input type="password" name="password" id="password"
+                    class="form-control" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="password">Nouveau mot de passe</label>
-                    <input type="password" name="password" id="password"
-                           class="form-control" required>
-                </div>
+            <div class="mb-3">
+                <label for="confirm_password">Confirmer le mot de passe</label>
+                <input type="password" name="confirm_password" id="confirm_password"
+                    class="form-control" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="confirm_password">Confirmer le mot de passe</label>
-                    <input type="password" name="confirm_password" id="confirm_password"
-                           class="form-control" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Réinitialiser</button>
+            <button type="submit" class="btn btn-primary">Réinitialiser</button>
 
             <?= form_close() ?>
 
