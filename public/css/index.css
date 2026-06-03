@@ -124,6 +124,11 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 } */
 
+.img-wrapper {
+  height: 180px;
+  overflow: hidden;
+}
+
 .w-custom {
   width: 100%;
   border-radius: 15px;
