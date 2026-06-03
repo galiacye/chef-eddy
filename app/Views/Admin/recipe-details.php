@@ -18,7 +18,7 @@
                     <?= $tag->nom_tag ?>
                 <?php endforeach */ ?>
             </h4>
-            <h3 class="text-center"><?= $recipe->title ?></h3>
+            <h3 class="text-center"><?= esc($recipe->title) ?></h3>
             <img src="<?= $recipe->image_url ? base_url($recipe->image_url) : base_url('img/logo.png') ?>" class="recipe-img" alt="image recette">
         </div>
     </div>
@@ -26,55 +26,59 @@
         <table class="table table-dark">
             <tr>
                 <th>Titre</th>
-                <td><?= $recipe->title ?></td>
+                <td><?= esc($recipe->title) ?></td>
             </tr>
             <tr>
                 <th>Statut</th>
-                <td><?= $recipe->status ?></td>
+                <td><?= esc($recipe->status) ?></td>
             </tr>
             <tr>
                 <th>Difficulté</th>
-                <td><?= $recipe->difficulty ?></td>
+                <td><?= esc($recipe->difficulty) ?></td>
             </tr>
             <tr>
                 <th>Temps préparation</th>
-                <td><?= $recipe->prep_time ?> min</td>
+                <td><?= esc($recipe->prep_time) ?> min</td>
             </tr>
             <tr>
                 <th>Temps cuisson</th>
-                <td><?= $recipe->cook_time ?> min</td>
+                <td><?= esc($recipe->cook_time) ?> min</td>
             </tr>
             <tr>
                 <th>Personnes</th>
-                <td><?= $recipe->portions ?></td>
+                <td><?= esc($recipe->portions) ?></td>
             </tr>
         </table>
 
         <h4>Ingrédients</h4>
         <ul>
             <?php foreach ($ingredients as $ingredient): ?>
-                <li><?= $ingredient->name ?> : <?= $ingredient->quantity ?> <?= $ingredient->unit ?></li>
+                <li><?= esc($ingredient->name) ?> : <?= esc($ingredient->quantity) ?> <?= esc($ingredient->unit) ?></li>
             <?php endforeach ?>
         </ul>
 
-        <div><?= $recipe->content ?></div>
+        <div><?= esc($recipe->content) ?></div>
     </div>
     <div class="btn-box d-flex">
         <?php
         if ($recipe->status === 'En attente') { ?>
             <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-warning">Rejeter</button>
             </form>
 
             <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
+                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-info">Approuver</button>
             </form>
         <?php } elseif ($recipe->statut === 'Approuvée') { ?>
             <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-warning">Rejeter</button>
             </form>
         <?php  } elseif ($recipe->statut === 'Rejetée') { ?>
             <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
+                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-info">Approuver</button>
             </form>
         <?php } ?>
