@@ -40,7 +40,7 @@
 <?php $success = session()->getFlashdata('success') ?>
 <?php if ($success) : ?>
     <div class="alert alert-success">
-        <?= $success ?>
+        <?= esc($success) ?>
     </div>
 <?php endif ?>
 
@@ -64,8 +64,8 @@
             <?php foreach ($recipes as $recipe): ?>
                 <li>
                     <div class="recipe-info">
-                        <h4><?= $recipe->title ?></h4>
-                        <p class="recipe-author"><?= $recipe->username ?></p>
+                        <h4><?= esc($recipe->title) ?></h4>
+                        <p class="recipe-author"><?= esc($recipe->username) ?></p>
                     </div>
                     <div class="recipe-actions">
                         <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-primary">Voir</a>
@@ -81,7 +81,7 @@
         </ul>
     </div>
 </div>
-<?php /*pour Admin::recipesIndex sans la jointure :
+<?php /*pour Admin:: ancienne methode recipesIndex sans la jointure :
    foreach($recipes as $recipe): ?>
     <div class="col m-3">
         <h4>Recette</h4>

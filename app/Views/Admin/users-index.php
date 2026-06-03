@@ -47,7 +47,7 @@
                 <li>
                     <div class="col m-3">
 
-                        <h4 class="text-light"><span class="text-light"><?= $user->username?></span></h4>
+                        <h4 class="text-light"><span class="text-light"><?= esc($user->username)?></span></h4>
 
                         <img src="<?= $user->avatar_url ? base_url($user->avatar_url) : base_url('uploads/avatars/fantome.png') ?>" class="avatar">
                        

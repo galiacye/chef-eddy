@@ -71,12 +71,12 @@
                  <?= csrf_field() ?>
                 <button type="submit" class="btn btn-info">Approuver</button>
             </form>
-        <?php } elseif ($recipe->statut === 'Approuvée') { ?>
+        <?php } elseif ($recipe->status === 'Approuvée') { ?>
             <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
                  <?= csrf_field() ?>
                 <button type="submit" class="btn btn-warning">Rejeter</button>
             </form>
-        <?php  } elseif ($recipe->statut === 'Rejetée') { ?>
+        <?php  } elseif ($recipe->status === 'Rejetée') { ?>
             <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
                  <?= csrf_field() ?>
                 <button type="submit" class="btn btn-info">Approuver</button>

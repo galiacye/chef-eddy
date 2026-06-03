@@ -1,7 +1,7 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('title') ?>
-Register
+<title>S'inscrire - Chef Eddy</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
@@ -22,7 +22,7 @@ Register
 order-2 order-md-1   -> sur mobile : position 2 (en dessous)
                        sur desktop : position 1 (à gauche) -->
         <?= form_open_multipart('register') ?>
-
+<!--form_open_miltipart nat ci4 se charge du csrf()-->
         <?php
         $username = [
             'name' => 'username',
@@ -70,10 +70,7 @@ order-2 order-md-1   -> sur mobile : position 2 (en dessous)
             'id' => 'avatar_url',
             'class' => 'form-control w-100',
         ];
-        $rolesOptions = ['' => 'Sélectionnez un rôle'];
-        foreach ($roles as $role) {
-            $rolesOptions[$role->id] = $role->name;
-        }
+      
         ?>
 
         <?= form_fieldset("Vos Informations", ['class' => 'border p-4']) ?>

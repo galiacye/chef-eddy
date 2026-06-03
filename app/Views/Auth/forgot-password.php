@@ -14,7 +14,7 @@
             <h2>Mot de passe oublié</h2>
 
             <?php if (session()->getFlashdata('error')): ?>
-                <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+                <div class="alert alert-danger"><?= esc(session()->getFlashdata('error')) ?></div>
             <?php endif ?>
 
             <?= form_open('forgot-password') ?>
