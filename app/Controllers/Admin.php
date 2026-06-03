@@ -61,7 +61,7 @@ class Admin extends BaseController
         return redirect()->to('dashboard')->with('success', 'Tag ajouté');
     }
 
-    //ici pas de $data car le param est passé directement à la vue,mais c'est pareil
+    //ici pas de $data car le param est passé directement à la vue, mais c'est pareil
     public function usersIndex()
     {
         $users = $this->userModel->findAll();

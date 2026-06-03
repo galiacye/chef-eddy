@@ -1,5 +1,7 @@
 <?= $this->extend('layout') ?>
-
+<?= $this->section('title') ?>
+<title>Favorites</title>
+<?= $this->endSection() ?>
 <?= $this->section('body') ?>
 <div class="container py-4">
 

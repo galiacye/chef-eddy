@@ -1,4 +1,7 @@
 <?= $this->extend('layout') ?>
+<?= $this->section('title') ?>
+<title>Les recettes <?= esc($tag->name) ?></title>
+<?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
 <h2 class="text-center"><?= esc($tag->name) ?></h2>

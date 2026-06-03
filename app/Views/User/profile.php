@@ -1,4 +1,9 @@
 <?= $this->extend('layout') ?>
+
+<?= $this->section('title') ?>
+<title>Profil</title>
+<?= $this->endSection() ?>
+
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('./css/user/profile.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>

@@ -1,4 +1,7 @@
 <?= $this->extend('layout') ?>
+<?= $this->section('title') ?>
+<titre>Tous les Tags</titre>
+<?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
 <h2 class="text-center">Les tags</h2>
