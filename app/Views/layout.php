@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- <meta name="description" content="<?= $this->renderSection('description') ?>">  -->
     <?= $this->renderSection('title') ?>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,29 +26,29 @@
 
 <body>
 
-<?php if (session()->getFlashdata('success')) : ?>
-    <div class="alert alert-success">
-        <?= session()->getFlashdata('success') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('success')) : ?>
+        <div class="alert alert-success">
+            <?= esc(session()->getFlashdata('success')) ?>
+        </div>
+    <?php endif; ?>
 
-<?php if (session()->getFlashdata('error')) : ?>
-    <div class="alert alert-danger">
-        <?= session()->getFlashdata('error') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('error')) : ?>
+        <div class="alert alert-danger">
+            <?= esc(session()->getFlashdata('error')) ?>
+        </div>
+    <?php endif; ?>
 
     <header class="py-3">
         <div class="ban d-flex align-items-center pe-3">
 
-        
+
             <div class="title ps-3">
                 <h1 class="hero-title">Chef Eddy</h1>
             </div>
 
 
             <div class="logo">
-                <img src="<?= base_url('img/logo-chef-transp.png') ?>" class="logo">
+                <img src="<?= base_url('img/logo-chef-transp.png') ?>" class="logo" alt="logo">
             </div>
 
 
@@ -173,7 +173,7 @@
 
                     <?php else: ?>
 
-                    
+
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="<?= base_url('login') ?>">

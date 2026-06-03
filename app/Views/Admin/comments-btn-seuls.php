@@ -7,7 +7,7 @@
 
 <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success">
-        <?= session()->getFlashdata('success') ?>
+        <?= esc(session()->getFlashdata('success')) ?>
     </div>
 <?php endif ?>
 
@@ -19,10 +19,10 @@
 
             <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <!-- user_id est ds $c grâce au join du model-->
-                <p class="username"><a href="<?= base_url('user/profile/') . $c->user_id ?>"><?= $c->username ?></a></p>
+                <p class="username"><a href="<?= base_url('user/profile/') . $c->user_id ?>"><?= esc($c->username) ?></a></p>
                 <!--idem pour recipe_title-->
-                <p class="recipe"><?= $c->recipe_title ?></p>
-                <p class="com-content"><?= $c->content ?></p>
+                <p class="recipe"><?= esc($c->recipe_title) ?></p>
+                <p class="com-content"><?= esc($c->content) ?></p>
 
                 <div class="btn-group mb-2">
 

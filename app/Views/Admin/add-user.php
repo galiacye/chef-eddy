@@ -103,7 +103,7 @@ foreach ($roles as $role) {
 <?= form_fieldset_close() ?>
 
 <div class="container text-center mt-3">
-    <?= form_submit('submit', 'Créer l’utilisateur', ['class' => 'btn btn-info']) ?>
+    <?= form_submit('submit', "Créer l’utilisateur", ['class' => 'btn btn-info']) ?>
 </div>
 
 <?= form_close() ?>

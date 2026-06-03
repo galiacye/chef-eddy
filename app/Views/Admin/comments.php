@@ -42,12 +42,12 @@
         <?php if (!empty($comments)): ?>
             <?php foreach ($comments as $c): ?>
                 <tr> <!--user_id et username appartiennent à $c grâce à la jointure-->
-                    <td><a href="<?= base_url('user/profile/' . $c->user_id) ?>"><?= $c->username ?></a></td>
-                    <td><?= $c->recipe_title ?></td>
-                    <td><?= $c->content ?></td>
-                    <td><?= $c->rating ?>/5</td>
+                    <td><a href="<?= base_url('user/profile/' . $c->user_id) ?>"><?= esc($c->username) ?></a></td>
+                    <td><?= esc($c->recipe_title) ?></td>
+                    <td><?= esc($c->content) ?></td>
+                    <td><?= $c->rating ?>/5</td><!--inutile de protéger quand c'est un entier-->
                     <td>
-                        <span class="badge <?= $c->status === 'approved' ? 'bg-success' : ($c->status === 'pending' ? 'bg-warning text-dark' : 'bg-danger') ?>">
+                        <span class="badge <?= esc($c->status) === 'approved' ? 'bg-success' : ($c->status === 'pending' ? 'bg-warning text-dark' : 'bg-danger') ?>">
                             <?= $c->status ?>
                         </span>
                     </td>
