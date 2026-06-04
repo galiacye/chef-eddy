@@ -20,7 +20,7 @@ class Home extends BaseController
         $tags = $tagModel->findAll();
         $homepageTag = $tagModel->getHomepageTag();
 
-        $recipes = $homepageTag ? $tagModel->getRecipesByTag($homepageTag->id) : $recipeModel->findAll();
+        $recipes = $homepageTag ? $tagModel->getRecipesByTag($homepageTag->id) : $recipeModel->getApprovedRecipes();
         $ingredientModel = model('IngredientModel');
         $ingredients = $ingredientModel->findAll();
 
