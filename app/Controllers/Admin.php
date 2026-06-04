@@ -304,4 +304,5 @@ class Admin extends BaseController
         $this->recipeModel->delete($id);
         return redirect()->to('Admin/recipes-index')->with('success', 'Recette supprimée'); //idem pr recipe: ds vue admin
     }
+    
 }

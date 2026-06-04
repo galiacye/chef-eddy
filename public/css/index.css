@@ -109,7 +109,12 @@ body {
 .btn-chrome:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
 /*/
 
-.card-img-top {
+.img-wrapper {
+  height: 230px;
+  overflow: hidden;
+}
+
+.img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover; /*  contain pour voir l'image entière */
@@ -124,10 +129,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 } */
 
-.img-wrapper {
-  height: 180px;
-  overflow: hidden;
-}
+
 
 .w-custom {
   width: 100%;

@@ -459,3 +459,5 @@ class Recipe extends BaseController
 
     
 }
+'recipes', 'CREATE TABLE `recipes` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `user_id` int(11) NOT NULL,\n  `title` varchar(100) NOT NULL,\n  `image_url` varchar(255) DEFAULT NULL,\n  `prep_time` int(11) DEFAULT NULL,\n  `cook_time` int(11) DEFAULT NULL,\n  `content` text DEFAULT NULL,\n  `portions` int(11) DEFAULT 4,\n  `difficulty` enum(\'facile\',\'moyen\',\'difficile\') DEFAULT \'moyen\',\n  `status` varchar(50) DEFAULT \'pending\',\n  `views` int(11) DEFAULT 0,\n  `created_at` timestamp NULL DEFAULT current_timestamp(),\n  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),\n  PRIMARY KEY (`id`),\n  KEY `user_id` (`user_id`),\n  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE\n) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'
+
