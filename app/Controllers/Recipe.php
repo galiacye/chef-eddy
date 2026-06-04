@@ -53,7 +53,7 @@ class Recipe extends BaseController
         //dd($recipe, $id);
 
         $data = [
-            'recipe'      => $recipe,//déjà récup'
+            'recipe'      => $recipe, //déjà récup'
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
@@ -411,7 +411,7 @@ class Recipe extends BaseController
             //dd($image->isValid(), $image->hasMoved(), $image->getError());
 
             //pour les tables de liaison:
-            $this->model->updateRecipe($id, $data);
+            $this->model->update($id, $data);
             //dd($result, $this->model->db->affectedRows());
             //$this->model->updateRecipe($id, $data);
 
@@ -456,7 +456,21 @@ class Recipe extends BaseController
                     ]);
                 }
             }
-            return redirect()->to('Recipe/recipesIndex')->with('success', 'Recette modifiée avec succès !');
+            //partie ajoutée car les tags s'acumulaient à chaque update
+            $tag_ids = $this->request->getPost('tags');
+            $db->table('recipe_tags')->where('recipe_id', $recipe_id)->delete();
+            if ($tag_ids) {
+                $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
+                foreach ($tag_ids as $tag_id) {
+                    $db->table('recipe_tags')->insert([
+                        'recipe_id' => $recipe_id,
+                        'tag_id'    => $tag_id
+                    ]);
+                }
+            }
+            $user_id = session()->get('user_id');
+            return redirect()->to('profile/' . $user_id)->with('success', 'Recette modifiée avec succès !');
+            // return redirect()->to('Recipe/recipes-index')->with('success', 'Recette modifiée avec succès !');
         }
     }
 

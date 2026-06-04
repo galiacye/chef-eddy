@@ -147,3 +147,20 @@ CREATE TABLE `comments` (
   KEY `recipe_id` (`recipe_id`),
   KEY `user_id` (`user_id`),
   KEY `fk_parent
+
+
+  DELETE FROM recipe_tags 
+WHERE id NOT IN (
+    SELECT MIN(id) FROM recipe_tags GROUP BY recipe_id, tag_id
+);
+-- La sous-requête SELECT MIN(id) ... GROUP BY recipe_id, tag_id dit : 
+-- pour chaque combinaison unique recipe_id + tag_id, garde seulement la ligne avec le plus petit id (la première insérée).
+
+-- MySQL ne permet pas de modifier une table dans une sous-requête qui lit la même table, donc si tu as une erreur il faut l'enrober :
+
+DELETE FROM recipe_tags 
+WHERE id NOT IN (
+    SELECT id FROM (
+        SELECT MIN(id) as id FROM recipe_tags GROUP BY recipe_id, tag_id
+    ) AS tmp
+);
