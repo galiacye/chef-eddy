@@ -40,6 +40,7 @@ $routes->get('Admin/recipes-index', 'Admin::recipesIndex');
 $routes->get('Admin/recipe-details/(:num)', 'Admin::recipeDetails/$1');
 $routes->post('Admin/recipe/remove/(:num)', 'Admin::deleteRecipe/$1'); // pour rejeter une recette
 $routes->post('Admin/recipe/save/(:num)', 'Admin::saveRecipe/$1'); // pour approuver une recette
+$routes->post('Admin/recipe/pending/(:num)', 'Admin::pendingRecipe/$1');
 
 //Admin - Tags
 $routes->post('Admin/add-tag', 'Admin::addTag');

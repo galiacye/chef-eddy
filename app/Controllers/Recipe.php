@@ -27,6 +27,7 @@ class Recipe extends BaseController
 
     public function showRecipe(int $id)
     {
+
         $recipeModel     = model('RecipeModel');
         $tagModel = model('TagModel');
         $ingredientModel = model('IngredientModel');
@@ -34,6 +35,14 @@ class Recipe extends BaseController
         $unitModel = model('UnitModel');
         $commentModel = model('CommentModel');
         $favoriteModel = model('FavoriteModel');
+
+
+        $recipe = $recipeModel->getRecipe($id); // d'abord on récupère
+
+        if (!$recipe || $recipe->status !== 'approved') { //ensuite on vérifie
+            return redirect()->to('/recipe-index')->with('error', 'Recette non disponible.');
+        }
+
 
         $user_id = session()->get('user_id');
         $isFav = false;
@@ -44,7 +53,7 @@ class Recipe extends BaseController
         //dd($recipe, $id);
 
         $data = [
-            'recipe'      => $recipeModel->getRecipe($id),
+            'recipe'      => $recipe,//déjà récup'
             'tags'        => $tagModel->getRecipeTags($id),
             'ingredients' => $ingredientModel->getRecipeIngredients($id),
             'categories'  => $categoryModel->getRecipeCategory($id), // une recette peut avoir plusieurs catégories
@@ -57,13 +66,13 @@ class Recipe extends BaseController
         return view('Recipe/show-recipe', $data);
     }
 
-    
+
 
     public function recipeIndex(): string
     { //avc ci4 les clés du tableau $data deviennent le nom des variables ds la vue:
         //$recipes = $this->model->getRecipeAuthor();
         //$data = ['recipes' => $recipes]; équivaut à :
-        $data['recipes'] = $this->model->getRecipesWithAuthor();
+        $data['recipes'] = $this->model->getApprovedRecipes();
         return view('Recipe/recipe-index', $data);
     }
 
@@ -174,7 +183,7 @@ class Recipe extends BaseController
                         'categories_ing_db' => (new IngredientModel())->getCategory()
                         //?
                     ]);
-                } 
+                }
                 // Gestion de l'image
                 $image = $this->request->getFile('image_url');
                 if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
@@ -203,7 +212,7 @@ class Recipe extends BaseController
                     'views'           => 0,
                 ];
 
-//gestion des tables de liaison:
+                //gestion des tables de liaison:
                 $recipe_id = $this->model->createRecipe($data); //ici insertion en base
                 $db = \Config\Database::connect();
                 $category_id = $this->request->getPost('category_id');
@@ -264,9 +273,9 @@ class Recipe extends BaseController
 
 
                 return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
-            }else {
-                    return redirect()->to('/')->with('error', 'Accès refusé.');
-                }
+            } else {
+                return redirect()->to('/')->with('error', 'Accès refusé.');
+            }
         }
     }
 
@@ -456,8 +465,4 @@ class Recipe extends BaseController
         $this->model->delete($id);
         return redirect()->to('Admin/recipes-index')->with('success', 'Recette supprimée');
     }
-
-    
 }
-'recipes', 'CREATE TABLE `recipes` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `user_id` int(11) NOT NULL,\n  `title` varchar(100) NOT NULL,\n  `image_url` varchar(255) DEFAULT NULL,\n  `prep_time` int(11) DEFAULT NULL,\n  `cook_time` int(11) DEFAULT NULL,\n  `content` text DEFAULT NULL,\n  `portions` int(11) DEFAULT 4,\n  `difficulty` enum(\'facile\',\'moyen\',\'difficile\') DEFAULT \'moyen\',\n  `status` varchar(50) DEFAULT \'pending\',\n  `views` int(11) DEFAULT 0,\n  `created_at` timestamp NULL DEFAULT current_timestamp(),\n  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),\n  PRIMARY KEY (`id`),\n  KEY `user_id` (`user_id`),\n  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE\n) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci'
-

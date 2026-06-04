@@ -291,18 +291,27 @@ class Admin extends BaseController
     {
         $recipe = $this->recipeModel->find($id);
         $data = [
-            'status' => 'Approuvée'
+            'status' => 'approved'
         ];
         $this->recipeModel->update($id, $data);
         return redirect()->to('Admin/recipes-index')->with('success', 'Recette validée');
     }
 
-
+    public function rejectRecipe(int $id)
+    {
+        $this->recipeModel->update($id, ['status' => 'rejected']);
+        return redirect()->to('Admin/recipes-index')->with('success', 'Recette rejetée');
+    }
 
     public function deleteRecipe(int $id)
     {
         $this->recipeModel->delete($id);
         return redirect()->to('Admin/recipes-index')->with('success', 'Recette supprimée'); //idem pr recipe: ds vue admin
     }
-    
+
+    public function pendingRecipe(int $id)
+    {
+        $this->recipeModel->update($id, ['status' => 'pending']);
+        return redirect()->to('Admin/recipes-index')->with('success', 'Recette remise en attente');
+    }
 }

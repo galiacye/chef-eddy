@@ -47,6 +47,7 @@ class TagModel extends Model
             ->join('recipe_tags', 'tags.id = recipe_tags.tag_id')
             ->join('recipes', 'recipes.id = recipe_tags.recipe_id')
             ->where('recipe_tags.tag_id', $tag_id)
+            ->where('recipes.status', 'approved')
             ->orderBy('recipes.id', 'RANDOM')
             //->limit($limit)
             ->get()->getResult();
