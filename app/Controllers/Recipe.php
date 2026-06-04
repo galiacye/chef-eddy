@@ -155,7 +155,7 @@ class Recipe extends BaseController
                     ],
                     "difficulty" => [
                         "label" => "Difficulté",
-                        "rules" => "required|in_list[facile,moyen,difficile]",
+                        "rules" => "required|in_list[easy,medium,difficult]",
                         "errors" => [
                             "required" => "La difficulté est requise",
                             "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
@@ -174,9 +174,9 @@ class Recipe extends BaseController
                         "rules" => "permit_empty",
                     ],
                 ];
-                dd($this->request->getPost('difficulty'));
+                //dd($this->request->getPost('difficulty'));
                 if (!$this->validate($rules)) {
-                    dd($this->validator->getErrors());
+                    //dd($this->validator->getErrors());
                     return view('Recipe/create-recipe', [
                         'errors' => $this->validator->getErrors(),
                         'tags'       => (new TagModel())->findAll(),
@@ -216,7 +216,7 @@ class Recipe extends BaseController
 
                 //gestion des tables de liaison:
                 $recipe_id = $this->model->createRecipe($data); //ici insertion en base
-                dd($recipe_id);
+                //dd($recipe_id);
                 $db = \Config\Database::connect();
                 $category_id = $this->request->getPost('category_id');
                 if ($category_id) {
