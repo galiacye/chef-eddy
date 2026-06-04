@@ -174,7 +174,9 @@ class Recipe extends BaseController
                         "rules" => "permit_empty",
                     ],
                 ];
+                dd($this->request->getPost('difficulty'));
                 if (!$this->validate($rules)) {
+                    dd($this->validator->getErrors());
                     return view('Recipe/create-recipe', [
                         'errors' => $this->validator->getErrors(),
                         'tags'       => (new TagModel())->findAll(),
@@ -214,6 +216,7 @@ class Recipe extends BaseController
 
                 //gestion des tables de liaison:
                 $recipe_id = $this->model->createRecipe($data); //ici insertion en base
+                dd($recipe_id);
                 $db = \Config\Database::connect();
                 $category_id = $this->request->getPost('category_id');
                 if ($category_id) {
