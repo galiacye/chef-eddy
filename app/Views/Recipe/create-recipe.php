@@ -114,7 +114,7 @@ foreach ($categories as $category) {
                 <div class="form-check">
                     <input
                         type="checkbox"
-                        name="tags"
+                        name="tags[]"
                         value="<?= (int)$tag->id ?>"
                         id="tag_<?= (int)$tag->id ?>"
                         class="form-check-input"

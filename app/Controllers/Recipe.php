@@ -226,7 +226,9 @@ class Recipe extends BaseController
                     ]);
                 }
                 $tag_ids = $this->request->getPost('tags');
+                 //dd($tag_ids);
                 if ($tag_ids) {
+                   
                     // force en tableau
                     $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                     foreach ($tag_ids as $tag_id) {
