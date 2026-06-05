@@ -19,7 +19,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
     <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
+    <style>
+        #toolbarContainer {
+            display: none !important;
+        }
 
+        #debug-bar {
+            display: none !important;
+        }
+    </style>
     <?= $this->renderSection('custom-css') ?>
 
 </head>
