@@ -18,6 +18,30 @@
 body {
     background-color: rgb(248, 240, 229);
 }
+
+
+.allergen-check {
+    display: none; /* cache la vraie checkbox */
+}
+.allergen-label {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1.3px solid #e8735a;
+    color: #5b3a02;
+    background-color: bisque;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+/*selecteur de frère adjacent*/
+.allergen-check:checked + .allergen-label {
+    background-color: rgb(250, 180, 94);
+    color: white;
+}
+
+
+
 .search-box1, .with, .without {
     border: 1px solid rgb(50, 192, 180);
     border-radius: 10px;

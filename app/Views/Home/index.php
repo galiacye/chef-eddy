@@ -15,49 +15,34 @@
 <div class="search-wrapper">
 
     <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
-        <input type="text" name="search" class="form-control" placeholder="Rechercher une recette">
+        <input type="text" 
+               name="search" 
+               class="form-control" 
+               placeholder="Rechercher une recette ou un ingrédient">
     </div>
 
     <div class="d-flex justify-content-center mb-2">
         <button type="button" class="btn btn-sm btn-outline-secondary" 
                 data-bs-toggle="collapse" data-bs-target="#filtres">
-            Filtres avancés 
+            Filtres 
         </button>
     </div>
 
-    <div class="collapse" id="filtres">
-
-        <p class="text-muted mb-1 mt-2">Avec ces ingrédients :</p>
-        <div class="d-flex flex-wrap gap-2 mb-3">
-            <?php foreach ($ingredients as $ingr): ?>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox"
-                           name="ingredient[]"
-                           value="<?= esc($ingr->name) ?>"
-                           id="ing_<?= esc($ingr->name) ?>">
-                    <label class="form-check-label" for="ing_<?= esc($ingr->name) ?>">
-                        <?= esc($ingr->name) ?>
-                    </label>
-                </div>
-            <?php endforeach ?>
-        </div>
-
-        <p class="text-muted mb-1">Sans ces catégories :</p>
-        <div class="d-flex flex-wrap gap-2 mb-3">
-            <?php foreach ($categories as $cat): ?>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox"
-                           name="without[]"
-                           value="<?= esc($cat->name) ?>"
-                           id="cat_<?= esc($cat->name) ?>">
-                    <label class="form-check-label" for="cat_<?= esc($cat->name) ?>">
-                        <?= esc($cat->name) ?>
-                    </label>
-                </div>
-            <?php endforeach ?>
-        </div>
-
+   <div class="collapse" id="filtres">
+    <p class="text-muted mb-2 mt-2 text-center">Exclure :</p>
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+        <?php foreach ($categories as $cat): ?>
+            <input class="allergen-check" 
+                   type="checkbox"
+                   name="without[]"
+                   value="<?= esc($cat->name) ?>"
+                   id="cat_<?= esc($cat->name) ?>">
+            <label class="allergen-label" for="cat_<?= esc($cat->name) ?>">
+                 <?= esc($cat->name) ?>
+            </label>
+        <?php endforeach ?>
     </div>
+</div>
 
     <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-search w-100">
@@ -68,14 +53,6 @@
 </div>
 </div>
 <?= form_close() ?>
-
-
-
-
-
-
-
-
 
   
     <div class="row mt-4 w-100 mx-0">

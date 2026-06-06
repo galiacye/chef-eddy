@@ -171,16 +171,62 @@ class SearchModel extends Model
     //     return $query->get()->getResultObject();
     // }
 
-    public function searchWithIngredients(array $ingredientNames): array
+    // public function searchWithIngredients(array $ingredientNames): array
+    // {
+    //     return $this->db->table('recipes')
+    //         ->select('recipes.id, recipes.title, recipes.image_url, recipes.difficulty, recipes.prep_time, recipes.cook_time, recipes.portions')
+    //         ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id')
+    //         ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
+    //         ->whereIn('ingredients.name', $ingredientNames)
+    //         ->groupBy('recipes.id')
+    //         ->having('COUNT(DISTINCT ingredients.name)', count($ingredientNames))
+    //         ->where('recipes.status', 'approved')
+    //         ->get()->getResultObject();
+    // }
+
+
+    // soit il tape un nom de recette, ça roule on touche pas soit il tape un ingredient ça suffit 
+    //on est pas dans le frigo pour l'instant, et ensuite sur les recettes tapées dans l'un de ces 
+    //deux champs on veut filtrer 2 ou 3 allergènes
+
+    public function search(string $search = '', array $without = [])
     {
-        return $this->db->table('recipes')
-            ->select('recipes.id, recipes.title, recipes.image_url, recipes.difficulty, recipes.prep_time, recipes.cook_time, recipes.portions')
-            ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id')
-            ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
-            ->whereIn('ingredients.name', $ingredientNames)
-            ->groupBy('recipes.id')
-            ->having('COUNT(DISTINCT ingredients.name)', count($ingredientNames))
+        $select = 'recipes.id, recipes.title, recipes.image_url, 
+               recipes.difficulty, recipes.prep_time, 
+               recipes.cook_time, recipes.portions';
+
+        // On cherche par titre ou par ingrédient en même temps
+        $query = $this->db->table('recipes')
+            ->select($select)
+            ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id', 'left')
+            ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id', 'left')
             ->where('recipes.status', 'approved')
-            ->get()->getResultObject();
+            ->groupBy('recipes.id');
+
+        if (!empty($search)) {
+            $query->groupStart() //groupstart/end = parenthèse ci4 pour sql:
+                //WHERE (recipes.title LIKE '%poulet%' OR ingredients.name LIKE '%poulet%')
+                //AND recipes.id NOT IN (...)
+                ->like('recipes.title', $search)
+                ->orLike('ingredients.name', $search)
+                ->groupEnd();
+        }
+
+        // Ensuite on filtre les allergènes
+        if (!empty($without)) {
+            $excludeIds = $this->db->table('recipe_ingredients')
+                ->select('recipe_ingredients.recipe_id')
+                ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
+                ->whereIn('ingredients.category', $without)
+                ->get()->getResultArray();
+
+            $excludeIds = array_unique(array_column($excludeIds, 'recipe_id'));
+
+            if (!empty($excludeIds)) {
+                $query->whereNotIn('recipes.id', $excludeIds);
+            }
+        }
+
+        return $query->get()->getResultObject();
     }
 }
