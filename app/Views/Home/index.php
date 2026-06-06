@@ -10,51 +10,72 @@
 
 <div class="container-fluid px-0">
 
-    <?= form_open('search', ['method' => 'GET']) ?>
+<?= form_open('search', ['method' => 'GET']) ?>
+<div class="d-flex justify-content-center mt-3">
+<div class="search-wrapper">
 
-    <!-- SEARCH -->
-    <div class="d-flex justify-content-center mt-3">
+    <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
+        <input type="text" name="search" class="form-control" placeholder="Rechercher une recette">
+    </div>
 
-    <div class="search-wrapper">
+    <div class="d-flex justify-content-center mb-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" 
+                data-bs-toggle="collapse" data-bs-target="#filtres">
+            Filtres avancés 
+        </button>
+    </div>
 
-        <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
-            <input type="text"
-                name="search"
-                class="form-control"
-                placeholder="Rechercher une recette">
+    <div class="collapse" id="filtres">
+
+        <p class="text-muted mb-1 mt-2">Avec ces ingrédients :</p>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            <?php foreach ($ingredients as $ingr): ?>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                           name="ingredient[]"
+                           value="<?= esc($ingr->name) ?>"
+                           id="ing_<?= esc($ingr->name) ?>">
+                    <label class="form-check-label" for="ing_<?= esc($ingr->name) ?>">
+                        <?= esc($ingr->name) ?>
+                    </label>
+                </div>
+            <?php endforeach ?>
         </div>
 
-        <div class="filters d-flex gap-2 mb-3">
-
-            <div class="with filter-half d-flex align-items-center gap-1 ">
-                <select name="ingredient" class="form-select">
-                    <option value="">Avec</option>
-                    <?php foreach ($ingredients as $ingr): ?>
-                        <option value="<?= esc($ingr->name) ?>"><?= esc($ingr->name) ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-
-            <div class="without filter-half d-flex align-items-center gap-1">
-                <select name="without" class="form-select">
-                    <option value="">Sans</option>
-                    <?php foreach ($categories as $cat): ?>
-                        <option value="<?= esc($cat->name) ?>"><?= esc($cat->name) ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-
+        <p class="text-muted mb-1">Sans ces catégories :</p>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            <?php foreach ($categories as $cat): ?>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                           name="without[]"
+                           value="<?= esc($cat->name) ?>"
+                           id="cat_<?= esc($cat->name) ?>">
+                    <label class="form-check-label" for="cat_<?= esc($cat->name) ?>">
+                        <?= esc($cat->name) ?>
+                    </label>
+                </div>
+            <?php endforeach ?>
         </div>
-        <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-search w-100">
+
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-search w-100">
             <i class="bi bi-search"></i> Rechercher
         </button>
-        </div>
     </div>
 
-    </div>
+</div>
+</div>
+<?= form_close() ?>
 
-    <?= form_close() ?>
+
+
+
+
+
+
+
 
   
     <div class="row mt-4 w-100 mx-0">
