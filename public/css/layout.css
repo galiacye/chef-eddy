@@ -34,6 +34,14 @@
   src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format("truetype");
 }
 
+#toolbarContainer {
+  display: none !important;
+}
+
+#debug-bar {
+  display: none !important;
+}
+
 .ban {
   position: relative;
   display: flex;
@@ -42,7 +50,7 @@
   gap: 140px;
   height: 100px;
   overflow: hidden;
- /* background: linear-gradient(
+  /* background: linear-gradient(
     145deg,
     #0a0a0a 0%,
     #1c1c1c 40%,
@@ -164,7 +172,7 @@
 }
 
 .ban h1,
-.ban ,
+.ban,
 .ban .eddy,
 .ban .txt {
   position: relative;
@@ -182,9 +190,9 @@
     height: 125px;
   }
   .logo {
-  height: 125px;
-  border-radius: 10px;
-}
+    height: 125px;
+    border-radius: 10px;
+  }
   .gato {
     height: 120px;
   }
@@ -194,16 +202,16 @@
   .ban {
     height: 180px;
   }
-    .ban h1 {
+  .ban h1 {
     font-size: 4rem;
   }
   .eddy {
     height: 160px;
   }
   .logo {
-  height: 160px;
-  border-radius: 10px;
-}
+    height: 160px;
+    border-radius: 10px;
+  }
   .gato {
     height: 160px;
   }
