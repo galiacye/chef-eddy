@@ -10,9 +10,9 @@
 
 <?= $this->section('body') ?>
 
-<h1 class="text-center mt-4">S'inscrire</h1>
+<h1 class="text-center mt-2">S'inscrire</h1>
 
-<div class="row g-2 mt-3">
+<div class="row align-items-center g-2 mt-0">
 
     <div class="col-12 col-md-6 order-2 order-md-1 formul  d-flex flex-column align-items-center justify-content-center">
         <!--order vient de flexbox donc native pour bs
@@ -99,7 +99,7 @@ order-2 order-md-1   -> sur mobile : position 2 (en dessous)
         <?= form_fieldset_close() ?>
 
         <div class="container text-center mt-3">
-            <?= form_submit('submit', 'Inscription', ['class' => 'btn btn-success']) ?>
+            <?= form_submit('submit', 'Inscription', ['class' => 'btn btn-custom']) ?>
         </div>
 
         <?= form_close() ?>
