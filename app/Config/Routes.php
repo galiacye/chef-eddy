@@ -10,9 +10,9 @@ $routes->setAutoRoute(false);
 //home
 $routes->get('/', 'Home::index');
 $routes->get('test', 'Home::salut');
-$routes->get('afficher','Home::afficher');
-$routes->get('monpdf','Home::creerPdf');
-$routes->get('upload','Article::upload');
+$routes->get('afficher', 'Home::afficher');
+$routes->get('monpdf', 'Home::creerPdf');
+$routes->get('upload', 'Article::upload');
 
 
 // Auth
@@ -33,7 +33,7 @@ $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
 $routes->match(['get', 'post'], 'Admin/add-user', 'Admin::addUser');
 $routes->post('Admin/changeUserRole/(:num)', 'Admin::changeUserRole/$1');
 $routes->get('Admin/deleteUser/(:num)', 'Admin::deleteUser/$1');
-$routes->get('delete-user/(:num)', 'Admin::deleteUser/$1'); 
+$routes->get('delete-user/(:num)', 'Admin::deleteUser/$1');
 
 // Admin - recipes
 $routes->get('Admin/recipes-index', 'Admin::recipesIndex');
@@ -102,3 +102,15 @@ $routes->get('role', 'Role::getRole');
 $routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
 $routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
 
+//the meal db
+//en CI4 l'ordre des routes peut avoir de l'importance:
+// d'abord la route la plus spécifique
+$routes->get('cuisine-du-monde/recette/(:num)',  'World::detail/$1');
+
+// puis la plus générale ((:segment) accepte espaces et tout)
+$routes->get('cuisine-du-monde/(:segment)',      'World::byCountry/$1');
+
+// enfin la page d'accueil
+$routes->get('cuisine-du-monde','World::worldIndex');
+//Comme ça /recette/123 est capturé par la première route, et /Cape Verdian par la deuxième
+//si on met (:segment) en premier, il va intercepter /recette/123 avant que la route recette ait une chance de matcher.
