@@ -12,7 +12,7 @@ document.querySelector('.ql-list[value="ordered"]').setAttribute('title', 'Liste
 document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste à puces');
 
 // Récupérer le contenu existant si retour de validation
-const existingContent = document.getElementById('contenu').value;
+const existingContent = document.getElementById('content').value;
 if (existingContent) {
     quill.root.innerHTML = existingContent;
 }
@@ -25,5 +25,5 @@ document.getElementById('form').addEventListener('submit', (e) => {
         alert('Veuillez écrire votre recette avant d\'envoyer');
         return;
     }
-    document.getElementById('contenu').value = quill.root.innerHTML;
+    document.getElementById('content').value = quill.root.innerHTML;
 });

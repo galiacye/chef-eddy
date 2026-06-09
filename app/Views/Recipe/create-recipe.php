@@ -147,19 +147,15 @@ foreach ($categories as $category) {
                     'type'        => 'hidden',
                     'id'          => 'ing-unit-0'
                 ];
-                ?>
-
-                <!-- Champ visible unique -->
-                <input type="text"
+                ?>     <!-- champ unique visible:-->
+               <input type="text"  
                     class="form-control w-50 ingredient-input"
                     placeholder="Ex: 200g farine, 2 oeufs..."
                     data-index="0">
-
-                <!-- Champs cachés qui stockent les 3 valeurs -->
+                <!-- champs cachés qui stockent les 3 valeurs -->
                 <?= form_input($ing_name) ?>
                 <?= form_input($ing_qty) ?>
                 <?= form_input($ing_unit) ?>
-
                 <!-- Aperçu du parsing -->
                 <small class="text-muted parsing-preview w-50"></small>
 
@@ -195,13 +191,10 @@ foreach ($categories as $category) {
         <div id="editor"></div>
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
         <!--Sans esc un utilisateur peut casser l’attribut HTML avec des guillemets-->
-
         <button type="submit" class="btn btn-primary">Envoyer</button>
-
     </div>
 </div>
 <?= form_close() ?>
-
 <?= $this->endSection() ?>
 <?= $this->section('customJs') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
@@ -210,7 +203,6 @@ foreach ($categories as $category) {
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
 //JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le JS.
-
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>

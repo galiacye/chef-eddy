@@ -1,0 +1,8 @@
+Propriété CSS transform
+Baseline Large disponibilité 
+    
+La propriété CSS transform permet de faire pivoter, redimensionner, incliner ou déplacer un élément. Elle modifie l'espace de coordonnées du modèle de mise en forme visuelle en CSS.
+Si la propriété est différente de none, un contexte d'empilement sera créé. Dans ce cas, l'élément agira comme le bloc englobant pour les éléments qu'il contient et qui ont position: fixed; ou position: absolute;.
+Vous pouvez également utiliser les propriétés de transformation individuelles : translate, rotate et scale. Ces propriétés sont appliquées dans l'ordre suivant : translate, rotate, scale et enfin transform.
+Attention : Seuls certains éléments peuvent être transformés. Les éléments dont la disposition est gérée avec des boîtes en ligne non-remplacées, des colonnes de tableau ou des groupes de colonnes de tableau ne peuvent pas être transformés.
+(source mdn )

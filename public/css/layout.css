@@ -59,11 +59,11 @@
   background-color: black;
 }
 
-/* couche chrome argenté incliné */
+/*  argenté incliné */
 .ban::before {
   content: "";
   position: absolute;
-  inset: -40%;
+  inset: -40%;/*effet incliné*/
   background: linear-gradient(
     135deg,
     rgba(180, 180, 180, 0.15) 0%,
@@ -75,8 +75,7 @@
   filter: blur(10px);
   pointer-events: none;
 }
-
-/* effet glossy chrome animé */
+/* effet reflet brillant qui passe */
 .ban::after {
   content: "";
   position: absolute;
@@ -85,15 +84,16 @@
     120deg,
     transparent 0%,
     rgba(255, 255, 255, 0.08) 45%,
-    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.45) 50%,/*plus clair au milieu*/
     rgba(255, 255, 255, 0.08) 55%,
     transparent 100%
   );
+  /*CSS translateX() repositionne un élément horizontalement sur le plan 2D.*/
   transform: translateX(-100%) rotate(8deg);
   animation: shine 5s infinite linear;
   pointer-events: none;
 }
-
+/* CSS rotate() fait pivoter un élément autour d'un point fixe du plan 2D, sans le déformer.*/
 @keyframes shine {
   0% {
     transform: translateX(-120%) rotate(8deg);
