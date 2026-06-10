@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Chef Eddy Recettes ">
+    <meta name="description" content="<?= $this->renderSection('meta_description') ?>">
     <?= $this->renderSection('description') ?>
     <?= $this->renderSection('title') ?>
 <!-- lien vers le framework CSS Bootstrap 5.3.2 -->
