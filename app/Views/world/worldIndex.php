@@ -5,7 +5,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/recipes/crecipe.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/recipes/recipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>

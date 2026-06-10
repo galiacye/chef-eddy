@@ -19,6 +19,17 @@ class Search extends BaseController
         $this->model = Model('SearchModel');
     }
 
+
+    public function search()
+    {
+        $search  = $this->request->getGet('search') ?? '';
+        $without = array_filter((array)($this->request->getGet('without') ?? []));
+
+        $recipes = $this->model->search($search, $without);
+
+        return view('Search/results', ['recipes' => $recipes]);
+    }
+
     // public function search()
     // {
     //     $search     = $this->request->getGet('search');
@@ -41,28 +52,19 @@ class Search extends BaseController
     // public function search()
     // {
     //     $search      = $this->request->getGet('search');
-    //     //l'opérateur de coalescence nulle ?? : isset($a) ? $a : $b
+        //l'opérateur de coalescence nulle ?? : isset($a) ? $a : $b
     //     $ingredients = array_filter((array)($this->request->getGet('ingredient') ?? []));//(array) force en tab car on va tomber sur des strings
-    //     //si rien n'est coché renvoie un tab vide
+        //si rien n'est coché renvoie un tab vide
     //     $without     = array_filter((array)($this->request->getGet('without') ?? []));
-    //     //dans la check-box array_filter enlève les vides ""
+         //dans la check-box array_filter enlève les vides ""
     //     $recipes = match (true) {
-    //         !empty($ingredients) => $this->model->searchWithIngredients($ingredients),
-    //         !empty($search)      => $this->model->searchRecipe($search),
-    //         !empty($without)     => $this->model->searchWithoutCategories($without),
+    //      /   !empty($ingredients) => $this->model->searchWithIngredients($ingredients),
+    //      /   !empty($search)      => $this->model->searchRecipe($search),
+    //       /  !empty($without)     => $this->model->searchWithoutCategories($without),
     //         default              => []
     //     };
 
     //     return view('Search/results', ['recipes' => $recipes]);
     // }
 
-    public function search()
-    {
-        $search  = $this->request->getGet('search') ?? '';
-        $without = array_filter((array)($this->request->getGet('without') ?? []));
-
-        $recipes = $this->model->search($search, $without);
-
-        return view('Search/results', ['recipes' => $recipes]);
-    }
 }

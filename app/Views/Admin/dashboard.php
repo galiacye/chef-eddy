@@ -17,7 +17,7 @@
 
     <h1 class="dash-title">Tableau de bord</h1>
 
-    <!-- Stats . Entiers esc inutile-->
+    <!-- Stats . entiers esc inutile-->
     <div class="stats-row">
         <div class="stat-card">
             <span class="stat-number"><?= $nb_users ?></span>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <!-- Nav cards -->
+    <!-- nav cards -->
     <div class="nav-grid">
         <a href="Admin/users-index" class="nav-card">
             <span class="nav-icon"></span>
@@ -57,7 +57,7 @@
         </a>
     </div>
 
-    <!-- Homepage tag -->
+    <!-- homepage tag -->
     <div class="tag-panel">
         <div class="tag-panel-header">
             <span class="tag-panel-icon"></span>

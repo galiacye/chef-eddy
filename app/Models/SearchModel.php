@@ -211,8 +211,7 @@ class SearchModel extends Model
                 ->orLike('ingredients.name', $search)
                 ->groupEnd();
         }
-
-        // Ensuite on filtre les allergènes
+        // Ensuite on filtre les ids à exclure
         if (!empty($without)) {
             $excludeIds = $this->db->table('recipe_ingredients')
                 ->select('recipe_ingredients.recipe_id')
@@ -226,7 +225,6 @@ class SearchModel extends Model
                 $query->whereNotIn('recipes.id', $excludeIds);
             }
         }
-
         return $query->get()->getResultObject();
     }
 }
