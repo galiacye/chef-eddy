@@ -23,7 +23,7 @@ class Admin extends BaseController
     public function __construct()
     {
         helper('form');
-        //nom de var plus explicite que juste model car sont plusieurs
+     
         $this->userModel = Model('UserModel');
         $this->roleModel = Model('RoleModel');
         $this->recipeModel = Model('RecipeModel');
