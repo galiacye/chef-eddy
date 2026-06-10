@@ -66,7 +66,7 @@ if ($user_id) {
         <div class="ingredients-grid">
             <div class="portions-control">
                 <label>Portions :</label>
-                <button type="button" id="moins">-</button>
+                <button type="button" id="moins">- </button>
                 <span id="portions"><?= esc($recipe->portions) ?></span>
                 <button type="button" id="plus">+</button>
             </div>
@@ -75,6 +75,7 @@ if ($user_id) {
                     <b><?= esc($ingredient->name) ?></b>
                     <div>
                         <span class="ingredient-qty" data-base="<?= $ingredient->quantity ?>">
+            <!-- si entier affiche entier sinon affiche la virgule-->
                             <?= ($ingredient->quantity == (int)$ingredient->quantity) ? (int)$ingredient->quantity : $ingredient->quantity ?>
                         </span>
                     </div>
