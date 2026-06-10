@@ -9,11 +9,11 @@ class World extends BaseController
     // url de base de l'API TheMealDB +clé gratuite 1
     private string $baseUrl  = 'https://www.themealdb.com/api/json/v1/1/';
 
-    // Pays exclus de la liste (cuisine française et entrées sans catégorie)
+    // pays exclus de la liste (cuisine française et entrées sans catégorie)
     private array  $excluded = ['French', 'Unknown'];
 
     /**
-     * Page principale : affiche la liste des pays disponibles
+     * page principale : affiche la liste des pays disponibles
      * GET /cuisine-du-monde
      */
     public function worldIndex(): string
@@ -32,18 +32,18 @@ class World extends BaseController
             return view('world/worldIndex', ['countries' => $countries]);
 
         } catch (\Exception $e) {
-            // En cas d'absence de connexion ou d'erreur API
+            //  cas d'absence de connexion ou d'erreur API
             return view('world/error');
         }
     }
 
     /**
-     * Affiche les recettes d'un pays donné
+     * affiche les recettes d'un pays donné
      * GET /cuisine-du-monde/(:alpha)
      */
     public function byCountry(string $country): string
     {
-        // Échappement du paramètre reçu depuis l'URL
+        // on echappe le param reçu depuis l'url
         $country = esc($country);
 
         try {
@@ -51,8 +51,9 @@ class World extends BaseController
             $response = $client->get($this->baseUrl . 'filter.php?a=' . urlencode($country));
             $data     = json_decode($response->getBody(), true);
 
-            // Si aucune recette trouvée, on passe un tableau vide
-            $meals = $data['meals'] ?? [];
+            // si aucune recette trouvée, on passe un tableau vide
+            $meals = $data['meals'] ?? [];//opérateur de coeallescence nulle:
+            //si il existe et n'est pas nul sinon tab vide
 
             return view('world/results', [
                 'country' => $country,
@@ -76,6 +77,8 @@ class World extends BaseController
             $data     = json_decode($response->getBody(), true);
 
             $meal = $data['meals'][0] ?? null;
+            //idem pour le 1er elem du tab meal , ici ça parait redondant de dire
+            //si c'est null la valeur par défaut est null mais c'est surtout pour éviter les erreurs.
 
             // Si l'id ne correspond à aucune recette
             if (!$meal) {
@@ -85,7 +88,7 @@ class World extends BaseController
             return view('world/detail', ['meal' => $meal]);
 
         } catch (\CodeIgniter\Exceptions\PageNotFoundException $e) {
-            // On laisse CI4 gérer le 404 normalement
+            //  404 par CI4
             throw $e;
         } catch (\Exception $e) {
             return view('world/error');
