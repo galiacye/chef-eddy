@@ -6,10 +6,10 @@ use App\Controllers\BaseController;
 
 class World extends BaseController
 {
-    // URL de base de l'API TheMealDB (clé gratuite "1")
+    // url de base de l'API TheMealDB +clé gratuite 1
     private string $baseUrl  = 'https://www.themealdb.com/api/json/v1/1/';
 
-    // Pays exclus de la liste (cuisine locale + entrées sans catégorie)
+    // Pays exclus de la liste (cuisine française et entrées sans catégorie)
     private array  $excluded = ['French', 'Unknown'];
 
     /**
@@ -65,7 +65,7 @@ class World extends BaseController
     }
 
     /**
-     * Affiche le détail d'une recette via son ID TheMealDB
+     * affiche le détail d'une recette via son id TheMealDB
      * GET /cuisine-du-monde/recette/(:num)
      */
     public function detail(int $id): string
@@ -77,7 +77,7 @@ class World extends BaseController
 
             $meal = $data['meals'][0] ?? null;
 
-            // Si l'ID ne correspond à aucune recette
+            // Si l'id ne correspond à aucune recette
             if (!$meal) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
