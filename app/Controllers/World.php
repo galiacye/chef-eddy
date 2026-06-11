@@ -9,11 +9,11 @@ class World extends BaseController
     // url de base de l'API TheMealDB +clé gratuite 1
     private string $baseUrl  = 'https://www.themealdb.com/api/json/v1/1/';
 
-    // pays exclus de la liste (cuisine française et entrées sans catégorie)
+    // pays exclus (cuisine française et entrées sans catégorie)
     private array  $excluded = ['French', 'Unknown'];
-
+//propriété de classe
     /**
-     * page principale : affiche la liste des pays disponibles
+     * page principale : affiche la liste des pays
      * GET /cuisine-du-monde
      */
     public function worldIndex(): string
@@ -23,10 +23,11 @@ class World extends BaseController
             $response = $client->get($this->baseUrl . 'list.php?a=list');
             $data     = json_decode($response->getBody(), true);
 
-            // On filtre les pays exclus
+            // on filtre les pays exclus
             $countries = array_filter(
                 $data['meals'] ?? [],
-                fn($c) => !in_array($c['strArea'], $this->excluded)
+                fn($c) => !in_array($c['strArea'], $this->excluded)//propriété de classe d'ou $this- 
+            //si var interne à la méthode serait $excluded
             );
 
             return view('world/worldIndex', ['countries' => $countries]);
