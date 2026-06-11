@@ -23,7 +23,7 @@ class Admin extends BaseController
     public function __construct()
     {
         helper('form');
-     
+
         $this->userModel = Model('UserModel');
         $this->roleModel = Model('RoleModel');
         $this->recipeModel = Model('RecipeModel');
@@ -31,10 +31,8 @@ class Admin extends BaseController
         $this->categoryModel = Model('CategoryModel');
         $this->tagModel = Model('TagModel');
     }
-
     public function dashboard()
     {
-
         return view('Admin/dashboard', [
             'nb_users' => $this->userModel->countAll(),
             'nb_recipes' => $this->recipeModel->countAll(), // countAll devient countAllResults derrière un where:
@@ -43,7 +41,6 @@ class Admin extends BaseController
             'homepageTag'       => $this->tagModel->getHomepageTag()
         ]);
     }
-
     public function setHomepageTag()
     {
         $tag_id = $this->request->getPost('tag_id');

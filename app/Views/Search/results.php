@@ -7,7 +7,7 @@
 <?php else: ?>
     <div class="row">
         <?php foreach($recipes as $recipe): ?>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 col-lg-3 mb-4">
                 <div class="card">
                     <img src="<?= base_url($recipe->image_url ?? 'img/default.jpg') ?>" class="card-img-top">
                         <div class="card-body">

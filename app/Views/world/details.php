@@ -13,7 +13,6 @@
 
     <div class="banner">
         <div class="banner-left">
-
          <!-- Tags : pays et catégorie TheMealDB  -->
             <div class="tags">
                 <span class="tag"><?= esc($meal['strArea']) ?></span><!--clé du tab json de l'api-->
@@ -26,7 +25,6 @@
              <!--l'img hebergée par l'api-->
                 <img src="<?= esc($meal['strMealThumb']) ?>" class="recipe-img" alt="<?= esc($meal['strMeal']) ?>">
             <?php endif ?>
-
         </div>
     </div>
 
@@ -58,7 +56,7 @@
     </section>
 
     <a href="<?= site_url('cuisine-du-monde') ?>" class="btn-action">
-       Retour en cuisine
+       Retour à la liste des pays
     </a>
 
 </div>

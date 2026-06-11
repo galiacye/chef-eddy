@@ -11,7 +11,7 @@ class World extends BaseController
 
     // exculre la cuisine française et les entrées inconnues:
     private array  $excluded = ['French', 'Unknown'];
-//propriété de classe
+//propriété de classe on l'utilisera 
     /**
      * page principale : affiche la liste des pays
      * GET /cuisine-du-monde
@@ -26,7 +26,7 @@ class World extends BaseController
             // on filtre les pays exclus
             $countries = array_filter(
                 $data['meals'] ?? [],
-                fn($c) => !in_array($c['strArea'], $this->excluded)//propriété de classe d'ou $this- 
+                fn($c) => !in_array($c['strArea'], $this->excluded)//propriété de classe d'ou $this
             //si var interne à la méthode serait $excluded
             );
 
@@ -66,7 +66,7 @@ class World extends BaseController
     }
 
     /**
-     * affiche le détail d'une recette via son id TheMealDB
+     * affiche le détail d'une recette grâce à son id TheMealDB
      * route: GET /cuisine-du-monde/recette/(:num)
      */
     public function detail(int $id): string

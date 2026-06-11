@@ -80,20 +80,6 @@ class Recipe extends BaseController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // createRecipe:
     // validation ,upload image, purification Quill, tables de liaison, gestion ingrédients intelligente 
     public function createRecipe()
@@ -201,12 +187,11 @@ class Recipe extends BaseController
                 if (!$this->validate($rules)) {
                     //dd($this->validator->getErrors());
                     return view('Recipe/create-recipe', [
-                        'errors' => $this->validator->getErrors(),
-                        'tags'       => (new TagModel())->findAll(),
-                        'categories' => (new CategoryModel())->findAll(),
-                        'units'     => array_column((new UnitModel())->findAll(), 'name'),
-                        'categories_ing_db' => (new IngredientModel())->getCategory()
-                        //?
+                        'errors'             => $this->validator->getErrors(),
+                        'tags'               => $tagModel->findAll(),
+                        'categories'         => $categoryModel->findAll(),
+                        'units'              => array_column($unitModel->findAll(), 'name'),//filtre la col name 
+                        'categories_ing_db'  => $ingredientModel->getCategory()
                     ]);
                 }
                 // gestion de l'image (à externaliser plus tard)
@@ -224,7 +209,7 @@ class Recipe extends BaseController
                 $purifier = new HTMLPurifier($config);
                 $content = $purifier->purify($this->request->getPost('content'));
                 $data = [
-                    'user_id'           => 3, //$user_id plus tard, là on teste avec admin
+                    'user_id'           => session()->get('user_id'),
                     'title'             => $this->request->getPost('title'),
                     'image_url'         => $image_path,
                     'prep_time' => $this->request->getPost('prep_time') ?: null,
