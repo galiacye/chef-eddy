@@ -126,6 +126,8 @@ h1, h2 {
 }
 
 @media screen and (min-width: 768px) {
+
+
   .ql-editor.ql-blank::before {
     display: block;
 
@@ -138,6 +140,7 @@ h1, h2 {
 }
 
 @media screen and (min-width: 1024px) {
+  
   .ql-editor.ql-blank::before {
     display: block;
 }

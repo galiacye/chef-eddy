@@ -6,10 +6,10 @@ use App\Controllers\BaseController;
 
 class World extends BaseController
 {
-    // url de base de l'API TheMealDB +clé gratuite 1
+    // url de l'API TheMealDB avec clé gratuite 1
     private string $baseUrl  = 'https://www.themealdb.com/api/json/v1/1/';
 
-    // pays exclus (cuisine française et entrées sans catégorie)
+    // exculre la cuisine française et les entrées inconnues:
     private array  $excluded = ['French', 'Unknown'];
 //propriété de classe
     /**
@@ -37,14 +37,13 @@ class World extends BaseController
             return view('world/error');
         }
     }
-
     /**
-     * affiche les recettes d'un pays donné
+     * les recettes d'un pays
      * GET /cuisine-du-monde/(:alpha)
      */
     public function byCountry(string $country): string
     {
-        // on echappe le param reçu depuis l'url
+        // on échappe le param reçu depuis l'url:
         $country = esc($country);
 
         try {

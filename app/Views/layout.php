@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+<!--pour afficher sur tablette et mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php $meta = $this->renderSection('meta_description'); ?>
-    <meta name="description" content="<?= $meta ? esc(trim($meta)) : 'Recettes Chef Eddy: Cuisine et pâtisserie' ?>">
+<!--pour améliorer le référencement-->
+    <meta name="description" content="<?= $this->renderSection('meta_description') ?>">
+    <?= $this->renderSection('description') ?>
     <?= $this->renderSection('title') ?>
 <!-- lien vers le framework CSS Bootstrap 5.3.2 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,9 +55,7 @@
 
 
     <nav class="navbar navbar-expand-lg navbar-custom">
-
         <div class="container">
-
             <!-- Btn burger-->
             <button class="navbar-toggler"
                 type="button"
@@ -64,38 +64,30 @@
                 aria-controls="mainNavbar"
                 aria-expanded="false"
                 aria-label="Toggle navigation">
-
                 <span class="navbar-toggler-icon"></span>
-
             </button>
-
             <!-- navbar content -->
             <div class="collapse navbar-collapse" id="mainNavbar">
-
                 <!-- gauche -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                     <li class="nav-item">
                         <a class="nav-link"
                             href="<?= base_url('index.php') ?>">
                             Accueil
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link"
                             href="<?= base_url('recipe-index') ?>">
                             Toutes les recettes
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link"
                             href="<?= base_url('category/index') ?>">
                             Les catégories
                         </a>
                     </li>
-
                     <!-- //uri_string mieux que current_url() qui retourne url complète -->
                     <!-- current_url() != base_url() -->
                     <?php if (uri_string() != '') : ?>
