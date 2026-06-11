@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?= $this->renderSection('meta_description') ?>">
-    <?= $this->renderSection('description') ?>
+    <?php $meta = $this->renderSection('meta_description'); ?>
+    <meta name="description" content="<?= $meta ? esc(trim($meta)) : 'Recettes Chef Eddy: Cuisine et pâtisserie' ?>">
     <?= $this->renderSection('title') ?>
 <!-- lien vers le framework CSS Bootstrap 5.3.2 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

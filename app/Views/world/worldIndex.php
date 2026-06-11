@@ -1,5 +1,5 @@
 <?= $this->extend('layout') ?>
-
+<?= $this->section('meta_description') ?>Recettes de cuisine <?= esc($COUNTRY) ?>Saveurs du monde sur Chef Eddy<?= $this->endSection() ?>
 <?= $this->section('title') ?>
 <title>Cuisine du monde</title>
 <?= $this->endSection() ?>

@@ -10,6 +10,9 @@
 ?>
 
 <?= $this->extend('layout') ?>
+<?= $this->section('meta_description') ?>
+<?= esc(mb_substr(strip_tags($recipe->content), 0, 155)) ?><?= $this->endSection() ?>
+<!-- mb_substr enlève les balises html. ici de 0 à 155 caractères--> 
 <?= $this->section('title') ?>
 <title>Recette de <?= esc($recipe->title) ?></title>
 <?= $this->endSection() ?>
