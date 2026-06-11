@@ -1,5 +1,9 @@
 <?= $this->extend('layout') ?>
 
+<?= $this->section('meta_description') ?>
+Résultats pour "Cuisine de <?= esc($country) ?>" sur Chef Eddy
+<?= $this->endSection() ?>
+
 <?= $this->section('title') ?>
 <title>Cuisine <?= esc($country) ?></title>
 <?= $this->endSection() ?>
@@ -14,14 +18,15 @@
     <h1>Cuisine <?= esc($country) ?></h1>
 
     <?php if (empty($meals)): ?>
-      <!-- cas où l'API ne retourne aucune recette pour ce pays  -->
+      <!-- cas où api ne retourne aucune recette pour ce pays  -->
         <p>Aucune recette trouvée.</p>
     <?php else: ?>
-       <!-- grille de recettes, chaque carte pointe vers le détail -->
+       <!-- grille de recettes, cards en boucle -->
         <div class="recipes-grid">
             <?php foreach ($meals as $meal): ?>
                 <a href="<?= site_url('cuisine-du-monde/recette/' . (int)$meal['idMeal']) ?>" class="recipe-card">
-                    <img src="<?= esc($meal['strMealThumb']) ?>" alt="<?= esc($meal['strMeal']) ?>">
+<!--url img api-->  <img src="<?= esc($meal['strMealThumb']) ?>" alt="<?= esc($meal['strMeal']) ?>">
+<!--str pour string en json-->
                     <h3><?= esc($meal['strMeal']) ?></h3>
                 </a>
             <?php endforeach ?>
@@ -29,7 +34,7 @@
     <?php endif ?>
 
     <a href="<?= site_url('cuisine-du-monde') ?>" class="btn-action">
-   Retour en cuisine
+   Retour à la liste des pays
     </a>
 
 </div>

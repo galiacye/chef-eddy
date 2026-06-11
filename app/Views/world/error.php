@@ -6,8 +6,7 @@
 
 <?= $this->section('body') ?>
 <div class="container">
-<!-- 
-   Affiché quand l'API est inaccessible (pas de connexion, timeout...)  -->
+<!-- pas de connexion, timeout...)  -->
     <h1>Cuisine du monde indisponible</h1>
     <p>Cette section nécessite une connexion internet.</p>
 

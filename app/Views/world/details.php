@@ -23,7 +23,7 @@
             <h1 class="recipe-title"><?= esc($meal['strMeal']) ?></h1>
 
             <?php if (!empty($meal['strMealThumb'])): ?>
-                {{-- Image hébergée côté TheMealDB --}}
+             <!--l'img hebergée par l'api-->
                 <img src="<?= esc($meal['strMealThumb']) ?>" class="recipe-img" alt="<?= esc($meal['strMeal']) ?>">
             <?php endif ?>
 
@@ -34,12 +34,12 @@
         <h2>Ingrédients</h2>
         <div class="ingredients-grid">
             <?php
-            // TheMealDB stocke les ingrédients dans 20 champs numérotés (strIngredient1 à strIngredient20)
-            // on fait une boucle et on ignore les champs vides
+            // TheMealdb stocke les ingrédients dans 20 champs numérotés (strIngredient1 à strIngredient20)
+            // on boucle et on ignore les champs vides
             for ($i = 1; $i <= 20; $i++):
                 $ingredient = $meal['strIngredient' . $i] ?? '';
                 $unit       = $meal['strMeasure' . $i]    ?? '';
-                if (empty(trim($ingredient))) continue;
+                if (empty(trim($ingredient))) continue;//passe au suivant sans exec le reste
             ?>
                 <div class="ingredient-card">
                     <b><?= esc($ingredient) ?></b>
