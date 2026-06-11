@@ -58,10 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       index++;
     });
 //évènement attendu passé sur le container:
-//délégation d'événement : au lieu de mettre un écouteur sur chaque bouton supp 
-// (qui n'existent pas encore au chargement puisqu'ils sont créés dynamiquement), 
-// on écoute les clics sur le container parent. Quand un clic arrive, e.target c'est
-//  l'élément cliqué — on vérifie s'il a la classe supprimer-ligne.
+// délégation : on écoute le container car les boutons sont créés dynamiquement
 document
     .getElementById("ingredients-container")
     .addEventListener("click", (e) => {
@@ -76,29 +73,38 @@ document
     });
 
   //parsing
+  //échappe les caractères spéciaux de $units car il pourrait y avoir des points (gr.)
+  // ou autres carac spé puisque c'est une string, et le regex serait perdue!
   function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-
+//découpe la saisie en objet js { quantite, unite, nom }
   function parseIngredient(texte) {
     const unitesEchappees = unites.map((u) => escapeRegex(u));
     const regex = new RegExp(
       `^(\\d+[.,]?\\d*)\\s*(${unitesEchappees.join("|")})?\\s*(.+)$`,
       "i",
     );
-    const match = texte.trim().match(regex);
+
+// ^(\d+[.,]?\d*)         groupe 1 : le nombre (200, 1.5 etc)
+  // \s*(g|ml|kg|cl|...)? groupe 2 : l'unité optionnelle (vient de php $unit)
+  // \s*(.+)$             groupe 3 : nom de l'ingrédient
+
+
+    //verifier si saisie matche avec regex
+    const match = texte.trim().match(regex);//trim supp espaces
     if (match) {
-      return {
+      return {//match est un tab
         quantite: match[1],
-        unite: match[2] || "",
+        unite: match[2] || "",//peut être indéfini: 1 oeuf
         nom: match[3].trim(),
       };
     }
-    // Pas de quantité ni unité (ex: "sel", "poivre")
+    // si ni quantité ni unité (sel)
     return { quantite: "", unite: "", nom: texte.trim() };
   }
 
-  // Écoute ce que l'user tape et remplit les champs cachés
+  // écoute ce que tape user et remplit les champs cachés
   document.addEventListener("input", function (e) {
     if (!e.target.classList.contains("ingredient-input")) return;
     const index = e.target.dataset.index;
@@ -108,28 +114,16 @@ document
     document.getElementById(`ing-unite-${index}`).value = parsed.unite;
   });
 
-  // Gestion de la soumission du formulaire
+  //  submit
   document.getElementById("form").addEventListener("submit", (e) => {
     const html = quill.root.innerHTML;
     document.getElementById("contenu").value = html;
 
-    // Vérifier que ce n'est pas vide
+    // vérifier que ce n'est pas vide
     const text = quill.getText().trim();
     if (text.length === 0) {
       e.preventDefault(); //empêche l'envoi par défaut
       alert("Veuillez écrire une recette avant d'envoyer");
     }
-  });
-
-  // submit
-  document.getElementById("form").addEventListener("submit", (e) => {
-    const html = quill.root.innerHTML;
-    document.getElementById("contenu").value = html;
-
-    const text = quill.getText().trim();
-    if (text.length === 0) {
-      e.preventDefault();
-      alert("Veuillez écrire une recette avant d'envoyer");
-    }
-  });
+  }); 
 });
