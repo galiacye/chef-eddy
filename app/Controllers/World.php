@@ -68,10 +68,11 @@ class World extends BaseController
 
     /**
      * affiche le détail d'une recette via son id TheMealDB
-     * GET /cuisine-du-monde/recette/(:num)
+     * route: GET /cuisine-du-monde/recette/(:num)
      */
     public function detail(int $id): string
-    {
+    {//les try-catch ne sont nécessaires que pour gérer les erreurs dûes à des sources externes,
+    //les nôtres CI4 s'en charge
         try {
             $client   = \Config\Services::curlrequest();
             $response = $client->get($this->baseUrl . 'lookup.php?i=' . $id);
