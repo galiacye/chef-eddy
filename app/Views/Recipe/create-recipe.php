@@ -57,8 +57,9 @@ $cat = [
     'class' => 'form-select w-50'
 ];
 
-//ingredients_categories
-$options_ingredients = ['' => '-- Catégorie --'];
+//ingredients_categories appelé $options_ingredients pour éviter
+// la confusion avec les catégories de recettes
+$options_ingredients = ['' => ' Catégorie '];
 foreach ($categories_ing_db as $cat_ing) {
 
     $options_ingredients[$cat_ing->name] = esc($cat_ing->name);
@@ -70,16 +71,19 @@ foreach ($categories as $category) {
 }
 ?>
 <?= validation_list_errors() ?>
+<!--form_open_multipart est obligatoire dès qu'un input type = file 
+(ici pour charger l'image-->
 <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
 <div class="recipe-form px-5">
     <!--<div class="row">
     <div class="col-12 col-md-6"> pour diviser row en deux pour image éventuelle-->
 
 
-    <!-- $status et $views gérées ds ctrlr -->
+    <!-- $status et $views gérées ds controller -->
     <div class="infos">
 
-<!--form_input(), form_upload(), form_dropdown(), validation_show_error(), validation_list_errors() échappent déjà -->
+<!--form_input(), form_upload(), form_dropdown(), validation_show_error(), 
+validation_list_errors() échappent déjà : esc est inutile ici-->
         <label for="title">Titre</label>
         <?= form_input($title) ?>
         <?= validation_show_error('title') ?>
@@ -156,7 +160,7 @@ foreach ($categories as $category) {
                 <?= form_input($ing_name) ?>
                 <?= form_input($ing_qty) ?>
                 <?= form_input($ing_unit) ?>
-                <!-- Aperçu du parsing -->
+                <!-- aperçu du parsing -->
                 <small class="text-muted parsing-preview w-50"></small>
 
                 <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50']) ?>
@@ -178,6 +182,7 @@ foreach ($categories as $category) {
     </div>fermeture row-->
 
     <div class="editeur">
+        <!--contenu copié dans #content (caché) avant soumission (voir create-recipe.js) -->
         <label for="content">
             <h2 class="m-4">Votre Recette</h2>
         </label>
@@ -190,7 +195,7 @@ foreach ($categories as $category) {
         </div>
         <div id="editor"></div>
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
-        <!--Sans esc un utilisateur peut casser l’attribut HTML avec des guillemets-->
+        <!--tjrs esc-->
         <button type="submit" class="btn btn-primary">Envoyer</button>
     </div>
 </div>
@@ -202,7 +207,7 @@ foreach ($categories as $category) {
     // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
-//JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le JS.
+//JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le js.
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>

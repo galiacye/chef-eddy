@@ -10,18 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (existingContent) {
     quill.root.innerHTML = existingContent;
   }
-  // tooltips
+  // tooltips 
   document.querySelector(".ql-bold").setAttribute("title", "Gras");
   document.querySelector(".ql-italic").setAttribute("title", "Italique");
   document.querySelector(".ql-underline").setAttribute("title", "Souligné");
-  document
-    .querySelector('.ql-list[value="ordered"]')
-    .setAttribute("title", "Liste numérotée");
-  document
-    .querySelector('.ql-list[value="bullet"]')
-    .setAttribute("title", "Liste à puces");
+  document.querySelector('.ql-list[value="ordered"]').setAttribute("title", "Liste numérotée");
+  document.querySelector('.ql-list[value="bullet"]').setAttribute("title", "Liste à puces");
 
-  let index = 1;
+  let index = 1;//pour numéroter les nouvelles lignes lignes dynamiques d'ingrédients
 
   document
     .getElementById("ajouter-ingredient")
@@ -29,12 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("ingredients-container");
 
       //ajouter une ligne
-      const row = document.createElement("div");
-      row.classList.add("ingredient-row", "gap-2", "mb-2");
-
+      const row = document.createElement("div");//méthode native du DOM
+      //créé l'elem qui sera injecté dans la page avec container.appendChild(row)
+      row.classList.add("ingredient-row", "gap-2", "mb-2");//on lui ajoute des classes
+//php passe du json à la vue: on en fait un select:
       const options = Object.entries(categoriesIngredient) //vient de la vue php->json
+     // Object.entries transforme l'objet json en tab clé/valeur
         .map(([val, label]) => `<option value="${val}">${label}</option>`)
-        .join("");
+        //map sépare la paire en 2 var
+        .join("");//transforme le tab en string
 
       row.innerHTML = `
     <input type="text"
@@ -55,11 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
     <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
 `;
 
-      container.appendChild(row);
+      container.appendChild(row);//on insère les nouvelles lignes
       index++;
     });
-
-  document
+//évènement attendu passé sur le container:
+//délégation d'événement : au lieu de mettre un écouteur sur chaque bouton supp 
+// (qui n'existent pas encore au chargement puisqu'ils sont créés dynamiquement), 
+// on écoute les clics sur le container parent. Quand un clic arrive, e.target c'est
+//  l'élément cliqué — on vérifie s'il a la classe supprimer-ligne.
+document
     .getElementById("ingredients-container")
     .addEventListener("click", (e) => {
       if (e.target.classList.contains("supprimer-ligne")) {
