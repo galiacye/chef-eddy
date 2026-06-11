@@ -76,16 +76,39 @@ class Recipe extends BaseController
         return view('Recipe/recipe-index', $data);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // createRecipe:
-    // validation upload image purification Quill tables de liaison gestion ingrédients intelligente 
+    // validation ,upload image, purification Quill, tables de liaison, gestion ingrédients intelligente 
     public function createRecipe()
     {
 
+        $recipeModel = model('RecipeModel');
+        $tagModel = model('TagModel');
+        $ingredientModel = model('IngredientModel');
+        $categoryModel = model('CategoryModel');
+        $unitModel = model('UnitModel');
+        $commentModel = model('CommentModel');
+        $favoriteModel = model('FavoriteModel');
+
+
         if ($this->request->is('post') === false) { // =if ($this->request->getMethod() !== 'post')
-            $tagModel       = new TagModel();
-            $categoryModel = new CategoryModel();
-            $unitModel = new UnitModel();
-            $ingredientModel = new IngredientModel();
 
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
@@ -97,7 +120,7 @@ class Recipe extends BaseController
             // L'user_id vient de la session
             $role_id = session()->get('role_id');
             if ($role_id == 2 || $role_id == 3) {
-
+                //règles de validation à factoriser 
                 $rules = [
                     "title" => [
                         "label" => "Titre",
@@ -186,7 +209,7 @@ class Recipe extends BaseController
                         //?
                     ]);
                 }
-                // Gestion de l'image
+                // gestion de l'image (à externaliser plus tard)
                 $image = $this->request->getFile('image_url');
                 if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
                     $newName = $image->getRandomName();
@@ -196,7 +219,7 @@ class Recipe extends BaseController
                     $image_path = null; // ou une image par défaut
                 }
 
-                // Purification du HTML de Quill
+                // Purification du html de quill
                 $config = HTMLPurifier_Config::createDefault();
                 $purifier = new HTMLPurifier($config);
                 $content = $purifier->purify($this->request->getPost('content'));
@@ -226,9 +249,9 @@ class Recipe extends BaseController
                     ]);
                 }
                 $tag_ids = $this->request->getPost('tags');
-                 //dd($tag_ids);
+                //dd($tag_ids);
                 if ($tag_ids) {
-                   
+
                     // force en tableau
                     $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                     foreach ($tag_ids as $tag_id) {

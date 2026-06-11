@@ -1,5 +1,7 @@
 <?= $this->extend('layout') ?>
-<?= $this->section('meta_description') ?>Recettes avec <?= esc($category->name) ?> sur Chef Eddy<?= $this->endSection() ?>
+<?= $this->section('meta_description') ?>
+Catégories de recettes sur Chef Eddy
+<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('./css/cat-index.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>

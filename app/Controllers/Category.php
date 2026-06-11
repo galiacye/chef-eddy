@@ -22,7 +22,8 @@ class Category extends BaseController
         $categoryModel = model('CategoryModel');
         $categories = $categoryModel->findAll();
         $data = [
-            'categories' => $categories
+            'categories' => $categories,
+            'category' => $categories[0] ?? null//car ds la balise meta pas encore de var
         ];
 
         return view('Category/index', $data);
