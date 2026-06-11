@@ -76,11 +76,11 @@ class World extends BaseController
             $client   = \Config\Services::curlrequest();
             $response = $client->get($this->baseUrl . 'lookup.php?i=' . $id);
             $data     = json_decode($response->getBody(), true);
-
+//dd($data)si on veut voir le json en tab php
             $meal = $data['meals'][0] ?? null;
             //idem pour le 1er elem du tab meal , ici ça parait redondant de dire
             //si c'est null la valeur par défaut est null mais c'est surtout pour éviter les erreurs.
-
+//[0] car l'api retourne un tab même pour une recette donc le premier elem
             // Si l'id ne correspond à aucune recette
             if (!$meal) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
