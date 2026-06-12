@@ -34,9 +34,7 @@ class Auth extends BaseController
 
     public function register()
     {
-        $config = HTMLPurifier_Config::createDefault();
-        $purifier = new HTMLPurifier($config);
-
+      
         if ($this->request->is('post') === false) { //= recommandé car insensible à la casse 'POST':  if ($this->request->getMethod() !== post) 
             //dd($this->request->getMethod());
             $data['roles'] = $this->RoleModel->findAll();

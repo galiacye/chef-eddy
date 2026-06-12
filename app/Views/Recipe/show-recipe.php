@@ -12,7 +12,7 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('meta_description') ?>
 <?= esc(mb_substr(strip_tags($recipe->content), 0, 155)) ?><?= $this->endSection() ?>
-<!-- mb_substr enlève les balises html. ici de 0 à 155 caractères--> 
+<!-- mb_substr enlève les balises html. ici de 0 à 155 caractères-->
 <?= $this->section('title') ?>
 <title>Recette de <?= esc($recipe->title) ?></title>
 <?= $this->endSection() ?>
@@ -78,7 +78,8 @@ if ($user_id) {
                     <b><?= esc($ingredient->name) ?></b>
                     <div>
                         <span class="ingredient-qty" data-base="<?= $ingredient->quantity ?>">
-            <!-- si entier affiche entier sinon affiche la virgule-->
+                            <!-- ternaire si entier affiche entier sinon affiche le décimal. 
+             C'est la valeur qui servira de base pour le calcul dynamique des portions-->
                             <?= ($ingredient->quantity == (int)$ingredient->quantity) ? (int)$ingredient->quantity : $ingredient->quantity ?>
                         </span>
                     </div>
@@ -161,7 +162,9 @@ if ($user_id) {
             const baseQty = parseFloat(element.dataset.base);
             if (!isNaN(baseQty)) {
                 const result = (baseQty * current / base);
-                element.textContent = parseFloat(result.toFixed(2)); //parseFloat supprime les zéros après la virgule
+                //une simple règle de trois permet de recalculer dynamiquement les portions
+                element.textContent = parseFloat(result.toFixed(2)); 
+                //parseFloat supprime les zéros après la virgule
             }
         });
     }

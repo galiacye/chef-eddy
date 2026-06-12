@@ -204,7 +204,8 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
 <?= $this->section('customJs') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    // Variables php vers js, déclarées ici car le fichier .js ne peut pas contenir du php
+    // Variables php injectées ici pour être utilisées dans create-recipe
+    // car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
 //JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le js.
