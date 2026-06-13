@@ -198,14 +198,15 @@ footer {
     rgb(240, 83, 26);
 }
 
-footer p {
+footer p, a {
   font-family: "Syncopate";
   font-size: small;
   color: black;
+  text-decoration: none;
+  font-weight: bold;
+  /*text-shadow: 0 0 0.3px currentColor;*/
 }
-footer a {
-text-decoration: none;
-}
+
 
 @media screen and (min-width: 768px) {
   .ban {
