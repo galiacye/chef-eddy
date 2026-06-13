@@ -195,10 +195,10 @@ footer {
       rgba(255, 255, 255, 0.25) 55%,
       rgba(255, 255, 255, 0) 100%
     ),
-    rgb(240, 83, 26);
+    #0bb5a7;
 }
 
-footer p, a {
+footer p, footer a {
   font-family: "Syncopate";
   font-size: small;
   color: black;
