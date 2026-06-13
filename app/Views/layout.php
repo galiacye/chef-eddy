@@ -3,24 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-<!--pour afficher sur tablette et mobile-->
+    <!--pour afficher sur tablette et mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--pour améliorer le référencement-->
+    <!--pour améliorer le référencement-->
     <meta name="description" content="<?= $this->renderSection('meta_description') ?>">
     <?= $this->renderSection('description') ?>
     <?= $this->renderSection('title') ?>
-<!-- lien vers le framework CSS Bootstrap 5.3.2 -->
+    <!-- lien vers le framework CSS Bootstrap 5.3.2 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- lien vers la bibliothèque d'icônes Bootstrap Icons 1.11.1 -->
+    <!-- lien vers la bibliothèque d'icônes Bootstrap Icons 1.11.1 -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<!-- liens vers les polices Google fonts-->
+    <!-- liens vers les polices Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-<!--feuille de style-->
+    <!--feuille de style-->
     <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
-  <!--section CI4-->
+    <!--section CI4-->
     <?= $this->renderSection('custom-css') ?>
 </head>
 
@@ -188,7 +188,10 @@
     <main class="container-fluid px-2 w-100">
         <?= $this->renderSection('body') ?>
     </main>
-
+    <footer>
+        <p>&copy; <?= date('Y') ?> Chef Eddy</p>
+        <a href="<?= site_url('mentions-legales') ?>">Mentions légales</a>
+    </footer>
     <?= $this->renderSection('customJs') ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
