@@ -84,7 +84,6 @@ class Auth extends BaseController
                     ->withInput()
                     ->with('validation', $this->validator);
             }
-
             //dd($this->request->getPost());
             $avatar_file = $this->request->getFile('avatar_url');
             $avatar_url = null;
@@ -98,7 +97,6 @@ class Auth extends BaseController
             } else {
                 $avatar_url = 'uploads/avatars/fantome.png';
             }
-
             $data = [
                 'username'   => $this->request->getPost('username'),
                 'email'      => $this->request->getPost('email'),
@@ -122,29 +120,20 @@ class Auth extends BaseController
             'email'    => 'required|valid_email',
             'password' => 'required|min_length[8]'
         ];
-
         if (!$this->validate($rules)) {
             return redirect()->to('login')->with('error', implode('<br>', $this->validator->getErrors()));
             //implode colle ensemble  en string les données du tableau errors avc br entre chaque
         }
-
         $email    = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $user = $this->UserModel->getUserByEmail($email);
-
-
-
         if (!$user) {
             return redirect()->to('login')->with('error', "Cet email n'existe pas");
         }
-
         if (!password_verify($password, $user->password)) {
             return redirect()->to('login')->with('error', 'Mot de passe incorrect');
         }
-
         $role_id = $user->role_id; //après avoir vérif user
-
-
         if ($user->role_id == 4) {
             return redirect()->to('login')->with('error', 'Compte banni');
         }

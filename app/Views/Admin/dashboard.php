@@ -74,6 +74,7 @@
                 <?php foreach ($tags as $tag): ?>
                     <option value="<?= $tag->id ?>"
                         <?= ($homepageTag && $homepageTag->id == $tag->id) ? 'selected' : '' ?>>
+                <!--$homepage existe-t-il et son id est elle égale à l'id de cetag? si oui le préselectionner-->
                         <?= esc($tag->name) ?>
                     </option>
                 <?php endforeach; ?>

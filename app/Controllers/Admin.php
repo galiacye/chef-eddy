@@ -213,7 +213,7 @@ class Admin extends BaseController
 
     public function deleteUser(int $id)
     {
-        // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé, par ex
+ // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé,par exemple
         $this->userModel->delete($id); //pattern natif de ci4 pas besoin de méthode customisée ds modèle
         return redirect()->to('Admin/users-index'); //créer vue admin avec index users
     }

@@ -248,20 +248,17 @@ class Recipe extends BaseController
                 }
                 // Sauvegarde des ingrédients
                 $ingredients = $this->request->getPost('ingredients');
-
                 //log_message('debug', print_r($ingredients, true));
-
                 if ($ingredients) {
                     foreach ($ingredients as $ingredient) {
-                        $name = ucfirst(strtolower(trim($ingredient['name']))); //éviter les doublons d'orthographe différente
+                        $name = ucfirst(strtolower(trim($ingredient['name']))); 
+                        //éviter les doublons d'orthographe différente:ucfirst normalise avec une capitale en premier
                         if (empty($name)) continue; // on saute les lignes vides
-
-                        //  Chercher si l'ingrédient existe déjà
+                        //  on cherche si l'ingrédient existe déjà
                         $existing = $db->table('ingredients')
                             ->where('name', $name)
                             ->get()
                             ->getRowArray();
-
                         if ($existing) {
                             // si existe : on récupère son id
                             $ingredient_id = $existing['id']; //syntaxe array car getRowArray() ci-dessus
@@ -273,8 +270,7 @@ class Recipe extends BaseController
                             ]);
                             $ingredient_id = $db->insertID();
                         }
-
-                        // Insérer dans recette_ingredients
+                        // insertion dans recette_ingredients
                         $db->table('recipe_ingredients')->insert([
                             'recipe_id'    => $recipe_id,
                             'ingredient_id' => $ingredient_id,
