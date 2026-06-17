@@ -22,7 +22,7 @@ class Search extends BaseController
 
     public function search()
     {
-        $search  = $this->request->getGet('search') ?? '';
+        $search  = $this->request->getGet('search') ?? '';//coalescence nulle
         $without = array_filter((array)($this->request->getGet('without') ?? []));
 
         $recipes = $this->model->search($search, $without);

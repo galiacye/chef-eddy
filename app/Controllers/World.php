@@ -11,11 +11,8 @@ class World extends BaseController
 
     // exculre la cuisine française et les entrées inconnues:
     private array  $excluded = ['French', 'Unknown'];
-//propriété de classe on l'utilisera 
-    /**
-     * page principale : affiche la liste des pays
-     * GET /cuisine-du-monde
-     */
+    //propriété de classe on l'utilisera 
+    // page principale : affiche la liste des pays
     public function worldIndex(): string
     {
         try {
@@ -26,12 +23,11 @@ class World extends BaseController
             // on filtre les pays exclus
             $countries = array_filter(
                 $data['meals'] ?? [],
-                fn($c) => !in_array($c['strArea'], $this->excluded)//propriété de classe d'ou $this
-            //si var interne à la méthode serait $excluded
+                fn($country) => !in_array($country['strArea'], $this->excluded) //propriété de classe d'ou $this
+                //si var interne à la méthode serait $excluded
             );
 
             return view('world/worldIndex', ['countries' => $countries]);
-
         } catch (\Exception $e) {
             //  cas d'absence de connexion ou d'erreur API
             return view('world/error');
@@ -52,14 +48,13 @@ class World extends BaseController
             $data     = json_decode($response->getBody(), true);
 
             // si aucune recette trouvée, on passe un tableau vide
-            $meals = $data['meals'] ?? [];//opérateur de coeallescence nulle:
+            $meals = $data['meals'] ?? []; //opérateur de coeallescence nulle:
             //si il existe et n'est pas nul sinon tab vide
 
             return view('world/results', [
                 'country' => $country,
                 'meals'   => $meals,
             ]);
-
         } catch (\Exception $e) {
             return view('world/error');
         }
@@ -70,24 +65,23 @@ class World extends BaseController
      * route: GET /cuisine-du-monde/recette/(:num)
      */
     public function detail(int $id): string
-    {//les try-catch ne sont nécessaires que pour gérer les erreurs dûes à des sources externes,
-    //les nôtres CI4 s'en charge
+    { //les try-catch ne sont nécessaires que pour gérer les erreurs dûes à des sources externes,
+        //les nôtres CI4 s'en charge
         try {
             $client   = \Config\Services::curlrequest();
             $response = $client->get($this->baseUrl . 'lookup.php?i=' . $id);
             $data     = json_decode($response->getBody(), true);
-//dd($data)si on veut voir le json en tab php
+            //dd($data)si on veut voir le json en tab php
             $meal = $data['meals'][0] ?? null;
             //idem pour le 1er elem du tab meal , ici ça parait redondant de dire
             //si c'est null la valeur par défaut est null mais c'est surtout pour éviter les erreurs.
-//[0] car l'api retourne un tab même pour une recette donc le premier elem
+            //[0] car l'api retourne un tab même pour une recette donc le premier elem
             // Si l'id ne correspond à aucune recette
             if (!$meal) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
 
             return view('world/detail', ['meal' => $meal]);
-
         } catch (\CodeIgniter\Exceptions\PageNotFoundException $e) {
             //  404 par CI4
             throw $e;
