@@ -15,14 +15,15 @@ class Search extends BaseController
     private object $model;
     public function __construct()
     {
-        helper('form');
+    
         $this->model = Model('SearchModel');
     }
 
 
     public function search()
     {
-        $search  = $this->request->getGet('search') ?? '';//coalescence nulle
+        $search  = $this->request->getGet('search') ?? '';//coalescence nulle:
+        //si est null on prend la valeur par défaut: une chaine vide
         $without = array_filter((array)($this->request->getGet('without') ?? []));
 
         $recipes = $this->model->search($search, $without);
