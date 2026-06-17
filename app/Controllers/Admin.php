@@ -46,8 +46,8 @@ class Admin extends BaseController
         $tag_id = $this->request->getPost('tag_id');
 
         $this->tagModel->where('is_homepage', 1)->set('is_homepage', 0)->update(); //remettre à 0 tag affiché
-        $this->tagModel->update($tag_id, ['is_homepage' => 1]); // mettre à 1 tag choisi par admin
-
+        $this->tagModel->update($tag_id, ['is_homepage' => 1]); // mettre à 1 le tag choisi par admin
+//to do: voir query builder transaction
         return redirect()->to('dashboard')->with('success', 'Tag homepage mis à jour');
     }
 
