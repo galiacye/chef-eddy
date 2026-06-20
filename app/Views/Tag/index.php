@@ -12,7 +12,7 @@
 <div class="container">
     <div class="nav-grid">
         <?php foreach ($tags as $tag) : ?>
-            <a href="<?= base_url('Tag/' . $tag->id) ?>" class="nav-card">
+            <a href="<?= base_url('tag/show/' . $tag->id) ?>" class="nav-card">
                 <img src="<?= base_url($tag->image_url ?? 'img/categories/default.avif') ?>"
                      class="nav-icon" alt="<?= esc($tag->name) ?>">
                 <span class="nav-title"><?= esc($tag->name) ?></span>

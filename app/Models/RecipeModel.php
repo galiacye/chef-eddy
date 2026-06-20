@@ -113,4 +113,17 @@ class RecipeModel extends Model
             ->get()
             ->getResult();
     }
+
+
+    public function getRecipeTagIds($id)
+    {
+        return array_column(
+            $this->db->table('recipe_tags')
+                ->select('tag_id')
+                ->where('recipe_id', $id)
+                ->get()
+                ->getResultArray(),
+            'tag_id'
+        );
+    }
 }

@@ -82,7 +82,7 @@ $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 
 // Tags
 $routes->get('tag/index', 'Tag::index');
-$routes->get('tag/(:num)', 'Tag::showRecipesByTag/$1');
+$routes->get('tag/show/(:num)', 'Tag::showRecipesByTag/$1');
 
 // Comments - user
 $routes->get('add-comment/(:num)', 'Comment::addComment/$1'); // form user

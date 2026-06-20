@@ -5,6 +5,7 @@
  * @var int $id
  * @var object $ingredients
  * @var object $ing
+ * @var object $tags
  */
 ?>
 <?= $this->extend('layout') ?>
@@ -124,6 +125,24 @@ foreach ($categories as $category) {
         <?= form_dropdown('category_id', $options_categories, 
             set_value('category_id', isset($recipe->category_id) ? $recipe->category_id : ''), $cat) ?>
         <?= validation_show_error('category_id') ?>
+
+        <label>Tags</label>
+<div class="tags-container d-flex flex-wrap gap-2">
+    <?php foreach ($tags as $tag) : ?>
+        <div class="form-check">
+            <input
+                type="checkbox"
+                name="tags[]"
+                id="tag-<?= $tag->id ?>"
+                value="<?= $tag->id ?>"
+                class="form-check-input"
+                <?= in_array($tag->id, $recipe_tag_ids ?? []) ? 'checked' : '' ?>
+            >
+            <label class="form-check-label" for="tag-<?= $tag->id ?>"><?= esc($tag->name) ?></label>
+        </div>
+    <?php endforeach; ?>
+</div>
+<?= validation_show_error('tags') ?> 
 
         <label>Ingrédients</label>
             <!--ici pas de champs unique, posssibilité de retoucher grammage uniquement, par ex-->         

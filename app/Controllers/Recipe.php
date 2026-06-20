@@ -190,7 +190,7 @@ class Recipe extends BaseController
                         'errors'             => $this->validator->getErrors(),
                         'tags'               => $tagModel->findAll(),
                         'categories'         => $categoryModel->findAll(),
-                        'units'              => array_column($unitModel->findAll(), 'name'),//filtre la col name 
+                        'units'              => array_column($unitModel->findAll(), 'name'), //filtre la col name 
                         'categories_ing_db'  => $ingredientModel->getCategory()
                     ]);
                 }
@@ -251,7 +251,7 @@ class Recipe extends BaseController
                 //log_message('debug', print_r($ingredients, true));
                 if ($ingredients) {
                     foreach ($ingredients as $ingredient) {
-                        $name = ucfirst(strtolower(trim($ingredient['name']))); 
+                        $name = ucfirst(strtolower(trim($ingredient['name'])));
                         //éviter les doublons d'orthographe différente:ucfirst normalise avec une capitale en premier
                         if (empty($name)) continue; // on saute les lignes vides
                         //  on cherche si l'ingrédient existe déjà
@@ -296,12 +296,15 @@ class Recipe extends BaseController
             $tagModel = model('TagModel');
             $categoryModel = model('CategoryModel');
             $ingredientModel = model('IngredientModel');
+            $recipe_tag_ids = $this->model->getRecipeTagIds($id);
+
             return view('Recipe/update-recipe', [
                 'recipe' => $recipe,
                 'tags' => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getRecipeIngredients($id),
                 'units' => array_column(model('UnitModel')->findAll(), 'name'),
+                'recipe_tag_ids' => $recipe_tag_ids
 
             ]);
         } else { //si pas get, post donc traitement
@@ -379,6 +382,7 @@ class Recipe extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->getRecipe($id),
                     'tags' => model('TagModel')->findAll(),
+                    'recipe_tag_ids' => $this->model->getRecipeTagIds($id),
                     'categories' => model('CategoryModel')->findAll(),
                     'ingredients' => $this->model->getRecipeIngredients($id),
                     'units' => array_column(model('UnitModel')->findAll(), 'name'),
