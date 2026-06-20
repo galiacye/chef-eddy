@@ -1,5 +1,5 @@
 <?= $this->extend('layout') ?>
-<?= $this->section('meta_description') ?>Recettes <?= esc($tag->name) ?> sur Chef Eddy<?= $this->endSection() ?>
+<?= $this->section('meta_description') ?>Recettes sur Chef Eddy<?= $this->endSection() ?>
 <?= $this->section('title') ?>
 <titre>Tous les Tags</titre>
 <?= $this->endSection() ?>
@@ -10,7 +10,7 @@
     <div class="row">
         <?php foreach ($tags as $tag) : ?>
             <div class="col-auto mb-2">
-                <a href="<?= site_url('tag/' . $tag->id) ?>" 
+                <a href="<?= site_url('Tag/show/' . $tag->id) ?>" 
                    class="btn btn-outline-primary">
                     <?= esc($tag->name) ?>
                 </a>
