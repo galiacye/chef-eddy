@@ -1,22 +1,24 @@
 <?= $this->extend('layout') ?>
-<?= $this->section('meta_description') ?>Recettes sur Chef Eddy<?= $this->endSection() ?>
-<?= $this->section('title') ?>
-<titre>Tous les Tags</titre>
-<?= $this->endSection() ?>
-<?= $this->section('body') ?>
+<?= $this->section('meta_description') ?>Tags sur Chef Eddy<?= $this->endSection() ?>
 
-<h2 class="text-center">Les tags</h2>
+<?= $this->section('title') ?><titre>Tous les Tags</titre><?= $this->endSection() ?>
+
+<?= $this->section('custom-css') ?>
+<link href="<?= base_url('css/tags/tag-index.css') ?>" rel="stylesheet">
+<?= $this->endSection() ?>
+
+<?= $this->section('body') ?>
+<h2 class="text-center m-4">Les Tags</h2>
 <div class="container">
-    <div class="row">
+    <div class="nav-grid">
         <?php foreach ($tags as $tag) : ?>
-            <div class="col-auto mb-2">
-                <a href="<?= site_url('tag/' . $tag->id) ?>" 
-                   class="btn btn-outline-primary">
-                    <?= esc($tag->name) ?>
-                </a>
-            </div>
-        <?php endforeach ?>
+            <a href="<?= base_url('Tag/' . $tag->id) ?>" class="nav-card">
+                <img src="<?= base_url($tag->image_url ?? 'img/categories/default.avif') ?>"
+                     class="nav-icon" alt="<?= esc($tag->name) ?>">
+                <span class="nav-title"><?= esc($tag->name) ?></span>
+            </a>
+        <?php endforeach; ?>
     </div>
 </div>
-
 <?= $this->endSection() ?>
+
