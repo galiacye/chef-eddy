@@ -8,10 +8,7 @@
 <?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('css/admin/comments.css') ?>" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<link href="<?= base_url('css/comments.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -27,7 +24,7 @@
     <a href="<?= base_url('Admin/comments?status=pending') ?>"
         class="btn <?= $status === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
     <a href="<?= base_url('Admin/comments?status=approved') ?>"
-        class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-success' ?>">Approuvés</a>
+        class="btn <?= $status === 'approved' ? 'btn-success' : 'btn-outline-success' ?>">Approuvés</a>
 </div>
 
 <table class="table table-striped table-hover align-middle">
@@ -45,12 +42,12 @@
         <?php if (!empty($comments)): ?>
             <?php foreach ($comments as $c): ?>
                 <tr> <!--user_id et username appartiennent à $c grâce à la jointure-->
-                    <td><a href="<?= base_url('user/profile/' . $c->user_id) ?>"><?= $c->username ?></a></td>
-                    <td><?= $c->recipe_title ?></td>
-                    <td><?= $c->content ?></td>
-                    <td><?= $c->rating ?>/5</td>
+                    <td><a href="<?= base_url('user/profile/' . $c->user_id) ?>"><?= esc($c->username) ?></a></td>
+                    <td><?= esc($c->recipe_title) ?></td>
+                    <td><?= esc($c->content) ?></td>
+                    <td><?= $c->rating ?>/5</td><!--inutile de protéger quand c'est un entier-->
                     <td>
-                        <span class="badge <?= $c->status === 'approved' ? 'bg-success' : ($c->status === 'pending' ? 'bg-warning text-dark' : 'bg-danger') ?>">
+                        <span class="badge <?= esc($c->status) === 'approved' ? 'bg-success' : ($c->status === 'pending' ? 'bg-warning text-dark' : 'bg-danger') ?>">
                             <?= $c->status ?>
                         </span>
                     </td>
@@ -58,18 +55,18 @@
                         <div class="d-flex flex-wrap gap-1">
                             <form method="post" action="<?= base_url('comment/status/' . $c->id . '/approved') ?>" class="d-inline">
                                 <?= csrf_field() ?>
-                                <button class="btn btn-emeraude btn-sm" onclick="return confirm('Approuver ?')">Approuver</button>
+                                <button class="btn btn-success btn-sm" onclick="return confirm('Approuver ?')">Approuver</button>
                             </form>
                             <form method="post" action="<?= base_url('comment/status/' . $c->id . '/pending') ?>" class="d-inline">
                                 <?= csrf_field() ?>
-                                <button class="btn btn-secondary btn-sm" onclick="return confirm('Remettre en attente ?')">Remettre en attente</button>
+                                <button class="btn btn-secondary btn-sm" onclick="return confirm('Remettre en attente ?')">En attente</button>
                             </form>
                             <form method="post" action="<?= base_url('comment/delete/' . $c->id) ?>" class="d-inline">
                                 <?= csrf_field() ?>
-                                <button class="btn btn-corail btn-sm" onclick="return confirm('Supprimer définitivement ?')">Supprimer</button>
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Supprimer définitivement ?')">Supprimer</button>
                             </form>
                             <!--data- = attributs html qui passent infos au js, toggle déclenche le collapse target cible-->
-                            <button class="btn btn-blue btn-sm" data-bs-toggle="collapse" data-bs-target="#reply-<?= $c->id ?>">
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#reply-<?= $c->id ?>">
                                 Répondre
                             </button>
                         </div>
@@ -89,7 +86,7 @@
                                 </div>
                                 <div id="editor-reply-<?= $c->id ?>" style="background:white; height:100px;"></div>
                                 <input type="hidden" name="content" id="content-<?= $c->id ?>">
-                                <input type="submit" value="envoyer" class="btn btn-blue btn-sm mt-2">
+                                <input type="submit" value="envoyer" class="btn btn-primary btn-sm mt-2">
                             </form>
                         </div>
                     </td>
