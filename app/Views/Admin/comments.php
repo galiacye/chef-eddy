@@ -89,7 +89,7 @@
                                 </div>
                                 <div id="editor-reply-<?= $c->id ?>" style="background:white; height:100px;"></div>
                                 <input type="hidden" name="content" id="content-<?= $c->id ?>">
-                                <input type="submit" value="envoyer" class="btn btn-blue btn-sm mt-2">
+                                <input type="submit" value="envoyer" class="btn btn-emeraude btn-sm mt-2">
                             </form>
                         </div>
                     </td>
