@@ -1,5 +1,5 @@
 <?= $this->extend('layout') ?>
-<?= $this->section('meta_description') ?>Recettes <?= esc($tag->name) ?> sur Chef Eddy<?= $this->endSection() ?>
+<?= $this->section('meta_description') ?>Recettes sur Chef Eddy<?= $this->endSection() ?>
 <?= $this->section('title') ?>
 <titre>Tous les Tags</titre>
 <?= $this->endSection() ?>

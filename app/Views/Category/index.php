@@ -12,8 +12,9 @@ Catégories de recettes sur Chef Eddy
         <?php foreach ($categories as $category) : ?>
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="<?= base_url($category->image_url ?? 'img/categories/default.avif') ?>" class="card-img-top" alt="<?= esc($category->name) ?>">
-                    <div class="card-body d-flex flex-column">
+                    <img src="<?= base_url($category->image_url ?? 'img/categories/default.avif') ?>" class="card-img-top object-fit-cover"
+             style="height: 180px;" alt="<?= esc($category->name) ?>">
+                    <div class="card-body d-flex flex-column" style="height: 90px;">
                         <h5 class="card-title"><?= esc($category->name) ?></h5>
                         <a href="<?= base_url('category/' . $category->id) ?>" class="btn btn-primary mt-auto">Voir les recettes</a>
                     </div>
