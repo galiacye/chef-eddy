@@ -216,7 +216,7 @@ class SearchModel extends Model
             $excludeIds = $this->db->table('recipe_ingredients')
                 ->select('recipe_ingredients.recipe_id')
                 ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
-                ->whereIn('ingredients.category', $without)
+                ->whereIn('ingredients.category_id', $without)
                 ->get()->getResultArray();
 
             $excludeIds = array_unique(array_column($excludeIds, 'recipe_id'));
