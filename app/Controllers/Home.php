@@ -27,6 +27,7 @@ class Home extends BaseController
         $ingredientsCategoriesModel = model('IngredientsCategoriesModel');
         $ingredientsCategories = $ingredientsCategoriesModel
             ->orderBy('name', 'ASC')
+            ->where('id !=', 13) //"autres": utile pour la saisie, pas un filtre pertinent
             ->findAll();
 
 
@@ -36,7 +37,7 @@ class Home extends BaseController
             'categories' => $ingredientsCategories,
             'tags' => $tags,
             'homepageTag' => $homepageTag, //éventuellement pour afficher titre du tag
-          
+
         ];
         return view('Home/index', $data);
     }

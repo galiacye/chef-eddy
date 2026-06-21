@@ -35,9 +35,9 @@
             <input class="allergen-check" 
                    type="checkbox"
                    name="without[]"
-                   value="<?= esc($cat->name) ?>"
-                   id="cat_<?= esc($cat->name) ?>">
-            <label class="allergen-label" for="cat_<?= esc($cat->name) ?>">
+                   value="<?= esc($cat->id) ?>"
+                   id="cat_<?= esc($cat->id) ?>">
+            <label class="allergen-label" for="cat_<?= esc($cat->id) ?>">
                  <?= esc($cat->name) ?>
             </label>
         <?php endforeach ?>
@@ -54,9 +54,7 @@
 </div>
 <?= form_close() ?>
 
-  
     <div class="row mt-4 w-100 mx-0">
-
         <!-- tags -->
         <div class="col-md-2">
 
@@ -66,98 +64,59 @@
                 data-bs-target="#tagsCollapse"
                 aria-expanded="false"
                 id="tagsBtn">
-
                 <i class="bi bi-list fs-4"
                     id="tagsIcon"
                     style="font-style: normal; font-family: 'nexa';">
                     Tags
                 </i>
-
             </button>
 
             <div class="collapse d-md-block" id="tagsCollapse">
-
                 <div class="row tags">
-
                     <div class="col-12">
-
                         <h2 class="tag-title text-center mb-4">Tags</h2>
-
                         <?php foreach ($tags as $tag) : ?>
-
                             <div class="d-flex justify-content-center align-items-center mb-4">
-
                                 <a href="<?= site_url('tag/' . $tag->id) ?>"
                                     class="btn btn-tag">
-
                                     <?= esc($tag->name) ?>
-
                                 </a>
-
                             </div>
-
                         <?php endforeach ?>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
         <!-- recettes -->
         <div class="col-md-10">
-
             <div class="row chef-recipes">
-
                 <?php foreach ($recipes as $recipe) : ?>
-
                     <div class="col-12 col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
-
                         <div class="card w-custom mt-4">
-
                             <div class="img-wrapper">
-
                                 <img src="<?= base_url($recipe->image_url ? $recipe->image_url : 'uploads/recipes/default.png') ?>"
                                     class="card-img-top"
                                     alt="<?= esc($recipe->title) ?>">
-
                             </div>
-
                             <div class="card-body d-flex flex-column">
-
                                 <h5 class="card-title">
                                     <?= esc($recipe->title) ?>
                                 </h5>
-
                                 <a href="<?= base_url('recipe/' . (int)$recipe->id) ?>"
                                     class="btn btn-see mt-auto">
-
                                     Voir
-
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 <?php endforeach ?>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
-
 <?= $this->endSection() ?>
 
 <?= $this->section('customJs') ?>
-
 <script>
     const collapse = document.getElementById('tagsCollapse');
     const icon = document.getElementById('tagsIcon');
