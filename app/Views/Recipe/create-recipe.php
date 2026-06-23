@@ -208,7 +208,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
     // car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
-//JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'exécute dans le js.
+//JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'éxécute dans le js.
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>
