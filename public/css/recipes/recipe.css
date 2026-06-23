@@ -74,7 +74,7 @@ body {
 }
 
 .card-block h2 {
-  font-family: "ginchiest";
+  font-family: "Lobster";
   margin-bottom: 1rem;
 }
 
@@ -119,24 +119,37 @@ body {
 }
 
 .btn-fav {
-  background: #6cf8a2;
+  background-color: #0ba3cd ;
+  color: white;
   border: none;
   padding: 0.7rem 1rem;
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.btn-fav:hover {
+  transform: translateY(-4px);
+  /* translateY(10px): descend
+translateY(-10px): monte */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
 .btn-fav.active {
   background: #fa8e66;
+
 }
 
 /* cta */
 .btn-action {
   display: inline-block;
-  margin-top: 1rem;
-  background: #1dbf73;
+ background-color: #0ba3cd ;
   color: white;
   padding: 0.8rem 1.2rem;
-  border-radius: 12px;
+  border-radius: 10px;
   text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-action:hover {
+    transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
