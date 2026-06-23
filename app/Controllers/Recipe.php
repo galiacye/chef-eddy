@@ -248,7 +248,7 @@ class Recipe extends BaseController
                 }
                 // Sauvegarde des ingrédients
                 $ingredients = $this->request->getPost('ingredients');
-                //log_message('debug', print_r($ingredients, true));
+                //dd($ingredients);
                 if ($ingredients) {
                     foreach ($ingredients as $ingredient) {
                         $name = ucfirst(strtolower(trim($ingredient['name'])));
