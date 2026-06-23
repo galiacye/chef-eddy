@@ -167,6 +167,8 @@ body {
 
 .w-custom {
   width: 100%;
+  max-width: 190px;
+  max-height: 220px;
   border-radius: 15px;
   overflow: hidden;
   transition: 0.25s ease;

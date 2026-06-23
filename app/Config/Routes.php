@@ -107,13 +107,10 @@ $routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1
 //pour ci4 l'ordre des routes peut être important
 // d'abord la route la plus spécifique
 $routes->get('cuisine-du-monde/recette/(:num)',  'World::detail/$1');
-
 // puis la plus générale ((:segment) accepte espaces et tout)
 $routes->get('cuisine-du-monde/(:segment)',      'World::byCountry/$1');
-
 // enfin la page d'accueil
 $routes->get('cuisine-du-monde','World::worldIndex');
 //comme ça /recette/123 est capturé par la première route, et /Cape Verdian par la deuxième
 //si on met (:segment) en premier, il va intercepter /recette/123 avant que la route recette ait une chance de matcher.
-
 $routes->view('mentions-legales', 'mentions-legales');
