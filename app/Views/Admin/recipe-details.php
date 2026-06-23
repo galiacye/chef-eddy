@@ -60,9 +60,11 @@
         <div><?= esc($recipe->content) ?></div>
     </div>
     <div class="btn-box d-flex">
-        <!-- <?php
+
+        <!---btn reject pas supp-->
+        <?php
         if ($recipe->status === 'pending') { ?>
-            <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+            <form action="<?= base_url('Admin/recipe/reject/' . $recipe->id) ?>" method="post">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-warning">Rejeter</button>
             </form>
@@ -74,16 +76,22 @@
 
             <form action="<?= base_url('Admin/recipe/pending/' . $recipe->id) ?>" method="post">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-secondary">Procrastiner et remettre en attente</button>
+                <button type="submit" class="btn btn-secondary">Remettre en attente</button>
             </form>
 
 
         <?php } elseif ($recipe->status === 'approved') { ?>
-            <form action="<?= base_url('Admin/recipe/remove/' . $recipe->id) ?>" method="post">
+            <form action="<?= base_url('Admin/recipe/reject/' . $recipe->id) ?>" method="post">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-warning">Rejeter</button>
             </form>
-        <?php  } elseif ($recipe->status === 'rejected') { ?>
+
+            <form action="<?= base_url('Admin/recipe/pending/' . $recipe->id) ?>" method="post">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn btn-secondary">Remettre en attente</button>
+            </form>
+
+        <?php } elseif ($recipe->status === 'rejected') { ?>
             <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-info">Approuver</button>
@@ -91,33 +99,9 @@
 
             <form action="<?= base_url('Admin/recipe/pending/' . $recipe->id) ?>" method="post">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-secondary">Procrastiner et remettre en attente</button>
+                <button type="submit" class="btn btn-secondary">Remettre en attente</button>
             </form>
-
-        <?php } ?> -->
-
-<!---btn reject pas supp-->
-<?php 
-if ($recipe->status === 'pending') { ?>
-    <form action="<?= base_url('Admin/recipe/reject/' . $recipe->id) ?>" method="post">
-        <?= csrf_field() ?>
-        <button type="submit" class="btn btn-warning">Rejeter</button>
-    </form>
-    <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
-        <?= csrf_field() ?>
-        <button type="submit" class="btn btn-info">Approuver</button>
-    </form>
-<?php } elseif ($recipe->status === 'approved') { ?>
-    <form action="<?= base_url('Admin/recipe/reject/' . $recipe->id) ?>" method="post">
-        <?= csrf_field() ?>
-        <button type="submit" class="btn btn-warning">Rejeter</button>
-    </form>
-<?php } elseif ($recipe->status === 'rejected') { ?>
-    <form action="<?= base_url('Admin/recipe/save/' . $recipe->id) ?>" method="post">
-        <?= csrf_field() ?>
-        <button type="submit" class="btn btn-info">Approuver</button>
-    </form>
-<?php } ?>
+        <?php } ?>
 
 
 
