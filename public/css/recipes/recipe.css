@@ -8,8 +8,10 @@ body {
     system-ui,/* prend la police la plus adaptée au navigateur et à l'appareil*/
     -apple-system,
     sans-serif;
+    color: black;
+    background-color: #caeff3;
   /* background: linear-gradient(145deg, #c3f8e6, #bbf4f8); */
-  color: #222;
+  
 }
 
 .recipe-page {
@@ -42,7 +44,9 @@ body {
 
 .tag {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.7);
+  background-color:#ff7e6c;
+  color: white;
+  font-family: "Syncopate";
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
   margin: 0.2rem;
@@ -58,7 +62,7 @@ body {
 }
 
 .info-card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.6);/*4ème param=transparence*/
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);/*lhorizontal, vertical, flou, couleur*/
