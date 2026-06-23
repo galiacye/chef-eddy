@@ -121,6 +121,7 @@
 }
 
 .navbar {
+  height: 60px;
   position: relative;
   background: linear-gradient(
     135deg,
@@ -195,15 +196,15 @@ footer {
       rgba(255, 255, 255, 0.25) 55%,
       rgba(255, 255, 255, 0) 100%
     ),
-    #0bb5a7;
+    black;
 }
 
 footer p, footer a {
-  font-family: "Syncopate";
+  font-family: "calibri";
   font-size: small;
-  color: black;
+  color: white;
   text-decoration: none;
-  font-weight: bold;
+ 
   /*text-shadow: 0 0 0.3px currentColor;*/
 }
 

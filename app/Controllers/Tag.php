@@ -39,7 +39,7 @@ class Tag extends BaseController
             'recipes' => $recipes
         ];
 
-        return view('Tag/show', $data);
+        return view('tag/show', $data);
     }
 
     public function addTag()
