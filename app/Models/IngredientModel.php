@@ -21,7 +21,7 @@ class IngredientModel extends Model
 
     public function getRecipeIngredients(int $recipe_id)
     {
-        return $this->select('ingredients.name, ingredients.category, recipe_ingredients.quantity, recipe_ingredients.unit')
+        return $this->select('ingredients.name, ingredients.category_id, recipe_ingredients.quantity, recipe_ingredients.unit')
             ->join('recipe_ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
             ->where('recipe_ingredients.recipe_id', $recipe_id)
             ->findAll();
@@ -32,5 +32,14 @@ class IngredientModel extends Model
         return $this->select('ingredients.name, ingredients.id')
             ->orderBy('name', 'ASC')
             ->findAll();
+    }
+
+    public function getCategoryIdByName(string $name): ?int
+    {
+        $cat = $this->db->table('ingredients_categories')
+            ->where('name', $name)
+            ->get()
+            ->getRowArray();
+        return $cat ? (int)$cat['id'] : null;
     }
 }

@@ -248,6 +248,7 @@ class Recipe extends BaseController
                 }
                 // Sauvegarde des ingrédients
                 $ingredients = $this->request->getPost('ingredients');
+                //dd($this->request->getPost());
                 //dd($ingredients);
                 if ($ingredients) {
                     foreach ($ingredients as $ingredient) {
@@ -264,10 +265,12 @@ class Recipe extends BaseController
                             $ingredient_id = $existing['id']; //syntaxe array car getRowArray() ci-dessus
                         } else {
                             //sinon on l'insère
+
                             $db->table('ingredients')->insert([
-                                'name'       => $name,
-                                'category' => $ingredient['category']
+                                'name'        => $name,
+                                'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category'])
                             ]);
+
                             $ingredient_id = $db->insertID();
                         }
                         // insertion dans recette_ingredients

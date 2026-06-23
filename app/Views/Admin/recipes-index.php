@@ -51,8 +51,7 @@
             class="btn <?= $status === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
         <a href="<?= base_url('Admin/recipes-index?status=approved') ?>"
             class="btn <?= $status === 'approved' ? 'btn-success' : 'btn-outline-success' ?>">Approuvées</a>
-        <a href="<?= base_url('Admin/recipes-index?status=rejected') ?>"
-            class="btn <?= $status === 'rejected' ? 'btn-danger' : 'btn-outline-danger' ?>">Rejetées</a>
+       
     </div>
     <div class="row m-3">
 
