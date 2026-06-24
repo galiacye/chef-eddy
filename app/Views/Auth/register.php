@@ -9,8 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-
-<h1 class="text-center mt-2">S'inscrire</h1>
+<p class="text-center mt-4">Cliquez sur "Déjà membre" ou</p> 
+<h1 class="text-center mt-2">Inscrivez-vous</h1>
 
 <div class="row align-items-center g-2 mt-0">
 
