@@ -37,12 +37,12 @@
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
-<?php $success = session()->getFlashdata('success') ?>
+<!-- <?php $success = session()->getFlashdata('success') ?>
 <?php if ($success) : ?>
     <div class="alert alert-success">
         <?= esc($success) ?>
     </div>
-<?php endif ?>
+<?php endif ?> -->
 
 <div class="container-fluid m-3">
     <div class="btn-group">

@@ -284,7 +284,7 @@ class Recipe extends BaseController
                 }
 
 
-                return redirect()->to('/recipe-index')->with('success', 'Recette créée avec succès !');
+                return redirect()->to('recipe-index')->with('success', 'Recette créée avec succès !');
             } else {
                 return redirect()->to('/')->with('error', 'Accès refusé.');
             }

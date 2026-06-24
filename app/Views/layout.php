@@ -19,7 +19,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -32,17 +31,6 @@
 
 <body>
 
-    <?php if (session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success">
-            <?= esc(session()->getFlashdata('success')) ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger">
-            <?= esc(session()->getFlashdata('error')) ?>
-        </div>
-    <?php endif; ?>
 
     <header class="py-3">
         <div class="ban d-flex align-items-center pe-3">
@@ -122,18 +110,13 @@
                                 Proposer une recette
                             </a>
                         </li>
-
                     <?php endif ?>
-
                 </ul>
 
                 <!-- droite -->
                 <ul class="navbar-nav">
-
                     <?php if (session()->has('user_id')): ?>
-
                         <?php if (session()->get('role_id') == 3): ?>
-
                             <li class="nav-item">
                                 <a href="<?= base_url('/dashboard') ?>"
                                     class="nav-link">
@@ -166,7 +149,6 @@
 
                     <?php else: ?>
 
-
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="<?= base_url('login') ?>">
@@ -182,15 +164,26 @@
                         </li>
 
                     <?php endif; ?>
-
                 </ul>
-
             </div>
         </div>
     </nav>
 
-
     <main class="container-fluid px-2 w-100">
+
+    <?php if (session()->getFlashdata('success')) : ?>
+        <div class="alert alert-success">
+            <?= esc(session()->getFlashdata('success')) ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')) : ?>
+        <div class="alert alert-danger">
+            <?= esc(session()->getFlashdata('error')) ?>
+        </div>
+    <?php endif; ?>
+    
+
         <?= $this->renderSection('body') ?>
     </main>
     <footer>
