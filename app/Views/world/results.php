@@ -20,7 +20,7 @@
        <!-- grille de recettes, chaque carte pointe vers le détail -->
         <div class="recipes-grid">
             <?php foreach ($meals as $meal): ?>
-                <a href="<?= site_url('cuisine-du-monde/recette/' . (int)$meal['idMeal']) ?>" class="recipe-card">
+                <a href="<?= site_url('cuisine-du-monde/recipe/' . (int)$meal['idMeal']) ?>" class="recipe-card">
                     <img src="<?= esc($meal['strMealThumb']) ?>" alt="<?= esc($meal['strMeal']) ?>">
                     <h3><?= esc($meal['strMeal']) ?></h3>
                 </a>
