@@ -66,7 +66,7 @@ class World extends BaseController
 
     /**
      * Affiche le détail d'une recette via son ID TheMealDB
-     * GET /cuisine-du-monde/recette/(:num)
+   
      */
     public function detail(int $id): string
     {
@@ -89,6 +89,7 @@ class World extends BaseController
             throw $e;
         } catch (\Exception $e) {
             return view('world/error');
+           // dd($e->getMessage());
         }
     }
 }
