@@ -142,6 +142,9 @@ h2 {
   .ql-editor::before {
     left: 40px;
   }
+  .ql-editor {
+    padding-left: 45px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -150,5 +153,8 @@ h2 {
   }
   .ql-editor::before {
     left: 60px;
+  }
+   .ql-editor {
+    padding-left: 65px;
   }
 }
