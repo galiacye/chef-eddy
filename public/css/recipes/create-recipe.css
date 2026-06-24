@@ -8,7 +8,8 @@ body {
   padding-right: 3rem; */
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: "Syncopate";
 }
 
@@ -20,7 +21,6 @@ h1, h2 {
 .form-label {
   font-family: "Lobster";
   font-size: 2rem;
-
 }
 
 .infos {
@@ -61,7 +61,7 @@ h1, h2 {
   padding-bottom: 60px;
   padding-left: 20px;
   line-height: 40px;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-family: "Patrick Hand", cursive;
   color: #5a3d2b;
   position: relative;
@@ -80,7 +80,7 @@ h1, h2 {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 60px;
+  left: 20px;
   width: 2px;
   background: rgba(255, 0, 0, 0.25);
 }
@@ -111,10 +111,10 @@ h1, h2 {
   color: white;
 }
 .btn-coralPlus {
-  background-color:  #f78779;
+  background-color: #f78779;
 }
 .btn-coralPlus:hover {
-  background-color:#e85744;
+  background-color: #e85744;
 }
 .btn-ajout {
   background-color: #0ba3cd;
@@ -123,29 +123,32 @@ h1, h2 {
   background-color: #0b8d82;
 }
 .btn-blue {
-    background-color: #0ba3cd;
-  
-    width: 80px;
+  background-color: #0ba3cd;
+
+  width: 80px;
 }
 .btn-blue:hover {
-   background-color:#0b8d82;
-  
+  background-color: #0b8d82;
 }
 
 @media screen and (min-width: 768px) {
-
-
   .ql-editor.ql-blank::before {
+    /*::before = contenu fictif avant le dom pour afficher placeholder*/
     display: block;
     left: 85px !important;
     color: #f1e7d9 !important;
-    font-style: normal !important;
+    font-style: normal !important; /*pour passer par-dessus le style inline donc prioritaire de quill*/
+  }
+  .ql-editor::before {
+    left: 40px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  
   .ql-editor.ql-blank::before {
     display: block;
-}
+  }
+  .ql-editor::before {
+    left: 60px;
+  }
 }

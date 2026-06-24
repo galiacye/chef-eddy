@@ -75,7 +75,7 @@ foreach ($categories as $category) {
 <!--form_open_multipart est obligatoire dès qu'un input type = file 
 (ici pour charger l'image-->
 <?= form_open_multipart('add-recipe', ['id' => 'form']) ?>
-<div class="recipe-form px-5">
+<div class="recipe-form px-1 px-md-3 px-lg-5">
     <!--<div class="row">
     <div class="col-12 col-md-6"> pour diviser row en deux pour image éventuelle-->
 
