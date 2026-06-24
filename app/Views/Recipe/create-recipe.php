@@ -182,7 +182,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
     </div>
     </div>fermeture row-->
 
-    <div class="editeur">
+    <div class="editeur w-100 m-0">
         <!--contenu copié dans #content (caché) avant soumission (voir create-recipe.js) -->
         <label for="content">
             <h2 class="m-4">Votre Recette</h2>
@@ -194,7 +194,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
             <button class="ql-list" value="ordered"></button>
             <button class="ql-list" value="bullet"></button>
         </div>
-        <div id="editor"></div>
+        <div id="editor" class="w-100 m-0"></div>
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
         <!--tjrs esc-->
         <div class="bouton">

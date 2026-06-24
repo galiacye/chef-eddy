@@ -30,62 +30,43 @@ h1, h2 {
 
 /* container editeur */
 .editeur {
-
   flex: 1;
   min-width: 0;
-
   display: flex;
   flex-direction: column;
-
   background: #f7f1e8;
-
   border-radius: 18px;
-
   overflow: hidden;
-
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #toolbar {
   background: #efe2c5;
-
   padding: 12px 16px;
-
   border: none;
-
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* container quill */
 .editeur .ql-container {
   border: none !important;
-
   background: #fffdf8;
 }
 
 /* zone d'écriture */
 .ql-editor {
   min-height: 600px;
-
   padding-top: 40px;
-  padding-right: 50px;
+  padding-right: 15px;
   padding-bottom: 60px;
-  padding-left: 85px;
-
+  padding-left: 20px;
   line-height: 40px;
-
   font-size: 1.2rem;
-
   font-family: "Patrick Hand", cursive;
-
   color: #5a3d2b;
-
   position: relative;
-
   margin: 0;
-
   background-color: #fffdf8;
-
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0px,
@@ -93,38 +74,28 @@ h1, h2 {
     #d7e7ff 40px
   );
 }
-
 /* marge */
 .ql-editor::before {
   content: "";
-
   position: absolute;
-
   top: 0;
   bottom: 0;
-
   left: 60px;
-
   width: 2px;
-
   background: rgba(255, 0, 0, 0.25);
 }
-
 .ql-editor p {
   margin: 0;
 }
-
 /* marge */
 .ql-editor.ql-blank::before {
   display: none;
 }
-
 .ingredient-row {
   flex-direction: column;
 
   gap: 0.5rem;
 }
-
 .ingredient-row input,
 .ingredient-row select {
   width: 100% !important;
@@ -147,15 +118,13 @@ h1, h2 {
 }
 .btn-ajout {
   background-color: #0ba3cd;
-
 }
 .btn-ajout:hover {
   background-color: #0b8d82;
-
 }
 .btn-blue {
     background-color: #0ba3cd;
-   
+  
     width: 80px;
 }
 .btn-blue:hover {
@@ -168,11 +137,8 @@ h1, h2 {
 
   .ql-editor.ql-blank::before {
     display: block;
-
     left: 85px !important;
-
     color: #f1e7d9 !important;
-
     font-style: normal !important;
   }
 }

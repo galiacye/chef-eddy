@@ -186,7 +186,7 @@
 
         <?= $this->renderSection('body') ?>
     </main>
-    <footer>
+    <footer class="mt-5">
         <p>&copy; <?= date('Y') ?> Chef Eddy</p>
         <a href="<?= site_url('mentions-legales') ?>">Mentions légales</a>
     </footer>
