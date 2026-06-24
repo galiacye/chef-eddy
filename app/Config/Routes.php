@@ -105,7 +105,7 @@ $routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1
 //the meal db
 //en CI4 l'ordre des routes peut avoir de l'importance:
 // d'abord la route la plus spécifique
-$routes->get('cuisine-du-monde/recette/(:num)',  'World::detail/$1');
+$routes->get('cuisine-du-monde/recipe/(:num)',  'World::detail/$1');
 
 // puis la plus générale ((:segment) accepte espaces et tout)
 $routes->get('cuisine-du-monde/(:segment)',      'World::byCountry/$1');
