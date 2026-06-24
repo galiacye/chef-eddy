@@ -12,8 +12,8 @@
     <div class="alert alert-success"><?= esc($success) ?></div>
 <?php endif ?>
 
-<div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3 mt-2">
-
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-3 mt-2">
+<!--row-cols deter nb de col ds la ligne . pratique-->
     <?php foreach ($recipes as $recipe): ?>
         <div class="col">
 

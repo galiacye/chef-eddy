@@ -48,6 +48,7 @@ class Category extends BaseController
     {
         helper('form');
         $categoryModel = model('CategoryModel');
+       
     }
     public function updateCategory(int $category_id)
     {

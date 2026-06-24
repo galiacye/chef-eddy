@@ -17,6 +17,11 @@ h1, h2 {
   gap: 2rem;
 }
 
+.form-label {
+  font-family: "Lobster";
+  font-size: 2rem;
+
+}
 
 .infos {
   flex: 0 0 25%;
@@ -123,6 +128,39 @@ h1, h2 {
 .ingredient-row input,
 .ingredient-row select {
   width: 100% !important;
+}
+.bouton {
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  color: black;
+}
+.btn:hover {
+  color: white;
+}
+.btn-coralPlus {
+  background-color:  #f78779;
+}
+.btn-coralPlus:hover {
+  background-color:#e85744;
+}
+.btn-ajout {
+  background-color: #0ba3cd;
+
+}
+.btn-ajout:hover {
+  background-color: #0b8d82;
+
+}
+.btn-blue {
+    background-color: #0ba3cd;
+   
+    width: 80px;
+}
+.btn-blue:hover {
+   background-color:#0b8d82;
+  
 }
 
 @media screen and (min-width: 768px) {

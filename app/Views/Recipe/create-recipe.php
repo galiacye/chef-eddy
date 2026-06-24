@@ -113,7 +113,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <?= form_dropdown('category_id', $options_categories, set_value('category_id'), $cat) ?>
         <?= validation_show_error('category_id') ?>
 
-        <label>Tags</label>
+        <label class="form-label mt-4 mb-1">Tags</label>
         <div class="d-flex flex-wrap gap-3 w-50">
             <?php foreach ($tags as $tag) : ?>
                 <div class="form-check">
@@ -133,7 +133,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         </div>
         <?= validation_show_error('tags') ?>
 
-        <label>Ingrédients</label>
+        <label class="form-label mt-4 mb-1">Ingrédients</label>
         <div id="ingredients-container" class="w-50">
             <div class="ingredient-row gap-2 mb-2">
                 <?php
@@ -165,10 +165,10 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
                 <small class="text-muted parsing-preview w-50"></small>
 
                 <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50']) ?>
-                <button type="button" class="btn btn-danger supprimer-ligne">X</button>
+                <button type="button" class="btn btn-coralPlus mt-2 supprimer-ligne">Supprimer</button>
             </div>
         </div>
-        <button type="button" class="btn btn-secondary mt-2 mb-3" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
+        <button type="button" class="btn btn-ajout mb-4" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
     </div>
     <!-- </div>
     <div class="col-12 col-md-6">
@@ -197,7 +197,9 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <div id="editor"></div>
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
         <!--tjrs esc-->
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <div class="bouton">
+            <button type="submit" class="btn btn-blue m-4">Envoyer</button>
+        </div>
     </div>
 </div>
 <?= form_close() ?>
