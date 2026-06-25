@@ -82,7 +82,7 @@
                                         <?= esc($tag->name) ?>
                                     </a>
                                 <?php else : ?>
-                                    <a href="<?= site_url('tag/' . $tag->id) ?>" class="btn btn-tag">
+                                    <a href="<?= site_url('tag/show/' . $tag->id) ?>" class="btn btn-tag">
                                         <?= esc($tag->name) ?>
                                     </a>
                                 <?php endif ?>

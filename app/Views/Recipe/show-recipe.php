@@ -91,7 +91,7 @@ if ($user_id) {
     <section class="card-block">
         <h2>La recette</h2>
         <div class="editor">
-            <?= esc($recipe->content) ?>
+            <?= html_entity_decode(esc($recipe->content)) ?>
         </div>
     </section>
 
