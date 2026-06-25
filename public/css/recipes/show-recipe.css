@@ -1,6 +1,6 @@
 @font-face {
   font-family: "ginchiest";
-  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format('truetype');
+  src: url("/fonts/ginchiest-font/Ginchiest-mLWgm.otf") format("truetype");
 }
 
 body {
@@ -35,16 +35,15 @@ pour show-recipe1
   gap: 2rem;
 }
 .recipeTitle {
-  margin: 0;
-  font-family: "ginchiest";
+  margin-top: 1rem;
+  font-family: "Lobster";
   font-size: 2rem;
 }
 
-
 .title-and-tags {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .title-and-tag h2 {
   font-size: 1rem;
@@ -56,10 +55,10 @@ pour show-recipe1
 }
 
 .larecette {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 2rem;
-    font-family: "creamer";
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 2rem;
+  font-family: "creamer";
 }
 
 /*
@@ -80,43 +79,41 @@ pour show-recipe1
 }
 */
 .editor {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-} 
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
 
 .recipe-bloc {
- padding: 1rem;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.55);
-
-    border-top: 2px solid rgba(0,0,0,0.08);
-    border-bottom: 2px solid rgba(0,0,0,0.08);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.6);
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .btn-is {
-    background-color: rgb(250, 142, 102);
+  background-color: rgb(250, 142, 102);
 }
 .btn-isNot {
-    background-color:#6cf8a2; 
+  background-color: #6cf8a2;
 }
 .comment-bloc {
   padding: 1rem;
-  background-color:#d0eaf5;
+  background-color: #d0eaf5;
   border: 1px solid rgb(175, 187, 207);
   border-radius: 10px;
 }
 
 .ingredients {
   background-color: azure;
- padding: 15px;
-    border-radius: 6px;
-    border: rgb(135, 150, 150);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15),
-      0 5px 10px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  border-radius: 6px;
+  border: rgb(135, 150, 150);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 5px 10px rgba(0, 0, 0, 0.08);
 }
 
 @media screen and (min-width: 768px) {
@@ -126,7 +123,7 @@ pour show-recipe1
     display: block;
     margin: 1rem;
     width: 100%;
-   
+
     border-radius: 20px;
     box-shadow:
       0 10px 25px rgba(0, 0, 0, 0.15),
@@ -134,7 +131,7 @@ pour show-recipe1
   }
 
   .recipeTitle {
-    color: rgb(247, 1, 115);
+    color: rgb(17, 1, 8);
     font-size: 2.2rem;
   }
   .tagName {
@@ -158,16 +155,15 @@ pour show-recipe1
   }
 
   .recipe-block {
-        padding: 3rem 10rem; 
-    }
+    padding: 3rem 10rem;
+  }
   .ingredients {
-    max-width:700px;
-   
+    max-width: 700px;
   }
 }
 
 @media (min-width: 1200px) {
-    .recipe-block {
-        padding: 4rem 18vw;
-    }
+  .recipe-block {
+    padding: 4rem 18vw;
+  }
 }

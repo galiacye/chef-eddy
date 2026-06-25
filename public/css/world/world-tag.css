@@ -1,7 +1,9 @@
 body {
   background-color: #efe2c5;
 }
-
+.btn-action {
+ max-width: 150px;
+}
 .btn-bloc {
   background-color: #f8f0e5;
   padding: 20px;

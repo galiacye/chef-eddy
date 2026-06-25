@@ -5,14 +5,15 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/tags/world-tag.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/world/world-tag.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 <div class="container">
-
-    <h1 class="text-center mt-4 mb- title">Cuisine du monde</h1>
-    <!-- liste des pays retournés par l'api, affichés comme des tags cliquables  -->
+    
+        <h1 class="col-8 text-center mt-4 mb- title">Cuisine du monde</h1>
+        <!-- liste des pays retournés par l'api, affichés comme des tags cliquables  -->
+  
     <div class="row">
         <div class="btn-bloc d-flex gap-2 flex-wrap justify-content-between">
             <?php foreach ($countries as $country): ?>
