@@ -14,14 +14,14 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="<?= site_url('recipes/' . $fav['id']) ?>">
+                                <a href="<?= base_url('recipe/' . $fav['id']) ?>">
                                     <?= esc($fav['title']) ?><!--$fav est un tab car getByUser utilise getResultArray()-->
                                 </a>
                             </h5>
                         </div>
                         <div class="card-footer">
                             <!-- bouton pour retirer directement depuis la liste -->
-                            <form action="<?= site_url('favorites/toggle/' . $fav['id']) ?>" method="post">
+                            <form action="<?= base_url('favorites/toggle/' . $fav['id']) ?>" method="post">
                                 <?= csrf_field() ?>
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     Retirer

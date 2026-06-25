@@ -17,45 +17,46 @@
 
     <h1 class="dash-title">Tableau de bord</h1>
 
-    <!-- Stats . entiers esc inutile-->
-    <div class="stats-row">
-        <div class="stat-card">
-            <span class="stat-number"><?= $nb_users ?></span>
-            <span class="stat-label">Utilisateurs</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number"><?= $nb_recipes ?></span>
-            <span class="stat-label">Recettes</span>
-        </div>
-        <div class="stat-card stat-warn">
-            <span class="stat-number"><?= $nb_recipes_pending ?></span>
-            <span class="stat-label">En attente</span>
-        </div>
+    
+    <!-- Statistiques du site. entiers esc inutile-->
+  <div class="row-stat d-flex justify-content-around mb-2 g-2">
+    <div class="stat-card">
+        <div class="stat-number"><?= $nb_users ?></div>
+        <div class="stat-label">Utilisateurs</div>
     </div>
+    <div class="stat-card">
+        <div class="stat-number"><?= $nb_recipes ?></div>
+        <div class="stat-label">Recettes</div>
+    </div>
+    <div class="stat-card stat-warn">
+        <div class="stat-number"><?= $nb_recipes_pending ?></div>
+        <div class="stat-label">En attente</div>
+    </div>
+</div>
 
-    <!-- nav cards -->
-    <div class="nav-grid">
-        <a href="Admin/users-index" class="nav-card">
-            <span class="nav-icon"></span>
-            <span class="nav-title">Utilisateurs</span>
-            <span class="nav-sub">Comptes, rôles, accès</span>
-        </a>
-        <a href="Admin/recipes-index" class="nav-card">
-            <span class="nav-icon"></span>
-            <span class="nav-title">Recettes</span>
-            <span class="nav-sub">Gérer, modifier, supprimer</span>
-        </a>
-        <a href="Admin/ing-index" class="nav-card">
-            <span class="nav-icon"></span>
-            <span class="nav-title">Ingrédients</span>
-            <span class="nav-sub">Voir, supprimer les doublons</span>
-        </a>
-        <a href="Admin/comments" class="nav-card">
-            <span class="nav-icon"></span>
-            <span class="nav-title">Commentaires</span>
-            <span class="nav-sub">Modérer</span>
-        </a>
-    </div>
+<!-- nav cards -->
+<div class="nav-grid">
+    <a href="Admin/users-index" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Utilisateurs</div>
+        <div class="nav-sub">Comptes, rôles, accès</div>
+    </a>
+    <a href="Admin/recipes-index" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Recettes</div>
+        <div class="nav-sub">Gérer, modifier, supprimer</div>
+    </a>
+    <a href="Admin/ing-index" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Ingrédients</div>
+        <div class="nav-sub">Voir, supprimer les doublons</div>
+    </a>
+    <a href="Admin/comments" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Commentaires</div>
+        <div class="nav-sub">Modérer</div>
+    </a>
+</div>
 
     <!-- homepage tag -->
     <div class="tag-panel">

@@ -1,8 +1,8 @@
 /* dashboard.css */
 
 body {
-    background-color: #0a0a0a;
-    background-image: url('/img/camouflage.jpg');
+  background: linear-gradient(135deg, #1a3a1a, #1f4a1f);
+    background-image: url('/img/Home/dash-bg.jpg');
     background-size: cover;
     background-attachment: fixed;
     min-height: 100vh;
@@ -14,11 +14,11 @@ body {
     padding: 2rem 1.5rem 4rem;
 }
 
-/* Flash */
+
 .flash-success {
     position: relative;
     background: linear-gradient(135deg, #1a3a1a, #1f4a1f);
-    border: 1px solid rgba(100, 200, 100, 0.3);
+    border: 1px solid rgba(100, 200, 100, 1);
     color: #90e090;
     padding: 0.85rem 1.25rem;
     border-radius: 10px;
@@ -49,21 +49,28 @@ body {
     display: block;
     height: 3px;
     width: 60%;
-    background: linear-gradient(90deg, #ff6f61, transparent);
+    background-color: #fc7468;
     margin-top: 6px;
     border-radius: 2px;
 }
 
-/* Stats */
-.stats-row {
+
+/* .stats-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
-}
+} */
 
+.row-stat {
+
+}
 .stat-card {
-    position: relative;
+    background-color: #1a1a1a;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    width: 120px;
+    /* position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,7 +80,7 @@ body {
     background: linear-gradient(145deg, rgba(30,30,30,0.85), rgba(15,15,15,0.9));
     border: 1px solid rgba(255,255,255,0.08);
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); */
 }
 .stat-card::before {
     content: "";
