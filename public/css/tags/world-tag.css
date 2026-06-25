@@ -1,0 +1,28 @@
+body {
+  background-color: #efe2c5;
+}
+
+.btn-bloc {
+  background-color: #f8f0e5;
+  padding: 20px;
+  border-radius: 10px;
+}
+.btn-worldTag {
+  
+    display: flex;
+    align-items: center;
+    color: white;
+    max-height: 30px;
+    background: linear-gradient(#008eb6, #0bb5a7);
+  /* border: 1px solid rgb(65, 40, 40); */
+  border-radius: 6px;
+
+}
+.btn-worldTag:hover {
+background: #fbf6f0;
+box-shadow: 0 3px 3px  #efe2c5;
+font-family: "Lobster";
+}
+.title {
+  font-family: "Syncopate";
+}

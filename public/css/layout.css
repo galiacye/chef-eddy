@@ -47,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 140px;
+
   height: 100px;
   overflow: hidden;
   /* background: linear-gradient(
@@ -117,7 +117,7 @@
 .ban h1 {
   font-family: "Syncopate";
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .navbar {
@@ -212,6 +212,7 @@ footer p, footer a {
 @media screen and (min-width: 768px) {
   .ban {
     height: 140px;
+    gap: 100px;
   }
   .ban h1 {
     font-size: 3rem;
