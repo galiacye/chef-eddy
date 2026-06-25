@@ -1,5 +1,5 @@
 <?= $this->extend('layout') ?>
-<?= $this->section('meta_description') ?>Recettes de cuisine <?= esc($country) ?>Saveurs du monde sur Chef Eddy<?= $this->endSection() ?>
+<?= $this->section('meta_description') ?>Saveurs du monde sur Chef Eddy<?= $this->endSection() ?>
 <?= $this->section('title') ?>
 <title>Cuisine du monde</title>
 <?= $this->endSection() ?>
@@ -15,6 +15,7 @@
 
      <!-- liste des pays retournés par l'api, affichés comme des tags cliquables  -->
     <div class="tags">
+       
         <?php foreach ($countries as $country): ?>
             <a href="<?= site_url('cuisine-du-monde/' . urlencode($country['strArea'])) ?>" class="tag">
                 <!--strArea: clé json du pays-->

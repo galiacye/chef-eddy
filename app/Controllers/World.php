@@ -37,16 +37,17 @@ class World extends BaseController
             //     fn($country) => !in_array($country['strArea'], $this->excluded) //propriété de classe d'ou $this
             //si var interne à la méthode serait $excluded
 
-
+//dd($countries);
             return view('world/worldIndex', ['countries' => $countries]);
         } catch (\Exception $e) {
+            dd($e->getMessage());
             //  cas d'absence de connexion ou d'erreur API
             return view('world/error');
         }
     }
     /**
      * les recettes d'un pays
-     * GET /cuisine-du-monde/(:alpha)
+     * get /cuisine-du-monde/(:alpha)
      */
     public function byCountry(string $country): string
     {
@@ -67,6 +68,7 @@ class World extends BaseController
                 'meals'   => $meals,
             ]);
         } catch (\Exception $e) {
+
             return view('world/error');
         }
     }

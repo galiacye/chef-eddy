@@ -14,13 +14,6 @@
     <div class="d-flex justify-content-center mt-3">
         <div class="search-wrapper">
 
-<<<<<<< HEAD
-    <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
-        <input type="text" 
-               name="search" 
-               class="form-control" 
-               placeholder="Tapez le nom d'une recette ou un ingrédient">
-=======
             <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
                 <input type="text"
                     name="search"
@@ -58,46 +51,9 @@
             </div>
 
         </div>
->>>>>>> saveMealdb
     </div>
     <?= form_close() ?>
 
-<<<<<<< HEAD
-    <div class="d-flex justify-content-center mb-2">
-        <button type="button" class="btn btn-filter btn-sm" 
-                data-bs-toggle="collapse" data-bs-target="#filtres">
-            Filtrez 
-        </button>
-    </div>
-
-   <div class="collapse" id="filtres">
-    <p class="text-muted mb-2 mt-2 text-center">Exclure :</p>
-    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
-        <?php foreach ($categories as $cat): ?>
-            <input class="allergen-check" 
-                   type="checkbox"
-                   name="without[]"
-                   value="<?= esc($cat->name) ?>"
-                   id="cat_<?= esc($cat->name) ?>">
-            <label class="allergen-label" for="cat_<?= esc($cat->name) ?>">
-                 <?= esc($cat->name) ?>
-            </label>
-        <?php endforeach ?>
-    </div>
-</div>
-    <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-search w-100">
-            <i class="bi bi-search"></i> Rechercher
-        </button>
-    </div>
-</div>
-</div>
-<?= form_close() ?>
-
-
-=======
-
->>>>>>> saveMealdb
     <div class="row mt-4 w-100 mx-0">
 
         <!-- colonne de gauche : tags -->
@@ -121,12 +77,6 @@
                         <h2 class="tag-title text-center mb-4">Tags</h2>
                         <?php foreach ($tags as $tag) : ?>
                             <div class="d-flex justify-content-center align-items-center mb-4">
-<<<<<<< HEAD
-                                <a href="<?= site_url('tag/show/' . $tag->id) ?>"
-                                    class="btn btn-tag">
-                                    <?= esc($tag->name) ?>
-                                </a>
-=======
                                 <?php if ($tag->name === 'World Food') : ?>
                                     <a href="<?= site_url('cuisine-du-monde') ?>" class="btn btn-tag">
                                         <?= esc($tag->name) ?>
@@ -136,18 +86,13 @@
                                         <?= esc($tag->name) ?>
                                     </a>
                                 <?php endif ?>
->>>>>>> saveMealdb
                             </div>
                         <?php endforeach ?>
                     </div>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
        
-=======
-        <!-- recettes -->
->>>>>>> saveMealdb
         <div class="col-md-10">
             <div class="row chef-recipes">
                 <?php foreach ($recipes as $recipe) : ?>
