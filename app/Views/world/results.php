@@ -17,7 +17,7 @@ Résultats pour "Cuisine de <?= esc($country) ?>" sur Chef Eddy
  <a href="<?= site_url('cuisine-du-monde') ?>" class="btn-action">
    Retour à la liste des pays
     </a>
-    <h1 class="recipeTitle mt-2"><?= esc($country) ?>  Food</h1>
+    <h1 class="recipeTitle mt-2 text-center"><?= esc($country) ?>  Food</h1>
 
     <?php if (empty($meals)): ?>
       <!-- cas où api ne retourne aucune recette pour ce pays  -->
