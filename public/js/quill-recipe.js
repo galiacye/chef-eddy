@@ -4,20 +4,20 @@ const quill = new Quill('#editor', {
     theme: 'snow',
 });
 
-// Tooltips FR
+// tooltips en français
 document.querySelector('.ql-bold').setAttribute('title', 'Gras');
 document.querySelector('.ql-italic').setAttribute('title', 'Italique');
 document.querySelector('.ql-underline').setAttribute('title', 'Souligné');
 document.querySelector('.ql-list[value="ordered"]').setAttribute('title', 'Liste numérotée');
 document.querySelector('.ql-list[value="bullet"]').setAttribute('title', 'Liste à puces');
 
-// Récupérer le contenu existant si retour de validation
+// récupérer le contenu existant si retour de validation
 const existingContent = document.getElementById('content').value;
 if (existingContent) {
     quill.root.innerHTML = existingContent;
 }
 
-// Injecter le HTML Quill dans le champ caché au submit
+// injecter le html quill ds le champ caché au submit
 document.getElementById('form').addEventListener('submit', (e) => {
     const text = quill.getText().trim();
     if (text.length === 0) {

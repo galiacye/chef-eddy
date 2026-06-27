@@ -4,15 +4,19 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background: linear-gradient(145deg, #c3f8e6, #bbf4f8);
-  color: #222;
+  font-family:
+    system-ui,/* prend la police la plus adaptée au navigateur et à l'appareil*/
+    -apple-system,
+    sans-serif;
+    color: black;
+    background-color: #caeff3;
+  /* background: linear-gradient(145deg, #c3f8e6, #bbf4f8); */
+  
 }
 
 .recipe-page {
   padding: 2rem 1rem;
 }
-
 
 .banner {
   display: flex;
@@ -33,21 +37,21 @@ body {
 }
 
 .recipe-title {
-  font-family: "ginchiest";
+  font-family: "Lobster";
   font-size: 2.5rem;
   margin: 0.5rem 0;
 }
 
-
 .tag {
   display: inline-block;
-  background: rgba(255,255,255,0.7);
+  background-color:#ff7e6c;
+  color: white;
+  font-family: "Syncopate";
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
   margin: 0.2rem;
   font-size: 0.85rem;
 }
-
 
 .recipe-img {
   width: 100%;
@@ -58,26 +62,24 @@ body {
 }
 
 .info-card {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);/*4ème param=transparence*/
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);/*lhorizontal, vertical, flou, couleur*/
 }
 
-
 .card-block {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   padding: 1.5rem;
   border-radius: 16px;
   margin-bottom: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
 .card-block h2 {
-  font-family: "ginchiest";
+  font-family: "Lobster";
   margin-bottom: 1rem;
 }
-
 
 .ingredients-grid {
   display: grid;
@@ -90,7 +92,7 @@ body {
   padding: 0.8rem;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
 
 .editor {
@@ -105,27 +107,37 @@ body {
 }
 
 .comment-reply {
-    margin-left: 1.5rem;
-    margin-top: 0.5rem;
-    padding: 0.75rem;
-    border-left: 3px solid #ffc107;
-    background: rgba(255, 193, 7, 0.08);
-    border-radius: 0 8px 8px 0;
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-left: 3px solid #ffc107;
+  background: rgba(255, 193, 7, 0.08);
+  border-radius: 0 8px 8px 0;
 }
 
 .reply-author {
-    font-weight: 500;
-    color: #ffc107;
+  font-weight: 500;
+  color: #ffc107;
 }
 
 .btn-fav {
-  background: #6cf8a2;
+  background-color: #0ba3cd;
+  color: white;
   border: none;
   padding: 0.7rem 1rem;
   border-radius: 10px;
   cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+.btn-fav:hover {
+  transform: translateY(-4px);
+  /* translateY(10px): descend
+translateY(-10px): monte */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
 .btn-fav.active {
   background: #fa8e66;
 }
@@ -133,10 +145,16 @@ body {
 /* cta */
 .btn-action {
   display: inline-block;
-  margin-top: 1rem;
-  background: #1dbf73;
+  background-color: #0ba3cd;
   color: white;
   padding: 0.8rem 1.2rem;
-  border-radius: 12px;
+  border-radius: 10px;
   text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn-action:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }

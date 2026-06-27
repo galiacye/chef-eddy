@@ -21,9 +21,6 @@
 
 <?= $this->section('body') ?>
 
-<?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
-<?php endif ?>
 
 <h2>Ajoutez un commentaire</h2>
 

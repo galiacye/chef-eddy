@@ -2,6 +2,7 @@ body {
     background-color:#f4fcf0 ;
 }
 
+
 .nav-grid {
     display: flex;
     flex-wrap: wrap;
@@ -37,4 +38,19 @@ body {
 .nav-title {
     font-size: 0.9rem;
     font-weight: 500;
+}
+.btn-emeraude {
+    background-color:#0b8d82;
+    color: white;
+
+}
+.btn-blue {
+    background-color: #0ba3cd;
+    color: white;
+}
+.btn-corailPlus {
+    background-color: #f06351;
+}
+.btn-blue:hover {
+    background-color: #25f3bc;
 }

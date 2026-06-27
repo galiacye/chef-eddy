@@ -4,8 +4,10 @@
 <?= $this->section('title') ?><titre>Tous les Tags</titre><?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/tags/tag-index.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/categories/cat-index.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
+
+
 
 <?= $this->section('body') ?>
 <h2 class="text-center m-4">Les Tags</h2>

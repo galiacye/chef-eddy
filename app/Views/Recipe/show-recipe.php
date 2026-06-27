@@ -17,7 +17,7 @@
 <title>Recette de <?= esc($recipe->title) ?></title>
 <?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/recipes/crecipe.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/recipes/recipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -91,14 +91,14 @@ if ($user_id) {
     <section class="card-block">
         <h2>La recette</h2>
         <div class="editor">
-            <?= esc($recipe->content) ?>
+            <?= html_entity_decode(esc($recipe->content)) ?>
         </div>
     </section>
 
     <?php if ($user_id) : ?>
         <form action="<?= site_url('favorites/toggle/' . (int)$recipe->id) ?>" method="post" class="fav-form">
             <?= csrf_field() ?>
-            <button class="btn-fav <?= $isFav ? 'active' : '' ?>">
+            <button class="btn-fav mb-4 shadow <?= $isFav ? 'active' : '' ?>">
                 <?= $isFav ? 'Retirer des favoris' : 'Ajouter aux favoris' ?>
             </button>
         </form>

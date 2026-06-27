@@ -10,12 +10,12 @@ use App\Models\CategoryModel;
 
 class Tag extends BaseController
 {
-   
-    public function __construct(){
+
+    public function __construct()
+    {
         helper('form');
-   
     }
-//tous les tags
+    //tous les tags
     public function index()
     {
         $tagModel = model('TagModel');
@@ -27,27 +27,29 @@ class Tag extends BaseController
 
         return view('Tag/index', $data);
     }
-//les recettes d'un tag : show
+    //les recettes d'un tag : show
     public function showRecipesByTag(int $tag_id)
     {
         $tagModel = model('TagModel');
         $tag = $tagModel->find($tag_id);
-        $recipes = $tagModel->getRecipesByTag($tag_id);
 
+        if ($tag->name === 'World Food') {
+            return redirect()->to(site_url('cuisine-du-monde'));
+        }
+
+        $recipes = $tagModel->getRecipesByTag($tag_id);
         $data = [
             'tag' => $tag,
             'recipes' => $recipes
         ];
 
-        return view('Tag/show', $data);
+        return view('tag/show', $data);
     }
 
     public function addTag()
     {
         helper('form');
         $tagModel = model('TagModel');
-
-        
     }
 
     public function updateTag(int $tag_id)
@@ -55,8 +57,6 @@ class Tag extends BaseController
         helper('form');
         $tagModel = model('TagModel');
         $tag = $tagModel->find($tag_id);
-
-        
     }
 
     public function deleteTag(int $tag_id)

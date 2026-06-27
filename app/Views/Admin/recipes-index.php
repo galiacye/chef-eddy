@@ -37,12 +37,12 @@
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 
-<?php $success = session()->getFlashdata('success') ?>
+<!-- <?php $success = session()->getFlashdata('success') ?>
 <?php if ($success) : ?>
     <div class="alert alert-success">
         <?= esc($success) ?>
     </div>
-<?php endif ?>
+<?php endif ?> -->
 
 <div class="container-fluid m-3">
     <div class="btn-group">
@@ -50,9 +50,8 @@
         <a href="<?= base_url('Admin/recipes-index?status=pending') ?>"
             class="btn <?= $status === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
         <a href="<?= base_url('Admin/recipes-index?status=approved') ?>"
-            class="btn <?= $status === 'approved' ? 'btn-success' : 'btn-outline-success' ?>">Approuvées</a>
-        <a href="<?= base_url('Admin/recipes-index?status=rejected') ?>"
-            class="btn <?= $status === 'rejected' ? 'btn-danger' : 'btn-outline-danger' ?>">Rejetées</a>
+            class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-success' ?>">Approuvées</a>
+  
     </div>
     <div class="row m-3">
 
@@ -68,11 +67,11 @@
                         <p class="recipe-author"><?= esc($recipe->username) ?></p>
                     </div>
                     <div class="recipe-actions">
-                        <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-primary">Voir</a>
+                        <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-blue">Voir</a>
                         <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
                             onsubmit="return confirm('Supprimer définitivement cette recette?')">
                             <?= csrf_field() ?>
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                            <button type="submit" class="btn btn-coralPlus">Supprimer</button>
                         </form>
                     </div>
                 </li>

@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
         placeholder="Ex: 200g farine"
         data-index="${index}">
 
-    <input type="hidden" name="ingredients[${index}][nom]" id="ing-nom-${index}">
-    <input type="hidden" name="ingredients[${index}][quantite]" id="ing-qte-${index}">
-    <input type="hidden" name="ingredients[${index}][unite]" id="ing-unite-${index}">
+    <input type="hidden" name="ingredients[${index}][name]" id="ing-name-${index}">
+    <input type="hidden" name="ingredients[${index}][quantity]" id="ing-qty-${index}">
+    <input type="hidden" name="ingredients[${index}][unit]" id="ing-unit-${index}">
 
     <small class="text-muted parsing-preview w-100"></small>
 
-    <select name="ingredients[${index}][categorie]" class="form-select w-25">
+    <select name="ingredients[${index}][category]" class="form-select w-25">
         ${options}
     </select>
 
@@ -79,10 +79,10 @@ document
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 //découpe la saisie en objet js { quantite, unite, nom }
-  function parseIngredient(texte) {
-    const unitesEchappees = unites.map((u) => escapeRegex(u));
+  function parseIngredient(text) {
+    const escapedUnits = units.map((u) => escapeRegex(u));
     const regex = new RegExp(
-      `^(\\d+[.,]?\\d*)\\s*(${unitesEchappees.join("|")})?\\s*(.+)$`,
+      `^(\\d+[.,]?\\d*)\\s*(${escapedUnits.join("|")})?\\s*(.+)$`,
       "i",
     );
 
@@ -92,16 +92,16 @@ document
 
 
     //verifier si saisie matche avec regex
-    const match = texte.trim().match(regex);//trim supp espaces
+    const match = text.trim().match(regex);//trim supp espaces
     if (match) {
       return {//match est un tab
-        quantite: match[1],
-        unite: match[2] || "",//peut être indéfini: 1 oeuf
-        nom: match[3].trim(),
+        quantity: match[1],
+        unit: match[2] || "",//peut être indéfini: 1 oeuf
+        name: match[3].trim(),
       };
     }
     // si ni quantité ni unité (sel)
-    return { quantite: "", unite: "", nom: texte.trim() };
+    return { quantity: "", unit: "", name: text.trim() };
   }
 
   // écoute ce que tape user et remplit les champs cachés
@@ -109,15 +109,15 @@ document
     if (!e.target.classList.contains("ingredient-input")) return;
     const index = e.target.dataset.index;
     const parsed = parseIngredient(e.target.value);
-    document.getElementById(`ing-nom-${index}`).value = parsed.nom;
-    document.getElementById(`ing-qte-${index}`).value = parsed.quantite;
-    document.getElementById(`ing-unite-${index}`).value = parsed.unite;
+    document.getElementById(`ing-name-${index}`).value = parsed.name;
+    document.getElementById(`ing-qty-${index}`).value = parsed.quantity;
+    document.getElementById(`ing-unit-${index}`).value = parsed.unit;
   });
 
   //  submit
   document.getElementById("form").addEventListener("submit", (e) => {
     const html = quill.root.innerHTML;
-    document.getElementById("contenu").value = html;
+    document.getElementById("content").value = html;
 
     // vérifier que ce n'est pas vide
     const text = quill.getText().trim();
