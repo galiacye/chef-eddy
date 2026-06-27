@@ -135,7 +135,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
 
         <label class="form-label mt-4 mb-1">Ingrédients</label>
         <div id="ingredients-container" class="w-50">
-            <div class="ingredient-row gap-2 mb-2">
+            <div class="ingredient-row d-flex flexwrap:nowrap gap-2 mb-2">
                 <?php
                 $ing_name = [
                     'name'        => 'ingredients[0][name]',

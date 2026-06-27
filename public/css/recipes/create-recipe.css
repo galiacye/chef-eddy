@@ -8,8 +8,7 @@ body {
   padding-right: 3rem; */
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: "Syncopate";
 }
 
@@ -92,9 +91,8 @@ h2 {
   display: none;
 }
 .ingredient-row {
+  display: flex;
   flex-direction: column;
-
-  gap: 0.5rem;
 }
 .ingredient-row input,
 .ingredient-row select {
@@ -112,6 +110,7 @@ h2 {
 }
 .btn-coralPlus {
   background-color: #f78779;
+  max-width: 100px;
 }
 .btn-coralPlus:hover {
   background-color: #e85744;
@@ -129,6 +128,10 @@ h2 {
 }
 .btn-blue:hover {
   background-color: #0b8d82;
+}
+.supprimer-ligne {
+  max-width: 100px;
+  background-color: #fc635b;
 }
 
 @media screen and (min-width: 768px) {
