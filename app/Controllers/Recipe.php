@@ -95,7 +95,8 @@ class Recipe extends BaseController
 
 
         if ($this->request->is('post') === false) { // =if ($this->request->getMethod() !== 'post')
-
+ 
+       
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
@@ -103,6 +104,8 @@ class Recipe extends BaseController
                 'categories_ing_db'  => $ingredientModel->getCategory()
             ]);
         } else {
+            // var_dump($this->request->getPost()) ;
+            // die();
             // L'user_id vient de la session
             $role_id = session()->get('role_id');
             if ($role_id == 2 || $role_id == 3) {
@@ -380,7 +383,7 @@ class Recipe extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                dd($this->validator->getErrors());
+                //dd($this->validator->getErrors());
                 return view('Recipe/update-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->getRecipe($id),

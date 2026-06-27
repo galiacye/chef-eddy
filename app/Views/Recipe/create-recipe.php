@@ -202,6 +202,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
         <!--tjrs esc-->
         <div class="bouton">
+            
             <button type="submit" class="btn btn-blue m-4">Envoyer</button>
         </div>
     </div>
