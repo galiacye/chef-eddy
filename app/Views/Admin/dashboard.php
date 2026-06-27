@@ -19,7 +19,7 @@
 
     
     <!-- Statistiques du site. entiers esc inutile-->
-  <div class="row-stat d-flex justify-content-around mb-2 g-2">
+  <div class="stat d-flex justify-content-around mb-2 g-2">
     <div class="stat-card">
         <div class="stat-number"><?= $nb_users ?></div>
         <div class="stat-label">Utilisateurs</div>

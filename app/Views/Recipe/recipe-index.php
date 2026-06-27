@@ -7,10 +7,6 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
-<?php $success = session()->getFlashdata('success') ?>
-<?php if ($success) : ?>
-    <div class="alert alert-success"><?= esc($success) ?></div>
-<?php endif ?>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-3 mt-2">
 <!--row-cols deter nb de col ds la ligne . pratique-->
