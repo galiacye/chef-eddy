@@ -52,7 +52,7 @@
             <?php endforeach ?>
         </ul>
 
-        <div><?= esc($recipe->content) ?></div>
+        <div><?= html_entity_decode(esc($recipe->content)) ?></div>
     </div>
     <div class="btn-box d-flex">
 
@@ -68,12 +68,12 @@
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-emeraude">Approuver</button>
             </form>
-<div class="btn-bottom">
-            <form action="<?= base_url('Admin/recipe/pending/' . $recipe->id) ?>" method="post">
-                <?= csrf_field() ?>
-                <button type="submit" class="btn btn-secondary btn-sm">Remettre en attente</button>
-            </form>
-</div>
+            <div class="btn-bottom">
+                <form action="<?= base_url('Admin/recipe/pending/' . $recipe->id) ?>" method="post">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-secondary btn-sm">Remettre en attente</button>
+                </form>
+            </div>
 
         <?php } elseif ($recipe->status === 'approved') { ?>
             <form action="<?= base_url('Admin/recipe/reject/' . $recipe->id) ?>" method="post">

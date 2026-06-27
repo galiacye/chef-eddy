@@ -95,8 +95,8 @@ class Recipe extends BaseController
 
 
         if ($this->request->is('post') === false) { // =if ($this->request->getMethod() !== 'post')
- 
-       
+
+
             return view('Recipe/create-recipe', [
                 'tags'       => $tagModel->findAll(),
                 'categories' => $categoryModel->findAll(),
@@ -113,7 +113,7 @@ class Recipe extends BaseController
                 $rules = [
                     "title" => [
                         "label" => "Titre",
-                        "rules" => "required|min_length[2]|max_length[50]",
+                        "rules" => "required|min_length[2]|max_length[150]",
                         "errors" => [
                             "required"   => "Titre requis",
                             "min_length" => "Titre trop court",
@@ -129,23 +129,30 @@ class Recipe extends BaseController
                             "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                         ]
                     ],
+                    // "prep_time" => [
+                    //     "label" => "Temps de préparation",
+                    //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
+                    //     "errors" => [
+                    //         "integer"               => "Le temps de préparation doit être un nombre entier",
+                    //         "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
+                    //         "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
+                    //     ]
+                    // ],
+                    // "cook_time" => [
+                    //     "label" => "Temps de cuisson",
+                    //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
+                    //     "errors" => [
+                    //         "integer"               => "Le temps de cuisson doit être un nombre entier",
+                    //         "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
+                    //         "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
+                    //     ]
                     "prep_time" => [
                         "label" => "Temps de préparation",
-                        "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                        "errors" => [
-                            "integer"               => "Le temps de préparation doit être un nombre entier",
-                            "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
-                            "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
-                        ]
+                        "rules" => "permit_empty|max_length[100]",
                     ],
                     "cook_time" => [
                         "label" => "Temps de cuisson",
-                        "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                        "errors" => [
-                            "integer"               => "Le temps de cuisson doit être un nombre entier",
-                            "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
-                            "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
-                        ]
+                        "rules" => "permit_empty|max_length[100]",
                     ],
                     "content" => [
                         "label" => "Étapes de la recette",
@@ -319,7 +326,7 @@ class Recipe extends BaseController
             $rules = [
                 "title" => [
                     "label" => "Titre",
-                    "rules" => "required|min_length[2]|max_length[50]",
+                    "rules" => "required|min_length[2]|max_length[150]",
                     "errors" => [
                         "required"   => "Titre requis",
                         "min_length" => "Titre trop court",
@@ -335,23 +342,31 @@ class Recipe extends BaseController
                         "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ],
+                // "prep_time" => [
+                //     "label" => "Temps de préparation",
+                //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
+                //     "errors" => [
+                //         "integer"               => "Le temps de préparation doit être un nombre entier",
+                //         "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
+                //         "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
+                //     ]
+                // ],
+                // "cook_time" => [
+                //     "label" => "Temps de cuisson",
+                //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
+                //     "errors" => [
+                //         "integer"               => "Le temps de cuisson doit être un nombre entier",
+                //         "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
+                //         "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
+                //     ]
+                // ],
                 "prep_time" => [
                     "label" => "Temps de préparation",
-                    "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                    "errors" => [
-                        "integer"               => "Le temps de préparation doit être un nombre entier",
-                        "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
-                        "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
-                    ]
+                    "rules" => "permit_empty|max_length[100]",
                 ],
                 "cook_time" => [
                     "label" => "Temps de cuisson",
-                    "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                    "errors" => [
-                        "integer"               => "Le temps de cuisson doit être un nombre entier",
-                        "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
-                        "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
-                    ]
+                    "rules" => "permit_empty|max_length[100]",
                 ],
                 "content" => [
                     "label" => "Étapes de la recette",
@@ -373,7 +388,7 @@ class Recipe extends BaseController
                 ],
                 "difficulty" => [
                     "label" => "Difficulté",
-                    "rules" => "required|in_list[easy,medium,difficult]",//attention pas de virgule
+                    "rules" => "required|in_list[easy,medium,difficult]", //attention pas de virgule
                     "errors" => [
                         "required" => "La difficulté est requise",
                         "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
@@ -416,7 +431,7 @@ class Recipe extends BaseController
             $purifier = new HTMLPurifier($config);
             $content = $purifier->purify($this->request->getPost('content'));
             $data = [
-                'user_id'           =>$user_id,
+                'user_id'           => $user_id,
                 'title'             => $this->request->getPost('title'),
                 'image_url'         => $image_path,
                 'prep_time' => $this->request->getPost('prep_time') ?: null,
