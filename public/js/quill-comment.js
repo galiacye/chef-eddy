@@ -20,7 +20,7 @@ document.getElementById('form').addEventListener('submit', (e) => {
     }
 });
 
-// Étoiles — EN DEHORS du submit
+// Étoiles: externes au submit
 const stars = document.querySelectorAll('.star');
 const selectedRating = document.getElementById('selected-rating');
 let currentRating = 0;

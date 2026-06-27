@@ -310,8 +310,8 @@ class Recipe extends BaseController
                 'categories' => $categoryModel->findAll(),
                 'ingredients' => $this->model->getRecipeIngredients($id),
                 'units' => array_column(model('UnitModel')->findAll(), 'name'),
-                'recipe_tag_ids' => $recipe_tag_ids
-
+                'recipe_tag_ids' => $recipe_tag_ids,
+                'categories_ing_db' => $ingredientModel->getCategory()
             ]);
         } else { //si pas get, post donc traitement
             $user_id = session()->get('user_id');
@@ -373,7 +373,7 @@ class Recipe extends BaseController
                 ],
                 "difficulty" => [
                     "label" => "Difficulté",
-                    "rules" => "required|in_list[facile,moyen,difficile]",
+                    "rules" => "required|in_list[easy,medium,difficult]",//attention pas de virgule
                     "errors" => [
                         "required" => "La difficulté est requise",
                         "in_list"  => "La difficulté doit être : facile, moyen ou difficile"
@@ -416,7 +416,7 @@ class Recipe extends BaseController
             $purifier = new HTMLPurifier($config);
             $content = $purifier->purify($this->request->getPost('content'));
             $data = [
-                'user_id'           => 3, //toujours provisoire
+                'user_id'           =>$user_id,
                 'title'             => $this->request->getPost('title'),
                 'image_url'         => $image_path,
                 'prep_time' => $this->request->getPost('prep_time') ?: null,
@@ -463,7 +463,7 @@ class Recipe extends BaseController
                     } else {
                         $db->table('ingredients')->insert([
                             'name' => $name,
-                            'category' => $ingredient['category']
+                            'category_id' => $ingredient['category_id']
                         ]);
                         $ingredient_id = $db->insertID();
                     }
