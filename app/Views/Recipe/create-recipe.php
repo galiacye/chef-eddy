@@ -18,32 +18,32 @@ $title = [
     'name' => 'title',
     'id' => 'title',
     'value' => set_value('title'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-50 shadow'
 ];
 $image = [
     'name' => 'image_url',
     'id' => 'image_url',
     'value' => set_value('image_url'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-50 shadow'
 ];
 $pt = [
     'name' => 'prep_time',
     'id' => 'prep_time',
     'value' => set_value('prep_time'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-50 shadow'
 ];
 $ct = [
     'name' => 'cook_time',
     'id' => 'cook_time',
     'value' => set_value('cook_time'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-50 shadow'
 ];
 
 $portions = [
     'name' => 'portions',
     'id' => 'portions',
     'value' => set_value('portions'),
-    'class' => 'form-control w-50'
+    'class' => 'form-control w-50 shadow'
 ];
 
 $diff_options = [
@@ -51,11 +51,12 @@ $diff_options = [
     'easy'    => 'Facile',
     'medium'     => 'Moyen',
     'difficult' => 'Difficile',
+    'class' => 'shadow'
 ];
 $cat = [
     'name'  => 'categoriyid',
     'id'    => 'category_id',
-    'class' => 'form-select w-50'
+    'class' => 'form-select w-50 shadow'
 ];
 
 //ingredients_categories appelé $options_ingredients pour éviter
@@ -102,7 +103,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <?= validation_show_error('cook_time') ?>
 
         <label for="portions">Nombre de personnes</label>
-        <?= form_input($portions) ?>
+        <?= form_input($portions)?>
         <?= validation_show_error('portions') ?>
 
         <label for="difficulty">Difficulté</label>
@@ -116,7 +117,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <label class="form-label mt-4 mb-1">Tags</label>
         <div class="d-flex flex-wrap gap-3 w-50">
             <?php foreach ($tags as $tag) : ?>
-                <div class="form-check">
+                <div class="form-check shadow">
                     <input
                         type="checkbox"
                         name="tags[]"
@@ -141,20 +142,23 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
                     'name'        => 'ingredients[0][name]',
                     'type'        => 'hidden',
                     'id'          => 'ing-name-0'
+                  
                 ];
                 $ing_qty = [
                     'name'        => 'ingredients[0][quantity]',
                     'type'        => 'hidden',
                     'id'          => 'ing-qty-0'
+                   
                 ];
                 $ing_unit = [
                     'name'        => 'ingredients[0][unit]',
                     'type'        => 'hidden',
                     'id'          => 'ing-unit-0'
+                   
                 ];
                 ?>     <!-- champ unique visible:-->
                <input type="text"  
-                    class="form-control w-50 ingredient-input"
+                    class="form-control w-50 ingredient-input shadow"
                     placeholder="Ex: 200g farine, 2 oeufs..."
                     data-index="0">
                 <!-- champs cachés qui stockent les 3 valeurs -->
@@ -164,11 +168,11 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
                 <!-- aperçu du parsing -->
                 <small class="text-muted parsing-preview w-50"></small>
 
-                <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50']) ?>
-                <button type="button" class="btn btn-coralPlus mt-2 supprimer-ligne">Supprimer</button>
+                <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50 shadow']) ?>
+                <button type="button" class="btn btn-coralPlus shadow mt-2 supprimer-ligne">Supprimer</button>
             </div>
         </div>
-        <button type="button" class="btn btn-ajout mb-4" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
+        <button type="button" class="btn btn-ajout mb-4 shadow" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
     </div>
     <!-- </div>
     <div class="col-12 col-md-6">
