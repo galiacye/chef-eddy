@@ -103,6 +103,7 @@
 <div class="text-center mt-2">
     <?= form_submit('delete', 'Supprimer votre compte', ['class' => 'btn btn-coral shadow']) ?>
 </div>
+<!--ajouter un modal de confirmation pour éviter suppression accidentelle-->
 <?= form_close() ?>
 
 <?= $this->endSection() ?>

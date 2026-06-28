@@ -3,7 +3,7 @@
 <title>Recettes : <?= esc($tag->name) ?></title>
 <?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('./css/tags/tag-show.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/tags/tag-show.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
