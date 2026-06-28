@@ -1,0 +1,36 @@
+body {
+  background-color: #f4fcf0;
+}
+#editor {
+  background-color: white;
+  height: 200px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+#toolbar {
+  background-color: white;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.rating-container {
+    margin-left: 2rem;
+}
+.btn-blue {
+  background-color: #0ba3cd;
+  color: white;
+  margin-left: 2rem;
+}
+.btn-blue:hover {
+  background-color: #58ddbe;
+  color: rgb(8, 8, 8);
+}
+h4, h5 {
+    font-family: "Lobster"
+}
+.rating-stars .star {
+    color: #ffc107; 
+    font-size: 2rem;
+    cursor: pointer;
+}
+
