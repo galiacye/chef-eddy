@@ -15,48 +15,63 @@
         </div>
     <?php endif; ?>
 
-    <h1 class="dash-title">Tableau de bord</h1>
+    <h1 class="dash-title text-center">Tableau de bord</h1>
 
-    
+    <!--mettre les burgers-->
     <!-- Statistiques du site. entiers esc inutile-->
-  <div class="stat d-flex justify-content-around mb-2 g-2">
-    <div class="stat-card">
-        <div class="stat-number"><?= $nb_users ?></div>
-        <div class="stat-label">Utilisateurs</div>
+    <div class="stat d-flex justify-content-around mb-2 g-2">
+        <div class="stat-card">
+            <div class="stat-number"><?= $nb_users ?></div>
+            <div class="stat-label">Utilisateurs</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number"><?= $nb_recipes ?></div>
+            <div class="stat-label">Recettes</div>
+        </div>
+        <div class="stat-card stat-warn">
+            <div class="stat-number"><?= $nb_recipes_pending ?></div>
+            <div class="stat-label">En attente</div>
+        </div>
     </div>
-    <div class="stat-card">
-        <div class="stat-number"><?= $nb_recipes ?></div>
-        <div class="stat-label">Recettes</div>
-    </div>
-    <div class="stat-card stat-warn">
-        <div class="stat-number"><?= $nb_recipes_pending ?></div>
-        <div class="stat-label">En attente</div>
-    </div>
-</div>
 
-<!-- nav cards -->
-<div class="nav-grid">
-    <a href="Admin/users-index" class="nav-card">
-        <div class="nav-icon"></div>
-        <div class="nav-title">Utilisateurs</div>
-        <div class="nav-sub">Comptes, rôles, accès</div>
-    </a>
-    <a href="Admin/recipes-index" class="nav-card">
-        <div class="nav-icon"></div>
-        <div class="nav-title">Recettes</div>
-        <div class="nav-sub">Gérer, modifier, supprimer</div>
-    </a>
-    <a href="Admin/ing-index" class="nav-card">
-        <div class="nav-icon"></div>
-        <div class="nav-title">Ingrédients</div>
-        <div class="nav-sub">Voir, supprimer les doublons</div>
-    </a>
-    <a href="Admin/comments" class="nav-card">
-        <div class="nav-icon"></div>
-        <div class="nav-title">Commentaires</div>
-        <div class="nav-sub">Modérer</div>
-    </a>
-</div>
+    <!-- nav cards -->
+    <div class="nav-grid">
+        <a href="Admin/users-index" class="nav-card">
+            <div class="nav-icon"><i class="bi bi-people"></i></div>
+            <div class="nav-title">Utilisateurs</div>
+            <div class="nav-p">Comptes, rôles, accès</div>
+        </a>
+
+        <a href="Admin/recipes-index" class="nav-card">
+            <div class="nav-icon"></div>
+            <div class="nav-title">Recettes</div>
+            <div class="nav-p">Gérer, modifier, supprimer</div>
+        </a>
+
+        <a href="Admin/comments" class="nav-card">
+            <div class="nav-icon"></div>
+            <div class="nav-title">Commentaires</div>
+            <div class="nav-p">Modérer</div>
+        </a>
+
+        <a href="Admin/cat-index" class="nav-card">
+            <div class="nav-icon"></div>
+            <div class="nav-title">Catégories</div>
+            <div class="nav-p">Modifier, Ajouter, Supprimer</div>
+        </a>
+
+          <a href="tag/index" class="nav-card">
+            <div class="nav-icon"></div>
+            <div class="nav-title">Tags</div>
+            <div class="nav-p">Modifier, Ajouter, Supprimer</div>
+        </a>
+
+        <a href="Admin/ing-index" class="nav-card">
+            <div class="nav-icon"></div>
+            <div class="nav-title">Ingrédients</div>
+            <div class="nav-p">Voir, supprimer les doublons</div>
+        </a>
+    </div>
 
     <!-- homepage tag -->
     <div class="tag-panel">
@@ -75,7 +90,7 @@
                 <?php foreach ($tags as $tag): ?>
                     <option value="<?= $tag->id ?>"
                         <?= ($homepageTag && $homepageTag->id == $tag->id) ? 'selected' : '' ?>>
-                <!--$homepage existe-t-il et son id est elle égale à l'id de cetag? si oui le préselectionner-->
+                        <!--$homepage existe-t-il et son id est elle égale à l'id de cetag? si oui le préselectionner-->
                         <?= esc($tag->name) ?>
                     </option>
                 <?php endforeach; ?>
@@ -88,7 +103,5 @@
             <button type="submit" class="tag-btn">Ajouter</button>
         </form>
     </div>
-
 </div>
-
 <?= $this->endSection() ?>

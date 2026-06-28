@@ -46,6 +46,7 @@ $routes->post('Admin/recipe/pending/(:num)', 'Admin::pendingRecipe/$1');
 //Admin - Tags
 $routes->post('Admin/add-tag', 'Admin::addTag');
 
+
 // Admin - ingredients
 $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
 $routes->post('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');

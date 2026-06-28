@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow"><!--referencement inutile pour pages admin-->
     <title>Admin - <?= $this->renderSection('titre') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?= base_url('css/Admin/layoutAdmin.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('css/layoutAdmin.css') ?>" rel="stylesheet">
     <?= $this->renderSection('custom-css') ?>
 </head>
 
@@ -31,11 +31,24 @@
 
             </button>
             <div class="collapse navbar-collapse" id="mainNavbar">
-                <span class="navbar-brand"> Admin Chef Eddy</span>
+                <span class="navbar-brand">Chef Eddy Administration</span>
                 <div>
-                    <a href="/dashboard" class="btn btn-outline-light btn-sm me-2">Tableau de bord</a>
-                    <a href="/Admin/recipes-index" class="btn btn-outline-light btn-sm me-2">Recettes</a>
-                    <a href="/Admin/users-index" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
+                    <?php if (uri_string() != 'dashboard'): ?><!--current renvoie l'url complète )-->
+                        <a href="/dashboard" class="btn btn-outline-light btn-sm me-2">Tableau de bord</a>
+                    <?php endif; ?>
+
+                    <?php if (uri_string() != 'Admin/recipes-index'): ?>
+                        <a href="/Admin/recipes-index" class="btn btn-outline-light btn-sm me-2">Recettes</a>
+                    <?php endif; ?>
+
+                    <?php if (uri_string() != 'Admin/users-index'): ?>
+                        <a href="/Admin/users-index" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
+                    <?php endif; ?>
+
+                    <?php if (uri_string() != 'Admin/comments'): ?>
+                        <a href="/Admin/comments" class="btn btn-outline-light btn-sm me-2">Commentaires</a>
+                    <?php endif; ?>
+
                     <a href="/" class="btn btn-outline-warning btn-sm">Site</a>
                 </div>
             </div>
