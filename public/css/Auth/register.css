@@ -1,20 +1,14 @@
 body {
-  background-color: rgb(247, 222, 213);
+  background-color: rgb(249, 243, 232);
+  font-family: "Nunito";
 }
-
+h1 {
+  font-family: "Lobster";
+}
 .btn-custom {
   color: white;
   background-color: #028d81;
   border: 1px solid rgb(2, 129, 129);
 }
-.row {
-align-items: center;
-}
 
-.pink-cake {
-  max-height: 300px;
-  max-width: 350px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(255, 61, 127, 0.25);
-}
+

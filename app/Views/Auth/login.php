@@ -1,32 +1,27 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('custom-css') ?>
-<link href="<?= base_url('css/login.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/Auth/login.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-<!-- flashdata = données temporaires de la session -->
- <!--si message d'erreur l'afficher-->
-<?php $error = session()->getFlashdata('error') ?>
-<?php if ($error) : ?>
-    <div class="alert alert-danger">
-        <?= esc($error) ?>
-    </div>
-<?php endif ?>
-
 <?= form_open('login') ?>
-<div class="mb-3">
+
+<div class="row justify-content-center align-items-center">
+    <h1 class="text-center mt-4">Connexion</h1>
+    <div class="infos col-4">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-control" required>
-    </div>
-    <div class="mb-3">
+        <input type="email" name="email" id="email" class="form-control w-100 shadow" required>
+
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" class="form-control" required>
-    </div>  
-    <a href="<?= base_url('forgot-password') ?>">Mot de passe oublié ?</a>
+        <input type="password" name="password" id="password" class="form-control w-100 shadow" required>
+        <div class="connect">
 
-    <button type="submit" class="btn btn-primary">Se connecter</button>
-<?= form_close() ?>
+            <button type="submit" class="btn btn-blue my-4 shadow">Se connecter</button>
 
-<?= $this->endSection() ?>
+            <a href="<?= base_url('forgot-password') ?>">Mot de passe oublié ?</a>
+        </div>
+        <?= form_close() ?>
+    </div>
+    <?= $this->endSection() ?>
