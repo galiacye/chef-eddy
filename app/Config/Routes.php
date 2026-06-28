@@ -68,6 +68,7 @@ $routes->match(['get', 'post'], 'update-user/(:num)', 'User::updateUser/$1');
 // Profile : ?int $id = null signifie que le param est optionnel mais il faut les 2 routes pour cas où
 $routes->match(['get', 'post'], 'profile', 'User::profile'); // id vient de la session
 $routes->match(['get', 'post'], 'profile/(:num)', 'User::profile/$1'); // voir le profil d'un user en particulier
+$routes->match(['get', 'post'], 'profile/update', 'User::updateProfile');
 
 // Recipes
 $routes->get('recipe-index', 'Recipe::recipeIndex');
