@@ -129,23 +129,7 @@ class Recipe extends BaseController
                             "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                         ]
                     ],
-                    // "prep_time" => [
-                    //     "label" => "Temps de préparation",
-                    //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                    //     "errors" => [
-                    //         "integer"               => "Le temps de préparation doit être un nombre entier",
-                    //         "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
-                    //         "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
-                    //     ]
-                    // ],
-                    // "cook_time" => [
-                    //     "label" => "Temps de cuisson",
-                    //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                    //     "errors" => [
-                    //         "integer"               => "Le temps de cuisson doit être un nombre entier",
-                    //         "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
-                    //         "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
-                    //     ]
+                  
                     "prep_time" => [
                         "label" => "Temps de préparation",
                         "rules" => "permit_empty|max_length[100]",
@@ -201,7 +185,8 @@ class Recipe extends BaseController
                         'tags'               => $tagModel->findAll(),
                         'categories'         => $categoryModel->findAll(),
                         'units'              => array_column($unitModel->findAll(), 'name'), //filtre la col name 
-                        'categories_ing_db'  => $ingredientModel->getCategory()
+                        'categories_ing_db'  => $ingredientModel->getCategory(),
+                        'old_ingredients'   => $this->request->getPost('ingredients') ?? []
                     ]);
                 }
                 // gestion de l'image (à externaliser plus tard)
@@ -342,24 +327,7 @@ class Recipe extends BaseController
                         "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ],
-                // "prep_time" => [
-                //     "label" => "Temps de préparation",
-                //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                //     "errors" => [
-                //         "integer"               => "Le temps de préparation doit être un nombre entier",
-                //         "greater_than_equal_to" => "Le temps de préparation doit être d'au moins 1 minute",
-                //         "less_than_equal_to"    => "Le temps de préparation ne peut pas dépasser 2880 minutes (48h)"
-                //     ]
-                // ],
-                // "cook_time" => [
-                //     "label" => "Temps de cuisson",
-                //     "rules" => "permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[2880]",
-                //     "errors" => [
-                //         "integer"               => "Le temps de cuisson doit être un nombre entier",
-                //         "greater_than_equal_to" => "Le temps de cuisson doit être d'au moins 1 minute",
-                //         "less_than_equal_to"    => "Le temps de cuisson ne peut pas dépasser 2880 minutes (48h)"
-                //     ]
-                // ],
+        
                 "prep_time" => [
                     "label" => "Temps de préparation",
                     "rules" => "permit_empty|max_length[100]",

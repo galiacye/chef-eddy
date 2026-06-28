@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <small class="text-muted parsing-preview w-100"></small>
 
-    <select name="ingredients[${index}][category]" class="form-select w-25">
+    <select name="ingredients[${index}][category_id]" class="form-select w-25">
         ${options}
     </select>
 

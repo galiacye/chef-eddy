@@ -50,11 +50,10 @@ $diff_options = [
     ''          => '-- Choisir --',
     'easy'    => 'Facile',
     'medium'     => 'Moyen',
-    'difficult' => 'Difficile',
-    'class' => 'shadow'
+    'difficult' => 'Difficile'
 ];
 $cat = [
-    'name'  => 'categoriyid',
+    'name'  => 'category_id',
     'id'    => 'category_id',
     'class' => 'form-select w-50 shadow'
 ];
@@ -64,7 +63,7 @@ $cat = [
 $options_ingredients = ['' => ' Catégorie '];
 foreach ($categories_ing_db as $cat_ing) {
 
-    $options_ingredients[$cat_ing->name] = esc($cat_ing->name);
+    $options_ingredients[$cat_ing->id] = esc($cat_ing->name);
 }
 //recette_categorie
 $options_categories = ['' => 'choisir une catégorie']; //s'affiche par défaut
@@ -84,8 +83,8 @@ foreach ($categories as $category) {
     <!-- $status et $views gérées ds controller -->
     <div class="infos">
 
-<!--form_input(), form_upload(), form_dropdown(), validation_show_error(), 
-validation_list_errors() échappent déjà : esc est inutile ici-->
+        <!--form_input(), form_upload(), form_dropdown(), validation_show_error(), 
+validation_list_errors() échappent donc esc est inutile ici-->
         <label for="title">Titre</label>
         <?= form_input($title) ?>
         <?= validation_show_error('title') ?>
@@ -103,7 +102,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <?= validation_show_error('cook_time') ?>
 
         <label for="portions">Nombre de personnes</label>
-        <?= form_input($portions)?>
+        <?= form_input($portions) ?>
         <?= validation_show_error('portions') ?>
 
         <label for="difficulty">Difficulté</label>
@@ -136,41 +135,38 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
 
         <label class="form-label mt-4 mb-1">Ingrédients</label>
         <div id="ingredients-container" class="w-50">
-            <div class="ingredient-row d-flex flexwrap:nowrap gap-2 mb-2">
-                <?php
-                $ing_name = [
-                    'name'        => 'ingredients[0][name]',
-                    'type'        => 'hidden',
-                    'id'          => 'ing-name-0'
-                  
-                ];
-                $ing_qty = [
-                    'name'        => 'ingredients[0][quantity]',
-                    'type'        => 'hidden',
-                    'id'          => 'ing-qty-0'
-                   
-                ];
-                $ing_unit = [
-                    'name'        => 'ingredients[0][unit]',
-                    'type'        => 'hidden',
-                    'id'          => 'ing-unit-0'
-                   
-                ];
-                ?>     <!-- champ unique visible:-->
-               <input type="text"  
-                    class="form-control w-50 ingredient-input shadow"
-                    placeholder="Ex: 200g farine, 2 oeufs..."
-                    data-index="0">
-                <!-- champs cachés qui stockent les 3 valeurs -->
-                <?= form_input($ing_name) ?>
-                <?= form_input($ing_qty) ?>
-                <?= form_input($ing_unit) ?>
-                <!-- aperçu du parsing -->
-                <small class="text-muted parsing-preview w-50"></small>
-
-                <?= form_dropdown('ingredients[0][category]', $options_ingredients, '', ['class' => 'form-select w-50 shadow']) ?>
-                <button type="button" class="btn btn-coralPlus shadow mt-2 supprimer-ligne">Supprimer</button>
-            </div>
+            <?php
+            $old_ingredients = $old_ingredients ?? [];
+            if (empty($old_ingredients)) : ?>
+                <!-- ligne vide par défaut au premier chargement -->
+                <div class="ingredient-row d-flex gap-2 mb-2">
+                    <input type="text" class="form-control ingredient-input shadow" placeholder="Ex: 200g farine, 2 oeufs..." data-index="0">
+                    <input type="hidden" name="ingredients[0][name]" id="ing-name-0">
+                    <input type="hidden" name="ingredients[0][quantity]" id="ing-qty-0">
+                    <input type="hidden" name="ingredients[0][unit]" id="ing-unit-0">
+                    <small class="text-muted parsing-preview w-50"></small>
+                    <?= form_dropdown('ingredients[0][category_id]', $options_ingredients, '', ['class' => 'form-select w-50 shadow']) ?>
+                    <button type="button" class="btn btn-coralPlus shadow mt-2 supprimer-ligne">Supprimer</button>
+                </div>
+            <?php else : ?>
+                <!-- restauration après échec validation -->
+                <?php foreach ($old_ingredients as $index => $ing) : ?>
+                    <div class="ingredient-row d-flex gap-2 mb-2">
+                        <input type="text" name="ingredients[<?= $index ?>][name]" value="<?= esc($ing['name']) ?>" class="form-control shadow">
+                        <input type="number" name="ingredients[<?= $index ?>][quantity]" value="<?= esc($ing['quantity']) ?>" class="form-control w-25 shadow" placeholder="Quantité">
+                        <input type="text" name="ingredients[<?= $index ?>][unit]" value="<?= esc($ing['unit']) ?>" class="form-control w-25 shadow" placeholder="Unité">
+                        <select name="ingredients[<?= $index ?>][category_id]" class="form-select w-50 shadow">
+                            <option value=""> Catégorie  </option>
+                            <?php foreach ($categories_ing_db as $cat_ing) : ?>
+                                <option value="<?= $cat_ing->id ?>" <?= ($ing['category_id'] ?? '') == $cat_ing->id ? 'selected' : '' ?>>
+                                    <?= esc($cat_ing->name) ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                        <button type="button" class="btn btn-coralPlus shadow mt-2 supprimer-ligne">Supprimer</button>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
         </div>
         <button type="button" class="btn btn-ajout mb-4 shadow" id="ajouter-ingredient">Ajouter un ingrédient</button><br>
     </div>
@@ -202,7 +198,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
         <!--tjrs esc-->
         <div class="bouton">
-            
+
             <button type="submit" class="btn btn-blue m-4">Envoyer</button>
         </div>
     </div>
@@ -216,7 +212,7 @@ validation_list_errors() échappent déjà : esc est inutile ici-->
     // car le fichier .js ne peut pas contenir du php
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
-//JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'éxécute dans le js.
+    //JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'éxécute dans le js.
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>
