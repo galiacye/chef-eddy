@@ -1,5 +1,6 @@
 body {
-  /* background-image: url('/img/Home/dash-bg.jpg'); */
+    
+   background-image: url('/img/Home/dash-bg-2.jpg'); 
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;

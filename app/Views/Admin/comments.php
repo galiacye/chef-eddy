@@ -8,7 +8,7 @@
 <?= $this->section('titre') ?>Tous les commentaires<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('css/admin/comments.css') ?>" rel="stylesheet">
+<link href="<?= base_url('css/Admin/comments.css') ?>" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -19,17 +19,17 @@
     <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
 <?php endif ?>
 
-<h2 class="text-center mb-4">Tous les commentaires</h2>
-
-<div class="btn-group mb-3">
-    <a href="<?= base_url('Admin/comments') ?>"
-        class="btn <?= $status === null ? 'btn-dark' : 'btn-outline-dark' ?>">Tous</a>
-    <a href="<?= base_url('Admin/comments?status=pending') ?>"
-        class="btn <?= $status === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
-    <a href="<?= base_url('Admin/comments?status=approved') ?>"
-        class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-success' ?>">Approuvés</a>
+<h2 class="text-center mt-4">Tous les commentaires</h2>
+<div class="d-flex justify-content-center">
+    <div class="btn-group mb-3">
+        <a href="<?= base_url('Admin/comments') ?>"
+            class="btn <?= $status === null ? 'btn-blue' : 'btn-outline-dark' ?>">Tous</a>
+        <a href="<?= base_url('Admin/comments?status=pending') ?>"
+            class="btn <?= $status === 'pending' ? 'btn-jaune' : 'btn-outline-warning' ?>">En attente</a>
+        <a href="<?= base_url('Admin/comments?status=approved') ?>"
+            class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-success' ?>">Approuvés</a>
+    </div>
 </div>
-
 <table class="table table-striped table-hover align-middle">
     <thead class="table-dark">
         <tr>
@@ -111,29 +111,31 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    <?php foreach ($comments as $c): ?>
-    (function() {
-        // Quill initialisé directement, pas dans shown.bs.collapse
-        const quill = new Quill('#editor-reply-<?= $c->id ?>', {
-            modules: { toolbar: '#toolbar-reply-<?= $c->id ?>' },
-            placeholder: 'Répondre...',
-            theme: 'snow',
-        });
+        <?php foreach ($comments as $c): ?>
+                (function() {
+                    // Quill initialisé directement, pas dans shown.bs.collapse
+                    const quill = new Quill('#editor-reply-<?= $c->id ?>', {
+                        modules: {
+                            toolbar: '#toolbar-reply-<?= $c->id ?>'
+                        },
+                        placeholder: 'Répondre...',
+                        theme: 'snow',
+                    });
 
-        document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-bold').setAttribute('title', 'Gras');
-        document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-italic').setAttribute('title', 'Italique');
-        document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-underline').setAttribute('title', 'Souligné');
+                    document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-bold').setAttribute('title', 'Gras');
+                    document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-italic').setAttribute('title', 'Italique');
+                    document.querySelector('#toolbar-reply-<?= $c->id ?> .ql-underline').setAttribute('title', 'Souligné');
 
-        document.getElementById('form-reply-<?= $c->id ?>').addEventListener('submit', (e) => {
-            if (quill.getText().trim().length <= 1) {
-                e.preventDefault();
-                alert('Veuillez écrire une réponse');
-                return;
-            }
-            document.getElementById('content-<?= $c->id ?>').value = quill.root.innerHTML;
-        });
-    })();
-    <?php endforeach; ?>
-});
+                    document.getElementById('form-reply-<?= $c->id ?>').addEventListener('submit', (e) => {
+                        if (quill.getText().trim().length <= 1) {
+                            e.preventDefault();
+                            alert('Veuillez écrire une réponse');
+                            return;
+                        }
+                        document.getElementById('content-<?= $c->id ?>').value = quill.root.innerHTML;
+                    });
+                })();
+        <?php endforeach; ?>
+    });
 </script>
 <?= $this->endSection() ?>
