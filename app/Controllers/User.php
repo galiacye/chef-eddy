@@ -6,7 +6,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class User extends BaseController
 {
-    
+
     private object $model;
     protected object $roleModel;
     protected object $commentModel;
@@ -252,10 +252,10 @@ class User extends BaseController
         //dd($data['isOwnProfile']);
         return view('User/profile', $data);
     }
-    
-    
-    public function updateProfile()//pas de $id ici pour qu'il ne soit pas passé par url-danger malveillance
-   // pour update-user de admin, on a pas id en session donc on le passe en param par l'url
+
+
+    public function updateProfile() //pas de $id ici pour qu'il ne soit pas passé par url-danger malveillance
+    // pour update-user de admin, on a pas id en session donc on le passe en param par l'url
     {
         $id = session()->get('user_id');
         $user = $this->model->find($id);
@@ -328,7 +328,7 @@ class User extends BaseController
             $email = $this->request->getPost('email');
             $last_name  = $this->request->getPost('last_name');
             $first_name = $this->request->getPost('first_name');
-          
+
             // Gestion du fichier avatar
 
             $avatar_file = $this->request->getFile('avatar_url');
@@ -361,5 +361,13 @@ class User extends BaseController
 
         // Retour view succès
         return redirect()->to('profile')->with('success', 'Vos modifications ont été enregistrées');
+    }
+
+    public function deleteProfile()
+    {
+        $id = session()->get('user_id');
+        $this->model->delete($id);
+        session()->destroy(); // détruit la session
+        return redirect()->to('/')->with('success', 'Votre compte a été supprimé');
     }
 }

@@ -69,7 +69,7 @@ $routes->match(['get', 'post'], 'update-user/(:num)', 'User::updateUser/$1');
 $routes->match(['get', 'post'], 'profile', 'User::profile'); // id vient de la session
 $routes->match(['get', 'post'], 'profile/(:num)', 'User::profile/$1'); // voir le profil d'un user en particulier
 $routes->match(['get', 'post'], 'profile/update', 'User::updateProfile');
-
+ $routes->post('delete-profile',  'User::deleteProfile');
 // Recipes
 $routes->get('recipe-index', 'Recipe::recipeIndex');
 $routes->get('recipe/(:num)', 'Recipe::showRecipe/$1');
