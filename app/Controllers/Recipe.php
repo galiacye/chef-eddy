@@ -366,7 +366,7 @@ class Recipe extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                //dd($this->validator->getErrors());
+                dd($this->validator->getErrors());
                 return view('Recipe/update-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->getRecipe($id),
