@@ -150,7 +150,6 @@ if ($user_id) {
         current--;
         update();
     });
-
     document.getElementById('plus').addEventListener('click', () => {
         current++;
         update();
@@ -164,7 +163,8 @@ if ($user_id) {
                 const result = (baseQty * current / base);
                 //une simple règle de trois permet de recalculer dynamiquement les portions
                 element.textContent = parseFloat(result.toFixed(2)); 
-                //parseFloat supprime les zéros après la virgule
+                //toFixed(2) arrondit le résultat à 2 décimales et le renvoie sous forme de string, 
+                // d'où le parseFloat() pour le repasser en nombre. et enlever les zéros superflus
             }
         });
     }

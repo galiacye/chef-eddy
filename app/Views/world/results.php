@@ -24,7 +24,7 @@ Résultats pour "Cuisine de <?= esc($country) ?>" sur Chef Eddy
         <p>Aucune recette trouvée.</p>
     <?php else: ?>
        <!-- grille de recettes, cards en boucle -->
-        <div class="d-flex justify-content-between flex-wrap gap-2">
+        <div class="d-flex flex-wrap justify-content-center justify-content-md-between gap-2">
             <?php foreach ($meals as $meal): ?>
                 <div class="card">
                 <a href="<?= site_url('cuisine-du-monde/recipe/' . (int)$meal['idMeal']) ?>" class="recipe-card">

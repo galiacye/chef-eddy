@@ -15,24 +15,23 @@ class Search extends BaseController
     private object $model;
     public function __construct()
     {
-
         $this->model = Model('SearchModel');
     }
-
-
     public function search()
     {
         $search  = $this->request->getGet('search') ?? ''; //coalescence nulle:
-        //si est null on prend la valeur par défaut: une chaine vide ;
+
         $without = array_filter((array)($this->request->getGet('without') ?? []));
-        $without = array_map('intval', $without); //  cast en int
-        // $without = is_array($without)? $without:[$without]; donnerait un tableau 
-        //mais pas nettoyé comme le fait array_filter()
-       $recipes = $this->model->search($search, $without);
+        $without = array_map('intval', $without);
+
+        $recipes = $this->model->search($search, $without);
 
         return view('Search/results', ['recipes' => $recipes]);
     }
-
+    ////si est null on prend la valeur par défaut: une chaine vide ;
+    ////  cast en int
+    // // $without = is_array($without)? $without:[$without]; donnerait un tableau 
+    //mais pas nettoyé comme le fait array_filter()
     // public function search()
     // {
     //     $search     = $this->request->getGet('search');

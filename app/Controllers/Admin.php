@@ -35,7 +35,7 @@ class Admin extends BaseController
     {
         return view('Admin/dashboard', [
             'nb_users' => $this->userModel->countAll(),
-            'nb_recipes' => $this->recipeModel->countAll(), // countAll devient countAllResults derrière un where:
+            'nb_recipes' => $this->recipeModel->countAll(),//countAll = countAllResults derrière where
             'nb_recipes_pending' => $this->recipeModel->where('status', 'pending')->countAllResults(),
             'tags'              => $this->tagModel->findAll(),
             'homepageTag'       => $this->tagModel->getHomepageTag()

@@ -68,7 +68,9 @@ body {
   background-color: rgb(2, 141, 129);
   color: white;
 }
-
+h2 .tag-title {
+  font-family: "Lobster";
+}
 .btn-tag {
   width: 150px;
   height: 35px;

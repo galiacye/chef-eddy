@@ -11,7 +11,7 @@
 <?= $this->section('body') ?>
 <div class="container">
     
-        <h1 class="col-8 text-center mt-4 mb- title">Cuisine du monde</h1>
+        <h1 class="text-center mt-4 mb- title">Cuisine du monde</h1>
         <!-- liste des pays retournés par l'api, affichés comme des tags cliquables  -->
   
     <div class="row">

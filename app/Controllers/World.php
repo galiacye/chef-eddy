@@ -21,26 +21,15 @@ class World extends BaseController
             $data     = json_decode($response->getBody(), true);
             $countries = [];
 
-            foreach ($data['meals'] ?? [] as $country) {
+            foreach ($data['meals'] ?? [] as $country)
+            {
                 if (!in_array($country['strArea'], $this->excluded)) {
                     $countries[] = $country;
                 }
             };
-            //ou avec une fonction fléchée:
-            //$countries = array_filter(
-            // $data['meals'] ?? [],
-            // fn($c) => !in_array($c['strArea'], $this->excluded)
-            //);
-            // on filtre les pays exclus
-            // $countries = array_filter(
-            //    $data['meals'] ?? [],
-            //     fn($country) => !in_array($country['strArea'], $this->excluded) //propriété de classe d'ou $this
-            //si var interne à la méthode serait $excluded
-
 //dd($countries);
             return view('world/worldIndex', ['countries' => $countries]);
         } catch (\Exception $e) {
-            dd($e->getMessage());
             //  cas d'absence de connexion ou d'erreur API
             return view('world/error');
         }

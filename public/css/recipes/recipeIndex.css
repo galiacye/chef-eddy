@@ -1,7 +1,11 @@
 body {
-    background-color: rgb(249, 163, 132);
+    /* background-color: rgb(249, 163, 132); */
+    /* background-color: #fceed9; */
+   background-color: #efe2c5;
 }
-
+h1 {
+    font-family: "Lobster";
+}
 
 .intro {
     display: flex;

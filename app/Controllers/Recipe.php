@@ -191,7 +191,8 @@ class Recipe extends BaseController
                 }
                 // gestion de l'image (à externaliser plus tard)
                 $image = $this->request->getFile('image_url');
-                if ($image && $image->isValid() && !$image->hasMoved()) { //car ne peut être bougée qu'une seule fois et l'a déjà été pour stockage temporaire
+                if ($image && $image->isValid() && !$image->hasMoved()) {//ne peut être bougée qu'une fois 
+                //et l'a déjà été pour stockage temporaire
                     $newName = $image->getRandomName();
                     $image_path = 'uploads/recipes/' . $newName;
                     $image->move(ROOTPATH . 'public/uploads/recipes', $newName);
@@ -277,7 +278,6 @@ class Recipe extends BaseController
                         ]);
                     }
                 }
-
 
                 return redirect()->to('recipe-index')->with('success', 'Recette créée avec succès !');
             } else {
@@ -366,7 +366,7 @@ class Recipe extends BaseController
 
             ];
             if (!$this->validate($rules)) {
-                dd($this->validator->getErrors());
+                //dd($this->validator->getErrors());
                 return view('Recipe/update-recipe', [
                     'errors' => $this->validator->getErrors(),
                     'recipe' => $this->model->getRecipe($id),

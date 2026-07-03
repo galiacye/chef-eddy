@@ -140,10 +140,15 @@ validation_list_errors() échappent donc esc est inutile ici-->
             if (empty($old_ingredients)) : ?>
                 <!-- ligne vide par défaut au premier chargement -->
                 <div class="ingredient-row d-flex gap-2 mb-2">
-                    <input type="text" class="form-control ingredient-input shadow" placeholder="Ex: 200g farine, 2 oeufs..." data-index="0">
+                    <input type="text" 
+                        class="form-control ingredient-input shadow" 
+                        placeholder="Ex: 200g farine, 2 oeufs..." 
+                        data-index="0">
+
                     <input type="hidden" name="ingredients[0][name]" id="ing-name-0">
                     <input type="hidden" name="ingredients[0][quantity]" id="ing-qty-0">
                     <input type="hidden" name="ingredients[0][unit]" id="ing-unit-0">
+                    
                     <small class="text-muted parsing-preview w-50"></small>
                     <?= form_dropdown('ingredients[0][category_id]', $options_ingredients, '', ['class' => 'form-select w-50 shadow']) ?>
                     <button type="button" class="btn btn-coralPlus shadow mt-2 supprimer-ligne">Supprimer</button>
@@ -183,7 +188,7 @@ validation_list_errors() échappent donc esc est inutile ici-->
     </div>fermeture row-->
 
     <div class="editeur w-100 m-0">
-        <!--contenu copié dans #content (caché) avant soumission (voir create-recipe.js) -->
+        <!--contenu copié en hidden dans #content avant soumission (voir create-recipe.js) -->
         <label for="content">
             <h2 class="m-4">Votre Recette</h2>
         </label>
@@ -198,7 +203,6 @@ validation_list_errors() échappent donc esc est inutile ici-->
         <input type="hidden" name="content" id="content" value="<?= esc(set_value('content')) ?>">
         <!--tjrs esc-->
         <div class="bouton">
-
             <button type="submit" class="btn btn-blue m-4">Envoyer</button>
         </div>
     </div>
@@ -208,11 +212,10 @@ validation_list_errors() échappent donc esc est inutile ici-->
 <?= $this->section('customJs') ?>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    // Variables php injectées ici pour être utilisées dans create-recipe
-    // car le fichier .js ne peut pas contenir du php
+// Variables PHP converties au format JSON afin d'être exploitées en JavaScript, create-recipe.js ne pouvant contenir de php
     const categoriesIngredient = <?= json_encode($options_ingredients, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
     const units = <?= json_encode($units, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
-    //JSON_HEX_TAG échappe les <> pour éviter qu'un nom d'ingrédient contenant du HTML ne s'éxécute dans le js.
+    // JSON_HEX_TAG encode les caractères < et > pour éviter l'injection de balises HTML dans le script.
 </script>
 <script src="/js/create-recipe.js"></script>
 <?= $this->endSection() ?>

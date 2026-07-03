@@ -58,12 +58,11 @@
   )/*/
   background-color: black;
 }
-
-/*  argenté incliné */
+/* Halo lumineux diagonal, flouté, derrière le contenu */
 .ban::before {
   content: "";
   position: absolute;
-  inset: -40%; /*effet incliné*/
+  inset: -40%; /* dépasse de 40% de chaque côté pour que le blur(10px) n'ait pas de bord net visible en périphérie */
   background: linear-gradient(
     135deg,
     rgba(180, 180, 180, 0.15) 0%,
@@ -71,11 +70,11 @@
     rgba(255, 255, 255, 0.2) 60%,
     rgba(180, 180, 180, 0.1) 100%
   );
-  transform: rotate(8deg);
+  transform: rotate(10deg); /* incline le dégradé de 10° par rapport à l'axe du gradient (135deg) */
   filter: blur(10px);
   pointer-events: none;
 }
-/* effet reflet brillant qui passe */
+/* Bande de reflet animée qui traverse l'élément */
 .ban::after {
   content: "";
   position: absolute;
@@ -84,16 +83,16 @@
     120deg,
     transparent 0%,
     rgba(255, 255, 255, 0.08) 45%,
-    rgba(255, 255, 255, 0.45) 50%,
-    /*plus clair au milieu*/ rgba(255, 255, 255, 0.08) 55%,
+    rgba(255, 255, 255, 0.45) 50%, /* 50% = centre de la bande, alpha 0.45 = pic d'opacité (le "flash") */
+    rgba(255, 255, 255, 0.08) 55%,
     transparent 100%
   );
-  /*CSS translateX() repositionne un élément horizontalement sur le plan 2D.*/
+  /* translateX(-100%) place le pseudo-élément entièrement hors de son propre inset:0 (à gauche), avant l'animation */
   transform: translateX(-100%) rotate(8deg);
-  animation: shine 5s infinite linear;
+  animation: shine 5s infinite linear; /* le déplacement réel se fait via les keyframes, ce transform n'est que l'état initial */
   pointer-events: none;
 }
-/* CSS rotate() fait pivoter un élément autour d'un point fixe du plan 2D, sans le déformer.*/
+/* translateX passe de -120% à 120%: l'animation interpole cette diff entre les deux états en 5s, fait "glisser" la bande de gauche à droite */
 @keyframes shine {
   0% {
     transform: translateX(-120%) rotate(8deg);
@@ -211,6 +210,7 @@ footer p, footer a {
 
 
 @media screen and (min-width: 768px) {
+
   .ban {
     height: 140px;
     gap: 100px;
@@ -231,6 +231,7 @@ footer p, footer a {
 }
 
 @media screen and (min-width: 1024px) {
+
   .ban {
     height: 180px;
   }

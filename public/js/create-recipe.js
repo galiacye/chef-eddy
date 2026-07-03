@@ -17,20 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('.ql-list[value="ordered"]').setAttribute("title", "Liste numérotée");
   document.querySelector('.ql-list[value="bullet"]').setAttribute("title", "Liste à puces");
 
-  let index = 1;//pour numéroter les nouvelles lignes lignes dynamiques d'ingrédients
-
+  let index = 1;//pour numéroter les nouvelles lignes dynamiques d'ingrédients
   document
     .getElementById("ajouter-ingredient")
     .addEventListener("click", () => {
       const container = document.getElementById("ingredients-container");
-
       //ajouter une ligne
       const row = document.createElement("div");//méthode native du DOM
       //créé l'elem qui sera injecté dans la page avec container.appendChild(row)
       row.classList.add("ingredient-row", "gap-2", "mb-2");//on lui ajoute des classes
-//php passe du json à la vue: on en fait un select:
+      //php passe du json à la vue: on en fait un select:
       const options = Object.entries(categoriesIngredient) //vient de la vue php->json
-     // Object.entries transforme l'objet json en tab clé/valeur
+        // Object.entries transforme l'objet json en tab clé/valeur
         .map(([val, label]) => `<option value="${val}">${label}</option>`)
         //map sépare la paire en 2 var
         .join("");//transforme le tab en string
@@ -53,13 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <button type="button" class="btn btn-danger supprimer-ligne">✕</button>
 `;
-
-      container.appendChild(row);//on insère les nouvelles lignes
+  container.appendChild(row);//on insère les nouvelles lignes
       index++;
     });
-//évènement attendu passé sur le container:
-// délégation : on écoute le container car les boutons sont créés dynamiquement
-document
+  //évènement attendu passé sur le container:
+  // délégation : on écoute le container car les boutons sont créés dynamiquement
+  document
     .getElementById("ingredients-container")
     .addEventListener("click", (e) => {
       if (e.target.classList.contains("supprimer-ligne")) {
@@ -78,7 +75,7 @@ document
   function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-//découpe la saisie en objet js { quantite, unite, nom }
+  //découpe la saisie en objet js { quantite, unite, nom }
   function parseIngredient(text) {
     const escapedUnits = units.map((u) => escapeRegex(u));
     const regex = new RegExp(
@@ -86,9 +83,9 @@ document
       "i",
     );
 
-// ^(\d+[.,]?\d*)         groupe 1 : le nombre (200, 1.5 etc)
-  // \s*(g|ml|kg|cl|...)? groupe 2 : l'unité optionnelle (vient de php $unit)
-  // \s*(.+)$             groupe 3 : nom de l'ingrédient
+    // ^(\d+[.,]?\d*)         groupe 1 : le nombre (200, 1.5 etc)
+    // \s*(g|ml|kg|cl|...)? groupe 2 : l'unité optionnelle (vient de php $unit)
+    // \s*(.+)$             groupe 3 : nom de l'ingrédient
 
 
     //verifier si saisie matche avec regex
@@ -125,5 +122,5 @@ document
       e.preventDefault(); //empêche l'envoi par défaut
       alert("Veuillez écrire une recette avant d'envoyer");
     }
-  }); 
+  });
 });

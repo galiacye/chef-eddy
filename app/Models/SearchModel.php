@@ -194,7 +194,6 @@ class SearchModel extends Model
         $select = 'recipes.id, recipes.title, recipes.image_url, 
                recipes.difficulty, recipes.prep_time, 
                recipes.cook_time, recipes.portions';
-
         // On cherche par titre ou par ingrédient en même temps
         $query = $this->db->table('recipes')
             ->select($select)
@@ -202,7 +201,6 @@ class SearchModel extends Model
             ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id', 'left')
             ->where('recipes.status', 'approved')
             ->groupBy('recipes.id');
-
         if (!empty($search)) {
             $query->groupStart() //groupstart/end = parenthèse ci4 pour sql:
                 //WHERE (recipes.title LIKE '%poulet%' OR ingredients.name LIKE '%poulet%')
@@ -220,7 +218,6 @@ class SearchModel extends Model
                 ->get()->getResultArray();
 
             $excludeIds = array_unique(array_column($excludeIds, 'recipe_id'));
-
             if (!empty($excludeIds)) {
                 $query->whereNotIn('recipes.id', $excludeIds);
             }
