@@ -17,12 +17,13 @@
             <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
                 <input type="text"
                     name="search"
-                    class="form-control"
-                    placeholder="Rechercher une recette ou un ingrédient">
+                    class="form-control shadow"
+                    placeholder="Taper le nom d'une recette ou d'un ingrédient"
+                  >
             </div>
 
             <div class="d-flex justify-content-center mb-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary"
+                <button type="button" class="btn btn-sm btn-secondary shadow"
                     data-bs-toggle="collapse" data-bs-target="#filtres">
                     Filtres
                 </button>
@@ -32,7 +33,7 @@
                 <p class="text-muted mb-2 mt-2 text-center">Exclure :</p>
                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
                     <?php foreach ($categories as $cat): ?>
-                        <input class="allergen-check"
+                        <input class="allergen-check shadow"
                             type="checkbox"
                             name="without[]"
                             value="<?= esc($cat->name) ?>"
@@ -45,8 +46,8 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-search w-100">
-                    <i class="bi bi-search"></i> Rechercher
+                <button type="submit" class="btn btn-search w-100 shadow">
+                    <i class="bi bi-search"></i> Lancer la recherche
                 </button>
             </div>
 

@@ -204,6 +204,7 @@ footer p, footer a {
   font-size: small;
   color: white;
   text-decoration: none;
+  margin: 0;
  
   /*text-shadow: 0 0 0.3px currentColor;*/
 }

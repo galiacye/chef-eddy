@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //parsing
   //échappe les caractères spéciaux de $units car il pourrait y avoir des points (gr.)
-  // ou autres carac spé puisque c'est une string, et le regex serait perdue!
+  // ou autres carac spé puisque c'est une string, et la regex serait perdue!
   function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
@@ -83,9 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "i",
     );
 
-    // ^(\d+[.,]?\d*)         groupe 1 : le nombre (200, 1.5 etc)
+    // ^(\d+[.,]?\d*)         groupe 1 : le nombre (\d+)
     // \s*(g|ml|kg|cl|...)? groupe 2 : l'unité optionnelle (vient de php $unit)
     // \s*(.+)$             groupe 3 : nom de l'ingrédient
+
+
 
 
     //verifier si saisie matche avec regex

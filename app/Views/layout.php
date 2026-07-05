@@ -171,24 +171,26 @@
 
     <main class="container-fluid px-2 w-100">
 
-    <?php if (session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success">
-            <?= esc(session()->getFlashdata('success')) ?>
-        </div>
-    <?php endif; ?>
+        <?php if (session()->getFlashdata('success')) : ?>
+            <div class="alert alert-success">
+                <?= esc(session()->getFlashdata('success')) ?>
+            </div>
+        <?php endif; ?>
 
-    <?php if (session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger">
-            <?= esc(session()->getFlashdata('error')) ?>
-        </div>
-    <?php endif; ?>
-    
+        <?php if (session()->getFlashdata('error')) : ?>
+            <div class="alert alert-danger">
+                <?= esc(session()->getFlashdata('error')) ?>
+            </div>
+        <?php endif; ?>
+
 
         <?= $this->renderSection('body') ?>
     </main>
     <footer class="mt-5">
-        <p>&copy; <?= date('Y') ?> Chef Eddy</p>
-        <a href="<?= site_url('mentions-legales') ?>">Mentions légales</a>
+        
+            <p class="text-center">&copy; <?= date('Y') ?> Chef Eddy</p>
+            <a href="<?= site_url('mentions-legales') ?>" class="text-center">Mentions légales</a>
+    
     </footer>
     <?= $this->renderSection('customJs') ?>
 

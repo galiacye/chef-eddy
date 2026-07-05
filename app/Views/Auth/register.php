@@ -49,8 +49,8 @@
             ];
 
             $confirm_password = [
-                'name'  => 'confirm_password',
-                'id'    => 'confirm_password',
+                'name'  => 'passconf',
+                'id'    => 'passconf',
                 'type'  => 'password',
                 'class' => 'form-control w-100 shadow'
             ];
