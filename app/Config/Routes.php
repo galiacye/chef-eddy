@@ -23,39 +23,42 @@ $routes->get('logout', 'Auth::logout');
 $routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
 $routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
 
-//Admin
-$routes->get('dashboard', 'Admin::dashboard');
-$routes->post('Admin/set-homepage-tag', 'Admin::setHomepageTag');
+// Zone Admin — tout ce groupe est protégé par le filtre adminOnly
+$routes->group('', ['filter' => 'adminOnly'], function ($routes) {
 
-// Admin - users
-$routes->get('Admin/users-index', 'Admin::usersIndex');
-$routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
-$routes->match(['get', 'post'], 'Admin/add-user', 'Admin::addUser');
-$routes->post('Admin/changeUserRole/(:num)', 'Admin::changeUserRole/$1');
-$routes->get('Admin/deleteUser/(:num)', 'Admin::deleteUser/$1');
-$routes->get('delete-user/(:num)', 'Admin::deleteUser/$1');
+    $routes->get('dashboard', 'Admin::dashboard');
+    $routes->post('Admin/set-homepage-tag', 'Admin::setHomepageTag');
 
-// Admin - recipes
-$routes->get('Admin/recipes-index', 'Admin::recipesIndex');
-$routes->get('Admin/recipe-details/(:num)', 'Admin::recipeDetails/$1');
-$routes->post('Admin/recipe/reject/(:num)', 'Admin::deleteRecipe/$1');//rejeter
-$routes->post('Admin/recipe/remove/(:num)', 'Admin::deleteRecipe/$1'); // pour supp une recette
-$routes->post('Admin/recipe/save/(:num)', 'Admin::saveRecipe/$1'); // pour approuver une recette
-$routes->post('Admin/recipe/pending/(:num)', 'Admin::pendingRecipe/$1');
+    // Admin - users
+    $routes->get('Admin/users-index', 'Admin::usersIndex');
+    $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
+    $routes->match(['get', 'post'], 'Admin/add-user', 'Admin::addUser');
+    $routes->post('Admin/changeUserRole/(:num)', 'Admin::changeUserRole/$1');
+    $routes->get('Admin/deleteUser/(:num)', 'Admin::deleteUser/$1');
+    $routes->get('delete-user/(:num)', 'Admin::deleteUser/$1');
 
-//Admin - Tags
-$routes->post('Admin/add-tag', 'Admin::addTag');
+    // Admin - recipes
+    $routes->get('Admin/recipes-index', 'Admin::recipesIndex');
+    $routes->get('Admin/recipe-details/(:num)', 'Admin::recipeDetails/$1');
+    $routes->post('Admin/recipe/reject/(:num)', 'Admin::deleteRecipe/$1');
+    $routes->post('Admin/recipe/remove/(:num)', 'Admin::deleteRecipe/$1');
+    $routes->post('Admin/recipe/save/(:num)', 'Admin::saveRecipe/$1');
+    $routes->post('Admin/recipe/pending/(:num)', 'Admin::pendingRecipe/$1');
 
+    // Admin - Tags
+    $routes->post('Admin/add-tag', 'Admin::addTag');
 
-// Admin - ingredients
-$routes->get('Admin/ing-index', 'Ingredient::ingIndex');
-$routes->post('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');
+    // Admin - ingredients
+    $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
+    $routes->post('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');
 
-// Admin - comments
-$routes->get('Admin/comments', 'Comment::commentsIndex');
-$routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1/$2');
-$routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
-$routes->post('comment/reply', 'Comment::replyComment');
+    // Admin - comments
+    $routes->get('Admin/comments', 'Comment::commentsIndex');
+    $routes->post('comment/status/(:num)/(:alpha)', 'Comment::updateCommentStatus/$1/$2');
+    $routes->post('comment/delete/(:num)', 'Comment::deleteComment/$1');
+    $routes->post('comment/reply', 'Comment::replyComment');
+
+});
 
 // Search
 $routes->get('search', 'Search::search');
