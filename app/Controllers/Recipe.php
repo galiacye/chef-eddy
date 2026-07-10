@@ -129,7 +129,7 @@ class Recipe extends BaseController
                             "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                         ]
                     ],
-                  
+
                     "prep_time" => [
                         "label" => "Temps de préparation",
                         "rules" => "permit_empty|max_length[100]",
@@ -191,8 +191,8 @@ class Recipe extends BaseController
                 }
                 // gestion de l'image (à externaliser plus tard)
                 $image = $this->request->getFile('image_url');
-                if ($image && $image->isValid() && !$image->hasMoved()) {//ne peut être bougée qu'une fois 
-                //et l'a déjà été pour stockage temporaire
+                if ($image && $image->isValid() && !$image->hasMoved()) { //ne peut être bougée qu'une fois 
+                    //et l'a déjà été pour stockage temporaire
                     $newName = $image->getRandomName();
                     $image_path = 'uploads/recipes/' . $newName;
                     $image->move(ROOTPATH . 'public/uploads/recipes', $newName);
@@ -262,9 +262,13 @@ class Recipe extends BaseController
                         } else {
                             //sinon on l'insère
 
+                            // $db->table('ingredients')->insert([
+                            //   'name'        => $name,
+                            // 'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category_id'])
+                            //]);
                             $db->table('ingredients')->insert([
                                 'name'        => $name,
-                                'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category'])
+                                'category_id' => $ingredient['category_id']
                             ]);
 
                             $ingredient_id = $db->insertID();
@@ -327,7 +331,7 @@ class Recipe extends BaseController
                         "mime_in"  => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ],
-        
+
                 "prep_time" => [
                     "label" => "Temps de préparation",
                     "rules" => "permit_empty|max_length[100]",
