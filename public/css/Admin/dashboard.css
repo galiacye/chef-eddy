@@ -1,6 +1,6 @@
 body {
     
-   background-image: url('/img/Home/dash-bg-2.jpg'); 
+   background-image: url('/img/Home/dash-bg-2.jpg');  
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;
@@ -18,10 +18,30 @@ body {
 }
 .stat-card {
   flex: 1;
-
+display: flex;
+justify-content: space-around;
+align-items: center;
   padding: 1rem 1.5rem;
   border: 1px solid #ccc;
   border-radius: 8px;
+}
+.stat-card-one {
+  background-image: ;
+}
+.stat-card-2 {
+  
+   background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.img-recipe,
+.img-profil {
+  max-height: 80px;
+  border-radius: 10%;
+  
+}
+.stat-card-3 {
+  background-image: ;
 }
 .stat-warn {
   border-color: #ff6f61;
@@ -88,3 +108,11 @@ body {
 details {
     margin-bottom: 1.5rem;
 }
+
+
+ .stat-card,
+.nav-card,
+.tag-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+} 
