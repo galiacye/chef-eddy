@@ -6,6 +6,11 @@ use CodeIgniter\Model;
 
 class RoleModel extends Model
 {
+    const ADMIN  = 3;
+    const AUTHOR = 2;
+    const BANNED = 4;
+    const GUEST  = 1;
+
     protected $table = 'roles';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

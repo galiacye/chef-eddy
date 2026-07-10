@@ -73,7 +73,7 @@
                                 Répondre
                             </button>
                         </div>
-                        <!-- Form de réponse collapse(dépliable) -->
+                        <!-- Form  collapse -->
                         <div class="collapse mt-2" id="reply-<?= $c->id ?>">
                             <form method="post" action="<?= base_url('comment/reply') ?>" id="form-reply-<?= $c->id ?>">
                                 <?= csrf_field() ?>

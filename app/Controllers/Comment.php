@@ -194,19 +194,55 @@ class Comment extends BaseController
             return redirect()->back()->with('success', 'La modification de votre commentaire est en attente de modération');
         }
     }
+    // public function replyComment()
+    // {
+    //     $data = [
+    //         'recipe_id' => $this->request->getPost('recipe_id'),
+    //         'parent_id'  => $this->request->getPost('parent_id'),
+    //         'content'    => $this->request->getPost('content'),
+    //         'user_id'    => session()->get('user_id'),
+    //         'status'     => 'approved',
+    //         'rating'     => null
+    //     ];
+    //     $this->model->insert($data);
+    //     return redirect()->back()->with('success', 'Réponse publiée');
+    // }
+
+
+    //correction de la faille 
+
     public function replyComment()
-    {
-        $data = [
-            'recipe_id' => $this->request->getPost('recipe_id'),
-            'parent_id'  => $this->request->getPost('parent_id'),
-            'content'    => $this->request->getPost('content'),
-            'user_id'    => session()->get('user_id'),
-            'status'     => 'approved',
-            'rating'     => null
-        ];
-        $this->model->insert($data);
-        return redirect()->back()->with('success', 'Réponse publiée');
+{
+    $recipeId = $this->request->getPost('recipe_id');
+    $userId   = session()->get('user_id');
+    $roleId   = session()->get('role_id');
+
+    $recipe = model('RecipeModel')->find($recipeId);
+
+    if (!$recipe) {
+        return redirect()->back()->with('error', 'Recette introuvable.');
     }
+
+    // L'utilisateur doit être soit le propriétaire de la recette, soit administrateur
+    $estProprietaire = ($recipe['user_id'] == $userId);
+    $estAdmin        = ($roleId == 3);
+
+    if (!$estProprietaire && !$estAdmin) {
+        return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à répondre à ce commentaire.');
+    }
+
+    $data = [
+        'recipe_id' => $recipeId,
+        'parent_id' => $this->request->getPost('parent_id'),
+        'content'   => $this->request->getPost('content'),
+        'user_id'   => $userId,
+        'status'    => 'approved',
+        'rating'    => null
+    ];
+
+    $this->model->insert($data);
+    return redirect()->back()->with('success', 'Réponse publiée');
+}
 
    
 }

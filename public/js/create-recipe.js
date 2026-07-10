@@ -87,9 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // \s*(g|ml|kg|cl|...)? groupe 2 : l'unité optionnelle (vient de php $unit)
     // \s*(.+)$             groupe 3 : nom de l'ingrédient
 
-
-
-
     //verifier si saisie matche avec regex
     const match = text.trim().match(regex);//trim supp espaces
     if (match) {
