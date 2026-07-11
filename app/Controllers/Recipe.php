@@ -310,6 +310,7 @@ class Recipe extends BaseController
                 'categories_ing_db' => $ingredientModel->getCategory()
             ]);
         } else { //si pas get, post donc traitement
+       // dd('POST reçu');
             $user_id = session()->get('user_id');
             // dd($id,$this->request->getPost());//pour voir!
             $rules = [
@@ -369,6 +370,7 @@ class Recipe extends BaseController
 
 
             ];
+          // dd($this->request->getPost('difficulty'));
             if (!$this->validate($rules)) {
                 //dd($this->validator->getErrors());
                 return view('Recipe/update-recipe', [
@@ -444,10 +446,11 @@ class Recipe extends BaseController
                         ->where('name', $name)
                         ->get()
                         ->getRowArray();
-
+ //dd($ingredient);
                     if ($existing) {
                         $ingredient_id = $existing['id'];
                     } else {
+                       
                         $db->table('ingredients')->insert([
                             'name' => $name,
                             'category_id' => $ingredient['category_id']
@@ -475,6 +478,7 @@ class Recipe extends BaseController
                 }
             }
             $user_id = session()->get('user_id');
+           // dd('fin update');
             return redirect()->to('profile/' . $user_id)->with('success', 'Recette modifiée avec succès !');
             // return redirect()->to('Recipe/recipes-index')->with('success', 'Recette modifiée avec succès !');
         }

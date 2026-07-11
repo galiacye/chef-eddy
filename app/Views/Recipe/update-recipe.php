@@ -17,7 +17,7 @@
 <link href="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.min.js"></script>
 
-<link href="<?= base_url('./css/recipes/createRecipe.css') ?>" rel="stylesheet">
+<link href="<?= base_url('./css/recipes/update-recipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -146,7 +146,7 @@ foreach ($categories as $category) {
                     <input type="text" name="ingredients[<?= $index ?>][unit]" value="<?= esc($ing->unit) ?>" placeholder="Unité (g, ml…)" class="form-control w-25">
                     <!--form_dropdown gère champs simples, pas les noms indexés dynamiquement comme ingredient[index][categorie].-->
                     <select name="ingredients[<?= $index ?>][category_id]" class="form-select w-25">
-                        <option value="">-- Catégorie --</option>
+                        <option value=""> Catégorie </option>
                         <?php foreach ($categories_ing_db as $cat_ing): ?>
                             <option value="<?= $cat_ing->id ?>"
                                 <?= isset($ing->category_id) && $ing->category_id == $cat_ing->id ? 'selected' : '' ?>>

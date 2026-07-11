@@ -91,7 +91,7 @@ if ($user_id) {
     <section class="card-block">
         <h2>La recette</h2>
         <div class="editor">
-            <?= html_entity_decode(esc($recipe->content)) ?>
+            <?= $recipe->content //a déjà été traité avec html_purifier ds cont ?>
         </div>
     </section>
 

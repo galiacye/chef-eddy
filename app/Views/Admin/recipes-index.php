@@ -71,7 +71,7 @@
                         <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
                             onsubmit="return confirm('Supprimer définitivement cette recette?')">
                             <?= csrf_field() ?>
-                            <button type="submit" class="btn btn-coralPlus">Supprimer</button>
+                            <button type="submit" class="btn btn-corail">Supprimer</button>
                         </form>
                     </div>
                 </li>

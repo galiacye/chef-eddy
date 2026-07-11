@@ -9,6 +9,13 @@ h1 {
     font-family: "Lobster";
 }
  
+.btn-blue {
+    background-color: #0ba3cd;
+    color: white;
+}
+.btn-corail {
+    background-color: #f06351;
+}
 .alert-success {
     background: linear-gradient(135deg, #1a3a1a, #1f4a1f);
     border: 1px solid rgba(100, 200, 100, 0.3);
