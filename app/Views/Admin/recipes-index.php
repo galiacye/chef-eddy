@@ -48,9 +48,9 @@
     <div class="btn-group">
 
         <a href="<?= base_url('Admin/recipes-index?status=pending') ?>"
-            class="btn <?= $status === 'pending' ? 'btn-warning' : 'btn-outline-warning' ?>">En attente</a>
+            class="btn <?= $status === 'pending' ? 'btn-corail' : 'btn-outline-corail' ?>">En attente</a>
         <a href="<?= base_url('Admin/recipes-index?status=approved') ?>"
-            class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-success' ?>">Approuvées</a>
+            class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-emeraude' ?>">Approuvées</a>
   
     </div>
     <div class="row m-3">
@@ -71,7 +71,7 @@
                         <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
                             onsubmit="return confirm('Supprimer définitivement cette recette?')">
                             <?= csrf_field() ?>
-                            <button type="submit" class="btn btn-corail">Supprimer</button>
+                            <button type="submit" class="btn btn-corail2">Supprimer</button>
                         </form>
                     </div>
                 </li>
