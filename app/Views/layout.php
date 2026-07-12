@@ -10,7 +10,7 @@
     <?= $this->renderSection('description') ?>
     <?= $this->renderSection('title') ?>
     <!-- lien vers le framework CSS Bootstrap 5.3.2 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- lien vers la bibliothèque d'icônes Bootstrap Icons 1.11.1 -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -23,8 +23,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <!--feuille de style-->
+  
     <link href="<?= base_url('css/layout.css') ?>" rel="stylesheet">
-    <!--section CI4-->
     <?= $this->renderSection('custom-css') ?>
 </head>
 
