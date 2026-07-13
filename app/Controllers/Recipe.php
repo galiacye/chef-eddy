@@ -399,8 +399,6 @@ class Recipe extends BaseController
                 $image_path = $recipe->image_url;
             }
 
-
-
             $config = HTMLPurifier_Config::createDefault();
             $purifier = new HTMLPurifier($config);
             $content = $purifier->purify($this->request->getPost('content'));

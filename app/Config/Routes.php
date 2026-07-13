@@ -29,6 +29,20 @@ $routes->group('', ['filter' => 'adminOnly'], function ($routes) {
     $routes->get('dashboard', 'Admin::dashboard');
     $routes->post('Admin/set-homepage-tag', 'Admin::setHomepageTag');
 
+
+// $routes->group('', ['filter' => 'adminOnly'], function ($routes) {
+//     $routes->get('dashboard', 'Admin::dashboard');
+//     $routes->post('comment/reply', 'Comment::replyComment');
+   
+// });
+
+// $routes->group('', ['filter' => 'isLogged'], function ($routes) {
+//     $routes->match(['get', 'post'], 'add-recipe', 'Recipe::createRecipe');
+//     $routes->post('favorites/toggle/(:num)', 'Favorite::toggle/$1');
+   
+// });
+
+
     // Admin - users
     $routes->get('Admin/users-index', 'Admin::usersIndex');
     $routes->get('Admin/user-details/(:num)', 'Admin::userDetails/$1');
