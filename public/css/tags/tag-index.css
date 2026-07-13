@@ -2,6 +2,9 @@ body {
     background-color:#f4fcf0 ;
 }
 
+h2 {
+    font-family: "Lobster";
+}
 .nav-grid {
     display: flex;
     flex-wrap: wrap;

@@ -14,12 +14,12 @@
     <div class="d-flex justify-content-center mt-3">
         <div class="search-wrapper">
 
+
             <div class="search-box1 d-flex align-items-center gap-1 mb-2 mt-2">
                 <input type="text"
                     name="search"
-                    class="form-control shadow"
-                    placeholder="Taper le nom d'une recette ou d'un ingrédient"
-                  >
+                    class="form-control shadow flex-grow-1 mw-0"
+                    placeholder="Taper le nom d'une recette ou d'un ingrédient">
             </div>
 
             <div class="d-flex justify-content-center mb-2">
@@ -93,7 +93,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="col-md-10">
             <div class="row chef-recipes">
                 <?php foreach ($recipes as $recipe) : ?>

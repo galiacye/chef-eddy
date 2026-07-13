@@ -15,65 +15,52 @@
         </div>
     <?php endif; ?>
 
-    <h1 class="dash-title text-center">Tableau de bord</h1>
+   
+   <h1 class="dash-title text-center">Tableau de bord</h1>
 
-    <!--mettre les burgers-->
-    <!-- Statistiques du site. entiers esc inutile-->
-    <div class="stat d-flex justify-content-around mb-3 g-2">
-        <div class="stat-card stat-card-one shadow">
-            <img src="<?=  base_url('./img/Home/profil.jpg') ?>" alt="img profil" class="img-profil shadow">
-            <div class="stat-number"><?= $nb_users ?></div>
-            <div class="stat-label">Utilisateurs</div>
+<div class="nav-grid">
+    <a href="Admin/users-index" class="nav-card shadow">
+        <div class="nav-icon"><i class="bi bi-people"></i></div>
+        <div class="nav-title">Utilisateurs <span class="nav-badge"><?= $nb_users ?></span></div>
+        <div class="nav-p">Comptes, rôles, accès</div>
+    </a>
+
+    <a href="Admin/recipes-index" class="nav-card shadow">
+        <div class="nav-icon"><i class="bi bi-journal-text"></i></div>
+        <div class="nav-title">
+            Recettes <span class="nav-badge"><?= $nb_recipes ?></span>
+            <?php if ($nb_recipes_pending > 0): ?>
+                <span class="nav-badge nav-badge-warn"><?= $nb_recipes_pending ?> en attente</span>
+            <?php endif ?>
         </div>
-        <div class="stat-card stat-card-2 shadow">
-            <img src="<?=  base_url('./img/Home/logo.png') ?>" alt="img recette" class="img-recipe shadow">
-            <div class="stat-number"><?= $nb_recipes ?></div>
-            <div class="stat-label">Recettes</div>
-        </div>
-        <div class="stat-card stat-card-3 shadow stat-warn">
-            <div class="stat-number"><?= $nb_recipes_pending ?></div>
-            <div class="stat-label">En attente</div>
-        </div>
-    </div>
+        <div class="nav-p">Gérer, modifier, supprimer</div>
+    </a>
 
-    <!-- nav cards -->
-    <div class="nav-grid">
-        <a href="Admin/users-index" class="nav-card shadow">
-            <div class="nav-icon"><i class="bi bi-people"></i></div>
-            <div class="nav-title">Utilisateurs</div>
-            <div class="nav-p">Comptes, rôles, accès</div>
-        </a>
+    <a href="Admin/comments" class="nav-card shadow">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Commentaires</div>
+        <div class="nav-p">Modérer</div>
+    </a>
 
-        <a href="Admin/recipes-index" class="nav-card shadow">
-            <div class="nav-icon"></div>
-            <div class="nav-title">Recettes</div>
-            <div class="nav-p">Gérer, modifier, supprimer</div>
-        </a>
+    <a href="Admin/cat-index" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Catégories</div>
+        <div class="nav-p">Modifier, Ajouter, Supprimer</div>
+    </a>
 
-        <a href="Admin/comments" class="nav-card shadow">
-            <div class="nav-icon"></div>
-            <div class="nav-title">Commentaires</div>
-            <div class="nav-p">Modérer</div>
-        </a>
+    <a href="tag/index" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Tags</div>
+        <div class="nav-p">Modifier, Ajouter, Supprimer</div>
+    </a>
 
-        <a href="Admin/cat-index" class="nav-card">
-            <div class="nav-icon"></div>
-            <div class="nav-title">Catégories</div>
-            <div class="nav-p">Modifier, Ajouter, Supprimer</div>
-        </a>
+    <a href="Admin/ing-index" class="nav-card">
+        <div class="nav-icon"></div>
+        <div class="nav-title">Ingrédients</div>
+        <div class="nav-p">Voir, supprimer les doublons</div>
+    </a>
+</div>
 
-          <a href="tag/index" class="nav-card">
-            <div class="nav-icon"></div>
-            <div class="nav-title">Tags</div>
-            <div class="nav-p">Modifier, Ajouter, Supprimer</div>
-        </a>
-
-        <a href="Admin/ing-index" class="nav-card">
-            <div class="nav-icon"></div>
-            <div class="nav-title">Ingrédients</div>
-            <div class="nav-p">Voir, supprimer les doublons</div>
-        </a>
-    </div>
 
     <!-- homepage tag -->
     <div class="tag-panel">

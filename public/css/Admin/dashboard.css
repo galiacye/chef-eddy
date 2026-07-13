@@ -10,57 +10,40 @@ body {
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
-.stat {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
+
+.nav-badge {
+  display: inline-block;
+  background: #ff6f61;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 6px;
 }
-.stat-card {
-  flex: 1;
-display: flex;
-justify-content: space-around;
-align-items: center;
-  padding: 1rem 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+
+.nav-badge-warn {
+  background: #d9534f;
 }
-.stat-card-one {
-  background-image: ;
-}
-.stat-card-2 {
-  
-   background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
+
 .img-recipe,
 .img-profil {
   max-height: 80px;
   border-radius: 10%;
   
 }
-.stat-card-3 {
-  background-image: ;
-}
-.stat-warn {
-  border-color: #ff6f61;
-}
-.stat-number {
-  font-size: 2rem;
-  font-weight: bold;
-}
-.stat-label {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-}
+
 .nav-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
 }
+
 .nav-card {
+  flex: 1 1 200px;
+  max-width: 260px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -68,6 +51,7 @@ align-items: center;
   border-radius: 8px;
   border: 1px solid #ccc;
   text-decoration: none;
+ 
 }
 .nav-title {
   font-weight: 600;
@@ -110,9 +94,9 @@ details {
 }
 
 
- .stat-card,
+
 .nav-card,
 .tag-panel {
-    background: rgba(255, 255, 255, 0.8);
+    background: white;
     backdrop-filter: blur(8px);
 } 

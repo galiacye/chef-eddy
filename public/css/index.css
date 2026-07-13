@@ -14,11 +14,9 @@
 .btn-tag:active { transform: scale(0.97); }
 /*/
 
-
 body {
   background-color: rgb(248, 240, 229);
 }
-
 
 .allergen-check {
   display: none;
@@ -38,14 +36,15 @@ body {
 }
 
 /*selecteur de frère adjacent*/
-.allergen-check:checked+.allergen-label {
+.allergen-check:checked + .allergen-label {
   background-color: rgb(250, 180, 94);
   color: white;
 }
-.search-box1 input {
-    width: 40ch;
-}
 
+.search-box1 input {
+  flex: 1;
+  min-width: 0;
+}
 .btn-filter {
   background-color: white;
 }
@@ -54,14 +53,12 @@ body {
   background-color: #0ba3cd;
 }
 
-
 .btn-search {
   display: flex;
   justify-content: center;
   background-color: #0bb5a7;
   /* background-color: rgb(50, 192, 180);*/
   max-width: 200px;
-
 }
 
 .btn-search:hover {
@@ -98,8 +95,6 @@ h2 .tag-title {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
-
 
 /*
 .btn-tag {
@@ -164,8 +159,6 @@ h2 .tag-title {
   transition: 0.25s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 } */
-
-
 
 .w-custom {
   width: 100%;
@@ -251,3 +244,9 @@ h2 .tag-title {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 /*/
+
+@media screen and (min-width: 768px) {
+  .search-box1 input {
+  width: 40ch;
+}
+}
