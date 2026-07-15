@@ -1,27 +1,47 @@
 body {
-    
-   background-image: url('/img/Home/dash-bg-2.jpg');  
+  background-image: url("/img/Home/dash-bg-2.jpg");
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;
+}
+h1 {
+  font-family: "Syncopate";
+  color: white;
 }
 .dashboard-wrap {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
-
+.nav-title {
+  font-family: "Calibri";
+  font-size: 1.5rem;
+  color: rgb(57, 31, 31);
+}
+.nav-p {
+  color: black;
+  font-style: italic;
+}
 .nav-badge {
   display: inline-block;
-  background: #ff6f61;
+  background: #0b8d82;
   color: white;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
   margin-left: 6px;
 }
-
+.nav-badge-pending {
+  display: inline-block;
+  background-color: #0ba3cd;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 6px;
+}
 .nav-badge-warn {
   background: #d9534f;
 }
@@ -30,7 +50,6 @@ body {
 .img-profil {
   max-height: 80px;
   border-radius: 10%;
-  
 }
 
 .nav-grid {
@@ -51,7 +70,6 @@ body {
   border-radius: 8px;
   border: 1px solid #ccc;
   text-decoration: none;
- 
 }
 .nav-title {
   font-weight: 600;
@@ -63,6 +81,7 @@ body {
 .nav-p {
   font-size: 1rem;
 }
+
 .tag-panel {
   max-width: 520px;
   padding: 1.5rem;
@@ -81,7 +100,24 @@ body {
   border: 1px solid #ccc;
 }
 
-
+.btn-emeraude {
+  background-color: #0b8d82;
+  color: white;
+  border-radius: 8px;
+  border: none;
+}
+.btn-blue {
+  background-color: #0ba3cd;
+  color: white;
+  border-radius: 8px;
+  border: none;
+}
+.btn-corail {
+  background-color: #f06351;
+}
+.btn-jaune {
+  background-color: rgb(252, 205, 87);
+}
 
 /* desktop : tout ouvert, summary caché */
 /* @media (min-width: 768px) {
@@ -90,13 +126,17 @@ body {
 } */
 
 details {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
-
-
 
 .nav-card,
 .tag-panel {
-    background: white;
-    backdrop-filter: blur(8px);
-} 
+  background: white;
+  backdrop-filter: blur(8px);
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    color: rgb(42, 20, 20);
+  }
+}

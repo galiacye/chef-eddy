@@ -16,7 +16,7 @@
     <?php endif; ?>
 
    
-   <h1 class="dash-title text-center">Tableau de bord</h1>
+   <h1 class="dash-title text-center mb-4">Tableau de bord</h1>
 
 <div class="nav-grid">
     <a href="Admin/users-index" class="nav-card shadow">
@@ -30,7 +30,7 @@
         <div class="nav-title">
             Recettes <span class="nav-badge"><?= $nb_recipes ?></span>
             <?php if ($nb_recipes_pending > 0): ?>
-                <span class="nav-badge nav-badge-warn"><?= $nb_recipes_pending ?> en attente</span>
+                <span class="nav-badge-pending nav-badge-warn"><?= $nb_recipes_pending ?> en attente</span>
             <?php endif ?>
         </div>
         <div class="nav-p">Gérer, modifier, supprimer</div>
@@ -84,12 +84,12 @@
                     </option>
                 <?php endforeach; ?>
             </select>
-            <button type="submit" class="tag-btn mt-2">Choisir</button>
+            <button type="submit" class="tag-btn btn-blue mt-2">Choisir</button>
         </form>
         <form action="<?= base_url('Admin/add-tag') ?>" method="post" class="mt-2">
             <?= csrf_field() ?>
             <input type="text" name="name" class="tag-select" placeholder="Nouveau tag" required>
-            <button type="submit" class="tag-btn">Ajouter</button>
+            <button type="submit" class="tag-btn btn-emeraude px-3 py-1">Ajouter</button>
         </form>
     </div>
 </div>

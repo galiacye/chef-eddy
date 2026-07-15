@@ -197,8 +197,8 @@ class SearchModel extends Model
         // On cherche par titre ou par ingrédient en même temps
         $query = $this->db->table('recipes')
             ->select($select)
-            ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id', 'left')
-            ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id', 'left')
+            ->join('recipe_ingredients', 'recipes.id = recipe_ingredients.recipe_id')
+            ->join('ingredients', 'ingredients.id = recipe_ingredients.ingredient_id')
             ->where('recipes.status', 'approved')
             ->groupBy('recipes.id');
         if (!empty($search)) {

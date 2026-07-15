@@ -7,6 +7,13 @@
     <meta name="robots" content="noindex, nofollow"><!--referencement inutile pour pages admin-->
     <title>Admin - <?= $this->renderSection('titre') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <link href="<?= base_url('css/layoutAdmin.css') ?>" rel="stylesheet">
     <?= $this->renderSection('custom-css') ?>
 </head>
@@ -49,7 +56,7 @@
                         <a href="/Admin/comments" class="btn btn-outline-light btn-sm me-2">Commentaires</a>
                     <?php endif; ?>
 
-                    <a href="/" class="btn btn-outline-warning btn-sm">Site</a>
+                    <a href="/" class="btn btn-emeraude btn-sm">Site</a>
                 </div>
             </div>
         </div>
