@@ -69,9 +69,9 @@ if ($user_id) {
         <div class="ingredients-grid">
             <div class="portions-control">
                 <label>Portions :</label>
-                <button type="button" id="moins">- </button>
-                <span id="portions"><?= esc($recipe->portions) ?></span>
-                <button type="button" id="plus">+</button>
+                <button type="button" id="moins" class="btn btn-moins">- </button>
+                <span id="portions">  <?= esc($recipe->portions) ?>  </span>
+                <button type="button" id="plus" class="btn btn-plus">+</button>
             </div>
             <?php foreach ($ingredients as $ingredient): ?>
                 <div class="ingredient-card">
