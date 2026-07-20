@@ -127,3 +127,6 @@ $routes->get('cuisine-du-monde','World::worldIndex');
 //comme ça /recette/123 est capturé par la première route, et /Cape Verdian par la deuxième
 //si on met (:segment) en premier, il va intercepter /recette/123 avant que la route recette ait une chance de matcher.
 $routes->view('mentions-legales', 'mentions-legales');
+
+//PDF de la recette
+$routes->get('recipes/(:num)/pdf', 'Pdf::generate/$1');
