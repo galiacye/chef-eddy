@@ -23,7 +23,7 @@ $routes->get('logout', 'Auth::logout');
 $routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
 $routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
 
-// Zone Admin — tout ce groupe est protégé par le filtre adminOnly
+// Zone Admin, tout ce groupe est protégé par le filtre adminOnly
 $routes->group('', ['filter' => 'adminOnly'], function ($routes) {
 
     $routes->get('dashboard', 'Admin::dashboard');
@@ -77,24 +77,48 @@ $routes->group('', ['filter' => 'adminOnly'], function ($routes) {
 // Search
 $routes->get('search', 'Search::search');
 
-// User
-$routes->get('user/(:num)', 'User::showUser/$1');
-$routes->get('user-chef/(:num)', 'User::userChef/$1');
-$routes->get('all-users', 'User::userIndex');
-$routes->match(['get', 'post'], 'update-user/(:num)', 'User::updateUser/$1');
 
-// Profile : ?int $id = null signifie que le param est optionnel mais il faut les 2 routes pour cas où
-$routes->match(['get', 'post'], 'profile', 'User::profile'); // id vient de la session
-$routes->match(['get', 'post'], 'profile/(:num)', 'User::profile/$1'); // voir le profil d'un user en particulier
-$routes->match(['get', 'post'], 'profile/update', 'User::updateProfile');
- $routes->post('delete-profile',  'User::deleteProfile');
+// Zone utilisateur connecté — protégée par le filtre isLogged
+$routes->group('', ['filter' => 'isLogged'], function ($routes) {
+
+    // User
+    $routes->get('user/(:num)', 'User::showUser/$1');
+    $routes->get('user-chef/(:num)', 'User::userChef/$1');
+    $routes->get('all-users', 'User::userIndex');
+    $routes->match(['get', 'post'], 'update-user/(:num)', 'User::updateUser/$1');
+
+    // Profile// Profile : ?int $id = null signifie que le param est optionnel mais il faut les 2 routes pour cas où
+    $routes->match(['get', 'post'], 'profile', 'User::profile'); // id vient de la session
+    $routes->match(['get', 'post'], 'profile/(:num)', 'User::profile/$1'); // voir le profil d'un user en particulier
+    $routes->match(['get', 'post'], 'profile/update', 'User::updateProfile');
+    $routes->post('delete-profile', 'User::deleteProfile');
+
+    // Recipes (création/édition/suppression — pas la lecture publique)
+    $routes->match(['get', 'post'], 'add-recipe', 'Recipe::createRecipe');
+    $routes->match(['get', 'post'], 'update-recipe/(:num)', 'Recipe::updateRecipe/$1');
+    $routes->post('delete-recipe/(:num)', 'Recipe::deleteRecipe/$1');
+    $routes->get('edit-recipe', 'Recipe::editRecipe');//test 3 champs cachés
+
+    // Comments - user
+    $routes->get('add-comment/(:num)', 'Comment::addComment/$1');//form user
+    $routes->post('comment/save', 'Comment::saveComment'); // mis en base en pending, id passé par post pas de num
+    $routes->get('comment/update/(:num)', 'Comment::updateComment/$1');
+    $routes->post('comment/update/(:num)', 'Comment::updateComment/$1');
+
+    // Favorites
+    $routes->post('favorites/toggle/(:num)', 'Favorite::toggle/$1');
+    $routes->get('favorites', 'Favorite::index');
+
+    // Roles
+    $routes->get('all-roles', 'Role::allRoles');
+    $routes->get('role', 'Role::getRole');
+
+});
+
+
 // Recipes
 $routes->get('recipe-index', 'Recipe::recipeIndex');
 $routes->get('recipe/(:num)', 'Recipe::showRecipe/$1');
-$routes->match(['get', 'post'], 'add-recipe', 'Recipe::createRecipe');
-$routes->match(['get', 'post'], 'update-recipe/(:num)', 'Recipe::updateRecipe/$1');
-$routes->post('delete-recipe/(:num)', 'Recipe::deleteRecipe/$1');
-$routes->get('edit-recipe', 'Recipe::editRecipe'); // test 3 champs cachés
 
 // Categories
 $routes->get('category/index', 'Category::index');
@@ -104,23 +128,6 @@ $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 $routes->get('tag/index', 'Tag::index');
 $routes->get('tag/show/(:num)', 'Tag::showRecipesByTag/$1');
 
-// Comments - user
-$routes->get('add-comment/(:num)', 'Comment::addComment/$1'); // form user
-$routes->post('comment/save', 'Comment::saveComment'); // mis en base en pending, id passé par post pas de num
-$routes->get('comment/update/(:num)', 'Comment::updateComment/$1');
-$routes->post('comment/update/(:num)', 'Comment::updateComment/$1');
-
-// Favorites
-$routes->post('favorites/toggle/(:num)', 'Favorite::toggle/$1');
-$routes->get('favorites', 'Favorite::index');
-
-// Roles
-$routes->get('all-roles', 'Role::allRoles');
-$routes->get('role', 'Role::getRole');
-
-//password-forgot
-$routes->match(['get', 'post'], 'forgot-password', 'Auth::forgotPassword');
-$routes->match(['get', 'post'], 'reset-password/(:any)', 'Auth::resetPassword/$1');
 
 //the meal db
 //pour ci4 l'ordre des routes peut être important
