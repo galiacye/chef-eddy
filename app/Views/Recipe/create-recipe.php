@@ -152,7 +152,7 @@ validation_list_errors() échappent donc esc est inutile ici-->
             <?php for ($index = 0; $index < 6; $index++) : ?>
                 <div class="ingredient-row col-12 col-md-6 col-lg-4 d-flex flex-column gap-2 mb-2">
                     <input type="text"
-                        class="form-control ingredient-input shadow"
+                        class="form-control ingredient-input shadow respons-width"
                         placeholder="Ex: 200g farine, 2 oeufs..."
                         data-index="<?= $index ?>">
 
