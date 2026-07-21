@@ -180,6 +180,7 @@ class Recipe extends BaseController
                 //dd($this->request->getPost('difficulty'));
                 if (!$this->validate($rules)) {
                     //dd($this->validator->getErrors());
+                    dd($options_ingredients);
                     return view('Recipe/create-recipe', [
                         'errors'             => $this->validator->getErrors(),
                         'tags'               => $tagModel->findAll(),
@@ -266,6 +267,8 @@ class Recipe extends BaseController
                             //   'name'        => $name,
                             // 'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category_id'])
                             //]);
+                           // dd($this->request->getPost('ingredients'));
+                           $category_id = $ingredient['category_id'] ?: null; // '' devient null si oublié
                             $db->table('ingredients')->insert([
                                 'name'        => $name,
                                 'category_id' => $ingredient['category_id']
@@ -448,10 +451,10 @@ class Recipe extends BaseController
                     if ($existing) {
                         $ingredient_id = $existing['id'];
                     } else {
-                       
+                       $category_id = $ingredient['category_id'] ?: null; // '' devient null si pas rempli
                         $db->table('ingredients')->insert([
                             'name' => $name,
-                            'category_id' => $ingredient['category_id']
+                            'category_id' => $category_id
                         ]);
                         $ingredient_id = $db->insertID();
                     }
@@ -469,6 +472,7 @@ class Recipe extends BaseController
             if ($tag_ids) {
                 $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                 foreach ($tag_ids as $tag_id) {
+                    
                     $db->table('recipe_tags')->insert([
                         'recipe_id' => $recipe_id,
                         'tag_id'    => $tag_id

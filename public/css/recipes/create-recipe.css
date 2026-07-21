@@ -12,6 +12,9 @@ h1, h2 {
   font-family: "Syncopate";
 }
 
+.respons-width {
+    width: 100%;
+}
 .formulaire {
   display: flex;
   gap: 2rem;
@@ -60,7 +63,7 @@ h1, h2 {
   padding-bottom: 60px;
   padding-left: 20px;
   line-height: 40px;
-  font-size: 0.9rem;
+  font-size: 1.7rem;
   font-family: "Patrick Hand", cursive;
   color: #5a3d2b;
   position: relative;
@@ -85,6 +88,7 @@ h1, h2 {
 }
 .ql-editor p {
   margin: 0;
+  color: #5a3d2b;
 }
 /* marge */
 .ql-editor.ql-blank::before {
@@ -148,6 +152,10 @@ h1, h2 {
   .ql-editor {
     padding-left: 45px;
   }
+  .respons-width {
+    width: 75%;
+}
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -160,4 +168,7 @@ h1, h2 {
    .ql-editor {
     padding-left: 65px;
   }
+  .respons-width {
+    width: 50%;
+}
 }
