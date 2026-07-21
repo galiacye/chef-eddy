@@ -41,7 +41,7 @@ class TagModel extends Model
             ->get()->getResult();
     }
     //les recettes d'un tag
-    public function getRecipesByTag(int $tag_id)//, int $limit = 6 en 2ème param pour limiter affichage
+    public function getRecipesByTag(int $tag_id) //, int $limit = 6 en 2ème param pour limiter affichage
     {
         return $this->select('recipes.id, recipes.title, recipes.image_url')
             ->join('recipe_tags', 'tags.id = recipe_tags.tag_id')
@@ -55,6 +55,10 @@ class TagModel extends Model
 
     public function getHomepageTag(): ?object
     {
-        return $this->where('is_homepage', 1)->first();
+        return $this->where('is_homepage', 1)->get()->getRow();
+    }
+    public function getTagByName(string $name): ?object
+    {
+        return $this->where('tags.name', $name)->get()->getRow();
     }
 }

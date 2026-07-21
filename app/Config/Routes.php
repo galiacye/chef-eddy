@@ -113,7 +113,7 @@ $routes->get('category/(:num)', 'Category::showRecipesByCategory/$1');
 // Tags
 $routes->get('tag/index', 'Tag::index');
 $routes->get('tag/show/(:num)', 'Tag::showRecipesByTag/$1');
-
+$routes->get('tag/tag-chef-eddy', 'Tag::cGetChefTag');
 
 //the meal db
 //pour ci4 l'ordre des routes peut être important
@@ -127,3 +127,6 @@ $routes->get('cuisine-du-monde','World::worldIndex');
 //comme ça /recette/123 est capturé par la première route, et /Cape Verdian par la deuxième
 //si on met (:segment) en premier, il va intercepter /recette/123 avant que la route recette ait une chance de matcher.
 $routes->view('mentions-legales', 'mentions-legales');
+
+//PDF de la recette
+$routes->get('recipes/(:num)/pdf', 'Pdf::generate/$1');

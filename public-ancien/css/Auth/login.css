@@ -1,0 +1,21 @@
+body {
+    background: linear-gradient(#a6d9e7,#daf7f5);
+}
+
+h1 {
+  font-family: "Syncopate";
+}
+
+.connect {
+  display: flex;
+  flex-direction: column;
+}
+.btn-blue {
+  background-color: #0ba3cd;
+  color: white;
+  max-width: 120px;
+}
+.btn-blue:hover {
+  background-color: #0b8d82;
+  color: white;
+}

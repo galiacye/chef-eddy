@@ -1,0 +1,132 @@
+
+
+body {
+    background-color: #f6f7fb;
+    min-height: 100vh;
+    color: #2b2b2b;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.container-fluid {
+    padding: 1rem;
+}
+
+
+.alert-success {
+    background: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    color: #2e7d32;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+
+
+.grenade-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.grenade-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+
+    background: #ffffff;
+    border: 1px solid #e6e8ef;
+    border-radius: 12px;
+    padding: 1rem;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: 0.2s ease;
+}
+
+.grenade-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+
+.recipe-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #1f2937;
+}
+
+.recipe-info .recipe-author {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+
+
+.recipe-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.recipe-actions .btn {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+}
+
+
+.grenade-icon {
+    color: #ff8a75;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.grenade-icon:hover {
+    transform: scale(1.1);
+    color: #ff5a5a;
+}
+
+
+
+@media (min-width: 768px) {
+
+    .container-fluid {
+        padding: 1.5rem;
+    }
+
+    .grenade-list li {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+    }
+
+    .recipe-actions {
+        width: auto;
+        justify-content: flex-end;
+    }
+}
+
+
+
+@media (min-width: 1024px) {
+
+    body {
+        background-color: #f6f7fb;
+    }
+
+    .grenade-list li {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .recipe-info h4 {
+        font-size: 1.05rem;
+    }
+
+    .recipe-actions .btn {
+        font-size: 0.85rem;
+    }
+}
