@@ -1,0 +1,30 @@
+body {
+    /* background-color: rgb(249, 163, 132); */
+    /* background-color: #fceed9; */
+   background-color: #efe2c5;
+}
+h1 {
+    font-family: "Lobster";
+}
+
+.intro {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.card {
+    max-width: 220px;
+    margin: auto;
+    border-radius: 12px;
+}
+
+.recipe-img {
+    height: 110px;
+    object-fit: cover;
+}
+
+
+.btn-recipe {
+    background-color: rgb(150, 193, 248);
+}

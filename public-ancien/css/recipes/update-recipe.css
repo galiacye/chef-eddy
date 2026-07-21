@@ -1,0 +1,6 @@
+.help-block {
+  display: block;
+  color: #dc3545; /* rouge Bootstrap "danger" */
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}

@@ -1,0 +1,29 @@
+body {
+    background-color:#f8f0e5;
+}
+.btn {
+    cursor: pointer;
+    color: white;
+    margin: 3px;
+}
+.btn-sm {
+    height: 30px;
+}
+.btn-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btn-emeraude {
+    background-color:#0b8d82;
+}
+.btn-blue {
+    background-color: #0ba3cd;
+}
+.btn-coralPlus {
+    background-color: #f3533d;
+}
+.recipe-img {
+       max-height: 150px;
+        max-width: 170px;
+    }

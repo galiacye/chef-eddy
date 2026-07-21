@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste Grenades</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icônes (FontAwesome pour la grenade) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Supprimer les puces par défaut et styliser */
+    .grenade-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .grenade-list li {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grenade-icon {
+      color: #ff8800; /* couleur grenat/orange */
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: transform 0.2s;
+    }
+
+    .grenade-icon:hover {
+      transform: scale(1.2);
+      color: red;
+    }
+  </style>
+</head>
+<body class="p-4 bg-dark text-white">
+
+  <h3>Liste de Grenades Cliquables</h3>
+  <ul class="grenade-list">
+    <li>
+      <i class="fa-solid fa-bomb grenade-icon" onclick="alert('Grenade 1 cliquée !')"></i>
+      Grenade 1
+    </li>
+    <li>
+      <i class="fa-solid fa-bomb grenade-icon" onclick="alert('Grenade 2 cliquée !')"></i>
+      Grenade 2
+    </li>
+    <li>
+      <i class="fa-solid fa-bomb grenade-icon" onclick="alert('Grenade 3 cliquée !')"></i>
+      Grenade 3
+    </li>
+  </ul>
+
+</body>
+</html>

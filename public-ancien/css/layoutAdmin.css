@@ -1,0 +1,7 @@
+.eddy {
+    border-radius: 50%;
+}
+#mainNavbar .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+}

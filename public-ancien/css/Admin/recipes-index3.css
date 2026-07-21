@@ -1,0 +1,113 @@
+
+body {
+    background: #f4f6fb;
+    min-height: 100vh;
+    color: #1f2937;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.container-fluid {
+    padding: 1.5rem;
+}
+
+.alert-success {
+    background: #ecfdf3;
+    border: 1px solid #d1fae5;
+    color: #065f46;
+    border-radius: 12px;
+    margin: 1rem;
+}
+
+.grenade-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.grenade-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: #ffffff;
+    border: 1px solid #eef0f5;
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    transition: all 0.2s ease;
+}
+
+.grenade-list li:hover {
+    border-color: #e2e8f0;
+    box-shadow: 0 4px 14px rgba(16, 24, 40, 0.06);
+}
+
+.recipe-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #111827;
+}
+
+.recipe-info .recipe-author {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.recipe-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.recipe-actions .btn {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+}
+
+
+.grenade-icon {
+    color: #f97316;
+    transition: 0.2s ease;
+}
+
+.grenade-icon:hover {
+    transform: scale(1.08);
+    color: #ef4444;
+}
+
+.grenade-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.recipe-actions {
+    width: 100%;
+    justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+
+    .grenade-list li {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .recipe-actions {
+        width: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .container-fluid {
+        padding: 2rem;
+    }
+
+    .grenade-list li {
+        padding: 1.15rem 1.5rem;
+    }
+}

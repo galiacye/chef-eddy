@@ -1,0 +1,95 @@
+/* =========================
+   TABLE CONTAINER
+========================= */
+
+.recipe-table {
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e6e8ef;
+}
+
+/* =========================
+   ROWS
+========================= */
+
+.recipe-row {
+    display: grid;
+    grid-template-columns: 1fr 180px 220px;
+    align-items: center;
+
+    padding: 0.9rem 1rem;
+
+    border-bottom: 1px solid #eef0f5;
+
+    transition: background 0.15s ease;
+}
+
+.recipe-row:hover {
+    background: #f8fafc;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.recipe-header {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    background: #f4f6fb;
+    color: #475569;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.recipe-main strong {
+    color: #111827;
+    font-size: 0.95rem;
+}
+
+.recipe-author {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.recipe-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.recipe-actions .btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .recipe-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .recipe-actions {
+        justify-content: flex-start;
+    }
+
+    .recipe-header {
+        display: none;
+    }
+}

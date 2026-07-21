@@ -1,0 +1,14 @@
+body {
+  background-color: rgb(249, 243, 232);
+  font-family: "Nunito";
+}
+h1 {
+  font-family: "Lobster";
+}
+.btn-custom {
+  color: white;
+  background-color: #028d81;
+  border: 1px solid rgb(2, 129, 129);
+}
+
+

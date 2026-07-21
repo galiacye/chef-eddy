@@ -1,0 +1,16 @@
+body {
+  background-color: #efe2c5;
+  font-family: "Nunito";
+}
+h1 {
+  font-family: "Syncopate";
+  font-size: 2rem;
+}
+.btn-coral {
+    background-color: #f06351;
+    
+}
+.btn-blue {
+  background-color: #0ba3cd;
+  color: white;
+}

@@ -1,0 +1,31 @@
+body {
+    background-color: antiquewhite;
+}
+.recipe-card {
+  
+  padding: 15px;
+  max-height: 240px;
+  width: 200px;
+  background-color: rgb(252, 248, 244);
+  border-radius: 10px;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 5px 10px rgba(0, 0, 0, 0.08);
+}
+.recipeTitle {
+    font-family: "Lobster";
+}
+.card-img-top {
+  height: 160px;
+  width: 170px;
+
+  object-fit: cover;
+}
+h3 {
+  font-size: 0.9rem;
+  text-decoration: none !important;
+  color: black;
+  font-family: "calibri";
+}
+@media screen and (min-width: 768px) {
+}
