@@ -34,7 +34,7 @@ class Tag extends BaseController
         $tag = $tagModel->find($tag_id);
 
         if ($tag->name === 'World Food') {
-            return redirect()->to(site_url('cuisine-du-monde'));
+            return redirect()->to(base_url('cuisine-du-monde'));
         }
 
         $recipes = $tagModel->getRecipesByTag($tag_id);
@@ -65,5 +65,20 @@ class Tag extends BaseController
         $tagModel->delete($tag_id);
 
         return redirect()->to('tag/index')->with('success', 'Tag supprimé avec succès.');
+    }
+
+    public function cGetChefTag()
+    {
+        $tagModel = model('TagModel');
+        $tag = $tagModel->getTagByName('Chef Eddy');
+       
+        $recipes = $tagModel->getRecipesByTag($tag->id);
+
+        $data = [
+            'tag' => $tag,
+            'recipes' => $recipes
+        ];
+
+        return view('tag/tag-chef-eddy', $data);
     }
 }

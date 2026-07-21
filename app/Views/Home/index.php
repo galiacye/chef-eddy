@@ -79,11 +79,15 @@
                         <?php foreach ($tags as $tag) : ?>
                             <div class="d-flex justify-content-center align-items-center mb-4">
                                 <?php if ($tag->name === 'World Food') : ?>
-                                    <a href="<?= site_url('cuisine-du-monde') ?>" class="btn btn-tag">
+                                    <a href="<?= base_url('cuisine-du-monde') ?>" class="btn btn-tag">
+                                        <?= esc($tag->name) ?>
+                                    </a>
+                                <?php elseif($tag->name ==='Chef Eddy') : ?>
+                                    <a href="<?= base_url('tag/tag-chef-eddy') ?>" class="btn btn-tag">
                                         <?= esc($tag->name) ?>
                                     </a>
                                 <?php else : ?>
-                                    <a href="<?= site_url('tag/show/' . $tag->id) ?>" class="btn btn-tag">
+                                    <a href="<?= base_url('tag/show/' . $tag->id) ?>" class="btn btn-tag">
                                         <?= esc($tag->name) ?>
                                     </a>
                                 <?php endif ?>

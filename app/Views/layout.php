@@ -34,7 +34,7 @@
 
     <header class="py-3">
         <div class="ban d-flex align-items-center pe-3">
-            <img src="./img/eddy-bd.jpeg" alt="eddy-bd" class="figure">
+            <img src="../img/Home/eddy-bd.jpeg" alt="eddy-bd" class="figure">
             <div class="title ps-3">
                 <h1 class="chef-title">Chef Eddy</h1>
                 <p>On ne plaisante pas avec les grammages...</p>
