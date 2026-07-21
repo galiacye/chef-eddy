@@ -12,6 +12,9 @@ h1, h2 {
   font-family: "Syncopate";
 }
 
+.responsive-width {
+    width: 100%;
+}
 .formulaire {
   display: flex;
   gap: 2rem;
@@ -149,6 +152,9 @@ h1, h2 {
     padding-left: 45px;
   }
 }
+.responsive-width {
+    width: 75%;
+}
 
 @media screen and (min-width: 1024px) {
   .ql-editor.ql-blank::before {
@@ -160,4 +166,7 @@ h1, h2 {
    .ql-editor {
     padding-left: 65px;
   }
+  .responsive-width {
+    width: 50%;
+}
 }
