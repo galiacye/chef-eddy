@@ -236,6 +236,14 @@ class Recipe extends BaseController
 
                     // force en tableau
                     $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
+
+                    // on retire le tag "Chef Eddy" si l'utilisateur n'est pas le chef
+                    $chefTagId = $tagModel->where('name', 'Chef Eddy')->first()->id ?? null;
+                    $role_id = session()->get('role_id');
+                    if ($chefTagId && $role_id != 1) {
+                        $tag_ids = array_filter($tag_ids, fn($id) => $id != $chefTagId);
+                    }
+
                     foreach ($tag_ids as $tag_id) {
                         $db->table('recipe_tags')->insert([
                             'recipe_id' => $recipe_id,
@@ -267,8 +275,8 @@ class Recipe extends BaseController
                             //   'name'        => $name,
                             // 'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category_id'])
                             //]);
-                           // dd($this->request->getPost('ingredients'));
-                           $category_id = $ingredient['category_id'] ?: null; // '' devient null si oublié
+                            // dd($this->request->getPost('ingredients'));
+                            $category_id = $ingredient['category_id'] ?: null; // '' devient null si oublié
                             $db->table('ingredients')->insert([
                                 'name'        => $name,
                                 'category_id' => $ingredient['category_id']
@@ -313,7 +321,7 @@ class Recipe extends BaseController
                 'categories_ing_db' => $ingredientModel->getCategory()
             ]);
         } else { //si pas get, post donc traitement
-       // dd('POST reçu');
+            // dd('POST reçu');
             $user_id = session()->get('user_id');
             // dd($id,$this->request->getPost());//pour voir!
             $rules = [
@@ -373,7 +381,7 @@ class Recipe extends BaseController
 
 
             ];
-          // dd($this->request->getPost('difficulty'));
+            // dd($this->request->getPost('difficulty'));
             if (!$this->validate($rules)) {
                 //dd($this->validator->getErrors());
                 return view('Recipe/update-recipe', [
@@ -447,11 +455,11 @@ class Recipe extends BaseController
                         ->where('name', $name)
                         ->get()
                         ->getRowArray();
- //dd($ingredient);
+                    //dd($ingredient);
                     if ($existing) {
                         $ingredient_id = $existing['id'];
                     } else {
-                       $category_id = $ingredient['category_id'] ?: null; // '' devient null si pas rempli
+                        $category_id = $ingredient['category_id'] ?: null; // '' devient null si pas rempli
                         $db->table('ingredients')->insert([
                             'name' => $name,
                             'category_id' => $category_id
@@ -472,7 +480,7 @@ class Recipe extends BaseController
             if ($tag_ids) {
                 $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                 foreach ($tag_ids as $tag_id) {
-                    
+
                     $db->table('recipe_tags')->insert([
                         'recipe_id' => $recipe_id,
                         'tag_id'    => $tag_id
@@ -480,7 +488,7 @@ class Recipe extends BaseController
                 }
             }
             $user_id = session()->get('user_id');
-           // dd('fin update');
+            // dd('fin update');
             return redirect()->to('profile/' . $user_id)->with('success', 'Recette modifiée avec succès !');
             // return redirect()->to('Recipe/recipes-index')->with('success', 'Recette modifiée avec succès !');
         }

@@ -96,12 +96,12 @@ validation_list_errors() échappent donc esc est inutile ici-->
             <?= validation_show_error('image_url') ?>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-            <label for="prep_time">Temps de préparation</label>
+            <label for="prep_time">Temps de préparation (en minutes)</label>
             <?= form_input($pt) ?>
             <?= validation_show_error('prep_time') ?>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-            <label for="cook_time">Temps de cuisson</label>
+            <label for="cook_time">Temps de cuisson (en minutes)</label>
             <?= form_input($ct) ?>
             <?= validation_show_error('cook_time') ?>
         </div>
@@ -122,27 +122,29 @@ validation_list_errors() échappent donc esc est inutile ici-->
         </div>
     </div>
     <label class="form-label mt-4 mb-1">Tags</label>
-    <div class="d-flex flex-wrap gap-3 ">
-        <?php foreach ($tags as $tag) : ?>
-
-            <div class="form-check">
-                <input
-                    type="checkbox"
-                    name="tags[]"
-                    value="<?= (int)$tag->id ?>"
-                    id="tag_<?= (int)$tag->id ?>"
-                    class="form-check-input"
-                    <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>>
-                <label class="form-check-label" for="tag_name" <?= $tag->id ?>">
-                    <!--<label class="form-check-label" for="tag_<?= (int)$tag->id ?>"> sinon html invalide ?-->
-                    <?= esc($tag->name) ?>
-                </label>
-            </div>
-
-        <?php endforeach ?>
-    </div>
-    <?= validation_show_error('tags') ?>
-
+   <div class="d-flex flex-wrap gap-3 ">
+    <?php foreach ($tags as $tag) : ?>
+        <?php
+            $isChefTag = ($tag->id == 1);
+            $isChef = (session()->get('role_id') == 1);
+            $canUseChefTag = $isChefTag ? $isChef : true;
+        ?>
+        <div class="form-check">
+            <input
+                type="checkbox"
+                name="tags[]"
+                value="<?= (int)$tag->id ?>"
+                id="tag_<?= (int)$tag->id ?>"
+                class="form-check-input"
+                <?= in_array($tag->id, (array) set_value('tags')) ? 'checked' : '' ?>
+                <?= $canUseChefTag ? '' : 'disabled' ?>>
+            <label class="form-check-label" for="tag_<?= (int)$tag->id ?>">
+                <?= esc($tag->name) ?>
+            </label>
+        </div>
+    <?php endforeach ?>
+</div>
+<?= validation_show_error('tags') ?>
     <label class="form-label mt-4 mb-1">Ingrédients</label>
     <div id="ingredients-container" class="row">
         <?php
