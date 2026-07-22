@@ -113,10 +113,11 @@
   height: 90px;
   border-radius: 10px;
 }
-.gato {
-  height: 90px;
-  border: 1px solid white;
-  border-radius: 6px;
+p {
+  display: none;
+}
+.figure {
+display: none;
 }
 
 .ban h1 {
@@ -182,20 +183,13 @@
 .ban h1,
 .ban,
 .ban .eddy,
-.ban .txt,
-.figure {
+.ban .txt
+ {
   position: relative;
   z-index: 1;
 } 
-.figure {
-  max-height: 150px;
-  border-radius: 50%;
-}
-p {
-  color: white;
-  margin: 0;
-  padding: 0;
-}
+
+
 
 
 footer {
@@ -230,6 +224,7 @@ footer p, footer a {
 
 @media screen and (min-width: 768px) {
 
+
   .ban {
     height: 140px;
     gap: 100px;
@@ -244,6 +239,18 @@ footer p, footer a {
     height: 125px;
     border-radius: 10px;
   }
+  p {
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+.figure {
+  display: block;
+  max-height: 100px;
+ border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
   .gato {
     height: 120px;
   }
@@ -264,7 +271,7 @@ footer p, footer a {
     height: 160px;
     border-radius: 10px;
   }
-  .gato {
-    height: 160px;
-  }
+.figure {
+  max-height: 150px;
+}
 }

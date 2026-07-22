@@ -180,7 +180,7 @@ class Recipe extends BaseController
                 //dd($this->request->getPost('difficulty'));
                 if (!$this->validate($rules)) {
                     //dd($this->validator->getErrors());
-                    dd($options_ingredients);
+                    //dd($options_ingredients);
                     return view('Recipe/create-recipe', [
                         'errors'             => $this->validator->getErrors(),
                         'tags'               => $tagModel->findAll(),
@@ -237,66 +237,68 @@ class Recipe extends BaseController
                     // force en tableau
                     $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
 
-                    // on retire le tag "Chef Eddy" si l'utilisateur n'est pas le chef
                     $chefTagId = $tagModel->where('name', 'Chef Eddy')->first()->id ?? null;
-                    $role_id = session()->get('role_id');
-                    if ($chefTagId && $role_id != 1) {
-                        $tag_ids = array_filter($tag_ids, fn($id) => $id != $chefTagId);
-                    }
+                    $chefEddy = (session()->get('role_id') == 1);
+
+                    $tag_ids_filtres = [];
 
                     foreach ($tag_ids as $tag_id) {
-                        $db->table('recipe_tags')->insert([
-                            'recipe_id' => $recipe_id,
-                            'tag_id'     => $tag_id
-                        ]);
-                    }
-                }
-                // Sauvegarde des ingrédients
-                $ingredients = $this->request->getPost('ingredients');
-                //dd($this->request->getPost());
-                //dd($ingredients);
-                if ($ingredients) {
-                    foreach ($ingredients as $ingredient) {
-                        $name = ucfirst(strtolower(trim($ingredient['name'])));
-                        //éviter les doublons d'orthographe différente:ucfirst normalise avec une capitale en premier
-                        if (empty($name)) continue; // on saute les lignes vides
-                        //  on cherche si l'ingrédient existe déjà
-                        $existing = $db->table('ingredients')
-                            ->where('name', $name)
-                            ->get()
-                            ->getRowArray();
-                        if ($existing) {
-                            // si existe : on récupère son id
-                            $ingredient_id = $existing['id']; //syntaxe array car getRowArray() ci-dessus
-                        } else {
-                            //sinon on l'insère
 
-                            // $db->table('ingredients')->insert([
-                            //   'name'        => $name,
-                            // 'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category_id'])
-                            //]);
-                            // dd($this->request->getPost('ingredients'));
-                            $category_id = $ingredient['category_id'] ?: null; // '' devient null si oublié
-                            $db->table('ingredients')->insert([
-                                'name'        => $name,
-                                'category_id' => $ingredient['category_id']
-                            ]);
+                        $tagChef = ($tag_id == 1);
+                        $chef = (session()->get('role_id') == 1);
+                        $canUseTag = !$tagChef || $chef; //on peut utiliser le tag si ce n'est pas le tag 'chef eddy' ou si on est le chef
 
-                            $ingredient_id = $db->insertID();
+                        if ($canUseTag) {
+                            $tag_ids_filtres[] = $tag_id;
                         }
-                        // insertion dans recette_ingredients
-                        $db->table('recipe_ingredients')->insert([
-                            'recipe_id'    => $recipe_id,
-                            'ingredient_id' => $ingredient_id,
-                            'quantity'      => $ingredient['quantity'] ?: null,
-                            'unit'         => $ingredient['unit'] ?: null
-                        ]);
                     }
-                }
+                    // Sauvegarde des ingrédients
+                    $ingredients = $this->request->getPost('ingredients');
+                    //dd($this->request->getPost());
+                    //dd($ingredients);
+                    if ($ingredients) {
+                        foreach ($ingredients as $ingredient) {
+                            $name = ucfirst(strtolower(trim($ingredient['name'])));
+                            //éviter les doublons d'orthographe différente:ucfirst normalise avec une capitale en premier
+                            if (empty($name)) continue; // on saute les lignes vides
+                            //  on cherche si l'ingrédient existe déjà
+                            $existing = $db->table('ingredients')
+                                ->where('name', $name)
+                                ->get()
+                                ->getRowArray();
+                            if ($existing) {
+                                // si existe : on récupère son id
+                                $ingredient_id = $existing['id']; //syntaxe array car getRowArray() ci-dessus
+                            } else {
+                                //sinon on l'insère
 
-                return redirect()->to('recipe-index')->with('success', 'Recette créée avec succès !');
-            } else {
-                return redirect()->to('/')->with('error', 'Accès refusé.');
+                                // $db->table('ingredients')->insert([
+                                //   'name'        => $name,
+                                // 'category_id' => $ingredientModel->getCategoryIdByName($ingredient['category_id'])
+                                //]);
+                                // dd($this->request->getPost('ingredients'));
+                                $category_id = $ingredient['category_id'] ?: null; // '' devient null si oublié
+                                $db->table('ingredients')->insert([
+                                    'name'        => $name,
+                                    'category_id' => $ingredient['category_id']
+                                ]);
+
+                                $ingredient_id = $db->insertID();
+                            }
+                            // insertion dans recette_ingredients
+                            $db->table('recipe_ingredients')->insert([
+                                'recipe_id'    => $recipe_id,
+                                'ingredient_id' => $ingredient_id,
+                                'quantity'      => $ingredient['quantity'] ?: null,
+                                'unit'         => $ingredient['unit'] ?: null
+                            ]);
+                        }
+                    }
+
+                    return redirect()->to('recipe-index')->with('success', 'Recette créée avec succès !');
+                } else {
+                    return redirect()->to('/')->with('error', 'Accès refusé.');
+                }
             }
         }
     }
@@ -474,19 +476,26 @@ class Recipe extends BaseController
                     ]);
                 }
             }
+
             //partie ajoutée car les tags s'acumulaient à chaque update
             $tag_ids = $this->request->getPost('tags');
             $db->table('recipe_tags')->where('recipe_id', $recipe_id)->delete();
             if ($tag_ids) {
                 $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                 foreach ($tag_ids as $tag_id) {
+                    $tagChef = ($tag_id == 1);
+                    $chef = (session()->get('role_id') == 1);
+                    $canUseTag = !$tagChef || $chef;
 
-                    $db->table('recipe_tags')->insert([
-                        'recipe_id' => $recipe_id,
-                        'tag_id'    => $tag_id
-                    ]);
+                    if ($canUseTag) {
+                        $db->table('recipe_tags')->insert([
+                            'recipe_id' => $recipe_id,
+                            'tag_id'    => $tag_id
+                        ]);
+                    }
                 }
             }
+
             $user_id = session()->get('user_id');
             // dd('fin update');
             return redirect()->to('profile/' . $user_id)->with('success', 'Recette modifiée avec succès !');

@@ -41,7 +41,7 @@
             </div>
 
             <div class="logo">
-                <img src="<?= base_url('img/logo-chef-transp.png') ?>" class="logo" alt="logo">
+                <img src="<?= base_url('img/Home/logo-chef-transp.png') ?>" class="logo" alt="logo">
             </div>
 
         </div>

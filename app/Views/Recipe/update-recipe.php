@@ -122,6 +122,11 @@ foreach ($categories as $category) {
         <label>Tags</label>
         <div class="tags-container d-flex flex-wrap gap-2">
             <?php foreach ($tags as $tag) : ?>
+                <?php
+                $tagChef = ($tag->id == 1);
+                $chef = (session()->get('role_id') == 1);
+                $canUseTag = !$tagChef || $chef;
+                ?>
                 <div class="form-check">
                     <input
                         type="checkbox"
@@ -129,7 +134,8 @@ foreach ($categories as $category) {
                         id="tag-<?= $tag->id ?>"
                         value="<?= $tag->id ?>"
                         class="form-check-input"
-                        <?= in_array($tag->id, $recipe_tag_ids ?? []) ? 'checked' : '' ?>>
+                        <?= in_array($tag->id, $recipe_tag_ids ?? []) ? 'checked' : '' ?>
+                        <?= $canUseTag ? '' : 'disabled' ?>>
                     <label class="form-check-label" for="tag-<?= $tag->id ?>"><?= esc($tag->name) ?></label>
                 </div>
             <?php endforeach; ?>
@@ -197,11 +203,11 @@ foreach ($categories as $category) {
 <?php
 $cats_js = [];
 foreach ($categories_ing_db as $c) {
-    $cats_js[$c->id] = $c->name;//def $cats_js comme objet js
+    $cats_js[$c->id] = $c->name; //def $cats_js comme objet js
 }
 ?>
 <script>
-   const categoriesIngredients = <?= json_encode($cats_js) ?>;
+    const categoriesIngredients = <?= json_encode($cats_js) ?>;
     let index = <?= !empty($ingredients) ? count($ingredients) : 1 ?>
 </script>
 <script>
