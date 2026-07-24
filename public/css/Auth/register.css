@@ -1,6 +1,7 @@
 body {
   background-color: rgb(249, 243, 232);
   font-family: "Nunito";
+  color: black;
 }
 h1 {
   font-family: "Lobster";
@@ -9,6 +10,10 @@ h1 {
   color: white;
   background-color: #028d81;
   border: 1px solid rgb(2, 129, 129);
+}
+
+.member {
+  color: black;
 }
 
 

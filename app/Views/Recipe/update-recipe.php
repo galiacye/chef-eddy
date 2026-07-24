@@ -17,12 +17,12 @@
 <link href="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.min.js"></script>
 
-<link href="<?= base_url('./css/recipes/update-recipe.css') ?>" rel="stylesheet">
+<link href="<?= base_url('../css/recipes/update-recipe.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
 
-<h2 class="text-center">Modifier une de vos recettes</h2>
+<h2 class="text-center mt-4">Modifier une de vos recettes</h2>
 
 <?php
 $title = [
@@ -78,28 +78,34 @@ foreach ($categories as $category) {
 <?= form_open_multipart('update-recipe/' . $recipe->id, ['id' => 'form']) ?>
 <div class="recipe-form">
     <!-- $status et $views gérées ds ctrlr -->
-    <div class="infos">
+    <div class=" row infos">
 
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="title">Title</label>
         <?= form_input($title) ?>
         <?= validation_show_error('title') ?>
-
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="image_url">Illustration</label>
         <?= form_upload($image) ?>
         <?= validation_show_error('image_url') ?>
-
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="prep_time">Temps de préparation</label>
         <?= form_input($pt) ?>
         <?= validation_show_error('prep_time') ?>
-
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="cook_time">Temps de cuisson</label>
         <?= form_input($ct) ?>
         <?= validation_show_error('cook_time') ?>
-
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="portions">Nombre de personnes</label>
         <?= form_input($portions) ?>
         <?= validation_show_error('portions') ?>
-
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="difficulty">Difficulté</label>
         <?= form_dropdown(
             'difficulty',
@@ -109,7 +115,8 @@ foreach ($categories as $category) {
             ['id' => 'difficulty', 'class' => 'form-select w-50']
         ) ?>
         <?= validation_show_error('difficulty') ?>
-
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
         <label for="category_id">Catégorie</label>
         <?= form_dropdown(
             'category_id',
@@ -118,13 +125,14 @@ foreach ($categories as $category) {
             $cat
         ) ?>
         <?= validation_show_error('category_id') ?>
-
+    </div>
+  
         <label>Tags</label>
         <div class="tags-container d-flex flex-wrap gap-2">
             <?php foreach ($tags as $tag) : ?>
                 <?php
                 $tagChef = ($tag->id == 1);
-                $chef = (session()->get('role_id') == 1);
+                $chef = (session()->get('role_id') == 3);
                 $canUseTag = !$tagChef || $chef;
                 ?>
                 <div class="form-check">
@@ -141,7 +149,7 @@ foreach ($categories as $category) {
             <?php endforeach; ?>
         </div>
         <?= validation_show_error('tags') ?>
-
+  <div class="row">
         <label>Ingrédients</label>
         <!--ici pas de champs unique, posssibilité de retoucher grammage uniquement, par ex-->
         <div id="ingredients-container">
@@ -164,7 +172,7 @@ foreach ($categories as $category) {
                 </div>
             <?php endforeach; ?>
         </div>
-
+    </div>
 
 
     </div>

@@ -238,14 +238,14 @@ class Recipe extends BaseController
                     $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
 
                     $chefTagId = $tagModel->where('name', 'Chef Eddy')->first()->id ?? null;
-                    $chefEddy = (session()->get('role_id') == 1);
+                    $chefEddy = (session()->get('role_id') == 3);
 
                     $tag_ids_filtres = [];
 
                     foreach ($tag_ids as $tag_id) {
 
                         $tagChef = ($tag_id == 1);
-                        $chef = (session()->get('role_id') == 1);
+                        $chef = (session()->get('role_id') == 3);
                         $canUseTag = !$tagChef || $chef; //on peut utiliser le tag si ce n'est pas le tag 'chef eddy' ou si on est le chef
 
                         if ($canUseTag) {
@@ -484,7 +484,7 @@ class Recipe extends BaseController
                 $tag_ids = is_array($tag_ids) ? $tag_ids : [$tag_ids];
                 foreach ($tag_ids as $tag_id) {
                     $tagChef = ($tag_id == 1);
-                    $chef = (session()->get('role_id') == 1);
+                    $chef = (session()->get('role_id') == 3);
                     $canUseTag = !$tagChef || $chef;
 
                     if ($canUseTag) {

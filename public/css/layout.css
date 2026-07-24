@@ -240,6 +240,7 @@ footer p, footer a {
     border-radius: 10px;
   }
   p {
+    display:block;
   color: white;
   margin: 0;
   padding: 0;

@@ -8,6 +8,7 @@ Catégories de recettes sur Chef Eddy
 
 <?= $this->section('body') ?>
 <h2 class="text-center m-4">Les catégories</h2>
+
 <div class="container">
     <div class="nav-grid">
         <?php foreach ($categories as $category) : ?>

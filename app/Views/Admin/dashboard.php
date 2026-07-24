@@ -1,5 +1,5 @@
 <?= $this->extend('layoutAdmin') ?>
-<?= $this->section('titre') ?>Dashboard<?= $this->endSection() ?>
+<?= $this->section('titre') ?><title>Dashboard</title><?= $this->endSection() ?>
 
 <?= $this->section('custom-css') ?>
 <link href="<?= base_url('css/Admin/dashboard.css') ?>" rel="stylesheet">
@@ -33,13 +33,13 @@
                 <span class="nav-badge-pending nav-badge-warn"><?= $nb_recipes_pending ?> en attente</span>
             <?php endif ?>
         </div>
-        <div class="nav-p">Gérer, modifier, supprimer</div>
+        <div class="nav-p">Voir, supprimer, mettre en attente</div>
     </a>
 
     <a href="Admin/comments" class="nav-card shadow">
         <div class="nav-icon"></div>
         <div class="nav-title">Commentaires</div>
-        <div class="nav-p">Modérer</div>
+        <div class="nav-p">Modérer, supprimer, répondre</div>
     </a>
 
     <a href="Admin/cat-index" class="nav-card">

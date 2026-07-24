@@ -126,7 +126,7 @@ validation_list_errors() échappent donc esc est inutile ici-->
         <?php foreach ($tags as $tag) : ?>
             <?php
             $tagChef = ($tag->id == 1);
-            $chef = (session()->get('role_id') == 1);
+            $chef = (session()->get('role_id') == 3);
             $canUseTag = !$tagChef || $chef;
             ?>
             <div class="form-check">

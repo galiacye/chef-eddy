@@ -13,7 +13,7 @@
 <h1 class="text-center mt-2">Inscrivez-vous</h1>
 
     <div class="row justify-content-center align-items-center">
-        <div class="col-4">
+        <div class="col-10 col-md-6 col-lg-4">
 
             <!--<div class="col-12 col-md-6 order-2 order-md-1 formul  d-flex flex-column align-items-center justify-content-center">-->
             <!--order vient de flexbox donc native bs
