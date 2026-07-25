@@ -45,7 +45,7 @@
 .ban {
   position: relative;
   display: flex;
-  
+
   align-items: center;
   justify-content: center;
 
@@ -71,7 +71,9 @@
     rgba(255, 255, 255, 0.2) 60%,
     rgba(180, 180, 180, 0.1) 100%
   );
-  transform: rotate(10deg); /* incline le dégradé de 10° par rapport à l'axe du gradient (135deg) */
+  transform: rotate(
+    10deg
+  ); /* incline le dégradé de 10° par rapport à l'axe du gradient (135deg) */
   filter: blur(10px);
   pointer-events: none;
 }
@@ -84,7 +86,8 @@
     120deg,
     transparent 0%,
     rgba(255, 255, 255, 0.08) 45%,
-    rgba(255, 255, 255, 0.45) 50%, /* 50% = centre de la bande, alpha 0.45 = pic d'opacité (le "flash") */
+    rgba(255, 255, 255, 0.45) 50%,
+    /* 50% = centre de la bande, alpha 0.45 = pic d'opacité (le "flash") */
     rgba(255, 255, 255, 0.08) 55%,
     transparent 100%
   );
@@ -117,7 +120,7 @@ p {
   display: none;
 }
 .figure {
-display: none;
+  display: none;
 }
 
 .ban h1 {
@@ -127,9 +130,11 @@ display: none;
   margin: 0;
   padding: 0;
 }
+.ban p {
+  color: black;
+}
 
- .navbar {
- 
+.navbar {
   min-height: 50px;
   position: relative;
   background: linear-gradient(
@@ -139,7 +144,7 @@ display: none;
     #ffb199 50%,
     #ff6f61 100%
   );
-   overflow: hidden;
+  overflow: hidden;
 }
 
 /* effet brillant 
@@ -174,7 +179,7 @@ display: none;
     transform: translateX(40%) rotate(10deg);
   }
 }*/
- .ban::before,
+.ban::before,
 .ban::after,
 .logo {
   z-index: 0;
@@ -183,14 +188,10 @@ display: none;
 .ban h1,
 .ban,
 .ban .eddy,
-.ban .txt
- {
+.ban .txt {
   position: relative;
   z-index: 1;
-} 
-
-
-
+}
 
 footer {
   display: flex;
@@ -211,20 +212,18 @@ footer {
     black;
 }
 
-footer p, footer a {
+footer p,
+footer a {
   font-family: "calibri";
   font-size: small;
   color: white;
   text-decoration: none;
   margin: 0;
- 
+
   /*text-shadow: 0 0 0.3px currentColor;*/
 }
 
-
 @media screen and (min-width: 768px) {
-
-
   .ban {
     height: 140px;
     gap: 100px;
@@ -239,26 +238,29 @@ footer p, footer a {
     height: 125px;
     border-radius: 10px;
   }
+  .title p {
+    display: block;
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
   p {
-    display:block;
-  color: white;
-  margin: 0;
-  padding: 0;
-}
-.figure {
-  display: block;
-  max-height: 100px;
- border-radius: 50%;
-  position: relative;
-  z-index: 1;
-}
+    display: block;
+    color: black;
+  }
+  .figure {
+    display: block;
+    max-height: 100px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
   .gato {
     height: 120px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-
   .ban {
     height: 180px;
   }
@@ -272,7 +274,7 @@ footer p, footer a {
     height: 160px;
     border-radius: 10px;
   }
-.figure {
-  max-height: 150px;
-}
+  .figure {
+    max-height: 150px;
+  }
 }
