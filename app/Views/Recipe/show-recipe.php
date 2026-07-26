@@ -38,14 +38,14 @@ if ($user_id) {
         <div class="banner-left">
             <div class="tags">
                 <?php foreach ($tags as $tag): ?>
-                    <span class="tag"><?= esc($tag->name) ?></span>
+                    <span class="tag shadow"><?= esc($tag->name) ?></span>
                 <?php endforeach ?>
             </div>
 
             <h1 class="recipe-title">
                 <?= esc($recipe->title) ?>
             </h1>
-<h4>Une recette publiée par <?= $recipe->username ?></h4>
+            <h5>Une recette publiée par <?= $recipe->username ?></h5>
             <?php if (!empty($recipe->image_url)): ?>
                 <img src="<?= base_url($recipe->image_url) ?>" class="recipe-img">
             <?php endif; ?>
@@ -70,7 +70,7 @@ if ($user_id) {
             <div class="portions-control">
                 <label>Portions :</label>
                 <button type="button" id="moins" class="btn btn-moins">- </button>
-                <span id="portions">  <?= esc($recipe->portions) ?>  </span>
+                <span id="portions"> <?= esc($recipe->portions) ?> </span>
                 <button type="button" id="plus" class="btn btn-plus">+</button>
             </div>
             <?php foreach ($ingredients as $ingredient): ?>
@@ -91,7 +91,8 @@ if ($user_id) {
     <section class="card-block">
         <h2>La recette</h2>
         <div class="editor">
-            <?= $recipe->content //a déjà été traité avec html_purifier ds cont ?>
+            <?= $recipe->content //a déjà été traité avec html_purifier ds cont 
+            ?>
         </div>
     </section>
 
@@ -162,7 +163,7 @@ if ($user_id) {
             if (!isNaN(baseQty)) {
                 const result = (baseQty * current / base);
                 //une simple règle de trois permet de recalculer dynamiquement les portions
-                element.textContent = parseFloat(result.toFixed(2)); 
+                element.textContent = parseFloat(result.toFixed(2));
                 //toFixed(2) arrondit le résultat à 2 décimales et le renvoie sous forme de string, 
                 // d'où le parseFloat() pour le repasser en nombre. et enlever les zéros superflus
             }

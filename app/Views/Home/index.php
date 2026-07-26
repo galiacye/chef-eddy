@@ -19,7 +19,7 @@
                 <input type="text"
                     name="search"
                     class="form-control shadow flex-grow-1 mw-0"
-                    placeholder="Taper le nom d'une recette ou d'un ingrédient">
+                    placeholder="Recette ou ingrédient...">
             </div>
 
             <div class="d-flex justify-content-center mb-2">

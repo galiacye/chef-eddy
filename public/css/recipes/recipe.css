@@ -5,13 +5,12 @@
 
 body {
   font-family:
-    system-ui,/* prend la police la plus adaptée au navigateur et à l'appareil*/
-    -apple-system,
+    system-ui,
+    /* prend la police la plus adaptée au navigateur et à l'appareil*/ -apple-system,
     sans-serif;
-    color: black;
-    background-color: #e0f4d5;
+  color: black;
+  background-color: #e0f4d5;
   /* background: linear-gradient(145deg, #c3f8e6, #bbf4f8); */
-  
 }
 h1 {
   font-size: 10px;
@@ -46,13 +45,18 @@ h1 {
 
 .tag {
   display: inline-block;
-  background-color:#ff7e6c;
+  background: linear-gradient(135deg, #008eb6, #0bb5a7);
   color: white;
   font-family: "Syncopate";
+  font-weight: bold;
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
   margin: 0.2rem;
   font-size: 0.85rem;
+}
+
+.tag:hover {
+  background: linear-gradient(135deg, #12c5b6, #09a4cf);
 }
 
 .recipe-img {
@@ -64,10 +68,10 @@ h1 {
 }
 
 .info-card {
-  background: rgba(255, 255, 255, 0.6);/*4ème param=transparence*/
+  background: rgba(255, 255, 255, 0.6); /*4ème param=transparence*/
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);/*lhorizontal, vertical, flou, couleur*/
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /*lhorizontal, vertical, flou, couleur*/
 }
 
 .card-block {
@@ -162,44 +166,41 @@ translateY(-10px): monte */
 }
 .btn-plus,
 .btn-moins {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
 
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-/* 
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  /* 
     background: linear-gradient(180deg, #ffffff, #d9d9d9);
     color: #333; */
 
-    box-shadow:
-        0 3px 8px rgba(0,0,0,.20),
-        inset 0 1px 0 rgba(255,255,255,.9);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
-    transition: all .2s ease;
+  transition: all 0.2s ease;
 }
-
-
 
 .btn-plus:hover,
 .btn-moins:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        0 6px 14px rgba(0,0,0,.25),
-        inset 0 1px 0 rgba(255,255,255,.9);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .btn-plus:active,
 .btn-moins:active {
-    transform: translateY(1px);
-    box-shadow:
-        inset 0 3px 6px rgba(0,0,0,.25);
+  transform: translateY(1px);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 .btn-moins {
   padding-bottom: 10px;
@@ -211,5 +212,5 @@ translateY(-10px): monte */
   padding-left: 12px;
   padding-bottom: 10px;
   margin-left: 10px;
-  background-color:#0ba3cd ;
+  background-color: #0ba3cd;
 }

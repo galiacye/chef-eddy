@@ -34,6 +34,12 @@ pour show-recipe1
   padding: 1rem;
   gap: 2rem;
 }
+.btn-tag {
+  background: linear-gradient(135deg,#008eb6,#0bb5a7);
+}
+.btn-tag:hover {
+   background: linear-gradient(135deg,#12c5b6,#09a4cf);
+}
 .recipeTitle {
   margin-top: 1rem;
   font-family: "Lobster";

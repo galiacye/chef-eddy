@@ -93,13 +93,16 @@
   );
   /* translateX(-100%) place le pseudo-élément entièrement hors de son propre inset:0 (à gauche), avant l'animation */
   transform: translateX(-100%) rotate(8deg);
-  animation: shine 5s infinite linear; /* le déplacement réel se fait via les keyframes, ce transform n'est que l'état initial */
+  animation: shine 8s infinite linear; /* le déplacement réel se fait via les keyframes, ce transform n'est que l'état initial */
   pointer-events: none;
 }
 /* translateX passe de -120% à 120%: l'animation interpole cette diff entre les deux états en 5s, fait "glisser" la bande de gauche à droite */
 @keyframes shine {
   0% {
     transform: translateX(-120%) rotate(8deg);
+  }
+  20% {
+    transform: translatex(120%) rotate(8deg);
   }
   100% {
     transform: translateX(120%) rotate(8deg);
@@ -195,6 +198,7 @@ footer {
     ),
     black;
 }
+
 
 footer p,
 footer a {
