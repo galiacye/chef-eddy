@@ -48,7 +48,7 @@
     </header>
 
 
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <nav class="navbar navbar-expand-lg navbar-custom shadow">
         <div class="container">
             <!-- Btn burger-->
             <button class="navbar-toggler"

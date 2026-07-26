@@ -39,7 +39,7 @@ class Recipe extends BaseController
 
         $recipe = $recipeModel->getRecipe($id); // d'abord on récupère
 
-        if (!$recipe || $recipe->status !== 'approved') { //ensuite on vérifie
+        if (!$recipe || $recipe->status !== 'approved') { //puis on vérifie
             return redirect()->to('/recipe-index')->with('error', 'Recette non disponible.');
         }
 

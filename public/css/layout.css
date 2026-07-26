@@ -135,7 +135,7 @@ p {
 }
 
 .navbar {
-  min-height: 50px;
+  max-height: 50px;
   position: relative;
   background: linear-gradient(
     135deg,
@@ -145,27 +145,11 @@ p {
     #ff6f61 100%
   );
   overflow: hidden;
+ 
 }
-
-/* effet brillant 
-.navbar::before {
-  content: "";
-  position: absolute;
-  top: -60%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.25) 45%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.25) 55%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: rotate(10deg);
-  animation: shine 4s infinite linear;
-  pointer-events: none;
+.nav-link {
+ 
+  font-weight: 500;
 }
 
 

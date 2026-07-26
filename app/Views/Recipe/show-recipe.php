@@ -45,7 +45,7 @@ if ($user_id) {
             <h1 class="recipe-title">
                 <?= esc($recipe->title) ?>
             </h1>
-
+<h4>Une recette publiée par <?= $recipe->username ?></h4>
             <?php if (!empty($recipe->image_url)): ?>
                 <img src="<?= base_url($recipe->image_url) ?>" class="recipe-img">
             <?php endif; ?>

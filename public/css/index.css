@@ -188,7 +188,7 @@ h2 .tag-title {
   align-items: center;
   width: 80px;
   height: 30px;
-  background-color: rgb(2, 141, 129);
+  background-color: #09a2cc;
   color: white;
   border: none;
   border-radius: 10px;
@@ -209,6 +209,7 @@ h2 .tag-title {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   color: white;
+  background-color: #0bb5a7;
 }
 
 /*.btn-tag {
