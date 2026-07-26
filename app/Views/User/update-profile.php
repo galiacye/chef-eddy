@@ -14,7 +14,7 @@
 <h1 class="text-center mt-3">Modifier vos données</h1>
 <div class="row justify-content-center align-items-center">
     <div class="col-12 col-md-6 col-lg-4">
-        <?= form_open_multipart('User/update-profile/' . $user->id) ?>
+        <?= form_open_multipart('profile/update') ?>
 
         <?php
         $username = [

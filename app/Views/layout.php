@@ -28,9 +28,7 @@
     <?= $this->renderSection('custom-css') ?>
 </head>
 
-
 <body>
-
 
     <header class="py-3">
         <div class="ban d-flex align-items-center pe-3">

@@ -317,7 +317,7 @@ class User extends BaseController
             ];
             if (!$this->validate($rules)) {
                 // echec de validation: on retourne le formulaire avec les erreurs
-                return view('User/updateProfile', [
+                return view('User/update-profile', [
                     'errors' => $this->validator->getErrors(),
                     'user' => $user
                 ]);
