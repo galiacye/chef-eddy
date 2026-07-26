@@ -64,19 +64,22 @@ if ($user_id) {
 
 
     <section class="card-block">
-        <h2>Ingrédients</h2>
 
+        <h2>Ingrédients</h2>
         <div class="ingredients-grid">
             <div class="portions-control">
+
                 <label>Portions :</label>
-                <button type="button" id="moins" class="btn btn-moins">- </button>
                 <span id="portions"> <?= esc($recipe->portions) ?> </span>
+                <button type="button" id="moins" class="btn btn-moins">- </button>
+                
                 <button type="button" id="plus" class="btn btn-plus">+</button>
             </div>
             <?php foreach ($ingredients as $ingredient): ?>
                 <div class="ingredient-card">
-                    <b><?= esc($ingredient->name) ?></b>
+
                     <div>
+                        <p><?= esc($ingredient->name) ?></p>
                         <span class="ingredient-qty" data-base="<?= $ingredient->quantity ?>">
                             <!-- ternaire si entier affiche entier sinon affiche le décimal. 
              C'est la valeur qui servira de base pour le calcul dynamique des portions-->
