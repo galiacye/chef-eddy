@@ -18,13 +18,13 @@
     <?= $this->renderSection('custom-css') ?>
 </head>
 
-<body class="bg-light">
+<body>
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-md"><!--expand: déplie le burger à partir de md-->
         <div class="container-fluid">
 
             <a class="navbar-brand" href="/Admin">
-                <img src="<?= base_url('img/eddy-bd.jpeg') ?>" height="80" alt="Chef Eddy" class="eddy">
+                <img src="<?= base_url('img/Home/eddy-bd.jpeg') ?>" height="80" alt="Chef Eddy" class="eddy">
             </a>
             <button class="navbar-toggler"
                 type="button"

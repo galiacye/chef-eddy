@@ -55,9 +55,6 @@
     </div>
     <div class="row m-3">
 
-
-
-
         <ul class="grenade-list">
 
             <?php foreach ($recipes as $recipe): ?>

@@ -85,10 +85,12 @@ class RecipeModel extends Model
             return $this->select('recipes.*, users.username')
                 ->join('users', 'users.id = recipes.user_id')
                 ->where('recipes.status', $status)
+                ->orderBy('recipes.created_at', 'DESC')
                 ->findAll();
         } else {
             return $this->select('recipes.*, users.username')
                 ->join('users', 'users.id = recipes.user_id')
+                ->orderBy('recipes.created_at', 'DESC')
                 ->findAll();
         }
     }

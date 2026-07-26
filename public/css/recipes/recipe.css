@@ -44,12 +44,12 @@ h1 {
 }
 
 .tag {
-  display: inline-block;
+ clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);/*la forme d'étiquette*/
   background: linear-gradient(135deg, #008eb6, #0bb5a7);
   color: white;
   font-family: "Syncopate";
   font-weight: bold;
-  padding: 0.3rem 0.6rem;
+  padding: 0.7rem 0.2rem;
   border-radius: 999px;
   margin: 0.2rem;
   font-size: 0.85rem;

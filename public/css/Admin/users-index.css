@@ -1,0 +1,39 @@
+body {
+  background-color: #efe2c5;
+}
+
+/* .container-fluid {
+  background-color: #efe2c5;
+} */
+
+.card {
+    background-color: #f8f0e5;
+    padding: 12px;
+}
+.avatar {
+  height: 60px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.btn-gerer {
+  width: 100px;
+  background-color: #008eb6;
+  color: white;
+}
+.btn-gerer:hover {
+    background-color: #0bb5a7;
+    color: white;
+}
+
+@media screen and (min-width: 768px) {
+
+
+
+.avatar {
+  height: 100px;
+  width: 95px;
+  border-radius: 50%;
+}
+
+}

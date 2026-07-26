@@ -121,7 +121,7 @@
                             <li class="nav-item">
                                 <a href="<?= base_url('/dashboard') ?>"
                                     class="nav-link">
-                                    Admin
+                                    Tableau de bord
                                 </a>
                             </li>
 

@@ -162,10 +162,13 @@ p {
   0% {
     transform: translateX(-40%) rotate(10deg);
   }
+  20% {
+    transform: translateX(40%) rotate(10deg);
+  }
   100% {
     transform: translateX(40%) rotate(10deg);
   }
-}*/
+}
 .ban::before,
 .ban::after,
 .logo {
