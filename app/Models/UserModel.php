@@ -44,4 +44,10 @@ class UserModel extends Model
             ->join('roles', 'users.role_id = roles.id')
             ->find();
     }
+
+    public function getUsers()
+    {
+        return $this->orderBy('id', 'DESC')
+            ->findAll();
+    }
 }

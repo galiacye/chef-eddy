@@ -14,13 +14,13 @@
     <div class="row m-3">
 
         <?php foreach ($users as $user): ?>
-            <div class="col-12 col-md-4 col-lg-2 mb-4 d-flex justify-content-center">
+            <div class="col-6 col-md-3 col-lg-2 mb-4 d-flex justify-content-center">
                 <div class="card user-card">
                     <div class="card-img-top">
                         <img src="<?= $user->avatar_url ? base_url($user->avatar_url) : base_url('uploads/avatars/fantome.png') ?>" class="avatar">
                     </div>
 
-                    <h4 class="text-light"><span class="text-light"><?= esc($user->username) ?></span></h4>
+                    <h4 class="text-center"><span><?= esc($user->username) ?></span></h4>
 
 
 

@@ -7,8 +7,17 @@ body {
 } */
 
 .card {
-    background-color: #f8f0e5;
-    padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f0e5;
+  padding: 12px;
+  max-width: 120px;
+  max-height: 200px;
+  color: black;
+}
+h4 {
+  font-size: 1rem;
 }
 .avatar {
   height: 60px;
@@ -17,23 +26,26 @@ body {
 }
 
 .btn-gerer {
-  width: 100px;
+  max-width: 70px;
   background-color: #008eb6;
   color: white;
 }
 .btn-gerer:hover {
-    background-color: #0bb5a7;
-    color: white;
+  background-color: #0bb5a7;
+  color: white;
 }
 
 @media screen and (min-width: 768px) {
-
-
-
-.avatar {
-  height: 100px;
-  width: 95px;
-  border-radius: 50%;
+  .avatar {
+    height: 80px;
+    width: 77px;
+    border-radius: 50%;
+  }
 }
-
+@media screen and (min-width: 1024px) {
+  .avatar {
+    height: 100px;
+    width: 95px;
+    border-radius: 50%;
+  }
 }

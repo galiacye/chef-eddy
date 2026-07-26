@@ -19,6 +19,7 @@ class Admin extends BaseController
     protected $ingredientModel;
     protected $categoryModel;
     protected $tagModel;
+  
 
     public function __construct()
     {
@@ -35,7 +36,7 @@ class Admin extends BaseController
     {
         return view('Admin/dashboard', [
             'nb_users' => $this->userModel->countAll(),
-            'nb_recipes' => $this->recipeModel->countAll(),//countAll = countAllResults derrière where
+            'nb_recipes' => $this->recipeModel->countAll(), //countAll = countAllResults derrière where
             'nb_recipes_pending' => $this->recipeModel->where('status', 'pending')->countAllResults(),
             'tags'              => $this->tagModel->findAll(),
             'homepageTag'       => $this->tagModel->getHomepageTag()
@@ -47,7 +48,7 @@ class Admin extends BaseController
 
         $this->tagModel->where('is_homepage', 1)->set('is_homepage', 0)->update(); //remettre à 0 tag affiché
         $this->tagModel->update($tag_id, ['is_homepage' => 1]); // mettre à 1 le tag choisi par admin
-//to do: voir query builder transaction
+        //to do: voir query builder transaction
         return redirect()->to('dashboard')->with('success', 'Tag homepage mis à jour');
     }
 
@@ -61,12 +62,13 @@ class Admin extends BaseController
     //ici pas de $data car le param est passé directement à la vue, mais c'est pareil
     public function usersIndex()
     {
-        $users = $this->userModel->findAll();
+        $users = $this->userModel->getUsers();
         return view('Admin/users-index', ["users" => $users]);
     } //pareil que :
-    //$users = $this->userModel->findAll();
+    //$users = $this->userModel->getUsers();
     //$data = ["users" => $users];
     //return view('Admin/userIndex', $data);
+
 
     public function userDetails($id)
     {
@@ -213,7 +215,7 @@ class Admin extends BaseController
 
     public function deleteUser(int $id)
     {
- // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé,par exemple
+        // $user = $this->userModel->find($id);  =>n'est utile que pour afficher nom de l'user supprimé,par exemple
         $this->userModel->delete($id); //pattern natif de ci4 pas besoin de méthode customisée ds modèle
         return redirect()->to('Admin/users-index'); //créer vue admin avec index users
     }
