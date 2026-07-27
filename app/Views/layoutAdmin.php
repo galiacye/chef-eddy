@@ -41,22 +41,22 @@
                 <span class="navbar-brand">Chef Eddy Administration</span>
                 <div>
                     <?php if (uri_string() != 'dashboard'): ?><!--current renvoie l'url complète )-->
-                        <a href="/dashboard" class="btn btn-outline-light btn-sm me-2">Tableau de bord</a>
+                        <a href="/dashboard" class="btn btn-blue btn-sm me-2">Tableau de bord</a>
                     <?php endif; ?>
 
                     <?php if (uri_string() != 'Admin/recipes-index'): ?>
-                        <a href="/Admin/recipes-index" class="btn btn-outline-light btn-sm me-2">Recettes</a>
+                        <a href="/Admin/recipes-index" class="btn btn-blue btn-sm me-2">Recettes</a>
                     <?php endif; ?>
 
                     <?php if (uri_string() != 'Admin/users-index'): ?>
-                        <a href="/Admin/users-index" class="btn btn-outline-light btn-sm me-2">Utilisateurs</a>
+                        <a href="/Admin/users-index" class="btn btn-blue btn-sm me-2">Utilisateurs</a>
                     <?php endif; ?>
 
                     <?php if (uri_string() != 'Admin/comments'): ?>
-                        <a href="/Admin/comments" class="btn btn-outline-light btn-sm me-2">Commentaires</a>
+                        <a href="/Admin/comments" class="btn btn-blue btn-sm me-2">Commentaires</a>
                     <?php endif; ?>
 
-                    <a href="/" class="btn btn-emeraude btn-sm">Site</a>
+                    <a href="/" class="btn btn-blue btn-sm">Site</a>
                 </div>
             </div>
         </div>

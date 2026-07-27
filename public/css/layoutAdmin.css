@@ -5,3 +5,11 @@
     display: flex;
     justify-content: space-between;
 }
+.btn-blue:hover {
+    background-color: #12c5b6;
+    color: white;
+}
+.btn-blue {
+    background-color: #008eb6;
+    color: white;
+}
