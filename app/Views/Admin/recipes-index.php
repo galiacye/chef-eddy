@@ -51,30 +51,30 @@
             class="btn <?= $status === 'pending' ? 'btn-corail' : 'btn-outline-corail' ?>">En attente</a>
         <a href="<?= base_url('Admin/recipes-index?status=approved') ?>"
             class="btn <?= $status === 'approved' ? 'btn-emeraude' : 'btn-outline-emeraude' ?>">Approuvées</a>
-  
+
     </div>
     <div class="row m-3">
 
-        <ul class="grenade-list">
+        <div class="recipe-grid">
 
             <?php foreach ($recipes as $recipe): ?>
-                <li>
-                    <div class="recipe-info">
-                        <h4><?= esc($recipe->title) ?></h4>
-                        <p class="recipe-author"><?= esc($recipe->username) ?></p>
-                    </div>
-                    <div class="recipe-actions">
-                        <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-blue">Voir</a>
-                        <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
-                            onsubmit="return confirm('Supprimer définitivement cette recette?')">
-                            <?= csrf_field() ?>
-                            <button type="submit" class="btn btn-corail2">Supprimer</button>
-                        </form>
-                    </div>
-                </li>
 
+                <div class=" card card-recipe">
+
+                    <h5><?= esc($recipe->title) ?></h5>
+                    <p class="recipe-author"><?= esc($recipe->username) ?></p>
+               
+                <div class="recipe-actions">
+                    <a href="<?= base_url('Admin/recipe-details/' . $recipe->id) ?>" class="btn btn-blue">Voir</a>
+                    <form action="<?= base_url('delete-recipe/' . $recipe->id) ?>" method="post"
+                        onsubmit="return confirm('Supprimer définitivement cette recette?')">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-corail2">Supprimer</button>
+                    </form>
+                </div>
+                </div>
             <?php endforeach ?>
-        </ul>
+        </div>
     </div>
 </div>
 <?php /*pour Admin:: ancienne methode recipesIndex sans la jointure :

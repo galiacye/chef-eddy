@@ -1,5 +1,5 @@
 body {
-    background-color: #0a0a0a;
+    background-color: #fcf7f0;
 
     background-size: cover;
     background-attachment: fixed;
@@ -7,6 +7,22 @@ body {
 }
 h1 {
     font-family: "Lobster";
+}
+.recipe-grid {
+     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 0.2rem;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f0e5;
+  padding: 12px;
+  max-width: 170px;
+  max-height: 200px;
+  color: black;
 }
 
 .btn-blue {
