@@ -143,7 +143,7 @@ class User extends BaseController
                     "rules" => "permit_empty|is_image[avatar_url]|max_size[avatar_url,2048]|mime_in[avatar_url,image/jpg,image/jpeg,image/png]",
                     "errors" => [
                         "is_image" => "Le fichier doit être une image",
-                        "max_size" => "L'image ne doit pas dépasser 2 Mo",
+                        "max_size" => "L'image ne doit pas dépasser 3 Mo",
                         "mime_in" => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ],
@@ -205,9 +205,6 @@ class User extends BaseController
     }
 
 
-
-
-
     public function userChef(int $id)
     {
         $data = [
@@ -217,16 +214,22 @@ class User extends BaseController
     }
 
 
-
-
-
     //id peut être null
     public function profile(?int $id = null): string|RedirectResponse //convention pas vraiment de string ici 
     {
 
         // Si pas d'id passé, on prend l'utilisateur connecté en session
         $session = session();
-        $user_id  = $id ?? $session->get('user_id');
+        //La scolaire:
+        // if ($id !== null) {
+        //     $user_id = $id;
+        // } else {
+        //     $user_id = $session->get('user_id');
+        // }
+        //La ternaire 
+        $user_id = ($id !== null) ? $id : $session->get('user_id');
+        //La "moderne" :coal nulle
+        // $user_id  = $id ?? $session->get('user_id');
 
         if (! $user_id) {
             return redirect()->to('/login')->with('errors', 'Vous devez être connecté.');
@@ -278,12 +281,13 @@ class User extends BaseController
                     "rules" => "min_length[2]|max_length[100]|valid_email|required",
                     "errors" => [
                         "valid_email" => "Email non valide",
-                        "required" => "Email requis"
+                        "required" => "Email requis",
+                        "is_unique" => "Cet email est déjà utilisé"
                     ]
                 ],
                 "password" => [
                     "label" => "Mot de passe",
-                    "rules" => "permit_empty|min_length[2]|max_length[30]",
+                    "rules" => "min_length[8]|max_length[30]",
                     "errors" => [
                         "min_length" => "Mot de passe trop court",
                         "max_length" => "Mot de passe trop long",
@@ -310,7 +314,7 @@ class User extends BaseController
                     "rules" => "permit_empty|is_image[avatar_url]|max_size[avatar_url,2048]|mime_in[avatar_url,image/jpg,image/jpeg,image/png]",
                     "errors" => [
                         "is_image" => "Le fichier doit être une image",
-                        "max_size" => "L'image ne doit pas dépasser 2 Mo",
+                        "max_size" => "L'image ne doit pas dépasser 3 Mo",
                         "mime_in" => "Le fichier doit être au format JPG ou PNG"
                     ]
                 ]
@@ -335,32 +339,42 @@ class User extends BaseController
             $avatar_url = $user->avatar_url; // garde l'avatar actuel par défaut
             if ($avatar_file && $avatar_file->isValid() && !$avatar_file->hasMoved()) {
                 //car ne peut être déplacé qu'une fois et l'a déjà été en tant que fichier temporaire au moment du chargement
+
                 $newName = $avatar_file->getRandomName();
                 $avatar_file->move(FCPATH . 'uploads/avatars', $newName);
                 $avatar_url = 'uploads/avatars/' . $newName;
+
+                // Si l'utilisateur avait déjà un avatar enregistré en base...
+                if (!empty($user->avatar_url) && file_exists(FCPATH . $user->avatar_url)) {
+                    // ...on supprime le fichier physique correspondant sur le disque
+                    // FCPATH = chemin absolu vers la racine publique (ex: /var/www/public/)
+                    // $user->avatar_url = chemin relatif stocké en base (ex: uploads/avatars/xyz.jpg)
+                    // concaténés = chemin absolu réel du fichier à supprimer
+                    unlink(FCPATH . $user->avatar_url);
+                }
             }
             //$avatar_url = $avatar_file->store(); //native de ci4 stocke direct les uploads 
             //ds writable et nous on veut ds uploads
+
+            // Préparation des données pour le modèle
+            $data = [
+                "username" => $username,
+                "email" => $email,
+                "last_name"  => $last_name,
+                "first_name" => $first_name,
+                "avatar_url" => $avatar_url
+            ];
+            $password = $this->request->getPost('password');
+            if (!empty($password)) {
+                $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+            }
+
+            // Insertion dans la base
+            $this->model->update($id, $data); //update fct native ci4
+
+            // Retour view succès
+            return redirect()->to('profile')->with('success', 'Vos modifications ont été enregistrées');
         }
-
-        // Préparation des données pour le modèle
-        $data = [
-            "username" => $username,
-            "email" => $email,
-            "last_name"  => $last_name,
-            "first_name" => $first_name,
-            "avatar_url" => $avatar_url
-        ];
-        $password = $this->request->getPost('password');
-        if (!empty($password)) {
-            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
-        }
-
-        // Insertion dans la base
-        $this->model->update($id, $data); //update fct native ci4
-
-        // Retour view succès
-        return redirect()->to('profile')->with('success', 'Vos modifications ont été enregistrées');
     }
 
     public function deleteProfile()
