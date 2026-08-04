@@ -269,7 +269,7 @@ class User extends BaseController
             $rules = [
                 "username" => [
                     "label" => "Pseudo",
-                    "rules" => "min_length[2]|max_length[50]|required",
+                    "rules" => "min_length[2]|max_length[50]|required|is_unique[users.username,id,$id]",
                     "errors" => [
                         "min_length" => "username trop court",
                         "max_length" => "username trop long",
@@ -278,7 +278,7 @@ class User extends BaseController
                 ],
                 "email" => [
                     "label" => "email",
-                    "rules" => "min_length[2]|max_length[100]|valid_email|required",
+                    "rules" => "min_length[2]|max_length[100]|valid_email|required|is_unique[users.email,id,$id]",
                     "errors" => [
                         "valid_email" => "Email non valide",
                         "required" => "Email requis",
@@ -287,7 +287,7 @@ class User extends BaseController
                 ],
                 "password" => [
                     "label" => "Mot de passe",
-                    "rules" => "min_length[8]|max_length[30]",
+                    "rules" => "permit_empty|min_length[8]|max_length[30]",
                     "errors" => [
                         "min_length" => "Mot de passe trop court",
                         "max_length" => "Mot de passe trop long",
@@ -311,7 +311,7 @@ class User extends BaseController
                 ],
                 "avatar_url" => [
                     "label" => "Avatar",
-                    "rules" => "permit_empty|is_image[avatar_url]|max_size[avatar_url,2048]|mime_in[avatar_url,image/jpg,image/jpeg,image/png]",
+                    "rules" => "permit_empty|is_image[avatar_url]|max_size[avatar_url,3072]|mime_in[avatar_url,image/jpg,image/jpeg,image/png]",
                     "errors" => [
                         "is_image" => "Le fichier doit être une image",
                         "max_size" => "L'image ne doit pas dépasser 3 Mo",

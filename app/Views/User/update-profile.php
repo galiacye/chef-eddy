@@ -20,14 +20,14 @@
         $username = [
             'name' => 'username',
             'id' => 'username',
-            'value' => set_value('username'),
+            'value' => set_value('username', $user->username),
             'class' => 'form-control w-100 shadow'
         ];
 
         $email = [
             'name' => 'email',
             'id' => 'email',
-            'value' => set_value('email'),
+            'value' => set_value('email', $user->email),
             'class' => 'form-control w-100 shadow'
         ];
 
@@ -71,6 +71,7 @@
         <?= validation_show_error('email') ?><br>
 
         <label for="password">Mot de passe</label>
+        <placeholder>Laissez vide si vous ne voulez pas changer</placeholder>
         <?= form_input($password) ?>
         <?= validation_show_error('password') ?><br>
 
@@ -99,7 +100,7 @@
 <?= form_close() ?>
 
 <?= form_open('delete-profile') ?>
-<?= csrf_field() ?>
+
 <div class="text-center mt-2">
     <?= form_submit('delete', 'Supprimer votre compte', ['class' => 'btn btn-coral shadow']) ?>
 </div>
