@@ -1,0 +1,87 @@
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    flex-shrink: 0;
+}
+
+.user-info p {
+    margin: 0.2rem 0;
+}
+
+h3 {
+    margin-top: 2rem;
+    border-top: 1px solid #dee2e6;
+    padding-top: 1rem;
+}
+
+.recipes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.recipes-table th,
+.recipes-table td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.recipes-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Responsive : tableau -> cartes empilées sous 576px */
+@media (max-width: 576px) {
+    .user-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .recipes-table thead {
+        display: none;
+    }
+
+    .recipes-table, .recipes-table tbody, .recipes-table tr, .recipes-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .recipes-table tr {
+        margin-bottom: 0.8rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+    }
+
+    .recipes-table td {
+        border-bottom: none;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .recipes-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        display: inline-block;
+        width: 80px;
+    }
+}

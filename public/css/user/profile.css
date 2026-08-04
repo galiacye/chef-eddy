@@ -30,6 +30,10 @@ body {
     background-color: #0ba3cd;
     color: white;
 }
+.btn-blue:hover {
+  background-color: #0bb5a7;
+  color: white;
+}
 .pseudo {
   font-family: "creamer";
 }

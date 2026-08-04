@@ -2,7 +2,8 @@
 <?= $this->section('titre') ?>Détails utilisateur<?= $this->endSection() ?>
 <?= $this->section('custom-css') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
+<link href="<?= base_url('./css/Admin/user-details.css') ?>" rel="stylesheet">
+<!-- <style>
     .avatar {
         height: 150px;
         width: 150px;
@@ -12,18 +13,18 @@
         color: orange;
         font-style: italic;
     }
-</style>
+</style> -->
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 <div class="container-fluid mt-3">
-
-    <h2><?= esc($user->username) ?></h2>
-    <img src="<?= $user->avatar_url ? base_url($user->avatar_url) : base_url('uploads/avatars/fantome.png') ?>" alt="avatar" class="avatar mb-3">
-
-
-
-    <p><?= esc($user->last_name) . ' ' . esc($user->first_name) ?></p>
-    <p><?= esc($user->email) ?></p>
+    <div class="user-card">
+        <img src="<?= $user->avatar_url ? base_url($user->avatar_url) : base_url('uploads/avatars/fantome.png') ?>" alt="avatar" class="avatar">
+        <div class="user-info">
+            <h2><?= esc($user->username) ?></h2>
+            <p><?= esc($user->last_name) . ' ' . esc($user->first_name) ?></p>
+            <p><?= esc($user->email) ?></p>
+        </div>
+    </div>
 
     <form action="<?= base_url('Admin/changeUserRole/' . $user->id) ?>" method="post">
         <select name="role_id">
@@ -40,8 +41,22 @@
         class="btn btn-danger">Supprimer</a>
 
     <h3>Recettes de <?= esc($user->username) ?></h3>
-    <?php foreach ($recipes as $recipe): ?>
-        <p> <?= esc($recipe->title) ?> : <span class="status"><?= esc($recipe->status) ? esc($recipe->status) : 'en attente' ?></span></p>
-    <?php endforeach ?>
+    <table class="recipes-table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($recipes as $recipe): ?>
+                <tr>
+                    <td data-label="Titre"><?= esc($recipe->title) ?></td>
+                    <td data-label="Statut"><span class="status"><?= esc($recipe->status) ? esc($recipe->status) : 'en attente' ?></span></td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+
 </div>
 <?= $this->endSection() ?>

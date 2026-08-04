@@ -71,7 +71,7 @@
         <?= validation_show_error('email') ?><br>
 
         <label for="password">Mot de passe</label>
-        <placeholder>Laissez vide si vous ne voulez pas changer</placeholder>
+        <placeholder> - Laissez vide si vous ne voulez pas changer</placeholder>
         <?= form_input($password) ?>
         <?= validation_show_error('password') ?><br>
 
