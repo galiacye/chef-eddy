@@ -12,19 +12,19 @@
 <p class="text-center mt-4 member">Cliquez sur "Déjà membre" ou</p>
 <h1 class="text-center mt-2">Inscrivez-vous</h1>
 
-    <div class="row justify-content-center align-items-center">
-        <div class="col-10 col-md-6 col-lg-4">
+<div class="row justify-content-center align-items-center">
+    <div class="col-10 col-md-6 col-lg-4">
 
-            <!--<div class="col-12 col-md-6 order-2 order-md-1 formul  d-flex flex-column align-items-center justify-content-center">-->
-            <!--order vient de flexbox donc native bs
+        <!--<div class="col-12 col-md-6 order-2 order-md-1 formul  d-flex flex-column align-items-center justify-content-center">-->
+        <!--order vient de flexbox donc native bs
     order-1 order-md-2: sur mobile en position 1 (en premier)
                         sur desktop en position 2 (à droite)
 
     order-2 order-md-1: sur mobile : position 2 (en dessous)
                         sur desktop : position 1 (à gauche) -->
-            <?= form_open_multipart('register') ?>
-            <!--form_open_miltipart nat ci4 se charge du csrf()-->
-            <!--ici par rapport à login en html avec input type, on utilise le helper form de ci4,
+        <?= form_open_multipart('register') ?>
+        <!--form_open_miltipart nat ci4 se charge du csrf()-->
+        <!--ici par rapport à login en html avec input type, on utilise le helper form de ci4,
             qui génère tout seul le html, et pour set_value qui conserve la saisie après echec valid.
             <?php
             $username = [
@@ -76,43 +76,55 @@
 
             ?>
             <!--  helper('form') est chargé globalement dans BaseController (maintenant)-->
-        
-            <div class="mb-2">
-                <label for="username" class="form-label">Pseudo</label>
-                <?= form_input($username) ?>
-                <?= validation_show_error('username') ?>
-            </div>
 
-            <div class="mb-2">
-                <label for="email" class="form-label">Email</label>
-                <?= form_input($email) ?>
-                <?= validation_show_error('email') ?>
-            </div>
-
-            <div class="mb-2">
-                <label for="password" class="form-label">Mot de passe</label>
-                <?= form_input($password) ?>
-                <?= validation_show_error('password') ?>
-            </div>
-
-            <div class="mb-2">
-                <label for="confirm_password" class="form-label">Confirmer le mot de passe</label>
-                <?= form_input($confirm_password) ?>
-                <?= validation_show_error('confirm_password') ?>
-            </div>
-
-            <label for="avatar_url">Avatar</label>
-            <?= form_upload($avatar) ?>
-            <?= validation_show_error('avatar_url') ?><br>
-
-            <div class="container text-center">
-                <?= form_submit('submit', 'Inscription', ['class' => 'btn btn-custom']) ?>
-            </div>
-
-            <?= form_close() ?>
-
+        <div class="mb-2">
+            <label for="username" class="form-label">Pseudo</label>
+            <?= form_input($username) ?>
+            <?= validation_show_error('username') ?>
         </div>
+
+        <div class="mb-2">
+            <label for="email" class="form-label">Email</label>
+            <?= form_input($email) ?>
+            <?= validation_show_error('email') ?>
+        </div>
+
+        <div class="mb-2">
+            <label for="password" class="form-label">Mot de passe</label>
+            <?= form_input($password) ?>
+            <?= validation_show_error('password') ?>
+        </div>
+
+        <div class="mb-2">
+            <label for="confirm_password" class="form-label">Confirmer le mot de passe</label>
+            <?= form_input($confirm_password) ?>
+            <?= validation_show_error('confirm_password') ?>
+        </div>
+
+        <div class="mb-2">
+            <label for="last_name" class="form-label">Nom - Facultatif</label>
+            <?= form_input($last_name) ?>
+            <?= validation_show_error('last_name') ?>
+        </div>
+
+        <div class="mb-2">
+            <label for="first_name" class="form-label">Prénom - Facultatif</label>
+            <?= form_input($first_name) ?>
+            <?= validation_show_error('first_name') ?>
+        </div>
+
+        <label for="avatar_url">Avatar</label>
+        <?= form_upload($avatar) ?>
+        <?= validation_show_error('avatar_url') ?><br>
+
+        <div class="container text-center">
+            <?= form_submit('submit', 'Inscription', ['class' => 'btn btn-custom']) ?>
+        </div>
+
+        <?= form_close() ?>
 
     </div>
 
-    <?= $this->endSection() ?>
+</div>
+
+<?= $this->endSection() ?>

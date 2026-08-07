@@ -49,7 +49,7 @@ h1 {
   color: white;
   font-family: "Syncopate";
   font-weight: bold;
-  padding: 0.7rem 0.2rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 999px;
   margin: 0.2rem;
   font-size: 0.85rem;
@@ -160,6 +160,7 @@ translateY(-10px): monte */
     box-shadow 0.2s ease;
 }
 .btn-action:hover {
+  background-color: #12c5b6;
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }

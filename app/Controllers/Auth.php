@@ -34,7 +34,7 @@ class Auth extends BaseController
 
     public function register()
     {
-      
+
         if ($this->request->is('post') === false) { //= recommandé car insensible à la casse 'POST':  if ($this->request->getMethod() !== post) 
             //dd($this->request->getMethod());
             $data['roles'] = $this->RoleModel->findAll();
@@ -68,17 +68,35 @@ class Auth extends BaseController
                         'min_length' => '8 caractères minimum.'
                     ]
                 ],
-                'confirm_password' => [
+                'passconf' => [
                     'rules'  => 'required|matches[password]',
                     'errors' => [
                         'required' => 'Confirmation requise',
                         'matches'  => 'Les mots de passe ne correspondent pas'
                     ]
                 ],
+                'last_name' => [
+                    'rules' => 'permit_empty|min_length[2]|max_length[50]|alpha_space',
+                    'errors' => [
+                        'min_length' => '2 caractères minimum.',
+                        'max_length' => '50 caractères maximum.',
+                        'alpha_space' => 'Le nom ne doit contenir que des lettres.'
+                    ]
+                ],
+
+                'first_name' => [
+                    'rules' => 'permit_empty|min_length[2]|max_length[50]|alpha_space',
+                    'errors' => [
+                        'min_length' => '2 caractères minimum.',
+                        'max_length' => '50 caractères maximum.',
+                        'alpha_space' => 'Le prénom ne doit contenir que des lettres.'
+                    ]
+                ],
             ];
 
             // 
             if (!$this->validate($rules)) {
+              //  dd($this->validator->getErrors());
 
                 return redirect()->back()
                     ->withInput()

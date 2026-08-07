@@ -11,7 +11,7 @@
 
     <div class="row align-items-center justify-content-around py-4 py-md-5">
         <div class="col-auto profile-title">
-            <h1 class="text-light">Profil de <span><?= esc($user->username) ?></span></h1>
+            <h1 class="text-dark">Profil de <span><?= esc($user->username) ?></span></h1>
             <a href="<?= base_url('profile/update') ?>" class="btn btn-blue">Modifier votre profil</a>
         </div>
         <div class="col-auto">

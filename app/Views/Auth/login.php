@@ -9,6 +9,7 @@
 <?= form_open('login') ?>
 
 <div class="row justify-content-center align-items-center">
+
     <h1 class="text-center mt-4">Connexion</h1>
     <div class="infos col-4">
         <label for="email">Email</label>

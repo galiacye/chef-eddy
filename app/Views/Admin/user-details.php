@@ -3,17 +3,7 @@
 <?= $this->section('custom-css') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="<?= base_url('./css/Admin/user-details.css') ?>" rel="stylesheet">
-<!-- <style>
-    .avatar {
-        height: 150px;
-        width: 150px;
-    }
 
-    .status {
-        color: orange;
-        font-style: italic;
-    }
-</style> -->
 <?= $this->endSection() ?>
 <?= $this->section('body') ?>
 <div class="container-fluid mt-3">
@@ -25,20 +15,21 @@
             <p><?= esc($user->email) ?></p>
         </div>
     </div>
+    <div class="user-actions">
+        <form action="<?= base_url('Admin/changeUserRole/' . $user->id) ?>" method="post" class="role-form">
+            <select name="role_id" class="role-select shadow">
+                <option value="1" <?= $user->role_id == 1 ? 'selected' : '' ?>>Guest</option>
+                <option value="2" <?= $user->role_id == 2 ? 'selected' : '' ?>>Author</option>
+                <option value="3" <?= $user->role_id == 3 ? 'selected' : '' ?>>Admin</option>
+                <option value="4" <?= $user->role_id == 4 ? 'selected' : '' ?>>Banned</option>
+            </select>
+            <button type="submit" class="btn btn-warning shadow">Mettre à jour</button>
+        </form>
 
-    <form action="<?= base_url('Admin/changeUserRole/' . $user->id) ?>" method="post">
-        <select name="role_id">
-            <option value="1" <?= $user->role_id == 1 ? 'selected' : '' ?>>Guest</option>
-            <option value="2" <?= $user->role_id == 2 ? 'selected' : '' ?>>Author</option>
-            <option value="3" <?= $user->role_id == 3 ? 'selected' : '' ?>>Admin</option>
-            <option value="4" <?= $user->role_id == 4 ? 'selected' : '' ?>>Banned</option>
-        </select>
-        <button type="submit" class="btn btn-warning">Mettre à jour</button>
-    </form>
-
-    <a href="<?= base_url('Admin/deleteUser/' . $user->id) ?>"
-        onclick="return confirm('Supprimer cet utilisateur ?')"
-        class="btn btn-danger">Supprimer</a>
+        <a href="<?= base_url('Admin/deleteUser/' . $user->id) ?>"
+            onclick="return confirm('Supprimer cet utilisateur ?')"
+            class="btn btn-danger shadow">Supprimer</a>
+    </div>
 
     <h3>Recettes de <?= esc($user->username) ?></h3>
     <table class="recipes-table">

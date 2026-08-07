@@ -5,7 +5,7 @@
 <?= $this->section('body') ?>
 <div class="container py-4">
 
-    <h1 class="mb-4">Mes favoris</h1>
+    <h1 class="mb-4">Mes favorites</h1>
 
     <?php if (! empty($favorites)) : ?>
         <div class="row row-cols-1 row-cols-md-3 g-4">
