@@ -42,7 +42,7 @@
         <div class="nav-p">Modérer, supprimer, répondre</div>
     </a>
 
-    <a href="Admin/cat-index" class="nav-card">
+    <a href="Admin/category-index" class="nav-card">
         <div class="nav-icon"></div>
         <div class="nav-title">Catégories</div>
         <div class="nav-p">Modifier, Ajouter, Supprimer</div>

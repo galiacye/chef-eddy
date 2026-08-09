@@ -46,6 +46,10 @@ $routes->group('', ['filter' => 'adminOnly'], function ($routes) {
     $routes->post('Admin/recipe/pending/(:num)', 'Admin::pendingRecipe/$1');
 
     //Admin - Catégories
+    $routes->get('Admin/category-index', 'Category::adminCatIndex');
+    $routes->match(['get', 'post'], 'Admin/category-update/(:num)', 'Category::updateCategory/$1');
+    $routes->match(['get', 'post'],'Admin/category-add', 'Category::addCategory');
+    $routes->post('Admin/category-delete/(:num)', 'Category::deleteCategory/$1');
 
     // Admin - Tags
     $routes->post('Admin/add-tag', 'Admin::addTag');

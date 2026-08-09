@@ -23,7 +23,7 @@ class Category extends BaseController
         $categories = $categoryModel->findAll();
         $data = [
             'categories' => $categories,
-            'category' => $categories[0] ?? null//car ds la balise meta pas encore de var
+            'category' => $categories[0] ?? null //car ds la balise meta pas encore de var
         ];
 
         return view('Category/index', $data);
@@ -36,36 +36,70 @@ class Category extends BaseController
         $recipes   = $categoryModel->getRecipesByCategory($category_id);
 
         $data = [
-            'category'   => $category,//category et recipes sont ici des noms qu'on donne pour la vue
+            'category'   => $category, //category et recipes sont ici des noms qu'on donne pour la vue
             'recipes'     => $recipes
         ];
 
         return view('Category/show', $data);
     }
 
-    
+    //Admin
+
+    public function adminCatIndex(){
+        $categoryModel = model('CategoryModel');
+        $categories = $categoryModel->findAll();
+
+        $data = [
+            'categories' => $categories
+        ];
+        return view('Admin/category-index', $data);
+
+    }
+
     public function addCategory()
     {
         helper('form');
         $categoryModel = model('CategoryModel');
-       
+
+        if ($this->request->is('post') == false) {
+            return view('Admin/category-add');
+        } else {
+            $data = [
+                'name' => $this->request->getPost('name'),
+                'image_url' => $this->request->getPost('image_url')
+            ];
+            $categoryModel->insert($data);
+            return redirect()->to('/Admin/category-index');
+        }
     }
-    public function updateCategory(int $category_id)
+    public function updateCategory(int $id)
     {
         helper('form');
         $categoryModel = model('CategoryModel');
-        $category = $categoryModel->find($category_id);
+
+        if ($this->request->is('post') == false) {
+            $category = $categoryModel->find($id);
+            return view('Admin/category-update', ['category' => $category]);
+        } else {
+            $data = [
+                'name' => $this->request->getPost('name'),
+                'image_url' => $this->request->getPost('image_url')
+            ];
+            $categoryModel->update($id, $data);
+            return redirect()->to('/Admin/category-index');
+        }
     }
-    //renommage se fera dans branche dédiée
-    public function deleteCategory(int $category_id)
+
+    public function deleteCategory(int $id)
     {
         $categoryModel = model('CategoryModel');
-        $categoryModel->delete($category_id);
+        $categoryModel->delete($id);
+        return view('Admin/category-delete', $id);
     }
     //option Alexis dans blog:
-    public function cDeleteCategory(int $idCategory): void
+    public function cDeleteCategory(int $id): void
     {
-        $this->model->deleteCategory($idCategory);
+        $this->model->deleteCategory($id);
         echo 'Suppression';
     }
 }

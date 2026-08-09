@@ -50,6 +50,7 @@ class Tag extends BaseController
     {
         helper('form');
         $tagModel = model('TagModel');
+        if()
     }
 
     public function updateTag(int $tag_id)
