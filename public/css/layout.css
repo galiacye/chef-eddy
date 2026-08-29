@@ -41,7 +41,14 @@
 #debug-bar {
   display: none !important;
 }
-
+body {
+  display: flex;
+  flex-direction: column;
+ min-height: 100vh;
+}
+main {
+  flex: 1;
+}
 .ban {
   position: relative;
   display: flex;

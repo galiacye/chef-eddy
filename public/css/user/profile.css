@@ -31,6 +31,9 @@ body {
   background-color: #f4fcf0;
   color: rgb(42, 30, 30);
 } 
+p {
+  color: white;
+}
 .btn-blue {
     background-color: #0ba3cd;
     color: white;

@@ -50,8 +50,20 @@ class Tag extends BaseController
     {
         helper('form');
         $tagModel = model('TagModel');
-        if()
+
+        if ($this->request->is('post') == false) {
+            return view('Admin/dashboard');
+        } else {
+            $data = [
+                'name' => $this->request->getPost('name'),
+                'is_homepage' => $this->request->getPost('is_homepage'),
+                'image_url' => $this->request->getPost('image_url')
+            ];
+            $tagModel->insert($data);
+            return redirect()->to('/Admin/dashboard');
+        }
     }
+
 
     public function updateTag(int $tag_id)
     {

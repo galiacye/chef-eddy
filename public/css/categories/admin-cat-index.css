@@ -1,3 +1,17 @@
 body {
-    background-color: ;
+    background-color: #fcf7f0;
+}
+.btn-blue {
+    background-color: #008eb6;
+}
+.btn-coral {
+    background-color: #f06351;
+    color: white;
+}
+.btn-blue:hover {
+    background-color: #0bb5a7;
+}
+.btn-coral:hover {
+    background-color: #ff7e6c;
+    color: white;
 }
