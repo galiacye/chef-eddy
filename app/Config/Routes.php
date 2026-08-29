@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->setAutoRoute(false);
 
+//$routes->get('fix-content', 'Recipe::fixOldContent');
+
 //home
 $routes->get('/', 'Home::index');
 $routes->get('test', 'Home::salut');

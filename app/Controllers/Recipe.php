@@ -23,6 +23,50 @@ class Recipe extends BaseController
 
         $this->model = Model('RecipeModel');
     }
+    // public function fixOldContent()
+    // {
+    //     $recipe = $this->model->find(15);
+
+    //     $content = $recipe->content;
+
+    //     do {
+    //         $before = $content;
+    //         $content = html_entity_decode($content, ENT_QUOTES | ENT_HTML5);
+    //     } while ($content !== $before);
+
+    //     $config = HTMLPurifier_Config::createDefault();
+    //     $purifier = new HTMLPurifier($config);
+    //     $clean = $purifier->purify($content);
+
+    //     $clean = preg_replace('/<p>\s*<\/p>/', '', $clean);
+
+    //     dd($clean);
+    // }
+
+    //  méthode temporaire
+    public function fixOldContent()
+    {
+        $recipes = $this->model->findAll();
+
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+
+        foreach ($recipes as $recipe) {
+            $content = $recipe->content;
+
+            do {
+                $before = $content;
+                $content = html_entity_decode($content, ENT_QUOTES | ENT_HTML5);
+            } while ($content !== $before);
+
+            $clean = $purifier->purify($content);
+            $clean = preg_replace('/<p>\s*<\/p>/', '', $clean);
+
+            $this->model->update($recipe->id, ['content' => $clean]);
+        }
+
+        return "Terminé, " . count($recipes) . " recettes traitées.";
+    }
 
 
     public function showRecipe(int $id)

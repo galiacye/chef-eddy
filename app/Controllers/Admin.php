@@ -210,7 +210,7 @@ class Admin extends BaseController
         }
     }
 
-    public function saveUser(int $id) {}
+  //  public function saveUser(int $id) {}
 
 
     public function deleteUser(int $id)
