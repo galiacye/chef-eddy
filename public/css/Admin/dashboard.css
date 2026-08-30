@@ -82,11 +82,19 @@ h1 {
   font-size: 1rem;
 }
 
+.homepage {
+  display: flex;
+  justify-content: center;
+}
+
 .tag-panel {
   max-width: 520px;
   padding: 1.5rem;
   border: 1px solid #ccc;
   border-radius: 8px;
+}
+.tag-panel-title {
+  font-family: "Syncopate";
 }
 .tag-form {
   display: flex;
@@ -131,7 +139,7 @@ details {
 
 .nav-card,
 .tag-panel {
-  background: white;
+  background: #c8ebf5;
   backdrop-filter: blur(8px);
 }
 

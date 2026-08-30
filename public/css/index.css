@@ -27,9 +27,9 @@ body {
   display: inline-block;
   padding: 6px 16px;
   border-radius: 6px;
-  border: 1.3px solid #e8735a;
-  color: #5b3a02;
-  background-color: bisque;
+  border: 1.3px solid #010101;
+  color: white;
+  background-color: #707070;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 0.9rem;
@@ -37,7 +37,7 @@ body {
 
 /*selecteur de frère adjacent*/
 .allergen-check:checked + .allergen-label {
-  background-color: rgb(250, 180, 94);
+  background-color: #f06351;
   color: white;
 }
 

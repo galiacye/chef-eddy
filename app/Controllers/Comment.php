@@ -109,7 +109,7 @@ class Comment extends BaseController
 
             $content = $this->request->getPostGet('content');
             //clean html
-            $content = strip_tags($content, '<p><strong><em><u><ul><ol><li><a><br>');
+            $content = strip_tags($content, '<strong><em><u><ul><ol><li><a><br>');
             //allow safe tags only
             $content = preg_replace('/<a\s+href="([^"]*)"[^>]*>/i', '<a href="$1" rel="nofollow">', $content);
             $rating = $this->request->getPostGet('rating');
@@ -184,6 +184,7 @@ class Comment extends BaseController
             }
 
             $content = $this->request->getPostGet('content');
+            $content = strip_tags($content, '<strong><em><u><ul><ol><li><a><br>');
             $rating = $this->request->getPostGet('rating');
             $data = [
                 "content" => $content,
