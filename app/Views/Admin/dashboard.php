@@ -55,7 +55,7 @@
         <a href="Admin/users-index" class="nav-card shadow">
             <div class="nav-icon"><i class="bi bi-people"></i></div>
             <div class="nav-title">Utilisateurs <span class="nav-badge"><?= $nb_users ?></span></div>
-            <div class="nav-p">Comptes, rôles, accès</div>
+            <div class="nav-p">Profil, recettes, statut</div>
         </a>
 
         <a href="Admin/recipes-index" class="nav-card shadow">
@@ -81,7 +81,7 @@
             <div class="nav-p">Modifier, Ajouter, Supprimer</div>
         </a>
 
-        <a href="tag/index" class="nav-card">
+        <a href="Admin/tag-index" class="nav-card">
             <div class="nav-icon"></div>
             <div class="nav-title">Tags</div>
             <div class="nav-p">Modifier, Ajouter, Supprimer</div>

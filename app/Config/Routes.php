@@ -54,8 +54,10 @@ $routes->group('', ['filter' => 'adminOnly'], function ($routes) {
     $routes->post('Admin/category-delete/(:num)', 'Category::deleteCategory/$1');
 
     // Admin - Tags
+    $routes->get('Admin/tag-index', 'Tag::adminTagIndex');
     $routes->post('Admin/add-tag', 'Admin::addTag');
-
+    $routes->match(['get', 'post'], 'Admin/tag-update/(:num)', 'Tag::updateTag/$1');
+    $routes->post('Admin/tag-delete/(:num)', 'Tag::deleteTag/$1');
     // Admin - ingredients
     $routes->get('Admin/ing-index', 'Ingredient::ingIndex');
     $routes->post('Admin/ingredients/delete/(:num)', 'Ingredient::deleteIngredient/$1');

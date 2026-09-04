@@ -46,6 +46,19 @@ class Tag extends BaseController
         return view('tag/show', $data);
     }
 
+
+    //admin
+    public function adminTagIndex()
+    {
+        $tagModel = model('TagModel');
+        $tags = $tagModel->findAll();
+
+        $data = [
+            'tags' => $tags
+        ];
+        return view('Admin/tag-index', $data);
+    }
+
     public function addTag()
     {
         helper('form');
@@ -65,33 +78,33 @@ class Tag extends BaseController
     }
 
 
-    public function updateTag(int $tag_id)
+
+
+
+    public function updateTag(int $id)
     {
         helper('form');
         $tagModel = model('TagModel');
-        $tag = $tagModel->find($tag_id);
+        $tag = $tagModel->find($id);
+
+        if ($this->request->is('post') == false) {
+            $tag = $tagModel->find($id);
+            return view('Admin/tag-update', ['tag' => $tag]);
+        } else {
+            $data = [
+                'name' => $this->request->getPost('name'),
+                'image_url' => $this->request->getPost('image_url')
+            ];
+            $tagModel->update($id, $data);
+            return redirect()->to('/Admin/tag-index');
+        }
     }
 
-    public function deleteTag(int $tag_id)
+    public function deleteTag(int $id)
     {
         $tagModel = model('TagModel');
-        $tagModel->delete($tag_id);
+        $tagModel->delete($id);
 
-        return redirect()->to('tag/index')->with('success', 'Tag supprimé avec succès.');
-    }
-
-    public function cGetChefTag()
-    {
-        $tagModel = model('TagModel');
-        $tag = $tagModel->getTagByName('Chef Eddy');
-       
-        $recipes = $tagModel->getRecipesByTag($tag->id);
-
-        $data = [
-            'tag' => $tag,
-            'recipes' => $recipes
-        ];
-
-        return view('tag/tag-chef-eddy', $data);
+        return redirect()->to('Admin/tag-index')->with('success', 'Tag supprimé avec succès.');
     }
 }

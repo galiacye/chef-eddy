@@ -94,7 +94,7 @@ class Category extends BaseController
     {
         $categoryModel = model('CategoryModel');
         $categoryModel->delete($id);
-        return view('Admin/category-delete', $id);
+        return redirect()->to('/Admin/category-index');
     }
     //option Alexis dans blog:
     public function cDeleteCategory(int $id): void
